@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
+    "target": "ESNext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
+    "module": "ESNext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -24,7 +24,8 @@
       "@/lib/*": ["./lib/*"],
       "@/server/*": ["./server/*"],
       "@/types/*": ["./types/*"],
-      "@/prisma/*": ["./prisma/*"]
+      "@/prisma/*": ["./prisma/*"],
+      "@/public/*": ["./public/*"]
     }
   },
   "include": [
