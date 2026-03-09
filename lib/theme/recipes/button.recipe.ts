@@ -29,10 +29,17 @@ export const buttonRecipe = defineRecipe({
         },
       },
       ghost: {
-        color: 'brand.primary',
         bg: 'transparent',
+        color: 'brand.primary',
         _hover: {
           bg: 'rgba(47, 43, 119, 0.1)',
+        },
+      },
+      subtle: {
+        bg: 'brand.accent',
+        color: 'text.primary',
+        _hover: {
+          bg: '#d7d4f5',
         },
       },
       outline: {
@@ -45,7 +52,7 @@ export const buttonRecipe = defineRecipe({
       },
     },
     size: {
-      sm: { px: '3', py: '2', fontSize: 'small' },
+      sm: { px: '5', py: '2', fontSize: 'small' },
       md: { px: '8', py: '6', fontSize: 'body', lineHeight: 'moderate' },
       lg: { px: '6', py: '3', fontSize: 'subheading' },
     },

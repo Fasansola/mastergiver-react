@@ -8,6 +8,7 @@ const config = defineConfig({
       colors: {
         brand: {
           primary: { value: '#2F2B77' }, // Your primary color
+          accent: { value: '#ECEBF8' }, // Accent for light btns
           primaryHover: { value: '#1F1B57' }, // Darker shade for hover
           primaryLight: { value: '#4A45A0' }, // Lighter shade
         },
