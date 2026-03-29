@@ -7,7 +7,7 @@ import ErrorIcon from '@/public/components-assets/error-svgrepo-com.svg';
 
 interface Props {
   title: string;
-  status?: 'missing-token' | 'error' | 'verifying';
+  status?: 'missing-token' | 'error' | 'verifying' | 'confirmation';
   children: ReactNode;
 }
 
@@ -20,14 +20,20 @@ const SuccessVerifier = ({ title, status, children }: Props) => {
         ) : (
           <Image
             alt="confirmation icon"
-            src={status ? ErrorIcon : SuccessIcon}
+            src={!status || status === 'confirmation' ? SuccessIcon : ErrorIcon}
             width={106}
             height={106}
           />
         )}
 
         <Flex direction="column" gap="16px" align="center" width="100%">
-          <Heading fontSize="heading" color="text.heading" fontWeight="700">
+          <Heading
+            fontSize="heading"
+            color="text.heading"
+            fontWeight="600"
+            maxW="600px"
+            textAlign="center"
+          >
             {title}
           </Heading>
           <Text
@@ -41,9 +47,11 @@ const SuccessVerifier = ({ title, status, children }: Props) => {
           </Text>
         </Flex>
       </Flex>
-      <Button>
-        <Link href="/login">Back to Login</Link>
-      </Button>
+      {status !== 'confirmation' && (
+        <Button>
+          <Link href="/login">Back to Login</Link>
+        </Button>
+      )}
     </Flex>
   );
 };

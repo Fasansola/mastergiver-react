@@ -9,7 +9,7 @@ export default async function OnboardingPage() {
   }
 
   if (user.onboarding?.isCompleted) {
-    redirect('/dasboard');
+    redirect('/dashboard');
   }
 
   const currentStep = user.onboarding?.currentStep || 1;

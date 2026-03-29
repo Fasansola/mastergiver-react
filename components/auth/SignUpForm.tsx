@@ -63,7 +63,7 @@ const SignUpForm = () => {
 
         {/* FIRST & LAST NAME */}
 
-        <Flex gap={3}>
+        <Flex gap={3} direction={{ base: 'column', md: 'row' }}>
           <Field.Root invalid={!!errors.firstName}>
             <Field.Label color="text.primary">
               First name

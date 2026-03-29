@@ -2,6 +2,8 @@ import { Metadata } from 'next';
 import LoginForm from '@/components/auth/LoginForm';
 import { Alert, Flex } from '@chakra-ui/react';
 import AuthHeading from '@/components/auth/AuthHeading';
+import { auth } from '@/lib/auth/auth';
+import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: 'Login | MasterGiver',
@@ -13,6 +15,12 @@ interface LoginPageProps {
 }
 
 const LoginPage = async ({ searchParams }: LoginPageProps) => {
+  const session = await auth();
+
+  if (session?.user) {
+    redirect('/dashboard');
+  }
+
   const showResetSuccess = (await searchParams).reset === 'success';
   return (
     <Flex direction="column" width="100%" gap="40px">

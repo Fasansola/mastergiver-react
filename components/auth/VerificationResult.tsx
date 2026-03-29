@@ -1,9 +1,9 @@
 'use client';
 
 import { Button } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SuccessVerifier from './SuccessVerifier';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { resendVerificationEmail } from '@/lib/auth/auth.actions';
 
 interface VerificationResultProps {
@@ -17,10 +17,17 @@ export function VerificationResult({
   email,
   error,
 }: VerificationResultProps) {
+  const router = useRouter();
   const [resendStatus, setResendStatus] = useState<
     'idle' | 'loading' | 'success' | 'error'
   >('idle');
   const [resendMessage, setResendMessage] = useState<string>('');
+
+  useEffect(() => {
+    if (resendStatus === 'success') {
+      router.push('/verify-email/check-email');
+    }
+  }, [resendStatus, router]);
 
   const handleResend = async () => {
     if (!email) {
@@ -58,10 +65,6 @@ export function VerificationResult({
         Please wait while we verify your account.
       </SuccessVerifier>
     );
-  }
-
-  if (resendStatus === 'success') {
-    redirect('/verify-email/check-email');
   }
 
   if (resendStatus === 'error') {

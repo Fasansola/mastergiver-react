@@ -15,6 +15,7 @@ model User {
   id            String    @id @default(cuid())
   email         String    @unique
   emailVerified DateTime?
+  pendingEmail  String?
   password      String
   role          Role      @default(USER)
 
@@ -204,10 +205,11 @@ model Organization {
   source      OrgSource
   pledgeOrgId String?   @unique
 
-  ein     String?
-  website String?
-  logo    String?
-  mission String? @db.Text
+  ein      String?
+  website  String?
+  logo     String?
+  mission  String? @db.Text
+  location String?
 
   isVerified Boolean @default(false)
 

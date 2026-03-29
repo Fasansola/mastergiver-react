@@ -20,12 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className="light"
-      style={{ colorScheme: 'light' }}
-      suppressHydrationWarning
-    >
+    <html lang="en" suppressHydrationWarning>
       <body className={`${poppins.variable}`}>
         <Provider>{children}</Provider>
       </body>

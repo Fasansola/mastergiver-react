@@ -16,11 +16,14 @@ const config = defineConfig({
           page: { value: '#f7f8fa' }, // Page background
           card: { value: '#FFFFFF' }, // White cards/boxes
           white: { value: '#FFFFFF' }, // White cards/boxes
+          lightBlue: { value: '#C7DCFD' }, // White cards/boxes
           input: { value: '#FFFFFF' }, // Input backgrounds
+          hover: { value: '#5851BF' }, // Link text
         },
         text: {
           heading: { value: '#27262D' },
           primary: { value: '#212325' }, // Main text
+          white: { value: '#FFFFFF' }, // White cards/boxes
           secondary: { value: '#575C62' }, // Muted text
           link: { value: '#5851BF' }, // Link text
           error: { value: '#E53E3E' }, // Error messages
@@ -28,11 +31,13 @@ const config = defineConfig({
         border: {
           accentBorder: { value: '#E9EAED' }, // Use border on elements
           default: { value: '#DCDFE3' }, // Input borders
+          subtle: { value: '#D2D2D8' }, // Lighter border for cards
           focus: { value: '#2F2B77' }, // Focus state
           error: { value: '#FC8181' }, // Error state
         },
       },
       fontSizes: {
+        bigheading: { value: '32px' },
         heading: { value: '24px' },
         subheading: { value: '18px' },
         body: { value: '16px' },
@@ -52,6 +57,16 @@ const config = defineConfig({
         sectionGap: { value: '48px' }, // Gap between sections
       },
       shadows: { formBox: { value: '0px 5px 3px 0px #4646490A' } },
+    },
+
+    semanticTokens: {
+      fontSizes: {
+        // Responsive overrides — desktop values match the static tokens above.
+        // base = mobile (< 1024px), lg = desktop (≥ 1024px)
+        bigheading: { value: { base: '24px', lg: '32px' } },
+        heading: { value: { base: '20px', lg: '24px' } },
+        subheading: { value: { base: '16px', lg: '18px' } },
+      },
     },
 
     recipes: {

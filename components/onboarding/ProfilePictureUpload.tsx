@@ -1,7 +1,5 @@
 'use client';
 
-import { useFormContext } from 'react-hook-form';
-import { CreateProfileFormValues } from './CreateProfileForm';
 import {
   Button,
   FieldErrorText,
@@ -11,73 +9,82 @@ import {
   Spinner,
   Text,
 } from '@chakra-ui/react';
-import { useState } from 'react';
 import axios from 'axios';
 import Avatar from '@/public/components-assets/Avatar.svg';
+import { useState } from 'react';
 
-// TYPES
+// ── Types ─────────────────────────────────────────────────
+
 type UploadStatus = 'idle' | 'uploading' | 'success' | 'error';
 
-interface ProfilePictureUploadProps {
+const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/gif'];
+const MAX_SIZE_BYTES = 5 * 1024 * 1024;
+
+// ── Controlled Props (ProfilePreview + Settings) ──────────
+
+interface ControlledProfilePictureUploadProps {
+  mode: 'controlled';
   currentImageURL: string | null;
+  onUploadComplete: (url: string) => void;
+  onDelete: () => void;
 }
 
-// CONSTANTS
+// ── Form Props (CreateProfileForm with RHF) ───────────────
 
-const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/gif'];
-const MAX_SIZE_BYTES = 5 * 1024 * 1024; // 5MB
+interface FormProfilePictureUploadProps {
+  mode: 'form';
+  currentImageURL: string | null;
+  onUploadComplete: (url: string) => void;
+  onDelete: () => void;
+}
 
-// COMPONENT
+type ProfilePictureUploadProps =
+  | ControlledProfilePictureUploadProps
+  | FormProfilePictureUploadProps;
+
+// ── Component ─────────────────────────────────────────────
 
 const ProfilePictureUpload = ({
+  mode,
   currentImageURL,
+  onUploadComplete,
+  onDelete,
 }: ProfilePictureUploadProps) => {
-  const { setValue } = useFormContext<CreateProfileFormValues>();
-
   const [displayUrl, setDisplayUrl] = useState(currentImageURL ?? null);
   const [isDeleting, setIsDeleting] = useState(false);
   const [status, setStatus] = useState<UploadStatus>('idle');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  // Delete existing saved image
-
   async function handleDeleteExisting() {
     setIsDeleting(true);
     try {
       await axios.delete('/api/upload', { data: { url: displayUrl } });
-      setValue('profilePicture', null, { shouldValidate: true });
       setDisplayUrl(null);
-      setIsDeleting(false);
+      onDelete();
     } catch {
       setErrorMessage('Failed to delete image. Try again');
+    } finally {
       setIsDeleting(false);
     }
   }
-
-  // Upload Logic
 
   async function handleUpload(file: File) {
     setStatus('uploading');
     setErrorMessage(null);
 
-    // Build formData this is what the route handler recieves
     const formData = new FormData();
     formData.append('file', file);
     formData.append('currentImageURL', displayUrl ?? '');
 
-    // Post to your route handler
     try {
       const { data } = await axios.post<{ url: string }>(
         '/api/upload',
         formData,
-        {
-          headers: { 'Content-Type': 'multipart/form-data' },
-        }
+        { headers: { 'Content-Type': 'multipart/form-data' } }
       );
 
-      // Store the real Blob in the RHF
-      setValue('profilePicture', data.url, { shouldValidate: true });
       setDisplayUrl(data.url);
+      onUploadComplete(data.url);
       setStatus('success');
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -104,9 +111,9 @@ const ProfilePictureUpload = ({
       <FileUpload.HiddenInput />
       <Flex direction="column" gap="6">
         <Heading color="text.heading" fontSize="subheading">
-          Add Profile Picture
+          {mode === 'controlled' ? 'Profile Picture' : 'Add Profile Picture'}
         </Heading>
-        <Flex gap="6" alignItems="center">
+        <Flex gap="6" alignItems={{ base: 'flex-start', md: 'center' }} direction={{ base: 'column', md: 'row' }}>
           <div style={{ position: 'relative' }}>
             {displayUrl ? (
               <img
@@ -167,7 +174,6 @@ const ProfilePictureUpload = ({
                       Upload New Picture
                     </Button>
                   </FileUpload.Trigger>
-
                   <Button
                     type="button"
                     size="sm"

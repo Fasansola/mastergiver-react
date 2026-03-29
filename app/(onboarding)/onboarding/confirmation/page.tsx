@@ -1,0 +1,24 @@
+import SuccessVerifier from '@/components/auth/SuccessVerifier';
+import { Button, Heading, HStack, Stack } from '@chakra-ui/react';
+import Link from 'next/link';
+import Image from 'next/image';
+
+const ConfirmarionPage = () => {
+  return (
+    <SuccessVerifier
+      title={'Congratulations, your account has been successfully created.'}
+      status="confirmation"
+    >
+      <Stack gap="8" align="center">
+        Go to your Dashboard to explore your new profile.
+        <Link href="/dashboard">
+          <Button colorScheme="brand" size="md">
+            Go to Dashboard
+          </Button>
+        </Link>
+      </Stack>
+    </SuccessVerifier>
+  );
+};
+
+export default ConfirmarionPage;

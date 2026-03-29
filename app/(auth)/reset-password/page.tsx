@@ -1,14 +1,21 @@
 import AuthHeading from '@/components/auth/AuthHeading';
 import RequestResetForm from '@/components/auth/RequestResetForm';
+import { auth } from '@/lib/auth/auth';
 import { Flex } from '@chakra-ui/react';
 import { Metadata } from 'next';
+import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: 'Reset Password | MasterGiver',
   description: 'Reset your password',
 };
 
-const ResetPasswordPage = () => {
+const ResetPasswordPage = async () => {
+  const session = await auth();
+
+  if (session?.user) {
+    redirect('/dashboard');
+  }
   return (
     <Flex direction="column" width="100%" gap="40px">
       <AuthHeading title="Forgot your password?">

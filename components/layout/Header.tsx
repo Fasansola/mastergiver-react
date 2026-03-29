@@ -1,9 +1,9 @@
-import { Flex, Container } from '@chakra-ui/react';
+import { Box, Container, Flex } from '@chakra-ui/react';
 import Image from 'next/image';
-import HeaderButtons from './HeaderButtons';
-
-import logo from '@/public/brand-assets/Mastergiver_logo.svg';
 import Link from 'next/link';
+import HeaderButtons from './HeaderButtons';
+import HeaderMobileMenu from './HeaderMobileMenu';
+import logo from '@/public/brand-assets/Mastergiver_logo.svg';
 
 const Header = () => {
   return (
@@ -19,7 +19,16 @@ const Header = () => {
         <Link href="/">
           <Image src={logo} alt="MasterGiver Logo" width={140} height={60} />
         </Link>
-        <HeaderButtons />
+
+        {/* Desktop nav buttons — hidden on mobile */}
+        <Box display={{ base: 'none', lg: 'flex' }} alignItems="center">
+          <HeaderButtons />
+        </Box>
+
+        {/* Mobile hamburger + drawer — hidden on desktop */}
+        <Box display={{ base: 'flex', lg: 'none' }} alignItems="center">
+          <HeaderMobileMenu />
+        </Box>
       </Container>
     </Flex>
   );

@@ -1,7 +1,8 @@
-import { redirect } from 'next/navigation';
 import { verifyEmail } from '@/lib/auth/auth.actions';
 import { prisma } from '@/lib/prisma';
+import { redirect } from 'next/navigation';
 import { VerificationResult } from '@/components/auth/VerificationResult';
+import { verifyTokenAndRedirect } from '@/lib/auth/verify-token-page';
 
 interface VerifyEmailPageProps {
   searchParams: Promise<{
@@ -15,44 +16,41 @@ export default async function VerifyEmailPage({
   const params = await searchParams;
   const token = params.token;
 
-  // No token provided
-  if (!token) {
-    return <VerificationResult status="missing-token" />;
-  }
+  const outcome = await verifyTokenAndRedirect({
+    token,
+    // successRedirect is omitted — the redirect destination depends on the
+    // user's onboarding status, so verifyFn handles it after a DB lookup.
+    verifyFn: async (t): Promise<{ success: boolean; error?: string; email?: string }> => {
+      const result = await verifyEmail(t);
 
-  // Verify the token
-  const result = await verifyEmail(token);
+      if (!result.success) {
+        return { success: false, error: result.error, email: result.email };
+      }
 
-  // Token invalid or expired
-  if (!result.success) {
-    return (
-      <VerificationResult
-        status="error"
-        error={result.error}
-        email={result.email}
-      />
-    );
-  }
+      const user = await prisma.user.findUnique({
+        where: { email: result.email },
+        include: { onboarding: true },
+      });
 
-  // Get user to check onboarding status
-  const user = await prisma.user.findUnique({
-    where: { email: result.email },
-    include: {
-      onboarding: true,
+      if (!user) {
+        return { success: false, error: 'User not found.' };
+      }
+
+      redirect(user.onboarding?.isCompleted ? '/dashboard' : '/onboarding');
     },
   });
 
-  if (!user) {
-    return <VerificationResult status="error" error="User not found" />;
+  // Only reached on error — redirect always fires on success inside verifyFn.
+
+  if (outcome.error === 'missing-token') {
+    return <VerificationResult status="missing-token" />;
   }
 
-  // Check if onboarding is completed
-  const shouldOnboard = !user.onboarding?.isCompleted;
-
-  // Redirect based on onboarding status
-  if (shouldOnboard) {
-    redirect('/onboarding');
-  } else {
-    redirect('/dashboard');
-  }
+  return (
+    <VerificationResult
+      status="error"
+      error={outcome.error}
+      email={outcome.email}
+    />
+  );
 }

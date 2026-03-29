@@ -11,6 +11,7 @@ import {
   Input,
   Text,
   Textarea,
+  Alert,
 } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
@@ -72,6 +73,7 @@ const CreateProfileForm = ({
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors },
   } = methods;
 
@@ -100,31 +102,53 @@ const CreateProfileForm = ({
 
   return (
     <FormProvider {...methods}>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        noValidate
-        style={{ width: '100%' }}
-      >
+      <form onSubmit={handleSubmit(onSubmit)} noValidate className="fullWidth">
         <Flex gap="10" direction="column" width={'100%'}>
-          <ProfilePictureUpload currentImageURL={profilePicture} />
+          <ProfilePictureUpload
+            mode="form"
+            currentImageURL={watch('profilePicture') ?? null}
+            onUploadComplete={(url) =>
+              setValue('profilePicture', url, { shouldValidate: true })
+            }
+            onDelete={() =>
+              setValue('profilePicture', null, { shouldValidate: true })
+            }
+          />
           <Separator variant="solid" borderColor="border.accentBorder" />
           <Flex direction="column" gap="6">
             {/* Username - display only */}
-            <Field.Root>
+            <Field.Root gap="2">
               <Field.Label color="text.primary">Username</Field.Label>
-              <Input value={username} disabled readOnly className="inputForm" />
+              <Input
+                value={username}
+                disabled
+                readOnly
+                className="inputForm"
+                h="12"
+                fontSize="md"
+              />
               <Field.HelperText color="text.secondary">
                 Username cannot be changed after it is set.
               </Field.HelperText>
             </Field.Root>
 
-            <LocationSelector />
+            <LocationSelector
+              mode="form"
+              state={watch('state')}
+              city={watch('city')}
+              onStateChange={(value) => setValue('state', value)}
+              onCityChange={(value) => setValue('city', value)}
+              errors={errors}
+            />
 
             {/* About Me */}
-            <Field.Root invalid={!!errors.aboutMe}>
+            <Field.Root invalid={!!errors.aboutMe} gap="2">
               <Flex justify="space-between" align="center" width={'100%'}>
                 <Field.Label color="text.primary">About Me</Field.Label>
-                <Text fontSize="small" color="text.primary">
+                <Text
+                  fontSize="small"
+                  color={aboutMeValue.length >= 255 ? 'fg.error' : 'fg.muted'}
+                >
                   {aboutMeValue.length} / 255
                 </Text>
               </Flex>
@@ -135,6 +159,8 @@ const CreateProfileForm = ({
                 className="inputForm"
                 color="text.primary"
                 placeholder="Your Personal and Professional Bio here"
+                fontSize="md"
+                resize="none"
               />
               <Field.ErrorText>{errors.aboutMe?.message}</Field.ErrorText>
             </Field.Root>
@@ -147,6 +173,14 @@ const CreateProfileForm = ({
           >
             Next
           </Button>
+          {serverError && (
+            <Alert.Root status="error">
+              <Alert.Indicator />
+              <Alert.Content>
+                <Alert.Title>{serverError}</Alert.Title>
+              </Alert.Content>
+            </Alert.Root>
+          )}
         </Flex>
       </form>
     </FormProvider>

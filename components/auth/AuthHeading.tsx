@@ -13,7 +13,6 @@ const AuthHeading = ({ title, children }: Props) => {
         color="text.heading"
         fontSize="heading"
         fontWeight="600"
-        fontFamily=""
       >
         {title}
       </Heading>

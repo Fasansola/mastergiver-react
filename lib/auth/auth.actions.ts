@@ -160,7 +160,7 @@ export async function login(data: LoginInput) {
 
     const redirectTo = user.onboarding?.isCompleted
       ? '/dashboard'
-      : 'onboarding';
+      : '/onboarding';
 
     return { success: true, redirectTo };
   } catch (error) {
@@ -353,7 +353,7 @@ export async function resetPassword(data: ResetPasswordInput) {
 // LOG OUT THE CURRENT USER
 
 export async function logout() {
-  await signOut({ redirectTo: '/login' });
+  await signOut({ redirect: false });
 }
 
 // RESEND VERIFICATION EMAIL
