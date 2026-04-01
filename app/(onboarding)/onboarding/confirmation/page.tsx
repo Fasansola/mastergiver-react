@@ -6,7 +6,7 @@ import Image from 'next/image';
 const ConfirmarionPage = () => {
   return (
     <SuccessVerifier
-      title={'Congratulations, your account has been successfully created.'}
+      title={'Congratulations, your account is live now.'}
       status="confirmation"
     >
       <Stack gap="8" align="center">

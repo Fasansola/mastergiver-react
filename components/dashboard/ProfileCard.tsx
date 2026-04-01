@@ -27,7 +27,7 @@ const ProfileCard = ({ profile, isDashboard }: ProfileProps) => {
       bgColor="background.white"
       borderRadius="20px"
       py={{ base: '10', md: '8', lg: '10' }}
-      px={{ base: '8', md: '6', lg: '8' }}
+      px={{ base: '6', md: '6', lg: '8' }}
       mt={{ base: '-80px', lg: '-100px' }}
       pos={{ base: 'static', lg: 'sticky' }}
       top={{ base: 'auto', lg: '24' }}

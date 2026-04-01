@@ -1,25 +1,25 @@
 import { HStack, Stack } from '@chakra-ui/react';
 import { PropsWithChildren } from 'react';
-import Sidebar from '@/components/layout/dashboard/Sidebar';
-import SidebarContent from '@/components/layout/dashboard/SidebarContent';
-import SidebarDrawer from '@/components/layout/dashboard/SidebarDrawer';
+import Sidebar from '@/components/dashboard/Sidebar';
+import SidebarContent from '@/components/dashboard/SidebarContent';
+import SidebarDrawer from '@/components/dashboard/SidebarDrawer';
+import { Header } from '@/components/layout';
 
 const DashboardLayout = ({ children }: PropsWithChildren) => {
   return (
-    <HStack minHeight="100vh" gap="0" bg="background.page" alignItems="start">
-      {/* Desktop sidebar — hidden on base/md */}
-      <Sidebar />
+    <>
+      {/* Header only - hidden on lg+ */}
+      <Header />
+      <HStack minHeight="100vh" gap="0" bg="background.page" alignItems="start">
+        {/* Desktop sidebar — hidden on base/md */}
+        <Sidebar />
 
-      {/* Main content */}
-      <Stack width="100%" flexGrow="1" minH="100vh">
-        {/* Mobile top bar + sidebar drawer — hidden on lg+ */}
-        <SidebarDrawer>
-          <SidebarContent />
-        </SidebarDrawer>
-
-        {children}
-      </Stack>
-    </HStack>
+        {/* Main content */}
+        <Stack width="100%" flexGrow="1" minH="100vh">
+          {children}
+        </Stack>
+      </HStack>
+    </>
   );
 };
 

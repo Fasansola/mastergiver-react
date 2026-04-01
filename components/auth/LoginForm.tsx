@@ -8,7 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Alert, Button, Field, Flex, Input, Text } from '@chakra-ui/react';
 import { PasswordInput } from '@/components/ui/password-input';
-import { login } from '@/lib/auth/auth.actions';
+import { loginAction } from '@/lib/actions/auth.actions';
 import Link from 'next/link';
 
 const LoginForm = () => {
@@ -30,7 +30,7 @@ const LoginForm = () => {
   const onSubmit = async (data: LoginInput) => {
     setServerError(null);
 
-    const result = await login(data);
+    const result = await loginAction(data);
 
     if (!result.success) {
       setServerError(result.error ?? 'Something went wrong');

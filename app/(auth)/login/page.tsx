@@ -1,9 +1,10 @@
 import { Metadata } from 'next';
 import LoginForm from '@/components/auth/LoginForm';
-import { Alert, Flex } from '@chakra-ui/react';
+import { Alert, Flex, Text } from '@chakra-ui/react';
 import AuthHeading from '@/components/auth/AuthHeading';
 import { auth } from '@/lib/auth/auth';
 import { redirect } from 'next/navigation';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Login | MasterGiver',
@@ -25,7 +26,12 @@ const LoginPage = async ({ searchParams }: LoginPageProps) => {
   return (
     <Flex direction="column" width="100%" gap="40px">
       <AuthHeading title="Welcome back">
-        Sign in to continue to your account
+        You don&apos;t have an account?{' '}
+        <Link href="/signup">
+          <Text as="span" color="text.link" fontWeight="500">
+            Create an account
+          </Text>
+        </Link>
       </AuthHeading>
 
       {/* Password Reset Success Message */}

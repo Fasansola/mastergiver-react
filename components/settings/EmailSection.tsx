@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Stack, HStack, Text, Input, Button, Field } from '@chakra-ui/react';
 import { LuInfo } from 'react-icons/lu';
-import { updateEmail } from '@/lib/actions/account.actions';
+import { updateEmailAction } from '@/lib/actions/account.actions';
 
 interface EmailSectionProps {
   currentEmail: string;
@@ -37,7 +37,7 @@ export default function EmailSection({
     setError(null);
     setIsLoading(true);
 
-    const result = await updateEmail(emailInput);
+    const result = await updateEmailAction(emailInput);
 
     setIsLoading(false);
 

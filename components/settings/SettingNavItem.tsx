@@ -17,15 +17,16 @@ const SettingNavItem = ({ href, label }: SettingsNavItemProps) => {
       <HStack
         px={{ base: '3', lg: '5' }}
         py={{ base: '3', lg: '6' }}
+        h="64px"
         gap="3"
-        bgColor={isActive ? 'background.white' : ''}
+        bgColor={isActive ? 'background.white' : 'background.page'}
         color={isActive ? 'text.primary' : ''}
         fontWeight="500"
         fontSize={{ base: 'sm', lg: 'md' }}
         justify={{ base: 'center', lg: 'flex-start' }}
         _hover={{ bgColor: 'background.white', color: 'brand.primary' }}
         borderBottom={{ base: 'none', lg: '1px solid' }}
-        borderColor="border.default"
+        borderColor="border.default!"
       >
         {label}
       </HStack>

@@ -41,6 +41,7 @@ const SuccessVerifier = ({ title, status, children }: Props) => {
             as={Flex}
             alignItems="center"
             className="flex-col"
+            textAlign="center"
             gap="4"
           >
             {children}

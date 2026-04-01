@@ -9,38 +9,20 @@ import {
   Spinner,
   Text,
 } from '@chakra-ui/react';
-import axios from 'axios';
 import Avatar from '@/public/components-assets/Avatar.svg';
-import { useState } from 'react';
+import { useProfilePictureUpload } from '@/hooks/useProfilePictureUpload';
 
 // ── Types ─────────────────────────────────────────────────
-
-type UploadStatus = 'idle' | 'uploading' | 'success' | 'error';
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/gif'];
 const MAX_SIZE_BYTES = 5 * 1024 * 1024;
 
-// ── Controlled Props (ProfilePreview + Settings) ──────────
-
-interface ControlledProfilePictureUploadProps {
-  mode: 'controlled';
+interface ProfilePictureUploadProps {
+  mode: 'controlled' | 'form';
   currentImageURL: string | null;
   onUploadComplete: (url: string) => void;
   onDelete: () => void;
 }
-
-// ── Form Props (CreateProfileForm with RHF) ───────────────
-
-interface FormProfilePictureUploadProps {
-  mode: 'form';
-  currentImageURL: string | null;
-  onUploadComplete: (url: string) => void;
-  onDelete: () => void;
-}
-
-type ProfilePictureUploadProps =
-  | ControlledProfilePictureUploadProps
-  | FormProfilePictureUploadProps;
 
 // ── Component ─────────────────────────────────────────────
 
@@ -50,51 +32,8 @@ const ProfilePictureUpload = ({
   onUploadComplete,
   onDelete,
 }: ProfilePictureUploadProps) => {
-  const [displayUrl, setDisplayUrl] = useState(currentImageURL ?? null);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [status, setStatus] = useState<UploadStatus>('idle');
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-  async function handleDeleteExisting() {
-    setIsDeleting(true);
-    try {
-      await axios.delete('/api/upload', { data: { url: displayUrl } });
-      setDisplayUrl(null);
-      onDelete();
-    } catch {
-      setErrorMessage('Failed to delete image. Try again');
-    } finally {
-      setIsDeleting(false);
-    }
-  }
-
-  async function handleUpload(file: File) {
-    setStatus('uploading');
-    setErrorMessage(null);
-
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('currentImageURL', displayUrl ?? '');
-
-    try {
-      const { data } = await axios.post<{ url: string }>(
-        '/api/upload',
-        formData,
-        { headers: { 'Content-Type': 'multipart/form-data' } }
-      );
-
-      setDisplayUrl(data.url);
-      onUploadComplete(data.url);
-      setStatus('success');
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        setErrorMessage(error.response?.data?.error ?? 'Upload failed');
-      } else {
-        setErrorMessage('Something went wrong');
-      }
-      setStatus('error');
-    }
-  }
+  const { displayUrl, status, errorMessage, isDeleting, handleUpload, handleDeleteExisting } =
+    useProfilePictureUpload({ initialUrl: currentImageURL, onUploadComplete, onDelete });
 
   return (
     <FileUpload.Root

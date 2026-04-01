@@ -1,4 +1,4 @@
-import { verifyEmail } from '@/lib/auth/auth.actions';
+import { verifyEmailAction } from '@/lib/actions/auth.actions';
 import { prisma } from '@/lib/prisma';
 import { redirect } from 'next/navigation';
 import { VerificationResult } from '@/components/auth/VerificationResult';
@@ -21,7 +21,7 @@ export default async function VerifyEmailPage({
     // successRedirect is omitted — the redirect destination depends on the
     // user's onboarding status, so verifyFn handles it after a DB lookup.
     verifyFn: async (t): Promise<{ success: boolean; error?: string; email?: string }> => {
-      const result = await verifyEmail(t);
+      const result = await verifyEmailAction(t);
 
       if (!result.success) {
         return { success: false, error: result.error, email: result.email };

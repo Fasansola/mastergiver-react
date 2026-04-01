@@ -8,12 +8,13 @@ import { sendEmail } from '@/lib/email/client';
 import VerifyEmail from '@/lib/email/templates/verify-email';
 import bcrypt from 'bcryptjs';
 import { updateEmailSchema, updatePasswordSchema } from '@/lib/validations/account.schema';
+import type { ActionResult } from '@/lib/types/actions';
 
 // ── Update Email ─────────────────────────────────────────────────────────────
 // Stores the new address as pendingEmail and sends a verification link to it.
-// The email is not changed until the user clicks the link (verifyNewEmail).
+// The email is not changed until the user clicks the link (verifyNewEmailAction).
 
-export async function updateEmail(newEmail: string) {
+export async function updateEmailAction(newEmail: string): Promise<ActionResult<{ message: string }>> {
   try {
     const user = await requireAuth();
 
@@ -88,12 +89,12 @@ export async function updateEmail(newEmail: string) {
 // Swaps pendingEmail into email and clears pendingEmail.
 // Does not require an active session — the token alone is the proof of ownership.
 
-export async function verifyNewEmail(token: string) {
+export async function verifyNewEmailAction(token: string): Promise<ActionResult<{ message: string }>> {
   try {
     const result = await verifyEmailToken(token);
 
     if (!result.success) {
-      return { success: false, error: result.error };
+      return { success: false, error: result.error ?? 'Verification failed.' };
     }
 
     const newEmail = result.email;
@@ -137,10 +138,10 @@ export async function verifyNewEmail(token: string) {
 
 // ── Update Password ───────────────────────────────────────────────────────────
 
-export async function updatePassword(
+export async function updatePasswordAction(
   currentPassword: string,
   newPassword: string
-) {
+): Promise<ActionResult<{ message: string }>> {
   try {
     const user = await requireAuth();
 
@@ -188,7 +189,7 @@ export async function updatePassword(
 // Cascading deletes on the User model handle Profile, OnboardingProgress,
 // ProfileCause, ProfileSkill, ProfileOrganization, and tokens automatically.
 
-export async function deleteAccount() {
+export async function deleteAccountAction(): Promise<ActionResult<{ redirectTo: string }>> {
   try {
     const user = await requireAuth();
 

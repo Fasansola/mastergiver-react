@@ -1,4 +1,4 @@
-import { pledgeInstance } from '@/lib/axios/pledge.axios';
+import { pledgeInstance } from '@/lib/api/pledge.axios';
 import { AxiosError } from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 

@@ -1,15 +1,15 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { Drawer, IconButton, Portal, Stack } from '@chakra-ui/react';
-import { LuMenu } from 'react-icons/lu';
-import HeaderButtons from './HeaderButtons';
+import { Drawer, IconButton, Portal } from '@chakra-ui/react';
+import Menu from '@/public/components-assets/menu.svg';
+import Image from 'next/image';
 
 // Hamburger trigger + slide-in drawer for the public header on base/md viewports.
 // Closes automatically when the pathname changes (link was tapped).
 
-const HeaderMobileMenu = () => {
+const HeaderMobileMenu = ({ children }: PropsWithChildren) => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
@@ -19,14 +19,12 @@ const HeaderMobileMenu = () => {
 
   return (
     <>
-      <IconButton
-        aria-label="Open menu"
-        variant="ghost"
-        colorPalette="brand"
+      <Image
+        src={Menu}
+        alt="Hamburger menu"
+        width="28"
         onClick={() => setIsOpen(true)}
-      >
-        <LuMenu size={24} />
-      </IconButton>
+      />
 
       <Drawer.Root
         open={isOpen}
@@ -36,15 +34,8 @@ const HeaderMobileMenu = () => {
         <Portal>
           <Drawer.Backdrop />
           <Drawer.Positioner>
-            <Drawer.Content maxW="280px">
-              <Drawer.Header borderBottomWidth="1px">
-                <Drawer.Title>Menu</Drawer.Title>
-              </Drawer.Header>
-              <Drawer.Body>
-                <Stack gap="3" pt="2">
-                  <HeaderButtons direction="column" />
-                </Stack>
-              </Drawer.Body>
+            <Drawer.Content maxW="280px" bgColor="brand.primary">
+              {children}
             </Drawer.Content>
           </Drawer.Positioner>
         </Portal>

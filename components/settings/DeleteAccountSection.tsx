@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Stack, HStack, Text, Button, Dialog, Portal } from '@chakra-ui/react';
 import { LuTriangleAlert } from 'react-icons/lu';
-import { deleteAccount } from '@/lib/actions/account.actions';
+import { deleteAccountAction } from '@/lib/actions/account.actions';
 
 export default function DeleteAccountSection() {
   const router = useRouter();
@@ -16,7 +16,7 @@ export default function DeleteAccountSection() {
     setError(null);
     setIsLoading(true);
 
-    const result = await deleteAccount();
+    const result = await deleteAccountAction();
 
     setIsLoading(false);
 

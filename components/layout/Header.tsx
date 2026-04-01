@@ -1,11 +1,14 @@
-import { Box, Container, Flex } from '@chakra-ui/react';
+import { Box, Button, Container, Flex, HStack, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import HeaderButtons from './HeaderButtons';
 import HeaderMobileMenu from './HeaderMobileMenu';
 import logo from '@/public/brand-assets/Mastergiver_logo.svg';
+import { SidebarContent } from '../dashboard';
+import { getCurrentUser } from '@/lib/auth/session';
 
-const Header = () => {
+const Header = async () => {
+  const user = await getCurrentUser();
   return (
     <Flex
       height={100}
@@ -17,7 +20,10 @@ const Header = () => {
     >
       <Container className="flex align-middle justify-between">
         <Link href="/">
-          <Image src={logo} alt="MasterGiver Logo" width={140} height={60} />
+          <HStack align="start">
+            <Image src={logo} alt="MasterGiver Logo" width={140} height={60} />
+            <Text fontSize="12px">BETA</Text>
+          </HStack>
         </Link>
 
         {/* Desktop nav buttons — hidden on mobile */}
@@ -27,7 +33,22 @@ const Header = () => {
 
         {/* Mobile hamburger + drawer — hidden on desktop */}
         <Box display={{ base: 'flex', lg: 'none' }} alignItems="center">
-          <HeaderMobileMenu />
+          {user && user.onboarding?.isCompleted ? (
+            <HeaderMobileMenu>
+              <SidebarContent />
+            </HeaderMobileMenu>
+          ) : user?.onboarding?.isCompleted === false ? null : (
+            <Button
+              variant="ghost"
+              colorPalette="brand"
+              asChild
+              p="0"
+              pr="2"
+              fontSize="sm"
+            >
+              <Link href="/login">Sign in</Link>
+            </Button>
+          )}
         </Box>
       </Container>
     </Flex>

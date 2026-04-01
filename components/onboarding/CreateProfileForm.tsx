@@ -2,7 +2,7 @@
 
 // SCHEMA
 
-import { saveProfileBasics } from '@/lib/actions/onboarding.actions';
+import { saveProfileBasicsAction } from '@/lib/actions/onboarding.actions';
 import {
   Flex,
   Separator,
@@ -84,7 +84,7 @@ const CreateProfileForm = ({
     setServerError(null);
     setIsSubmitting(true);
 
-    const result = await saveProfileBasics({
+    const result = await saveProfileBasicsAction({
       profilePicture: values.profilePicture ?? undefined,
       aboutMe: values.aboutMe ?? '',
       state: values.state,

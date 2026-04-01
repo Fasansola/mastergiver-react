@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { PasswordInput } from '../ui/password-input';
-import { resetPassword } from '@/lib/auth/auth.actions';
+import { resetPasswordAction } from '@/lib/actions/auth.actions';
 
 interface ResetPasswordFormProps {
   token: string;
@@ -34,7 +34,7 @@ const ResetPasswordForm = ({ token }: ResetPasswordFormProps) => {
   const onSubmit = async (data: Omit<ResetPasswordInput, 'token'>) => {
     setServerError(null);
 
-    const result = await resetPassword({
+    const result = await resetPasswordAction({
       token,
       password: data.password,
     });

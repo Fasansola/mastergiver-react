@@ -1,61 +1,15 @@
 import { redirect } from 'next/navigation';
 import { requireCompletedOnboarding } from '@/lib/auth/session';
 import { prisma } from '@/lib/prisma';
-import ProfileDisplay from '@/components/layout/dashboard/ProfileDisplay';
+import ProfileDisplay from '@/components/dashboard/ProfileDisplay';
+import { profileQuerySelect } from '@/lib/utils/profile-query';
 
 export const dynamic = 'force-dynamic';
 
 async function getDashboardData(userId: string) {
   return prisma.profile.findUnique({
     where: { userId },
-    select: {
-      username: true,
-      profilePicture: true,
-      firstName: true,
-      lastName: true,
-      city: true,
-      state: true,
-      aboutMe: true,
-      whyIGive: true,
-      status: true,
-      publishedAt: true,
-      causes: {
-        select: {
-          cause: {
-            select: {
-              id: true,
-              name: true,
-              slug: true,
-              color: true,
-              icon: true,
-            },
-          },
-        },
-      },
-      skills: {
-        select: {
-          skill: {
-            select: { id: true, name: true, slug: true },
-          },
-        },
-      },
-      organizations: {
-        select: {
-          organization: {
-            select: {
-              id: true,
-              pledgeOrgId: true,
-              name: true,
-              logo: true,
-              location: true,
-              ein: true,
-              website: true,
-              mission: true,
-            },
-          },
-        },
-      },
-    },
+    select: profileQuerySelect,
   });
 }
 

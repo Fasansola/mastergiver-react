@@ -1,6 +1,6 @@
 'use client';
 
-import { requestPasswordReset } from '@/lib/auth/auth.actions';
+import { requestPasswordResetAction } from '@/lib/actions/auth.actions';
 import {
   resetPasswordRequestSchema,
   ResetPasswordRequestInput,
@@ -31,7 +31,7 @@ const RequestResetForm = () => {
   const onSubmit = async (data: ResetPasswordRequestInput) => {
     setServerMessage(null);
 
-    const result = await requestPasswordReset(data);
+    const result = await requestPasswordResetAction(data);
 
     if (!result.success) {
       setServerMessage({

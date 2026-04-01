@@ -1,10 +1,11 @@
 import { notFound } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
-import ProfileDisplay from '@/components/layout/dashboard/ProfileDisplay';
+import ProfileDisplay from '@/components/dashboard/ProfileDisplay';
 import { Stack, Container, HStack, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 import Image from 'next/image';
 import LeftArrow from '@/public/components-assets/chevron-left.svg';
+import { profileQuerySelect } from '@/lib/utils/profile-query';
 
 async function getPublicProfile(username: string) {
   return prisma.profile.findUnique({
@@ -13,54 +14,7 @@ async function getPublicProfile(username: string) {
       // Only show published profiles to the public
       status: 'PUBLISHED',
     },
-    select: {
-      username: true,
-      profilePicture: true,
-      firstName: true,
-      lastName: true,
-      city: true,
-      state: true,
-      aboutMe: true,
-      whyIGive: true,
-      status: true,
-      publishedAt: true,
-      causes: {
-        select: {
-          cause: {
-            select: {
-              id: true,
-              name: true,
-              slug: true,
-              color: true,
-              icon: true,
-            },
-          },
-        },
-      },
-      skills: {
-        select: {
-          skill: {
-            select: { id: true, name: true, slug: true },
-          },
-        },
-      },
-      organizations: {
-        select: {
-          organization: {
-            select: {
-              id: true,
-              pledgeOrgId: true,
-              name: true,
-              logo: true,
-              location: true,
-              ein: true,
-              website: true,
-              mission: true,
-            },
-          },
-        },
-      },
-    },
+    select: profileQuerySelect,
   });
 }
 

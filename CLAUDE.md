@@ -58,9 +58,10 @@ mastergiver/
 │
 ├── components/
 │   ├── auth/                      — LoginForm, SignUpForm, ResetPasswordForm, VerificationResult, etc.
+│   ├── dashboard/                 — Sidebar, NavItem, ProfileCard, ProfileDisplay, ReadMore
 │   ├── layout/
-│   │   ├── Header.tsx, HeaderButtons.tsx
-│   │   └── dashboard/             — Sidebar, NavItem, ProfileCard, ProfileDisplay, ReadMore
+│   │   └── Header.tsx, HeaderButtons.tsx
+│   ├── settings/                  — EmailSection, PasswordSection, DeleteAccountSection
 │   └── onboarding/
 │       ├── CreateProfileForm.tsx
 │       ├── ProfilePreview.tsx     — Dual-mode component (onboarding + settings)
@@ -71,7 +72,7 @@ mastergiver/
 │       └── what-i-care-about/     — CausesSelect, SkillsSelect, OrganizationsSelect, cards, SelectedGrid
 │
 ├── lib/
-│   ├── actions/onboarding.actions.ts  — All server actions for onboarding/profile mutations
+│   ├── actions/                       — auth.actions.ts, onboarding.actions.ts, account.actions.ts, index.ts
 │   ├── auth/                          — auth.ts, auth.actions.ts, auth.config.ts, session.ts, token.ts
 │   ├── axios/                         — axios.ts (base instance), pledge.axios.ts (Pledge.com client)
 │   ├── data/us-location.ts
@@ -79,9 +80,14 @@ mastergiver/
 │   ├── prisma.ts                      — Prisma client singleton
 │   ├── store/onboarding.store.ts      — Zustand store for Step 2 selections
 │   ├── theme/                         — Chakra theme.ts + component recipes
+│   ├── types/actions.ts               — Shared ActionResult discriminated union type
+│   ├── utils/profile-query.ts         — Shared Prisma select config for full profile queries
 │   └── validations/auth.schema.ts     — Zod schemas for auth forms
 │
-├── hooks/useDebounce.ts
+├── hooks/
+│   ├── useDebounce.ts
+│   ├── useOrganizationSearch.ts   — Org combobox search logic (TanStack Query + Chakra collection)
+│   └── useProfilePictureUpload.ts — Upload/delete logic for profile picture
 ├── prisma/
 │   ├── schema.prisma
 │   ├── seed.ts                    — Seeds 200+ skills only (causes NOT seeded — see Known Bugs)
@@ -193,12 +199,12 @@ Profile pictures go through `POST /api/upload` which calls Vercel Blob. The rout
 
 **Server Actions pattern**
 ```ts
-export const myAction = async (data: FormData) => {
+export async function myThingAction(data: FormData): Promise<ActionResult> {
   const session = await requireAuth();      // throws redirect if not authed
   // ... validate, mutate, return { success, error }
-};
+}
 ```
-Actions return `{ success: true, data? }` or `{ success: false, error: string }`. Never throw from an action — catch and return error objects.
+All action exports use the `Action` suffix (e.g. `signUpAction`, `saveProfileBasicsAction`). Return type is `ActionResult` from `lib/types/actions.ts` — a discriminated union: `{ success: true } | { success: false; error: string }`. Use `ActionResult<{ extraField: string }>` to attach extra data to the success branch. Never throw from an action — catch and return error objects.
 
 **Auth protection**
 Use the helpers in `lib/auth/session.ts`:

@@ -6,11 +6,10 @@ import {
   Text,
   HStack,
   Flex,
-  Separator,
 } from '@chakra-ui/react';
 import NextImage from 'next/image';
 import Logo from '@/public/brand-assets/Mastergiver_logo.svg';
-import ProfileCard from '@/components/layout/dashboard/ProfileCard';
+import ProfileCard from './ProfileCard';
 import { $Enums } from '@prisma/client';
 
 // ── Types ─────────────────────────────────────────────────
@@ -65,7 +64,9 @@ const ProfileDisplay = ({ profile, isDashboard }: ProfileDisplayProps) => {
         justify={{ base: 'top', md: 'center' }}
         pt={{ base: '64px', md: '0' }}
       >
-        <NextImage alt="MasterGiver Big Hero logo" src={Logo} width={300} />
+        <Stack w={{ base: '240px', md: '300px' }}>
+          <NextImage alt="MasterGiver Big Hero logo" src={Logo} width={300} />
+        </Stack>
       </Stack>
 
       <Container px={{ base: '4', md: '6', lg: '8' }}>
@@ -92,8 +93,7 @@ const ProfileDisplay = ({ profile, isDashboard }: ProfileDisplayProps) => {
                 <Stack
                   minH="80px"
                   justify="center"
-                  px="6"
-                  py="6"
+                  p="6"
                   borderRadius="12px"
                   borderWidth="1px"
                   borderStyle="dashed"
@@ -122,18 +122,35 @@ const ProfileDisplay = ({ profile, isDashboard }: ProfileDisplayProps) => {
                       borderColor="border.default"
                       py={{ base: '4', md: '5', lg: '6' }}
                     >
-                      <Image
+                      <Stack
                         bgColor="brand.accent"
-                        p="3"
+                        p="2"
                         borderRadius="4px"
-                        src={organization.logo ?? ''}
-                        alt={organization.name}
                         width={{ base: '72px', md: '96px', lg: '120px' }}
                         height={{ base: '72px', md: '96px', lg: '120px' }}
-                        objectFit="contain"
-                        flexShrink="0"
-                      />
-                      <Text fontWeight="600" fontSize="heading">
+                        flexShrink="1"
+                      >
+                        <Stack
+                          p="1"
+                          bgColor="background.white"
+                          borderRadius="4px"
+                          w="100%"
+                          h="100%"
+                        >
+                          <Image
+                            src={organization.logo ?? ''}
+                            alt={organization.name}
+                            objectFit="contain"
+                            flexShrink="0"
+                            width="100%"
+                            height="100%"
+                          />
+                        </Stack>
+                      </Stack>
+                      <Text
+                        fontWeight="600"
+                        fontSize={{ base: 'subheading', md: 'heading' }}
+                      >
                         {organization.name}
                       </Text>
                     </HStack>

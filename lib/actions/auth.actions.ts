@@ -23,10 +23,11 @@ import {
 import { sendEmail } from '@/lib/email/client';
 import VerifyEmail from '@/lib/email/templates/verify-email';
 import ResetPassword from '@/lib/email/templates/reset-password';
+import type { ActionResult } from '@/lib/types/actions';
 
 // SIGN UP A NEW USER
 
-export async function signUp(data: SignUpInput) {
+export async function signUpAction(data: SignUpInput): Promise<ActionResult<{ message: string }>> {
   try {
     // Validate input
     const validatedFields = signUpSchema.safeParse(data);
@@ -122,7 +123,7 @@ export async function signUp(data: SignUpInput) {
 
 // LOG IN A USER
 
-export async function login(data: LoginInput) {
+export async function loginAction(data: LoginInput): Promise<ActionResult<{ redirectTo: string }>> {
   try {
     const validatedFields = loginSchema.safeParse(data);
 
@@ -201,7 +202,7 @@ export async function login(data: LoginInput) {
 
 // VERIFY EMAIL WITH TOKEN
 
-export async function verifyEmail(token: string) {
+export async function verifyEmailAction(token: string) {
   try {
     // Verify token
     const result = await verifyEmailToken(token);
@@ -241,7 +242,7 @@ export async function verifyEmail(token: string) {
 
 // REQUEST PASSWORD RESET
 
-export async function requestPasswordReset(data: ResetPasswordRequestInput) {
+export async function requestPasswordResetAction(data: ResetPasswordRequestInput): Promise<ActionResult<{ message: string }>> {
   try {
     const validatedFields = resetPasswordRequestSchema.safeParse(data);
 
@@ -300,7 +301,7 @@ export async function requestPasswordReset(data: ResetPasswordRequestInput) {
 
 //  RESET PASSWORD WITH TOKEN
 
-export async function resetPassword(data: ResetPasswordInput) {
+export async function resetPasswordAction(data: ResetPasswordInput): Promise<ActionResult<{ message: string }>> {
   try {
     const validatedFields = resetPasswordSchema.safeParse(data);
 
@@ -319,7 +320,7 @@ export async function resetPassword(data: ResetPasswordInput) {
     if (!result.success) {
       return {
         success: false,
-        error: result.error,
+        error: result.error ?? 'Token verification failed.',
       };
     }
 
@@ -352,7 +353,7 @@ export async function resetPassword(data: ResetPasswordInput) {
 
 // LOG OUT THE CURRENT USER
 
-export async function logout() {
+export async function logoutAction(): Promise<void> {
   await signOut({ redirect: false });
 }
 
@@ -360,7 +361,7 @@ export async function logout() {
 
 const resendAttempts = new Map<string, { count: number; resetAt: number }>();
 
-export async function resendVerificationEmail(email: string) {
+export async function resendVerificationEmailAction(email: string): Promise<ActionResult<{ message: string }>> {
   try {
     // Rate limiting: 3 attempts in 15 minutes
 

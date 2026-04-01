@@ -1,5 +1,5 @@
 import WhatICareAboutForm from '@/components/onboarding/what-i-care-about/WhatICareAboutForm';
-import { getOnboardingData } from '@/lib/actions/onboarding.actions';
+import { getOnboardingDataAction } from '@/lib/actions/onboarding.actions';
 import { requireIncompleteOnboarding } from '@/lib/auth/session';
 import { prisma } from '@/lib/prisma';
 
@@ -36,7 +36,7 @@ const WhatICareAboutPage = async () => {
   await requireIncompleteOnboarding();
 
   const [onboardingData, { causes, skills }] = await Promise.all([
-    getOnboardingData(),
+    getOnboardingDataAction(),
     getCausesAndSkills(),
   ]);
 

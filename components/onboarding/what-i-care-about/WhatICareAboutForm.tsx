@@ -1,6 +1,6 @@
 'use client';
 
-import { saveCausesSkillsOrgs } from '@/lib/actions/onboarding.actions';
+import { saveCausesSkillsOrgsAction } from '@/lib/actions/onboarding.actions';
 import {
   CauseItem,
   OrgItem,
@@ -74,7 +74,7 @@ const WhatICareAboutForm = ({
     setIsSaving(true);
     setError(null);
 
-    const results = await saveCausesSkillsOrgs({
+    const results = await saveCausesSkillsOrgsAction({
       causeIds: selectedCauses.map((c) => c.id),
       skillIds: selectedSkills.map((s) => s.id),
       organizations: selectedOrgs.map((org) => ({

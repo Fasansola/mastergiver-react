@@ -1,5 +1,5 @@
 import CreateProfileForm from '@/components/onboarding/CreateProfileForm';
-import { getOnboardingData } from '@/lib/actions/onboarding.actions';
+import { getOnboardingDataAction } from '@/lib/actions/onboarding.actions';
 import { requireIncompleteOnboarding } from '@/lib/auth/session';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default async function CreateProfilePage() {
   await requireIncompleteOnboarding();
 
-  const data = await getOnboardingData();
+  const data = await getOnboardingDataAction();
 
   if (!data.success || !data.data?.profile) {
     redirect('/dashboard');

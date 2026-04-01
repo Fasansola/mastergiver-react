@@ -2,7 +2,7 @@ import { Flex, Heading, Text, Button } from '@chakra-ui/react';
 import Link from 'next/link';
 import Image from 'next/image';
 import ErrorIcon from '@/public/components-assets/error-svgrepo-com.svg';
-import { verifyNewEmail } from '@/lib/actions/account.actions';
+import { verifyNewEmailAction } from '@/lib/actions/account.actions';
 import { verifyTokenAndRedirect } from '@/lib/auth/verify-token-page';
 import { Metadata } from 'next';
 
@@ -20,7 +20,7 @@ export default async function VerifyEmailChangePage({ searchParams }: Props) {
 
   const outcome = await verifyTokenAndRedirect({
     token,
-    verifyFn: verifyNewEmail,
+    verifyFn: verifyNewEmailAction,
     successRedirect: '/settings/account',
   });
 

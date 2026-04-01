@@ -15,7 +15,7 @@ import {
   changePasswordFormSchema,
   type ChangePasswordFormInput,
 } from '@/lib/validations/account.schema';
-import { updatePassword } from '@/lib/actions/account.actions';
+import { updatePasswordAction } from '@/lib/actions/account.actions';
 
 export default function PasswordSection() {
   const [isEditing, setIsEditing] = useState(false);
@@ -49,7 +49,7 @@ export default function PasswordSection() {
     setServerError(null);
     setIsLoading(true);
 
-    const result = await updatePassword(data.currentPassword, data.newPassword);
+    const result = await updatePasswordAction(data.currentPassword, data.newPassword);
 
     setIsLoading(false);
 

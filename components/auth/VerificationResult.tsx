@@ -4,7 +4,7 @@ import { Button } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import SuccessVerifier from './SuccessVerifier';
 import { useRouter } from 'next/navigation';
-import { resendVerificationEmail } from '@/lib/auth/auth.actions';
+import { resendVerificationEmailAction } from '@/lib/actions/auth.actions';
 
 interface VerificationResultProps {
   status: 'missing-token' | 'error' | 'verifying';
@@ -42,7 +42,7 @@ export function VerificationResult({
     setResendStatus('loading');
 
     try {
-      const result = await resendVerificationEmail(email);
+      const result = await resendVerificationEmailAction(email);
 
       if (result.success) {
         setResendStatus('success');

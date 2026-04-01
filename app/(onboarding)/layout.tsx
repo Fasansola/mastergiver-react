@@ -6,7 +6,11 @@ const OnboardingLayout = ({ children }: PropsWithChildren) => {
   return (
     <Flex minH="100vh" direction="column" bg="background.page">
       <Header />
-      <Flex align="center" justify="center" py={{ base: '6', lg: 'sectionGap' }}>
+      <Flex
+        align="center"
+        justify="center"
+        py={{ base: '6', lg: 'sectionGap' }}
+      >
         <Container alignItems="center" justifyContent="center" className="flex">
           <Flex
             background="background.card"
@@ -14,7 +18,8 @@ const OnboardingLayout = ({ children }: PropsWithChildren) => {
             maxW="974px"
             borderRadius="card"
             minH="300px"
-            p={{ base: '6', lg: 'sectionGap' }}
+            py={{ base: '8', lg: 'sectionGap' }}
+            px={{ base: '5', lg: 'sectionGap' }}
             shadow="formBox"
           >
             {children}

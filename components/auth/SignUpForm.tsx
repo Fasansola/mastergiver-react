@@ -8,7 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Alert, Button, Checkbox, Field, Flex, Input } from '@chakra-ui/react';
 import { PasswordInput } from '@/components/ui/password-input';
-import { signUp } from '@/lib/auth/auth.actions';
+import { signUpAction } from '@/lib/actions/auth.actions';
 
 const SignUpForm = () => {
   const router = useRouter();
@@ -36,7 +36,7 @@ const SignUpForm = () => {
   const onSubmit = async (data: SignUpInput) => {
     setServerError(null);
 
-    const result = await signUp(data);
+    const result = await signUpAction(data);
 
     if (!result.success) {
       setServerError(result.error ?? 'Something went wrong');

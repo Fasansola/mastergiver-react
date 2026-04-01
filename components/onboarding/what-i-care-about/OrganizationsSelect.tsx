@@ -1,84 +1,21 @@
-import { OrgSearchResult } from '@/app/api/organizations/search/route';
-import { useDebounce } from '@/hooks/useDebounce';
-import { instance } from '@/lib/axios/axios';
 import { useOnboardingStore } from '@/lib/store/onboarding.store';
 import { Combobox, Portal } from '@ark-ui/react';
 import {
   HStack,
   Span,
   Spinner,
-  useListCollection,
   Image,
   VStack,
   Heading,
   Stack,
   Box,
 } from '@chakra-ui/react';
-import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
-
-interface OrgComboboxItem {
-  label: string;
-  value: string;
-  logo: string | null;
-  location: string | null;
-  ein: string | null;
-  pledgeOrgId: string;
-  website: string | null;
-  mission: string | null;
-}
-
-async function searchOrganization(q: string): Promise<OrgSearchResult[]> {
-  const { data } = await instance.get<{ results: OrgSearchResult[] }>(
-    '/api/organizations/search',
-    { params: { q } }
-  );
-
-  return data.results ?? [];
-}
+import { useOrganizationSearch, OrgComboboxItem } from '@/hooks/useOrganizationSearch';
 
 const OrganizationsSelect = () => {
   const { selectedOrgs, addOrg } = useOnboardingStore();
-  const [inputValue, setInputValue] = useState('');
-  const debounceQuery = useDebounce(inputValue, 400);
 
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ['org-search', debounceQuery],
-    queryFn: () => searchOrganization(debounceQuery),
-
-    // Don't fetch until user has typed at least 2 characters
-    enabled: debounceQuery.trim().length >= 2,
-
-    // Keep previous results visible while new one loads
-    placeholderData: (prev) => prev,
-    staleTime: 1000 * 60 * 5, // Cache results for 5 minutes
-  });
-
-  const { collection, set } = useListCollection<OrgComboboxItem>({
-    initialItems: [],
-    itemToString: (item) => item.label,
-    itemToValue: (item) => item.value,
-  });
-
-  // Mirror the docs pattern — sync data into collection when query returns
-  useEffect(() => {
-    const items: OrgComboboxItem[] = (data ?? [])
-      .filter(
-        (org) => !selectedOrgs.some((o) => o.pledgeOrgId === org.pledgeOrgId)
-      )
-      .map((org) => ({
-        label: org.name,
-        value: org.pledgeOrgId,
-        logo: org.logo,
-        location: org.location,
-        ein: org.ein,
-        pledgeOrgId: org.pledgeOrgId,
-        website: org.website,
-        mission: org.mission,
-      }));
-
-    set(items);
-  }, [data]); // ← depend on data only, not filteredResults
+  const { inputValue, setInputValue, isLoading, isError, data, collection } = useOrganizationSearch({ selectedOrgs });
 
   const handleSelect = (details: Combobox.ValueChangeDetails) => {
     const selectedId = details.value[0];

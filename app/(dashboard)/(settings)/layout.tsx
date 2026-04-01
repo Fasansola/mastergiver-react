@@ -1,16 +1,22 @@
 import { Heading, Stack } from '@chakra-ui/react';
 import { PropsWithChildren } from 'react';
-import SettingNavItem from './settings/SettingNavItem';
+import SettingNavItem from '@/components/settings/SettingNavItem';
 
 const Settingslayout = ({ children }: PropsWithChildren) => {
   return (
     <>
       <Stack gap="0">
         <Stack
-          py="6"
+          justify="center"
           px="5"
           borderBottom="solid 1px"
           borderColor="border.default"
+          position="sticky"
+          top="0"
+          bottom="0"
+          bgColor="background.page"
+          zIndex="1"
+          h={{ base: '64px', md: '80px' }}
         >
           <Heading fontWeight="500" fontSize="heading">
             Account Settings
@@ -20,12 +26,20 @@ const Settingslayout = ({ children }: PropsWithChildren) => {
           <Stack
             borderRight={{ base: 'none', lg: 'solid 1px' }}
             borderBottom={{ base: 'solid 1px', lg: 'none' }}
-            borderColor="border.default"
+            borderColor="border.default!"
             minW={{ base: '0', lg: '320px' }}
-            minH={{ base: '0', lg: '100vh' }}
+            minH={{ base: '0', lg: 'calc(100vh - 80px)' }}
             w={{ base: '100%', lg: 'auto' }}
+            position="sticky"
+            zIndex="1"
+            top={{ base: '64px', md: '80px' }}
           >
-            <Stack as="nav" width="100%" gap="0" direction={{ base: 'row', lg: 'column' }}>
+            <Stack
+              as="nav"
+              width="100%"
+              gap="0"
+              direction={{ base: 'row', lg: 'column' }}
+            >
               <SettingNavItem label="Edit Profile" href="/settings" />
               <SettingNavItem
                 label="Email Address & Password"

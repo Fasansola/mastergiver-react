@@ -3,8 +3,8 @@
 // TYPES
 
 import {
-  launchProfile,
-  saveProfileSettings,
+  launchProfileAction,
+  saveProfileSettingsAction,
 } from '@/lib/actions/onboarding.actions';
 import {
   CauseItem,
@@ -126,7 +126,7 @@ const ProfilePreview = ({
 
     try {
       if (mode === 'onboarding') {
-        const result = await launchProfile({
+        const result = await launchProfileAction({
           ...profileData,
           causeIds: selectedCauses.map((c) => c.id),
           skillIds: selectedSkills.map((s) => s.id),
@@ -143,7 +143,7 @@ const ProfilePreview = ({
         router.push('/onboarding/confirmation');
       } else {
         // For settings mode, we would call an updateProfile action instead
-        const result = await saveProfileSettings({
+        const result = await saveProfileSettingsAction({
           ...profileData,
           whyIGive: profileData.whyIGive ?? '',
           causeIds: selectedCauses.map((c) => c.id),

@@ -4,6 +4,7 @@ import { auth } from '@/lib/auth/auth';
 import { prisma } from '../prisma';
 import { revalidatePath } from 'next/cache';
 import { OrgSearchResult } from '@/app/api/organizations/search/route';
+import type { ActionResult } from '@/lib/types/actions';
 
 interface ProfileUpdateData {
   firstName?: string;
@@ -161,12 +162,12 @@ async function updateProfileData(profileId: string, data: ProfileUpdateData) {
 
 // Step 1: Save profile basics (pictures, about me, location)
 
-export async function saveProfileBasics(data: {
+export async function saveProfileBasicsAction(data: {
   profilePicture?: string;
   aboutMe: string;
   state: string;
   city: string;
-}) {
+}): Promise<ActionResult> {
   try {
     const session = await auth();
 
@@ -200,12 +201,12 @@ export async function saveProfileBasics(data: {
 
 // Step 2: Save causes, skills, and organizations
 
-export async function saveCausesSkillsOrgs(data: {
+export async function saveCausesSkillsOrgsAction(data: {
   causeIds: string[];
   skillIds: string[];
   organizations: OrgSearchResult[];
   whyIGive: string;
-}) {
+}): Promise<ActionResult> {
   try {
     const session = await auth();
 
@@ -243,7 +244,7 @@ export async function saveCausesSkillsOrgs(data: {
 
 // ── Step 3: Launch profile (preview page) ────────────────
 
-export async function launchProfile(data: ProfileUpdateData) {
+export async function launchProfileAction(data: ProfileUpdateData): Promise<ActionResult> {
   try {
     const session = await auth();
 
@@ -292,7 +293,7 @@ export async function launchProfile(data: ProfileUpdateData) {
 
 // ── Settings: Save profile changes ───────────────────────
 
-export async function saveProfileSettings(data: ProfileUpdateData) {
+export async function saveProfileSettingsAction(data: ProfileUpdateData): Promise<ActionResult> {
   try {
     const session = await auth();
 
@@ -322,7 +323,7 @@ export async function saveProfileSettings(data: ProfileUpdateData) {
 
 // Get current onboarding data
 
-export async function getOnboardingData() {
+export async function getOnboardingDataAction() {
   try {
     const session = await auth();
 
