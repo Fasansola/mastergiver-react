@@ -10,10 +10,27 @@
   --color-foreground: var(--foreground);
 }
 
+/* Business panel font utilities.
+   Written outside any @layer so they are unlayered CSS — unlayered author
+   styles always win over layered ones (including Chakra/Panda CSS layers).
+   !important on font-body also covers any element-level overrides from
+   Chakra's global reset (e.g. h1–h6 heading tokens). */
+.font-body,
+.font-body * {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif !important;
+}
+
+/* font-display has higher two-class specificity so it overrides font-body * */
+.font-body .font-display,
+.font-display {
+  font-family: var(--font-libre-bodoni), Georgia, serif !important;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-poppins), Helvetica, sans-serif;
+  line-height: 1.5em;
 }
 
 .inputForm {
@@ -38,4 +55,23 @@ select:-webkit-autofill {
   box-shadow: 0 0 0px 1000px transparent inset !important;
   -webkit-text-fill-color: #575C62 !important;
   transition: background-color 5000s ease-in-out 0s;
+}
+.offer-claim-btn {
+  display: block;
+  width: 100%;
+  height: 52px;
+  line-height: 52px;
+  text-align: center;
+  background: #2F2B77;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 15px;
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0px 8px 10px -6px #E2E1FF, 0px 20px 25px -5px #D4D1FF;
+  transition: background 0.2s ease;
+}
+
+.offer-claim-btn:hover {
+  background: #3d3899;
 }

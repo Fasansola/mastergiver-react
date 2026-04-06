@@ -2,7 +2,7 @@
 
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { Drawer, IconButton, Portal } from '@chakra-ui/react';
+import { Drawer, Portal } from '@chakra-ui/react';
 import Menu from '@/public/components-assets/menu.svg';
 import Image from 'next/image';
 

@@ -1,9 +1,9 @@
 import { Stack } from '@chakra-ui/react';
 import DashboardIcon from '@/public/components-assets/umbrella.svg';
-import LogOutIcon from '@/public/components-assets/log-out.svg';
 import SettingsIcon from '@/public/components-assets/settings.svg';
 import AccountIcon from '@/public/components-assets/account.svg';
 import NavItem from './NavItem';
+import LogoutNavItem from './LogoutNavItem';
 import { getCurrentUser } from '@/lib/auth/session';
 
 const NavItemList = async () => {
@@ -26,7 +26,7 @@ const NavItemList = async () => {
         iconSrc={SettingsIcon.src}
         label={'Account Settings'}
       />
-      <NavItem href={'/logout'} iconSrc={LogOutIcon.src} label={'Log Out'} />
+      <LogoutNavItem />
     </Stack>
   );
 };

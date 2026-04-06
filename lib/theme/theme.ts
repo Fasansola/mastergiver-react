@@ -4,6 +4,9 @@ import { inputRecipe } from './recipes/input.recipe';
 
 const config = defineConfig({
   theme: {
+    breakpoints: {
+      '3xl': '1920px',
+    },
     tokens: {
       colors: {
         brand: {
@@ -27,6 +30,7 @@ const config = defineConfig({
           secondary: { value: '#575C62' }, // Muted text
           link: { value: '#5851BF' }, // Link text
           error: { value: '#E53E3E' }, // Error messages
+          businessH: { value: '#1F2937' }, // Business profile page heading
         },
         border: {
           accentBorder: { value: '#E9EAED' }, // Use border on elements

@@ -1,7 +1,6 @@
 import SuccessVerifier from '@/components/auth/SuccessVerifier';
-import { Button, Heading, HStack, Stack } from '@chakra-ui/react';
+import { Button, Stack } from '@chakra-ui/react';
 import Link from 'next/link';
-import Image from 'next/image';
 
 const ConfirmarionPage = () => {
   return (

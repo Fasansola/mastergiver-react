@@ -1,8 +1,6 @@
 import { HStack, Stack } from '@chakra-ui/react';
 import { PropsWithChildren } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import SidebarContent from '@/components/dashboard/SidebarContent';
-import SidebarDrawer from '@/components/dashboard/SidebarDrawer';
 import { Header } from '@/components/layout';
 
 const DashboardLayout = ({ children }: PropsWithChildren) => {

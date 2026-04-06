@@ -26,6 +26,7 @@ model User {
   accounts   Account[]
   sessions   Session[]
   onboarding OnboardingProgress?
+  business   Business? // Phase 2: links user to their business profile
 
   @@map("users")
 }
@@ -75,7 +76,7 @@ model VerificationToken {
 }
 
 // ============================================
-// PROFILE
+// PROFILE (PHASE 1 — DO NOT MODIFY)
 // ============================================
 
 model Profile {
@@ -113,7 +114,7 @@ enum ProfileStatus {
 }
 
 // ============================================
-// CAUSES
+// CAUSES (PHASE 1 — ONE PHASE 2 ADDITION)
 // ============================================
 
 model Cause {
@@ -129,7 +130,8 @@ model Cause {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  profiles ProfileCause[]
+  profiles   ProfileCause[]
+  businesses BusinessCause[] // Phase 2: allows businesses to link to causes
 
   @@map("causes")
 }
@@ -154,7 +156,7 @@ model ProfileCause {
 }
 
 // ============================================
-// SKILLS
+// SKILLS (PHASE 1 — DO NOT MODIFY)
 // ============================================
 
 model Skill {
@@ -193,7 +195,7 @@ model ProfileSkill {
 }
 
 // ============================================
-// ORGANIZATIONS
+// ORGANIZATIONS (PHASE 1 — DO NOT MODIFY)
 // ============================================
 
 model Organization {
@@ -241,7 +243,7 @@ model ProfileOrganization {
 }
 
 // ============================================
-// ONBOARDING
+// ONBOARDING (PHASE 1 — DO NOT MODIFY)
 // ============================================
 
 model OnboardingProgress {
@@ -270,4 +272,139 @@ model PasswordResetToken {
 
   @@unique([email, token])
   @@map("password_reset_tokens")
+}
+
+// ============================================
+// BUSINESS PANEL (PHASE 2)
+// ============================================
+
+enum BusinessStatus {
+  PENDING // Registered but has not paid yet
+  ACTIVE // Payment confirmed, full access
+  SUSPENDED // Payment failed or subscription cancelled
+}
+
+model Business {
+  id        String         @id @default(cuid())
+  slug      String         @unique
+  ownerId   String         @unique
+  owner     User           @relation(fields: [ownerId], references: [id])
+  status    BusinessStatus @default(PENDING)
+  published Boolean        @default(false)
+
+  // --- About Us section ---
+  logo        String?
+  coverPhoto  String?
+  companyName String?
+  address     String?
+  city        String?
+  zipCode     String?
+  aboutUs     String? @db.Text
+  tagline     String?
+  website     String?
+
+  // --- Impact Summary section ---
+  yearsOfInvolvement Int?
+  totalContributions Decimal?
+  activePartners     Int?
+
+  // --- Stripe subscription fields ---
+  stripeCustomerId     String?
+  stripeSubscriptionId String?
+  subscriptionStatus   String?
+  currentPeriodEnd     DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // --- Relations ---
+  causes          BusinessCause[]
+  partners        BusinessPartner[]
+  communityEvents BusinessCommunityEvent[]
+  endorsements    BusinessEndorsement[]
+  offers          BusinessOffer[]
+
+  @@map("businesses")
+}
+
+// Join table linking businesses to causes
+// Mirrors the ProfileCause pattern from Phase 1
+model BusinessCause {
+  id         String @id @default(cuid())
+  businessId String
+  causeId    String
+
+  createdAt DateTime @default(now())
+
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  cause    Cause    @relation(fields: [causeId], references: [id], onDelete: Cascade)
+
+  @@unique([businessId, causeId])
+  @@map("business_causes")
+}
+
+// Stores individual community partner or program entries for a business
+model BusinessPartner {
+  id          String  @id @default(cuid())
+  businessId  String
+  image       String?
+  name        String
+  description String  @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@map("business_partners")
+}
+
+// Stores individual "In the Community" event/photo entries for a business
+model BusinessCommunityEvent {
+  id          String  @id @default(cuid())
+  businessId  String
+  photo       String?
+  description String  @db.Text
+  externalUrl String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@map("business_community_events")
+}
+
+// Stores individual endorsement entries for a business
+model BusinessEndorsement {
+  id                   String  @id @default(cuid())
+  businessId           String
+  endorsingOrg         String
+  endorserName         String?
+  endorsementStatement String  @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@map("business_endorsements")
+}
+
+// Stores individual offer entries for a business
+model BusinessOffer {
+  id          String    @id @default(cuid())
+  businessId  String
+  title       String
+  description String    @db.Text
+  link        String?
+  offerCode   String?
+  expiresAt   DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@map("business_offers")
 }

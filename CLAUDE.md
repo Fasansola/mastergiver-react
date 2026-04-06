@@ -6,28 +6,33 @@ Read this file at the start of every session to understand the project state, co
 
 ## 1. Project Overview
 
-**MasterGiver** is a public platform where users create profiles showcasing their philanthropic identity: the causes they care about, organizations they support, and skills they contribute to charitable work. Users complete a guided onboarding flow, then receive a shareable public profile URL.
+**MasterGiver** is a public platform with two distinct panels:
 
-The core value proposition is a verified, public "giving pledge" page — similar to a LinkedIn profile but focused entirely on charitable giving and impact.
+**Phase 1 — Individual User Panel (complete)**
+Users create profiles showcasing their philanthropic identity: causes they care about, organizations they support, and skills they contribute. Users complete a guided onboarding flow and receive a shareable public profile URL.
+
+**Phase 2 — Business Panel (current work)**
+Businesses pay an annual $59 subscription to create a public profile showcasing their community values, impact, partners, endorsements, and offers. The business panel is a fully separate layer of the application — separate routing (`/business/*`), separate design system, and no shared UI components with the user panel.
 
 ---
 
 ## 2. Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Framework | Next.js 16.1.6 (App Router), React 19, TypeScript 5 |
-| Database | PostgreSQL (Docker locally), Prisma ORM v5 |
-| Auth | NextAuth v5 (beta.30), credentials provider, JWT sessions |
-| UI Library | Chakra UI v3 (Panda CSS-based API) + Ark UI (Combobox) |
-| Styling | Tailwind CSS v4 (used alongside Chakra for utilities) |
-| State | Zustand v5 with devtools middleware |
-| Forms | React Hook Form v7 + Zod v4 + @hookform/resolvers |
-| Data Fetching | TanStack Query v5 (used only for org search) |
-| HTTP Client | Axios v1 |
-| Email | Resend v6 + React Email v5 (templated transactional emails) |
-| File Storage | Vercel Blob v2 (profile pictures) |
-| Other | bcryptjs, country-state-city, next-themes (forced light mode), framer-motion, lucide-react, react-icons |
+| Layer         | Technology                                                                                              |
+| ------------- | ------------------------------------------------------------------------------------------------------- |
+| Framework     | Next.js 16.1.6 (App Router), React 19, TypeScript 5                                                     |
+| Database      | PostgreSQL (Docker locally), Prisma ORM v5                                                              |
+| Auth          | NextAuth v5 (beta.30), credentials provider, JWT sessions                                               |
+| UI Library    | Chakra UI v3 (Panda CSS-based API) + Ark UI (Combobox)                                                  |
+| Styling       | Tailwind CSS v4 (used alongside Chakra for utilities)                                                   |
+| State         | Zustand v5 with devtools middleware                                                                     |
+| Forms         | React Hook Form v7 + Zod v4 + @hookform/resolvers                                                       |
+| Data Fetching | TanStack Query v5                                                                                       |
+| HTTP Client   | Axios v1                                                                                                |
+| Email         | Resend v6 + React Email v5 (templated transactional emails)                                             |
+| File Storage  | Vercel Blob v2 (profile pictures + business images)                                                     |
+| Payments      | Stripe (Checkout + Webhooks + Customer Portal) — Phase 2 only                                           |
+| Other         | bcryptjs, country-state-city, next-themes (forced light mode), framer-motion, lucide-react, react-icons |
 
 **Local dev:** `docker-compose.yml` spins up PostgreSQL. Run `npx prisma migrate dev` and `npx prisma db seed` after first setup.
 
@@ -40,7 +45,7 @@ mastergiver/
 ├── app/
 │   ├── (auth)/                    — Auth route group (login, signup, reset-password, verify-email)
 │   │   └── layout.tsx             — Centered card, 700px wide
-│   ├── (dashboard)/               — Protected area
+│   ├── (dashboard)/               — Protected individual user area
 │   │   ├── layout.tsx             — Sidebar + main content HStack
 │   │   ├── dashboard/page.tsx     — Main profile view
 │   │   └── (settings)/            — Nested settings layout
@@ -51,337 +56,369 @@ mastergiver/
 │   │   └── onboarding/            — page.tsx (step router), create-profile/, what-i-care-about/, preview/, confirmation/
 │   ├── api/
 │   │   ├── organizations/search/  — Pledge.com proxy route
-│   │   └── upload/                — Vercel Blob upload/delete
-│   ├── profile/[username]/        — Public profile (PUBLISHED only, 404 for DRAFT)
+│   │   ├── upload/                — Vercel Blob upload/delete
+│   │   ├── webhooks/stripe/       — Stripe webhook handler (Phase 2)
+│   │   └── business/              — Business API routes (Phase 2)
+│   ├── business/                  — Business panel (Phase 2)
+│   │   ├── signup/
+│   │   ├── signin/
+│   │   ├── reset-password/
+│   │   │   └── new/
+│   │   ├── confirm/               — Payment gate (Stripe Checkout)
+│   │   ├── suspended/             — Suspended account notice
+│   │   ├── dashboard/
+│   │   │   ├── layout.tsx         — Business sidebar + progress tracker
+│   │   │   ├── edit-profile/      — 7-section accordion onboarding/edit
+│   │   │   ├── account-settings/
+│   │   │   └── billing/
+│   │   └── [slug]/                — Public business profile page
+│   ├── profile/[username]/        — Public individual profile (PUBLISHED only)
 │   ├── logout/page.tsx
-│   └── page.tsx                   — Home (placeholder: <div>Hello</div>)
+│   └── page.tsx                   — Home (placeholder)
 │
 ├── components/
-│   ├── auth/                      — LoginForm, SignUpForm, ResetPasswordForm, VerificationResult, etc.
-│   ├── dashboard/                 — Sidebar, NavItem, ProfileCard, ProfileDisplay, ReadMore
+│   ├── auth/                      — Individual user auth components
+│   ├── dashboard/                 — Individual user dashboard components
 │   ├── layout/
-│   │   └── Header.tsx, HeaderButtons.tsx
-│   ├── settings/                  — EmailSection, PasswordSection, DeleteAccountSection
-│   └── onboarding/
-│       ├── CreateProfileForm.tsx
-│       ├── ProfilePreview.tsx     — Dual-mode component (onboarding + settings)
-│       ├── ProfilePictureUpload.tsx
-│       ├── LocationSelector.tsx
-│       ├── skeletons/
-│       ├── profile-preview/       — 9 section sub-components (NameSection, AboutSection, etc.)
-│       └── what-i-care-about/     — CausesSelect, SkillsSelect, OrganizationsSelect, cards, SelectedGrid
+│   ├── settings/
+│   ├── onboarding/
+│   └── business/                  — All business panel components (Phase 2)
+│       ├── layout/                — Sidebar, DashboardShell, ProgressBar
+│       ├── auth/                  — Business auth forms
+│       ├── edit-profile/          — One component per accordion section
+│       ├── profile/               — Public profile view components
+│       └── shared/                — Reusable business UI primitives
 │
 ├── lib/
-│   ├── actions/                       — auth.actions.ts, onboarding.actions.ts, account.actions.ts, index.ts
-│   ├── auth/                          — auth.ts, auth.actions.ts, auth.config.ts, session.ts, token.ts
-│   ├── axios/                         — axios.ts (base instance), pledge.axios.ts (Pledge.com client)
+│   ├── actions/                   — Individual user server actions
+│   ├── auth/
+│   ├── axios/
+│   ├── business/                  — Business logic (Phase 2)
+│   │   ├── stripe.ts              — Stripe helpers
+│   │   ├── progress.ts            — Profile completion calculation
+│   │   └── slugify.ts             — Slug generation
 │   ├── data/us-location.ts
-│   ├── email/                         — Resend client + verify-email and reset-password templates
-│   ├── prisma.ts                      — Prisma client singleton
-│   ├── store/onboarding.store.ts      — Zustand store for Step 2 selections
-│   ├── theme/                         — Chakra theme.ts + component recipes
-│   ├── types/actions.ts               — Shared ActionResult discriminated union type
-│   ├── utils/profile-query.ts         — Shared Prisma select config for full profile queries
-│   └── validations/auth.schema.ts     — Zod schemas for auth forms
+│   ├── email/
+│   ├── prisma.ts
+│   ├── store/
+│   ├── theme/
+│   ├── types/actions.ts
+│   ├── utils/profile-query.ts
+│   └── validations/
 │
 ├── hooks/
-│   ├── useDebounce.ts
-│   ├── useOrganizationSearch.ts   — Org combobox search logic (TanStack Query + Chakra collection)
-│   └── useProfilePictureUpload.ts — Upload/delete logic for profile picture
 ├── prisma/
-│   ├── schema.prisma
-│   ├── seed.ts                    — Seeds 200+ skills only (causes NOT seeded — see Known Bugs)
+│   ├── schema.prisma              — Contains both Phase 1 and Phase 2 models
+│   ├── seed.ts
 │   └── migrations/
-└── public/brand-assets/, components-assets/
+└── public/
 ```
 
 ---
 
 ## 4. Completed Milestones
 
-| Milestone | Description | Status |
-|---|---|---|
-| 0 | Project setup — Next.js, Prisma, Docker, Tailwind, Chakra | Done |
-| 1 | Auth — sign-up, email verification, login, password reset | Done |
-| 2 | Onboarding Step 1 — profile picture, location, about me | Done |
-| 3 | Onboarding Step 2 — why I give, causes, skills, org search | Done |
-| 4 | Onboarding Step 3 — profile preview, inline editing, publish | Done |
-| 5 | Public profile page — `/profile/[username]` | Done |
-| 6 | Dashboard — profile display, settings/edit profile | Partially done (see below) |
+| Milestone | Description                                                  | Status         |
+| --------- | ------------------------------------------------------------ | -------------- |
+| 0         | Project setup — Next.js, Prisma, Docker, Tailwind, Chakra    | Done           |
+| 1         | Auth — sign-up, email verification, login, password reset    | Done           |
+| 2         | Onboarding Step 1 — profile picture, location, about me      | Done           |
+| 3         | Onboarding Step 2 — why I give, causes, skills, org search   | Done           |
+| 4         | Onboarding Step 3 — profile preview, inline editing, publish | Done           |
+| 5         | Public profile page — `/profile/[username]`                  | Done           |
+| 6         | Dashboard — profile display, settings/edit profile           | Partially done |
+| 7         | Business Panel — Phase 2                                     | In progress    |
 
 ---
 
-## 5. Current Work (Milestone 6 — In Progress)
+## 5. Current Work — Phase 2: Business Panel
 
-**Done in Milestone 6:**
-- Dashboard with full profile display (`/dashboard`)
-- Profile display component with causes, skills, organizations, empty states
-- Sidebar navigation with active states
-- Edit profile at `/settings` (reuses `ProfilePreview` in settings mode)
-- Public profile at `/profile/[username]`
+We are building the business panel step by step. Complete each step and wait for confirmation before proceeding.
 
-**Still to do:**
-- `/settings/account` — change email, change password (currently stubbed out)
-- Site-wide responsive design — the entire app is desktop-only right now; all layouts need mobile/tablet breakpoints
+**Build order:**
+
+- [ ] Step 1 — Prisma schema + migration ✅ Done
+- [ ] Step 2 — Business auth pages (signup, signin, reset password)
+- [ ] Step 3 — Stripe Checkout integration + confirm page
+- [ ] Step 4 — Dashboard layout + sidebar + progress tracker
+- [ ] Step 5 — Edit profile page (7 accordion sections)
+- [ ] Step 6 — Account settings page
+- [ ] Step 7 — Billing settings page
+- [ ] Step 8 — Public business profile page (`/business/[slug]`)
+
+**Detailed specs for each step live in `PHASE2_BRIEF.md`. Read the relevant section before starting each step.**
 
 ---
 
-## 6. Known Bugs
+## 6. Business Panel — Design System
 
-All bugs found during initial audit (2026-03-29). Update status as fixed.
+The business panel has its own visual identity. Apply these tokens to all `/business/*` pages and components. Do not use these in Phase 1 components.
+
+### Typography
+
+| Token                  | Font         | Weight | Size | Line Height | Color   |
+| ---------------------- | ------------ | ------ | ---- | ----------- | ------- |
+| Heading (H1)           | Libre Bodoni | 700    | 32px | 120%        | #27262D |
+| Small Heading (H2)     | Libre Bodoni | 700    | 24px | 140%        | #27262D |
+| Accordion Heading (H3) | Libre Bodoni | 700    | 20px | 150%        | #2F2B77 |
+| Body                   | SF Pro       | 400    | 16px | 150%        | #212325 |
+| Big Text               | SF Pro       | 400    | 20px | 120%        | #212325 |
+| Small Text             | SF Pro       | 400    | 14px | 120%        | #212325 |
+| Input Label            | SF Pro       | 700    | 14px | 20px        | #575C62 |
+| Placeholder            | SF Pro       | 510    | 14px | 100%        | #575C62 |
+| Button Text            | SF Pro       | 700    | 20px | 160%        | #FFFFFF |
+
+Input labels: `letter-spacing: 1.16px`, `text-transform: uppercase`
+Placeholders: `letter-spacing: -0.15px`, `text-transform: capitalize`
+
+### Components
+
+**Input Field**
+
+```
+background: #F9FAFB
+border: 1px solid #F3F4F6
+height: 42px
+border-radius: 6px
+padding: 10px 16px
+```
+
+**Primary Button**
+
+```
+background: #2F2B77
+height: 64px
+border-radius: 8px
+padding: 16px 40px
+gap: 8px
+box-shadow: 0px 8px 10px -6px #E2E1FF, 0px 20px 25px -5px #D4D1FF
+```
+
+**Sidebar Nav — Active**
+
+```
+background: #2F2B77
+width: 330px
+height: 52px
+border-radius: 8px
+padding: 10px
+gap: 16px
+box-shadow: 0px 8px 10px -6px #E2E1FF, 0px 20px 25px -5px #D4D1FF
+text: SF Pro 510, 18px, line-height 20px, letter-spacing -0.15px, color #FFFFFF
+```
+
+**Sidebar Nav — Inactive**
+
+```
+background: transparent
+width: 330px
+height: 56px
+border-radius: 14px
+padding: 12px 16px
+gap: 16px
+text: SF Pro 510, 18px, line-height 20px, letter-spacing -0.15px, color #212325
+```
+
+---
+
+## 7. Business Panel — Key Architecture Decisions
+
+**Stripe Checkout (not Elements, not merchant link)**
+Annual subscription at $59/year. Flow: create Checkout Session server-side → redirect to Stripe hosted page → webhook confirms payment → account activated. Secret key is server-side only, never in client code.
+
+**Webhook events to handle:**
+
+- `checkout.session.completed` → set `status: ACTIVE`
+- `invoice.payment_succeeded` → update `currentPeriodEnd`
+- `invoice.payment_failed` → set `status: SUSPENDED`
+- `customer.subscription.deleted` → set `status: SUSPENDED`
+
+**Business auth is separate from user auth**
+Business users register and sign in via `/business/signin` — not `/login`. They share the same `User` model (one account per email) but the business panel checks for a linked `Business` record and its `status` field.
+
+**Access control via middleware**
+All `/business/dashboard/*` routes are protected in `middleware.ts`:
+
+- No session → `/business/signin`
+- `status: PENDING` → `/business/confirm`
+- `status: SUSPENDED` → `/business/suspended`
+- `status: ACTIVE` → allow through
+
+**Progress tracker**
+7 accordion sections, each worth ~14.3%. A section is complete when its required fields are populated. Logic lives in `lib/business/progress.ts` as a pure function.
+
+**Phase 1 model touches (minimal)**
+Only two Phase 1 models were modified for Phase 2:
+
+- `User` — added `business Business?` relation
+- `Cause` — added `businesses BusinessCause[]` relation
+
+No other Phase 1 models were touched.
+
+---
+
+## 8. Known Bugs
 
 ### Critical
 
-| # | File | Issue | Status |
-|---|---|---|---|
-| 1 | `lib/actions/onboarding.actions.ts:224` | Missing `await` on `updateProfileData()` — causes/skills/orgs/whyIGive writes are fire-and-forget; data may not save before redirect | Open |
-| 2 | `app/(onboarding)/onboarding/page.tsx:13` | Typo: `redirect('/dasboard')` (missing `h`) — 404 for users who revisit `/onboarding` post-completion | Open |
-| 3 | `lib/auth/auth.actions.ts:161` | Missing leading slash: `'onboarding'` instead of `'/onboarding'` — post-login redirect may go to `/login/onboarding` | Open |
-| 4 | `components/auth/VerificationResult.tsx:64` | `redirect()` from `next/navigation` called inside a `'use client'` component — throws at runtime; should use `router.push()` | Open |
-| 5 | `components/onboarding/profile-preview/NameSection.tsx:44-55` | Input `value` bound to props (`firstName`/`lastName`) instead of `draft.firstName`/`draft.lastName` — displayed value doesn't reflect typing | Open |
-| 6 | `app/logout/page.tsx` | `logout()` and `router.push()` called directly in render body, not inside `useEffect` — fires on every render | Open |
+| #   | File                                                          | Issue                                                                         | Status |
+| --- | ------------------------------------------------------------- | ----------------------------------------------------------------------------- | ------ |
+| 1   | `lib/actions/onboarding.actions.ts:224`                       | Missing `await` on `updateProfileData()` — data may not save before redirect  | Open   |
+| 2   | `app/(onboarding)/onboarding/page.tsx:13`                     | Typo: `redirect('/dasboard')` — 404 post-completion                           | Open   |
+| 3   | `lib/auth/auth.actions.ts:161`                                | Missing leading slash: `'onboarding'` instead of `'/onboarding'`              | Open   |
+| 4   | `components/auth/VerificationResult.tsx:64`                   | `redirect()` called in `use client` component — should use `router.push()`    | Open   |
+| 5   | `components/onboarding/profile-preview/NameSection.tsx:44-55` | Input bound to props not draft state — displayed value doesn't reflect typing | Open   |
+| 6   | `app/logout/page.tsx`                                         | `logout()` and `router.push()` called in render body not `useEffect`          | Open   |
 
 ### Non-Critical
 
-| # | File | Issue | Status |
-|---|---|---|---|
-| 7 | `lib/theme/recipes/input.recipe.ts:6` | `borderWidth: '9px'` — almost certainly a typo for `'1px'`; masked on most inputs by inline CSS override | Fixed |
-| 8 | `components/auth/AuthHeading.tsx:15` | `fontFamily=""` — empty string overrides theme font on all auth headings | Fixed |
-| 9 | `components/layout/dashboard/ProfileCard.tsx:59` | `profile.city + ', ' + profile.state` renders as `"null, null"` when either field is unset | Fixed |
-| 10 | `lib/auth/auth.config.ts:106` | Comment reads "Using database for sessions storage" but `strategy: 'jwt'` is set — misleading only | Open |
-| 11 | `components/onboarding/what-i-care-about/OrganizationsSelect.tsx` | Two `console.log` debug statements left in production code | Fixed |
-| 12 | `lib/actions/onboarding.actions.ts` | `revalidatePath(\`/${profile.id}\`)` uses DB id not username — targets a non-existent path, does nothing | Fixed |
-| 13 | `app/(dashboard)/(settings)/settings/page.tsx` | `existingOrgs` filter drops orgs where `pledgeOrgId === null` — silently loses any manually-added organizations | Open |
-| 14 | `lib/auth/auth.actions.ts` | Resend rate limiting uses a module-level `Map` — resets on every serverless cold start, provides no real protection in production | Open |
+| #   | File                                                              | Issue                                                                 | Status |
+| --- | ----------------------------------------------------------------- | --------------------------------------------------------------------- | ------ |
+| 7   | `lib/theme/recipes/input.recipe.ts:6`                             | `borderWidth: '9px'` — typo for `'1px'`                               | Fixed  |
+| 8   | `components/auth/AuthHeading.tsx:15`                              | `fontFamily=""` — overrides theme font                                | Fixed  |
+| 9   | `components/layout/dashboard/ProfileCard.tsx:59`                  | `"null, null"` when city/state unset                                  | Fixed  |
+| 10  | `lib/auth/auth.config.ts:106`                                     | Misleading comment about session strategy                             | Open   |
+| 11  | `components/onboarding/what-i-care-about/OrganizationsSelect.tsx` | Debug `console.log` in production                                     | Fixed  |
+| 12  | `lib/actions/onboarding.actions.ts`                               | `revalidatePath` uses DB id not username                              | Fixed  |
+| 13  | `app/(dashboard)/(settings)/settings/page.tsx`                    | `existingOrgs` filter silently drops manual orgs                      | Open   |
+| 14  | `lib/auth/auth.actions.ts`                                        | Rate limiting resets on cold start — no real protection in production | Open   |
 
 ---
 
-## 7. Architecture Decisions
+## 9. Architecture Decisions (Phase 1)
 
 **JWT sessions (not database sessions)**
-Sessions are stored in JWT tokens (30-day expiry). The `Session` and `Account` Prisma models exist for the NextAuth adapter but are not actively used. Session refresh happens on `trigger === 'update'` in the JWT callback.
+Sessions stored in JWT tokens (30-day expiry). `Session` and `Account` Prisma models exist for the NextAuth adapter but are not actively used.
 
 **Server Actions for all mutations**
-All data mutations go through Next.js Server Actions in `lib/actions/onboarding.actions.ts` and `lib/auth/auth.actions.ts`. No separate API layer for mutations — API routes are only used for proxying (Pledge.com) and file uploads (Vercel Blob).
+All data mutations go through Next.js Server Actions. No separate API layer for mutations — API routes only used for proxying and file uploads.
 
 **Zustand for onboarding Step 2 state**
-The `useOnboardingStore` holds selected causes, skills, orgs, and whyIGive text during the onboarding flow. It is seeded from the DB when entering the preview/settings page via a `useEffect`. The store uses Zustand `devtools` middleware (named `OnboardingStore`).
+`useOnboardingStore` holds selected causes, skills, orgs, and whyIGive text during onboarding. Seeded from DB when entering preview/settings via `useEffect`.
 
 **Chakra UI v3 component patterns**
-Chakra v3 uses a new Panda CSS-based API. Component recipes live in `lib/theme/recipes/`. The provider is in `components/ui/provider.tsx`. Color mode is forced to light via `forcedTheme="light"` on `ThemeProvider`.
+Chakra v3 uses Panda CSS-based API. Recipes in `lib/theme/recipes/`. Provider in `components/ui/provider.tsx`. Forced light mode.
 
 **Profile status flow**
-Profiles are created as `DRAFT` during onboarding. Clicking "Launch Profile" on the preview step calls `publishProfile()` which sets `status: PUBLISHED` and `publishedAt`. The public profile route returns 404 for non-`PUBLISHED` profiles.
+Profiles created as `DRAFT`. Publishing sets `status: PUBLISHED`. Public profile returns 404 for non-published profiles.
 
 **Pledge.com integration**
-Organization search proxies through `/api/organizations/search` to avoid CORS. The actual Axios client is in `lib/axios/pledge.axios.ts`. `lib/api/pledge.ts` exists but is empty — any future Pledge.com helpers should go there.
+Organization search proxies through `/api/organizations/search`. Axios client in `lib/axios/pledge.axios.ts`.
 
 **File uploads**
-Profile pictures go through `POST /api/upload` which calls Vercel Blob. The route also deletes the previous blob URL before uploading a new one. The blob URL is stored in `Profile.profilePicture`.
+Profile pictures through `POST /api/upload` → Vercel Blob. Route deletes previous blob before uploading new one.
 
 ---
 
-## 8. Coding Conventions
+## 10. Coding Conventions
 
 **File naming**
-- Page files: `page.tsx` (Next.js convention)
-- Components: PascalCase, e.g. `ProfilePreview.tsx`
-- Server actions files: `[domain].actions.ts`
-- Hooks: camelCase prefixed with `use`, e.g. `useDebounce.ts`
-- Zustand stores: `[domain].store.ts`
+
+- Pages: `page.tsx`
+- Components: PascalCase — `ProfilePreview.tsx`
+- Server actions: `[domain].actions.ts`
+- Hooks: `use[Name].ts`
+- Stores: `[domain].store.ts`
 - Schemas: `[domain].schema.ts`
 - Recipes: `[component].recipe.ts`
 
-**Component organization**
-- Break complex pages into sub-components in a folder named after the parent component (e.g., `profile-preview/`, `what-i-care-about/`)
-- Skeleton loading components go in a `skeletons/` subfolder
-- No barrel `index.ts` files — import directly from component files
+**Component rules**
+
+- Every component in its own file
+- Max ~150 lines per component — split if larger
+- Comment block at top of every file explaining what it does
+- Inline comments on non-obvious logic
+- No barrel `index.ts` files — import directly
 
 **Server Actions pattern**
+
 ```ts
 export async function myThingAction(data: FormData): Promise<ActionResult> {
-  const session = await requireAuth();      // throws redirect if not authed
-  // ... validate, mutate, return { success, error }
+  const session = await requireAuth();
+  // validate, mutate, return { success, error }
 }
 ```
-All action exports use the `Action` suffix (e.g. `signUpAction`, `saveProfileBasicsAction`). Return type is `ActionResult` from `lib/types/actions.ts` — a discriminated union: `{ success: true } | { success: false; error: string }`. Use `ActionResult<{ extraField: string }>` to attach extra data to the success branch. Never throw from an action — catch and return error objects.
+
+Return type is always `ActionResult` from `lib/types/actions.ts`. Never throw from an action.
 
 **Auth protection**
-Use the helpers in `lib/auth/session.ts`:
+
 - `requireAuth()` — redirects to `/login` if no session
-- `requireCompletedOnboarding()` — redirects to `/onboarding` if onboarding incomplete
-- `requireIncompleteOnboarding()` — redirects to `/dashboard` if already completed
+- `requireCompletedOnboarding()` — redirects to `/onboarding` if incomplete
+- `requireIncompleteOnboarding()` — redirects to `/dashboard` if complete
 
 **Chakra UI usage**
-- Use Chakra components (`Box`, `VStack`, `HStack`, `Text`, etc.) as the primary layout and UI system
-- Tailwind utility classes are used sparingly for things Chakra doesn't cover cleanly
-- Custom variants/styles go in `lib/theme/` recipes, not inline `sx` props
-- For className-based Chakra styling, use `className="inputForm"` pattern (defined in `globals.css`)
+
+- Chakra components as primary layout and UI system
+- Tailwind used sparingly for things Chakra doesn't cover
+- Custom variants in `lib/theme/` recipes, not inline `sx` props
 
 **Form pattern**
+
 ```tsx
 const form = useForm<Schema>({ resolver: zodResolver(schema) });
 const onSubmit = form.handleSubmit(async (data) => {
   const result = await serverAction(data);
-  if (!result.success) { /* show error */ }
+  if (!result.success) {
+    /* show error */
+  }
 });
 ```
 
 **TypeScript**
-- Strict mode is on — no `any` without a comment explaining why
-- Prisma-generated types are used directly; don't redefine models as interfaces
-- Zod schemas in `lib/validations/` are the single source of truth for form validation types
+
+- Strict mode on — no `any` without explanatory comment
+- Prisma-generated types used directly
+- Zod schemas are single source of truth for validation types
 
 ---
 
-## 9. Responsive Design Standards
+## 11. Responsive Design Standards
 
-The app is currently desktop-only. Responsive design is active work. All new layout code and any layout being touched for other reasons should follow these standards.
+The app is currently desktop-only. All new code and any layout touched for other reasons must follow these standards.
 
 ### Breakpoints
 
-| Name | Width | Target |
-|---|---|---|
-| `base` | 0px+ | Mobile phones |
-| `md` | 768px+ | Tablets |
-| `lg` | 1024px+ | Desktop (current design baseline) |
+| Name   | Width   | Target  |
+| ------ | ------- | ------- |
+| `base` | 0px+    | Mobile  |
+| `md`   | 768px+  | Tablet  |
+| `lg`   | 1024px+ | Desktop |
 
-### Syntax
-
-Always use Chakra's responsive object syntax. Never use Tailwind breakpoint prefixes (`sm:`, `md:`) for layout — Chakra handles it consistently with its own system.
+Always use Chakra's responsive object syntax. Never use Tailwind breakpoint prefixes for layout.
 
 ```tsx
 // Correct
 <Stack direction={{ base: 'column', lg: 'row' }} gap={{ base: '4', lg: '8' }}>
-
-// Wrong — don't mix Tailwind breakpoints for layout
-<div className="flex-col lg:flex-row gap-4 lg:gap-8">
 ```
-
-### Layout Patterns
-
-**Stacking: side-by-side → vertical**
-Any `HStack` that places content side by side on desktop should stack vertically on mobile:
-```tsx
-// Before (desktop-only)
-<HStack gap="16">...</HStack>
-
-// After (responsive)
-<Stack direction={{ base: 'column', lg: 'row' }} gap={{ base: '6', lg: '16' }}>
-```
-
-**Fixed widths → responsive max-widths**
-Hardcoded pixel widths become `w="100%"` with a `maxW` cap, so they fill the screen on small viewports and stay capped on large ones:
-```tsx
-// Auth card: was width="700px"
-<Flex w="100%" maxW="700px" ...>
-
-// Onboarding card: was width="974px"
-<Flex w="100%" maxW="974px" ...>
-```
-
-**Padding and gaps scale down on mobile**
-```tsx
-// Sections
-py={{ base: '6', lg: 'sectionGap' }}
-px={{ base: '4', lg: '8' }}
-
-// Card internal padding
-p={{ base: '6', lg: 'sectionGap' }}
-
-// Content gaps
-gap={{ base: '6', lg: '16' }}
-```
-
-**Font sizes** — keep the same unless readability requires adjustment. The existing type scale (`heading`, `subheading`, `body`, `small`) works at all sizes.
-
-### Specific Component Targets
-
-**`app/(auth)/layout.tsx`**
-- Card: `width="700px"` → `w="100%" maxW="700px"`
-- Card padding: `p="sectionGap"` → `p={{ base: '6', lg: 'sectionGap' }}`
-- Outer vertical padding: `py="sectionGap"` → `py={{ base: '6', lg: 'sectionGap' }}`
-
-**`app/(onboarding)/layout.tsx`**
-- Card: `width="974px"` → `w="100%" maxW="974px"`
-- Same padding treatment as auth layout
-
-**`app/(dashboard)/layout.tsx` + `Sidebar`**
-- On `lg`: sidebar visible at `w="25%" maxW="264px"`, main content fills remainder
-- On `base`/`md`: sidebar hidden; a hamburger button in the top bar opens a `Drawer` overlay
-- The sticky sidebar's `position="sticky"` becomes `position="fixed"` inside the drawer on mobile
-- `NavItemList` and badge panel render identically inside the drawer
-
-**`components/layout/Header.tsx`**
-- On `lg`: logo left, Login + Sign Up buttons right (current behavior)
-- On `base`/`md`: logo left, hamburger icon right — tapping opens a simple dropdown or drawer with the nav links
-- `HeaderButtons` (Login/Sign Up) hidden on mobile, shown inside the mobile menu
-
-**`components/layout/dashboard/ProfileDisplay.tsx`**
-- `HStack alignItems="start" gap="16"` → `Stack direction={{ base: 'column', lg: 'row' }}`
-- `ProfileCard` loses `mt="-100px"` on mobile (no hero overlap) and `position="sticky"` only applies at `lg`
-- Profile card becomes full-width on mobile, then its natural max-width on desktop
-
-**`app/(dashboard)/(settings)/layout.tsx`**
-- Two-column `HStack` (nav sidebar + content) → stacks vertically on mobile
-- Settings nav becomes a horizontal tab-bar on `base`/`md`, vertical sidebar on `lg`
-- `minW="320px"` on the nav panel is removed on mobile
-
-### Drawer / Mobile Menu Convention
-
-Use Chakra's `Drawer` component for both the sidebar and the header mobile menu:
-```tsx
-<Drawer.Root open={isOpen} onOpenChange={(e) => setIsOpen(e.open)} placement="start">
-  <Portal>
-    <Drawer.Backdrop />
-    <Drawer.Positioner>
-      <Drawer.Content maxW="264px">
-        {/* same content as desktop sidebar */}
-      </Drawer.Content>
-    </Drawer.Positioner>
-  </Portal>
-</Drawer.Root>
-```
-
-The trigger button (hamburger) should only render on `base`/`md`:
-```tsx
-<Box display={{ base: 'block', lg: 'none' }}>
-  <IconButton aria-label="Open menu" onClick={() => setIsOpen(true)}>
-    <LuMenu />
-  </IconButton>
-</Box>
-```
-
-### Checklist for Any Layout Change
-
-Before marking a layout component as responsive:
-- [ ] No hardcoded pixel widths (except `maxW` caps)
-- [ ] All `HStack` side-by-side layouts have a `base: 'column'` direction
-- [ ] Padding and gap values use responsive objects at `base` and `lg` at minimum
-- [ ] Nothing overflows or gets clipped on a 375px viewport
-- [ ] Sidebar/nav is accessible on mobile (drawer or tab-bar)
 
 ---
 
-## 10. Important Notes
+## 12. Important Notes
 
 **`prisma` and `@prisma/client` are in `devDependencies`**
-This will break production builds (Vercel). Both need to move to `dependencies` before any production deployment.
+Must move to `dependencies` before any production deployment.
 
 **Causes are not seeded**
-`prisma/seed.ts` seeds 200+ skills but no causes. The `Cause` model has `name`, `slug`, `color`, and `icon` fields. The causes combobox in onboarding Step 2 will be empty on a fresh database. Causes need to be seeded before the onboarding flow is usable end-to-end.
+`seed.ts` seeds 200+ skills but no causes. The causes combobox will be empty on a fresh database.
 
-**Public profile URL is `/profile/[username]`, not `/[username]`**
-The intended final URL structure is `mastergiver.com/username` (root-level dynamic route). Currently it's at `/profile/[username]`. This will require adding `app/[username]/page.tsx` and is a future change.
+**Public profile URL**
+Currently `/profile/[username]`. Intended final URL is `mastergiver.com/username` — future change.
 
-**No `middleware.ts`**
-There is no Next.js middleware file. Route protection is handled per-page via session helper calls inside Server Components. This is functional but less efficient than edge-level middleware. Adding `middleware.ts` is a future improvement.
+**No `middleware.ts` for Phase 1**
+Route protection handled per-page via session helpers. Phase 2 will introduce `middleware.ts` for business dashboard protection.
 
 **Theme is forced to light mode**
-`next-themes` is installed and `ThemeProvider` has `forcedTheme="light"`. Dark mode is not planned. Don't add dark mode styles.
+`forcedTheme="light"` on `ThemeProvider`. No dark mode planned.
 
 **NextAuth v5 is beta**
-`next-auth@5.0.0-beta.30` with Next.js 16 may have edge cases. Keep this version pinned — do not upgrade without testing the full auth flow.
+Pinned at `beta.30`. Do not upgrade without testing the full auth flow.
 
-**Org deduplication**
-When saving organizations in `saveCausesSkillsOrgs`, the action uses `upsert` on `pledgeOrgId` to avoid duplicate org rows. Manual orgs (no `pledgeOrgId`) would need a different deduplication strategy.
+**Stripe environment variables needed for Phase 2**
+
+```
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+STRIPE_PRICE_ID=        ← annual $59 subscription price ID from Stripe dashboard
+NEXT_PUBLIC_APP_URL=    ← needed for Stripe success/cancel redirect URLs
+```
