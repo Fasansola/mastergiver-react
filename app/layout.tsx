@@ -39,6 +39,10 @@ export const metadata: Metadata = {
     description:
       'Turn your community impact into verified reputation signals that AI and search engines trust.',
   },
+  icons: {
+    icon: '/brand-assets/MasterGiver favicon.png',
+    apple: '/brand-assets/MasterGiver favicon.png',
+  },
 };
 
 export default function RootLayout({
