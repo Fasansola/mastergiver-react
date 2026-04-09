@@ -17,17 +17,18 @@ export async function generateMetadata({
 
   const profile = await prisma.profile.findUnique({
     where: { username, status: 'PUBLISHED' },
-    select: { name: true, aboutMe: true, profilePicture: true },
+    select: { firstName: true, lastName: true, aboutMe: true, profilePicture: true },
   });
 
   if (!profile) {
     return { title: 'Profile not found | MasterGiver' };
   }
 
-  const title = `${profile.name} | MasterGiver`;
+  const fullName = `${profile.firstName} ${profile.lastName}`;
+  const title = `${fullName} | MasterGiver`;
   const description = profile.aboutMe
     ? profile.aboutMe.slice(0, 155)
-    : `View ${profile.name}'s philanthropic profile on MasterGiver.`;
+    : `View ${fullName}'s philanthropic profile on MasterGiver.`;
 
   return {
     title,
