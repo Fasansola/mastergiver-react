@@ -11,7 +11,7 @@ const LandingH = ({ color, children }: Props) => {
     <Heading
       className="font-display"
       fontWeight="700"
-      fontSize={{ base: '32px', md: '44px', lg: '56px' }}
+      fontSize={{ base: '34px', md: '44px', lg: '56px' }}
       lineHeight="120%"
       color={color ? color : 'brand.primary'}
     >

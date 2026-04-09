@@ -50,7 +50,7 @@ const WhoItsForSection = () => {
               <Stack gap="7">
                 <Text
                   className="font-display"
-                  fontSize={{ base: '22px', lg: '28px' }}
+                  fontSize={{ base: '22px', md: '24px', lg: '28px' }}
                   lineHeight="130%"
                   fontWeight="700"
                 >

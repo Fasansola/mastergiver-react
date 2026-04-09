@@ -114,7 +114,7 @@ const ReturnOnReputationSection = () => {
               <Stack gap="4" key={i} align="start" textAlign="start">
                 <Heading
                   className="font-display"
-                  fontSize={{ base: '20px', lg: '28px' }}
+                  fontSize={{ base: '20px', md: '24px', lg: '28px' }}
                   color="brand.primary"
                   fontWeight="500"
                 >
@@ -133,7 +133,7 @@ const ReturnOnReputationSection = () => {
           </Grid>
 
           <Stack
-            padding="8"
+            p={{ base: '5', lg: '8' }}
             borderRadius="0 16px 16px 0"
             border="1px solid"
             borderLeft="4px solid"

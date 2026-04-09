@@ -61,7 +61,7 @@ const ProfileHeader = ({
       border="0.5px solid #DCDFE3"
       borderRadius="20px"
       boxShadow="0px 1px 2px 0px #4646490F, 0px 1px 3px 0px #4646490A"
-      mt={{ base: '0', lg: '-32' }}
+      mt={{ base: '-28', lg: '-32' }}
       pos={{ base: 'static', lg: 'sticky' }}
       top="140px"
     >
@@ -71,8 +71,8 @@ const ProfileHeader = ({
           boxShadow="0px 1.52px 3.03px 0px #46464914, 0px 1.52px 4.55px 0px #46464914"
           border="solid 12px white"
           borderRadius="full"
-          w={{ base: '200px', md: '260px', lg: '324px' }}
-          h={{ base: '200px', md: '260px', lg: '324px' }}
+          w={{ base: '180px', md: '240px', lg: '324px' }}
+          h={{ base: '180px', md: '240px', lg: '324px' }}
         >
           {logo ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -81,8 +81,8 @@ const ProfileHeader = ({
               alt={companyName}
               objectFit="contain"
               borderRadius="full"
-              width={{ base: '176px', md: '236px', lg: '300px' }}
-              height={{ base: '176px', md: '236px', lg: '300px' }}
+              width={{ base: '156px', md: '216px', lg: '300px' }}
+              height={{ base: '156px', md: '216px', lg: '300px' }}
               border=""
               boxShadow="0px -1.52px 3.03px 0px #46464914, 0px -1.52px 4.55px 0px #46464914"
             />

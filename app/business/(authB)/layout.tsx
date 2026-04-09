@@ -10,8 +10,8 @@ const AuthLayout = ({ children }: PropsWithChildren) => {
         minH="calc(100vh - 100px)"
         align="center"
         justify="center"
-        py="6"
-        px="4"
+        py={{ base: '8', md: '10' }}
+        px={{ base: '4', md: '6' }}
       >
         {children}
       </Stack>

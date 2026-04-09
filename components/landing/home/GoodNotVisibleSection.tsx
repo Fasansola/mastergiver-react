@@ -74,7 +74,7 @@ const GoodNotVisibleSection = () => {
           justify="space-between"
           borderRadius="16px"
         >
-          <Stack gap="6" w={{ base: '100%', lg: '720px' }}>
+          <Stack gap="6" w={{ base: '100%', lg: '760px' }}>
             <HStack gap="4" flexWrap="wrap">
               {[
                 'You sponsor local teams.',
@@ -88,7 +88,7 @@ const GoodNotVisibleSection = () => {
             <Heading
               className="font-display"
               fontWeight="700"
-              fontSize={{ base: '22px', lg: '28px' }}
+              fontSize={{ base: '22px', md: '24px', lg: '28px' }}
               lineHeight="120%"
               color="brand.primary"
             >
@@ -97,9 +97,9 @@ const GoodNotVisibleSection = () => {
 
             <Stack gap="2">
               <Text>
-                Your website doesn&apos;t surface it in a meaningful way.
-                Search engines don&apos;t understand it. AI tools don&apos;t
-                recognize it when deciding which businesses to recommend
+                Your website doesn&apos;t surface it in a meaningful way. Search
+                engines don&apos;t understand it. AI tools don&apos;t recognize
+                it when deciding which businesses to recommend
               </Text>
               <Text>
                 So the very things that make your business different — your
@@ -109,9 +109,10 @@ const GoodNotVisibleSection = () => {
               </Text>
             </Stack>
           </Stack>
+
           <Stack
-            padding="8"
-            w={{ base: '100%', lg: '400px' }}
+            p={{ base: '5', lg: '8' }}
+            w={{ base: '100%', lg: '350px' }}
             borderLeft="4px solid"
             borderColor="brand.primary"
             borderRadius="12px"
@@ -120,7 +121,7 @@ const GoodNotVisibleSection = () => {
           >
             <Text
               className="font-display"
-              fontSize={{ base: '24px', lg: '36px' }}
+              fontSize={{ base: '22px', md: '28px', lg: '36px' }}
               lineHeight="130%"
               color="brand.primary"
               fontWeight="700"

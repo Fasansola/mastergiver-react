@@ -12,12 +12,15 @@
 import { type SearchParams } from 'next/dist/server/request/search-params';
 import BusinessAuthCard from '@/components/business/auth/BusinessAuthCard';
 import SigninForm from '@/components/business/auth/SigninForm';
+import { redirectIfBusinessSession } from '@/lib/auth/session';
 
 interface SigninPageProps {
   searchParams: Promise<SearchParams>;
 }
 
 const BusinessSigninPage = async ({ searchParams }: SigninPageProps) => {
+  await redirectIfBusinessSession();
+
   const params = await searchParams;
   const passwordWasReset = params.passwordReset === 'true';
 

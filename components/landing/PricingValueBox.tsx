@@ -15,21 +15,22 @@ const PricingValueBox = ({ price, title, description }: triElementBox) => {
       <Stack gap="5" align="center">
         <Heading
           className="font-display"
-          fontSize="28px"
+          fontSize={{ base: '22px', lg: '28px' }}
           color="brand.primary"
           fontWeight="500"
         >
           {price}
         </Heading>
 
-        <Heading
-          className="font-display"
+        <Text
+          className="font-body"
           fontSize="heading"
           color="text.primary"
           fontWeight="700"
+          textTransform="uppercase"
         >
           {title}
-        </Heading>
+        </Text>
       </Stack>
 
       <Text

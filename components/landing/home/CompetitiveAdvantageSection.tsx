@@ -45,7 +45,7 @@ const CompetitiveAdvantageSection = () => {
 
         {/* Pricing card */}
         <Stack
-          p={{ base: '8', lg: '60px' }}
+          p={{ base: '6', md: '10', lg: '60px' }}
           boxShadow="0px 25px 50px -12px #00000040"
           bgColor="white"
           align="center"
@@ -60,7 +60,7 @@ const CompetitiveAdvantageSection = () => {
             <Heading
               className="font-display"
               fontWeight="700"
-              fontSize={{ base: '26px', lg: '40px' }}
+              fontSize={{ base: '24px', md: '32px', lg: '40px' }}
               lineHeight="120%"
               color="text.primary"
               textAlign="center"
@@ -158,7 +158,7 @@ const CompetitiveAdvantageSection = () => {
           textAlign="center"
           gap="10"
         >
-          <Heading className="font-display" fontSize="bigheading" lineHeight="120%">
+          <Heading className="font-display" fontSize={{ base: '22px', md: '28px', lg: '32px' }} lineHeight="120%">
             What You&apos;re Already Spending vs. What You Get
           </Heading>
           <Stack gap="6">

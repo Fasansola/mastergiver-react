@@ -44,7 +44,7 @@ const CommunityGallery = ({ events }: CommunityGalleryProps) => {
               style={{
                 width: '100%',
                 borderRadius: '12px 12px 0 0',
-                height: '280px',
+                height: 'clamp(180px, 40vw, 280px)',
                 objectFit: 'cover',
               }}
             />

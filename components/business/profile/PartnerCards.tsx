@@ -27,7 +27,7 @@ const PartnerCards = ({ partners }: PartnerCardsProps) => {
       {partners.map((p, i) => (
         <>
           {i !== 0 && <Separator />}
-          <Stack direction={{ base: 'column', sm: 'row' }} gap="6" key={p.id}>
+          <Stack direction={{ base: 'column', md: 'row' }} gap="6" key={p.id}>
             {/* Partner image */}
             {p.image && (
               <Image

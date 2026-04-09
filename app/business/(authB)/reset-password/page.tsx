@@ -11,8 +11,11 @@
 
 import BusinessAuthCard from '@/components/business/auth/BusinessAuthCard';
 import ResetPasswordForm from '@/components/business/auth/ResetPasswordForm';
+import { redirectIfBusinessSession } from '@/lib/auth/session';
 
-const BusinessResetPasswordPage = () => {
+const BusinessResetPasswordPage = async () => {
+  await redirectIfBusinessSession();
+
   return (
     <BusinessAuthCard>
       <ResetPasswordForm />

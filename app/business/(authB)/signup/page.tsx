@@ -7,8 +7,11 @@
 
 import BusinessAuthCard from '@/components/business/auth/BusinessAuthCard';
 import SignupForm from '@/components/business/auth/SignupForm';
+import { redirectIfBusinessSession } from '@/lib/auth/session';
 
-const BusinessSignupPage = () => {
+const BusinessSignupPage = async () => {
+  await redirectIfBusinessSession();
+
   return (
     <BusinessAuthCard>
       <SignupForm />

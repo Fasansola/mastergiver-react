@@ -26,11 +26,11 @@ const HomeCtaSection = () => {
           textAlign="center"
           gap="8"
         >
-          <Stack gap="6" maxW={{ base: '380px', sm: '100%' }}>
+          <Stack gap="6" maxW="100%">
             <Heading
               className="font-display"
               fontWeight="700"
-              fontSize={{ base: '40px', md: '48px', lg: '60px' }}
+              fontSize={{ base: '34px', md: '46px', lg: '60px' }}
               lineHeight="120%"
             >
               Make Sure Your Reputation Works for You

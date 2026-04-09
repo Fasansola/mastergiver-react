@@ -14,10 +14,7 @@ import LandingH from '@/components/landing/LandingH';
 const MasterGiverProfileSection = () => {
   return (
     <Stack bg="white">
-      <Container
-        pt={{ base: '40px', lg: '64px' }}
-        pb={{ base: '60px', lg: '100px' }}
-      >
+      <Container py={{ base: '60px', lg: '100px' }}>
         <Stack
           direction={{ base: 'column', lg: 'row' }}
           gap={{ base: '10', lg: '6' }}

@@ -15,12 +15,15 @@ import BusinessAuthCard from '@/components/business/auth/BusinessAuthCard';
 import NewPasswordForm from '@/components/business/auth/NewPasswordForm';
 import Nextlink from 'next/link';
 import { Heading, Link, Stack, Text } from '@chakra-ui/react';
+import { redirectIfBusinessSession } from '@/lib/auth/session';
 
 interface NewPasswordPageProps {
   searchParams: Promise<SearchParams>;
 }
 
 const BusinessNewPasswordPage = async ({ searchParams }: NewPasswordPageProps) => {
+  await redirectIfBusinessSession();
+
   const params = await searchParams;
   const token = typeof params.token === 'string' ? params.token : null;
 

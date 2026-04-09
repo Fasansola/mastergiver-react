@@ -37,7 +37,7 @@ const HomeHeroSection = () => {
               <Heading
                 className="font-display"
                 fontWeight="700"
-                fontSize={{ base: '38px', md: '52px', lg: '74px' }}
+                fontSize={{ base: '36px', md: '52px', lg: '74px' }}
                 lineHeight="120%"
               >
                 Get Discovered for the{' '}

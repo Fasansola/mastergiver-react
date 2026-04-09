@@ -129,9 +129,9 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
             business.coverPhoto ? `url(${business.coverPhoto})` : undefined
           }
           bgSize="cover"
-          bgPos="50% -80px"
+          bgPos={{ base: 'center center', md: '50% -80px' }}
           bgRepeat="no-repeat"
-          minH={{ base: '160px', md: '260px', lg: '400px' }}
+          minH={{ base: '340px', md: '400px' }}
         />
         <Container>
           <Stack
@@ -152,8 +152,18 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
             />
 
             {/* Content sections */}
-            <Stack mt={{ base: '0', lg: '10' }} gap={{ base: '6', lg: '12' }} w="100%">
-              <Stack mt={{ base: '0', lg: '10' }} gap={{ base: '6', lg: '12' }} justify="center" align="center" w="100%">
+            <Stack
+              // mt={{ base: '0', lg: '10' }}
+              gap={{ base: '6', lg: '12' }}
+              w="100%"
+            >
+              <Stack
+                mt={{ base: '0', lg: '10' }}
+                gap={{ base: '6', lg: '12' }}
+                justify="center"
+                align="center"
+                w="100%"
+              >
                 {/* Verified Community Impact */}
                 <HStack
                   bgColor="white"

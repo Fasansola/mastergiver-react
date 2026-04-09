@@ -51,14 +51,14 @@ const ReputationRulesSection = () => {
               </Stack>
 
               <Stack
-                padding="8"
+                p={{ base: '5', lg: '8' }}
                 borderLeft="4px solid"
                 borderColor="#BDBDFA"
                 bg="#FFFFFF"
               >
                 <Text
                   className="font-display"
-                  fontSize={{ base: '20px', lg: '28px' }}
+                  fontSize={{ base: '20px', md: '24px', lg: '28px' }}
                   lineHeight="130%"
                   fontWeight="700"
                 >

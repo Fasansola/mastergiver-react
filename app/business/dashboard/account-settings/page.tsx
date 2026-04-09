@@ -40,7 +40,7 @@ const AccountSettingsPage = async () => {
   };
 
   return (
-    <Container p={{ base: '4', md: '6', lg: '10' }}>
+    <Container p="0">
       <Stack gap="8">
         {/* Page heading */}
         <Stack gap="5">

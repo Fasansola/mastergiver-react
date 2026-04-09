@@ -13,17 +13,21 @@
 import BusinessSidebarNav from './BusinessSidebarNav';
 import { Heading, Stack } from '@chakra-ui/react';
 
-const BusinessSidebar = () => {
+interface BusinessSidebarProps {
+  isDrawer?: boolean;
+}
+
+const BusinessSidebar = ({ isDrawer = false }: BusinessSidebarProps) => {
   return (
     <Stack
       as="aside"
-      w="25%"
-      minW="320px"
-      maxW="400px"
-      h="calc(100vh - 100px)"
-      minH="calc(100vh - 100px)"
-      p="10"
-      borderRight="1px solid"
+      w={isDrawer ? 'full' : '25%'}
+      minW={isDrawer ? undefined : '320px'}
+      maxW={isDrawer ? undefined : '400px'}
+      h={isDrawer ? undefined : 'calc(100vh - 100px)'}
+      minH={isDrawer ? undefined : 'calc(100vh - 100px)'}
+      p={isDrawer ? '6' : '10'}
+      borderRight={isDrawer ? 'none' : '1px solid'}
       borderColor="border.default"
       gap="6"
     >
