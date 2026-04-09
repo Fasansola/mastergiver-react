@@ -21,6 +21,8 @@
  * Uses the minimal app/business/layout.tsx (Libre Bodoni font only).
  */
 
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 import ProfileHeader from '@/components/business/profile/ProfileHeader';
 import ImpactStats from '@/components/business/profile/ImpactStats';
@@ -39,6 +41,47 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+
+  const business = await prisma.business.findUnique({
+    where: { slug },
+    select: {
+      companyName: true,
+      tagline: true,
+      aboutUs: true,
+      logo: true,
+    },
+  });
+
+  if (!business || !business.companyName) {
+    return { title: 'Business Profile Not Found' };
+  }
+
+  const title = business.companyName;
+  const description =
+    business.tagline ??
+    business.aboutUs?.slice(0, 155) ??
+    `See how ${business.companyName} gives back to the community on MasterGiver.`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title: `${title} | MasterGiver`,
+      description,
+      url: `https://mastergiver.com/business/${slug}`,
+      images: business.logo ? [{ url: business.logo }] : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${title} | MasterGiver`,
+      description,
+      images: business.logo ? [business.logo] : [],
+    },
+  };
+}
+
 const BusinessProfilePage = async ({ params }: PageProps) => {
   const { slug } = await params;
 
@@ -53,38 +96,9 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
     },
   });
 
-  // Not found or unpublished — render a clean "not available" message
+  // Not found or unpublished — return proper 404
   if (!business || !business.published) {
-    return (
-      <div
-        style={{
-          minHeight: '100vh',
-          background: '#F9FAFB',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <div
-          style={{ textAlign: 'center', maxWidth: '400px', padding: '40px' }}
-        >
-          <p style={{ fontSize: '48px', marginBottom: '16px' }}>🔍</p>
-          <h1
-            style={{
-              fontSize: '22px',
-              fontWeight: 700,
-              color: '#27262D',
-              marginBottom: '12px',
-            }}
-          >
-            Profile not available
-          </h1>
-          <p style={{ fontSize: '15px', color: '#575C62', lineHeight: '150%' }}>
-            This business profile is either not published yet or does not exist.
-          </p>
-        </div>
-      </div>
-    );
+    notFound();
   }
 
   // Serialise Prisma types that cannot cross the Server→RSC boundary as-is
@@ -119,8 +133,37 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
   const hasEndorsements = business.endorsements.length > 0;
   const hasOffers = offers.length > 0;
 
+  const BASE_URL =
+    process.env.NEXT_PUBLIC_APP_URL ?? 'https://mastergiver.com';
+
+  // Schema.org JSON-LD — helps search engines and AI understand this business
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: business.companyName,
+    url: business.website ?? `${BASE_URL}/business/${slug}`,
+    ...(business.logo && { logo: business.logo }),
+    ...(business.coverPhoto && { image: business.coverPhoto }),
+    ...(business.tagline && { slogan: business.tagline }),
+    ...(business.aboutUs && { description: business.aboutUs }),
+    ...(business.address && {
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: business.address,
+      },
+    }),
+    sameAs: [`${BASE_URL}/business/${slug}`],
+    ...(causes.length > 0 && {
+      knowsAbout: causes.map((c) => c.name),
+    }),
+  };
+
   return (
     <Stack as="main" bgColor="#FFFCF7" gap="0">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <BusinessHeader />
       {/* White profile card centred on the page */}
       <Stack gap="0">

@@ -5,8 +5,21 @@
  * header (BusinessHeader with gradient bg) and footer. Each visual section
  * lives in its own component under components/landing/home/.
  */
+import type { Metadata } from 'next';
 import { Stack } from '@chakra-ui/react';
 import BusinessHeader from '@/components/business/layout/BusinessHeader';
+
+export const metadata: Metadata = {
+  title: 'Get Discovered for the Good Your Business Does',
+  description:
+    'MasterGiver turns your charitable giving and community involvement into verified reputation signals so AI recommends you, search engines rank you higher, and customers choose you.',
+  openGraph: {
+    title: 'Get Discovered for the Good Your Business Does | MasterGiver',
+    description:
+      'Turn your community impact into verified reputation signals that AI and search engines trust.',
+    url: 'https://mastergiver.com',
+  },
+};
 import Footer from '@/components/layout/Footer';
 import HomeHeroSection from '@/components/landing/home/HomeHeroSection';
 import GoodNotVisibleSection from '@/components/landing/home/GoodNotVisibleSection';

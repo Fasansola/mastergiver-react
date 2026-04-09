@@ -6,6 +6,40 @@ import Link from 'next/link';
 import Image from 'next/image';
 import LeftArrow from '@/public/components-assets/chevron-left.svg';
 import { profileQuerySelect } from '@/lib/utils/profile-query';
+import type { Metadata } from 'next';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ username: string }>;
+}): Promise<Metadata> {
+  const { username } = await params;
+
+  const profile = await prisma.profile.findUnique({
+    where: { username, status: 'PUBLISHED' },
+    select: { name: true, aboutMe: true, profilePicture: true },
+  });
+
+  if (!profile) {
+    return { title: 'Profile not found | MasterGiver' };
+  }
+
+  const title = `${profile.name} | MasterGiver`;
+  const description = profile.aboutMe
+    ? profile.aboutMe.slice(0, 155)
+    : `View ${profile.name}'s philanthropic profile on MasterGiver.`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      ...(profile.profilePicture ? { images: [{ url: profile.profilePicture }] } : {}),
+    },
+    twitter: { card: 'summary', title, description },
+  };
+}
 
 async function getPublicProfile(username: string) {
   return prisma.profile.findUnique({

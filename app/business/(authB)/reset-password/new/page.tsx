@@ -10,12 +10,18 @@
  * show a clear error rather than rendering a broken form.
  */
 
+import type { Metadata } from 'next';
 import { type SearchParams } from 'next/dist/server/request/search-params';
 import BusinessAuthCard from '@/components/business/auth/BusinessAuthCard';
 import NewPasswordForm from '@/components/business/auth/NewPasswordForm';
 import Nextlink from 'next/link';
 import { Heading, Link, Stack, Text } from '@chakra-ui/react';
 import { redirectIfBusinessSession } from '@/lib/auth/session';
+
+export const metadata: Metadata = {
+  title: 'Set New Password | MasterGiver Business',
+  description: 'Create a new password for your MasterGiver business account.',
+};
 
 interface NewPasswordPageProps {
   searchParams: Promise<SearchParams>;

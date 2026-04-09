@@ -20,9 +20,25 @@ const BusinessHeaderButtons = ({
 }: BusinessHeaderButtonsProps) => {
   return (
     <Flex gap="3" direction={direction} align="center">
-      {/* Login — transparent background, body text color */}
+      {/* Mobile: "Sign in" — hidden at lg+ */}
       <Button
         asChild
+        display={{ base: 'flex', lg: 'none' }}
+        variant="ghost"
+        bg="transparent"
+        color="text.primary"
+        fontWeight="700"
+        className="font-body"
+        px="3"
+        _hover={{ bg: 'transparent', opacity: 0.7 }}
+      >
+        <Link href="/business/signin">Sign in</Link>
+      </Button>
+
+      {/* Desktop: "Login" — hidden below lg */}
+      <Button
+        asChild
+        display={{ base: 'none', lg: 'flex' }}
         variant="ghost"
         bg="transparent"
         color="text.primary"
@@ -33,9 +49,10 @@ const BusinessHeaderButtons = ({
         <Link href="/business/signin">Login</Link>
       </Button>
 
-      {/* Sign Up — primary filled, Figma spec: h-56 r-8 px-32 py-16 */}
+      {/* Sign Up — primary filled, hidden on mobile */}
       <Button
         asChild
+        display={{ base: 'none', lg: 'flex' }}
         bg="#2F2B77"
         color="white"
         h="56px"

@@ -9,10 +9,16 @@
  * the form so the user knows they can now sign in with their new password.
  */
 
+import type { Metadata } from 'next';
 import { type SearchParams } from 'next/dist/server/request/search-params';
 import BusinessAuthCard from '@/components/business/auth/BusinessAuthCard';
 import SigninForm from '@/components/business/auth/SigninForm';
 import { redirectIfBusinessSession } from '@/lib/auth/session';
+
+export const metadata: Metadata = {
+  title: 'Business Sign In | MasterGiver',
+  description: 'Sign in to your MasterGiver business account to manage your community impact profile.',
+};
 
 interface SigninPageProps {
   searchParams: Promise<SearchParams>;

@@ -9,9 +9,15 @@
  * after the user clicks the link in the email.
  */
 
+import type { Metadata } from 'next';
 import BusinessAuthCard from '@/components/business/auth/BusinessAuthCard';
 import ResetPasswordForm from '@/components/business/auth/ResetPasswordForm';
 import { redirectIfBusinessSession } from '@/lib/auth/session';
+
+export const metadata: Metadata = {
+  title: 'Reset Password | MasterGiver Business',
+  description: 'Reset your MasterGiver business account password.',
+};
 
 const BusinessResetPasswordPage = async () => {
   await redirectIfBusinessSession();

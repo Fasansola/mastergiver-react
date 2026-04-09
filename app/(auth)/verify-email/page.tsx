@@ -1,8 +1,15 @@
+import type { Metadata } from 'next';
 import { verifyEmailAction } from '@/lib/actions/auth.actions';
 import { prisma } from '@/lib/prisma';
 import { redirect } from 'next/navigation';
 import { VerificationResult } from '@/components/auth/VerificationResult';
 import { verifyTokenAndRedirect } from '@/lib/auth/verify-token-page';
+
+export const metadata: Metadata = {
+  title: 'Verify Email | MasterGiver',
+  description: 'Verify your email address to activate your MasterGiver account.',
+  robots: { index: false },
+};
 
 interface VerifyEmailPageProps {
   searchParams: Promise<{

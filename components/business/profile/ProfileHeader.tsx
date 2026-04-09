@@ -31,16 +31,6 @@ function getInitials(name: string): string {
     .join('');
 }
 
-/** Escape HTML special characters then convert newlines to <br /> tags. */
-function toBrHtml(text: string): string {
-  return text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/\r\n/g, '\n')
-    .replace(/\n/g, '<br />');
-}
 
 const ProfileHeader = ({
   companyName,
@@ -116,14 +106,16 @@ const ProfileHeader = ({
       <Stack gap="10">
         {aboutUs && (
           <p
-            dangerouslySetInnerHTML={{ __html: toBrHtml(aboutUs) }}
             style={{
               fontSize: '16px',
               lineHeight: '160%',
               color: '#212325',
+              whiteSpace: 'pre-wrap',
               marginBottom: tagline ? '12px' : 0,
             }}
-          />
+          >
+            {aboutUs}
+          </p>
         )}
 
         <Link href={website || '/'} className="fullWidth" target="_blank">

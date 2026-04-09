@@ -98,8 +98,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   const businessId = session.client_reference_id;
 
   if (!businessId) {
-    console.error('checkout.session.completed: missing client_reference_id');
-    return;
+    throw new Error('checkout.session.completed: missing client_reference_id');
   }
 
   await prisma.business.update({
@@ -121,15 +120,14 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
  */
 async function handlePaymentSucceeded(invoice: Stripe.Invoice) {
   const customerId = extractId(invoice.customer);
-  if (!customerId) return;
+  if (!customerId) throw new Error('invoice.payment_succeeded: missing customer ID');
 
   const business = await prisma.business.findFirst({
     where: { stripeCustomerId: customerId },
   });
 
   if (!business) {
-    console.error(`invoice.payment_succeeded: no business found for customer ${customerId}`);
-    return;
+    throw new Error(`invoice.payment_succeeded: no business found for customer ${customerId}`);
   }
 
   await prisma.business.update({
@@ -148,15 +146,14 @@ async function handlePaymentSucceeded(invoice: Stripe.Invoice) {
  */
 async function handlePaymentFailed(invoice: Stripe.Invoice) {
   const customerId = extractId(invoice.customer);
-  if (!customerId) return;
+  if (!customerId) throw new Error('invoice.payment_failed: missing customer ID');
 
   const business = await prisma.business.findFirst({
     where: { stripeCustomerId: customerId },
   });
 
   if (!business) {
-    console.error(`invoice.payment_failed: no business found for customer ${customerId}`);
-    return;
+    throw new Error(`invoice.payment_failed: no business found for customer ${customerId}`);
   }
 
   await prisma.business.update({
@@ -171,15 +168,14 @@ async function handlePaymentFailed(invoice: Stripe.Invoice) {
  */
 async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
   const customerId = extractId(subscription.customer);
-  if (!customerId) return;
+  if (!customerId) throw new Error('customer.subscription.deleted: missing customer ID');
 
   const business = await prisma.business.findFirst({
     where: { stripeCustomerId: customerId },
   });
 
   if (!business) {
-    console.error(`customer.subscription.deleted: no business found for customer ${customerId}`);
-    return;
+    throw new Error(`customer.subscription.deleted: no business found for customer ${customerId}`);
   }
 
   await prisma.business.update({

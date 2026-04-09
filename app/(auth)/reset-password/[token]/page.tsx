@@ -1,8 +1,15 @@
+import type { Metadata } from 'next';
 import AuthHeading from '@/components/auth/AuthHeading';
 import ResetPasswordForm from '@/components/auth/ResetPasswordForm';
 import SuccessVerifier from '@/components/auth/SuccessVerifier';
 import { verifyPasswordResetToken } from '@/lib/auth/token';
 import { Flex } from '@chakra-ui/react';
+
+export const metadata: Metadata = {
+  title: 'Set New Password | MasterGiver',
+  description: 'Create a new password for your MasterGiver account.',
+  robots: { index: false },
+};
 
 interface Props {
   params: Promise<{ token: string }>;
