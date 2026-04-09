@@ -17,26 +17,17 @@ import BusinessMobileMenu from './BusinessMobileMenu';
 import BusinessSidebar from './BusinessSidebar';
 
 interface BusinessHeaderProps {
-  /** Business logo URL — only passed in dashboard context */
-  businessLogo?: string | null;
-  companyName?: string | null;
-  progressPercent?: number;
+  isDashboard?: boolean;
+  bgColor?: string;
 }
 
-const BusinessHeader = ({
-  businessLogo,
-  companyName,
-  progressPercent,
-}: BusinessHeaderProps) => {
-  // We're in dashboard context when progressPercent has been supplied
-  const isDashboard = progressPercent !== undefined;
-
+const BusinessHeader = ({ isDashboard, bgColor }: BusinessHeaderProps) => {
   return (
     <Flex
       height={100}
       align="center"
       justify="center"
-      bg="background.white"
+      bg={bgColor ? bgColor : 'background.white'}
       borderColor="border.accentBorder"
       borderWidth="1px"
       pos="sticky"
@@ -47,7 +38,12 @@ const BusinessHeader = ({
         {/* Logo — links to home */}
         <Link href="/">
           <HStack align="start">
-            <Image src={siteLogo} alt="MasterGiver Logo" width={140} height={60} />
+            <Image
+              src={siteLogo}
+              alt="MasterGiver Logo"
+              width={140}
+              height={60}
+            />
           </HStack>
         </Link>
 
@@ -55,11 +51,7 @@ const BusinessHeader = ({
         {isDashboard && (
           <Box display={{ base: 'flex', lg: 'none' }} alignItems="center">
             <BusinessMobileMenu>
-              <BusinessSidebar
-                logo={businessLogo ?? null}
-                companyName={companyName ?? null}
-                progressPercent={progressPercent}
-              />
+              <BusinessSidebar />
             </BusinessMobileMenu>
           </Box>
         )}

@@ -10,22 +10,12 @@
  * their content in <BusinessAuthCard>. The dashboard will have its own
  * inner layout with a sidebar (added in Step 4).
  */
-import { Libre_Bodoni } from 'next/font/google';
-import type { PropsWithChildren } from 'react';
 
-const libreBodoni = Libre_Bodoni({
-  variable: '--font-libre-bodoni',
-  weight: ['400', '700'],
-  subsets: ['latin'],
-});
+import { Stack } from '@chakra-ui/react';
+import { PropsWithChildren } from 'react';
 
 const BusinessLayout = ({ children }: PropsWithChildren) => {
-  return (
-    // libreBodoni.variable sets --font-libre-bodoni on this element so
-    // font-display can resolve var(--font-libre-bodoni) for all descendants.
-    // font-body applies SF Pro as the default for the entire business panel.
-    <div className={`${libreBodoni.variable} font-body`}>{children}</div>
-  );
+  return <Stack gap="0">{children}</Stack>;
 };
 
 export default BusinessLayout;

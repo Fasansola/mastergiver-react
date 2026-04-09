@@ -13,18 +13,13 @@
 import BusinessSidebarNav from './BusinessSidebarNav';
 import { Heading, Stack } from '@chakra-ui/react';
 
-interface BusinessSidebarProps {
-  logo?: string | null;
-  companyName?: string | null;
-  progressPercent?: number;
-}
-
-const BusinessSidebar = (_props: BusinessSidebarProps) => {
+const BusinessSidebar = () => {
   return (
     <Stack
       as="aside"
-      w="400px"
-      minW="400px"
+      w="25%"
+      minW="320px"
+      maxW="400px"
       h="calc(100vh - 100px)"
       minH="calc(100vh - 100px)"
       p="10"

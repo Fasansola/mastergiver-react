@@ -1,10 +1,17 @@
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
+import { Libre_Bodoni } from 'next/font/google';
 import { Provider } from '@/components/ui/provider';
 import './globals.css';
 
 const poppins = Poppins({
   variable: '--font-poppins',
+  weight: ['400', '500', '600', '700'],
+  subsets: ['latin'],
+});
+
+const libreBodoni = Libre_Bodoni({
+  variable: '--font-libre-bodoni',
   weight: ['400', '500', '600', '700'],
   subsets: ['latin'],
 });
@@ -21,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${poppins.variable}`}>
+      <body className={`${poppins.variable} ${libreBodoni.variable} font-body`}>
         <Provider>{children}</Provider>
       </body>
     </html>

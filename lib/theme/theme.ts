@@ -67,9 +67,9 @@ const config = defineConfig({
       fontSizes: {
         // Responsive overrides — desktop values match the static tokens above.
         // base = mobile (< 1024px), lg = desktop (≥ 1024px)
-        bigheading: { value: { base: '24px', lg: '32px' } },
-        heading: { value: { base: '20px', lg: '24px' } },
-        subheading: { value: { base: '16px', lg: '18px' } },
+        // bigheading: { value: { base: '24px', lg: '32px' } },
+        // heading: { value: { base: '20px', lg: '24px' } },
+        // subheading: { value: { base: '16px', lg: '18px' } },
       },
     },
 

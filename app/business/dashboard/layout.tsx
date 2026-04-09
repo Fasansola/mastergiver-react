@@ -62,17 +62,10 @@ const BusinessDashboardLayout = async ({ children }: PropsWithChildren) => {
     redirect('/business/suspended');
   }
 
-  // Calculate profile completion for the sidebar progress bar
-  const progressPercent = calculateProgress(business);
-
   return (
     <Stack gap="0">
       {/* Header receives business data so it can render the mobile sidebar drawer */}
-      <BusinessHeader
-        businessLogo={business.logo ?? null}
-        companyName={business.companyName ?? null}
-        progressPercent={progressPercent}
-      />
+      <BusinessHeader isDashboard={true} />
       <HStack
         minH="calc(100vh - 100px)"
         align="start"
@@ -86,11 +79,7 @@ const BusinessDashboardLayout = async ({ children }: PropsWithChildren) => {
           top="100px"
           bottom="0"
         >
-          <BusinessSidebar
-            logo={business.logo ?? null}
-            companyName={business.companyName ?? null}
-            progressPercent={progressPercent}
-          />
+          <BusinessSidebar />
         </Box>
 
         {/* Main content area — grows to fill remaining space */}

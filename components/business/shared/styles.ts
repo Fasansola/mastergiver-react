@@ -49,9 +49,9 @@ export const errorTextStyle: CSSProperties = {
  */
 export const primaryButtonStyle = (disabled: boolean): CSSProperties => ({
   background: disabled ? '#8B88BB' : '#2F2B77',
-  height: '64px',
+  whiteSpace: 'normal',
   borderRadius: '8px',
-  padding: '16px 40px',
+  padding: '16px 32px',
   boxShadow: '0px 8px 10px -6px #E2E1FF, 0px 20px 25px -5px #D4D1FF',
   color: '#FFFFFF',
   fontWeight: 700,

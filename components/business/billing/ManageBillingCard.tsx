@@ -17,9 +17,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { createBillingPortalAction } from '@/lib/actions/business-billing.actions';
 import { Box } from '@chakra-ui/react';
-import {
-  primaryButtonStyle,
-} from '@/components/business/shared/styles';
+import { primaryButtonStyle } from '@/components/business/shared/styles';
 
 const ManageBillingCard = () => {
   const mutation = useMutation({
@@ -27,6 +25,7 @@ const ManageBillingCard = () => {
     onSuccess: (result) => {
       if (!result.success) return; // error shown below
       // Redirect the entire browser window to the Stripe-hosted portal
+      if (!result.url) return;
       window.location.href = result.url;
     },
   });
@@ -51,8 +50,8 @@ const ManageBillingCard = () => {
         Manage Billing
       </h2>
       <p style={{ fontSize: '14px', color: '#575C62', marginBottom: '24px' }}>
-        Update your payment method, download invoices, or cancel your subscription
-        through the Stripe billing portal.
+        Update your payment method, download invoices, or cancel your
+        subscription through the Stripe billing portal.
       </p>
 
       <button
@@ -61,13 +60,14 @@ const ManageBillingCard = () => {
         disabled={mutation.isPending}
         style={{
           ...primaryButtonStyle(mutation.isPending),
+          height: 'unset',
           width: 'auto',
           fontSize: '16px',
-          height: '48px',
-          padding: '0 32px',
         }}
       >
-        {mutation.isPending ? 'Opening portal…' : 'Update Payment Method / View Invoices'}
+        {mutation.isPending
+          ? 'Opening portal…'
+          : 'Update Payment Method / View Invoices'}
       </button>
 
       {/* Show an inline error if the portal session could not be created */}
