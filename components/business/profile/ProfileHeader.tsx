@@ -31,7 +31,6 @@ function getInitials(name: string): string {
     .join('');
 }
 
-
 const ProfileHeader = ({
   companyName,
   tagline,
@@ -109,7 +108,7 @@ const ProfileHeader = ({
             style={{
               fontSize: '16px',
               lineHeight: '160%',
-              color: '#212325',
+              color: '#000000',
               whiteSpace: 'pre-wrap',
               marginBottom: tagline ? '12px' : 0,
             }}

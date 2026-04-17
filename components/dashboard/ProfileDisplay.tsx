@@ -30,7 +30,7 @@ export interface ProfileDisplayData {
     name: string;
     slug: string;
     color: string;
-    icon: string;
+    icon: string | null;
   }[];
   skills: {
     id: string;
@@ -202,13 +202,15 @@ const ProfileDisplay = ({ profile, isDashboard }: ProfileDisplayProps) => {
                       bgColor={cause.color}
                       borderRadius="12px"
                     >
-                      <Image
-                        src={cause.icon}
-                        alt={cause.name}
-                        width={9}
-                        height={9}
-                        objectFit="contain"
-                      />
+                      {cause.icon && (
+                        <Image
+                          src={cause.icon}
+                          alt={cause.name}
+                          width={9}
+                          height={9}
+                          objectFit="contain"
+                        />
+                      )}
                       <Text
                         fontWeight="500"
                         fontSize="subheading"

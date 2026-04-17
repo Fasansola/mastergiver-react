@@ -15,14 +15,14 @@ import type { CSSProperties } from 'react';
 export const inputStyle: CSSProperties = {
   background: '#F9FAFB',
   border: '1px solid #F3F4F6',
-  height: '42px',
+  height: '48px',
   borderRadius: '6px',
   padding: '10px 16px',
-  fontSize: '14px',
+  fontSize: '16px', // fontSizes.body token
   width: '100%',
   outline: 'none',
   boxSizing: 'border-box',
-  color: '#212325',
+  color: '#000000',
 };
 
 // Input label — uppercase, tracked, muted grey

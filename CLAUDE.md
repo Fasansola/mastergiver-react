@@ -161,9 +161,9 @@ The business panel has its own visual identity. Apply these tokens to all `/busi
 | Heading (H1)           | Libre Bodoni | 700    | 32px | 120%        | #27262D |
 | Small Heading (H2)     | Libre Bodoni | 700    | 24px | 140%        | #27262D |
 | Accordion Heading (H3) | Libre Bodoni | 700    | 20px | 150%        | #2F2B77 |
-| Body                   | SF Pro       | 400    | 16px | 150%        | #212325 |
-| Big Text               | SF Pro       | 400    | 20px | 120%        | #212325 |
-| Small Text             | SF Pro       | 400    | 14px | 120%        | #212325 |
+| Body                   | SF Pro       | 400    | 16px | 150%        | #000000 |
+| Big Text               | SF Pro       | 400    | 20px | 120%        | #000000 |
+| Small Text             | SF Pro       | 400    | 14px | 120%        | #000000 |
 | Input Label            | SF Pro       | 700    | 14px | 20px        | #575C62 |
 | Placeholder            | SF Pro       | 510    | 14px | 100%        | #575C62 |
 | Button Text            | SF Pro       | 700    | 20px | 160%        | #FFFFFF |
@@ -216,7 +216,7 @@ height: 56px
 border-radius: 14px
 padding: 12px 16px
 gap: 16px
-text: SF Pro 510, 18px, line-height 20px, letter-spacing -0.15px, color #212325
+text: SF Pro 510, 18px, line-height 20px, letter-spacing -0.15px, color #000000
 ```
 
 ---

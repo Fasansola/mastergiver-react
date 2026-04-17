@@ -22,6 +22,7 @@ import {
   communityEventSchema,
   endorsementSchema,
   offerSchema,
+  impactRecordSchema,
   type AboutUsInput,
   type ImpactSummaryInput,
   type PartnerInput,
@@ -29,6 +30,7 @@ import {
   type CommunityEventInput,
   type EndorsementInput,
   type OfferInput,
+  type ImpactRecordInput,
 } from '@/lib/validations/business-profile.schema';
 import type { ActionResult } from '@/lib/types/actions';
 
@@ -388,6 +390,90 @@ export async function deleteOfferAction(id: string): Promise<ActionResult> {
   await prisma.businessOffer.deleteMany({
     where: { id, businessId: business.id },
   });
+
+  return { success: true };
+}
+
+// ---------------------------------------------------------------------------
+// Section 8 — Impact Record (CRUD)
+// ---------------------------------------------------------------------------
+
+export async function createImpactRecordAction(
+  data: ImpactRecordInput,
+): Promise<ActionResult<{ id: string }>> {
+  const business = await getAuthenticatedBusiness();
+  if (!business) return { success: false, error: 'Unauthorized' };
+
+  const parsed = impactRecordSchema.safeParse(data);
+  if (!parsed.success) return { success: false, error: 'Invalid input.' };
+
+  const record = await prisma.businessImpactRecord.create({
+    data: {
+      businessId: business.id,
+      title: parsed.data.title,
+      causeId: parsed.data.causeId,
+      organization: parsed.data.organization ?? null,
+      impactType: parsed.data.impactType,
+      startYear: parsed.data.startYear,
+      endYear: parsed.data.endYear ?? null,
+      isPresent: parsed.data.isPresent,
+      contributionType: parsed.data.contributionType ?? null,
+      amount: parsed.data.amount ?? null,
+      details: parsed.data.details ?? null,
+    },
+  });
+
+  return { success: true, id: record.id };
+}
+
+export async function updateImpactRecordAction(
+  id: string,
+  data: ImpactRecordInput,
+): Promise<ActionResult> {
+  const business = await getAuthenticatedBusiness();
+  if (!business) return { success: false, error: 'Unauthorized' };
+
+  const parsed = impactRecordSchema.safeParse(data);
+  if (!parsed.success) return { success: false, error: 'Invalid input.' };
+
+  try {
+    await prisma.businessImpactRecord.update({
+      where: { id, businessId: business.id },
+      data: {
+        title: parsed.data.title,
+        causeId: parsed.data.causeId,
+        organization: parsed.data.organization ?? null,
+        impactType: parsed.data.impactType,
+        startYear: parsed.data.startYear,
+        endYear: parsed.data.endYear ?? null,
+        isPresent: parsed.data.isPresent,
+        contributionType: parsed.data.contributionType ?? null,
+        amount: parsed.data.amount ?? null,
+        details: parsed.data.details ?? null,
+      },
+    });
+  } catch (e: unknown) {
+    const err = e as { code?: string };
+    if (err.code === 'P2025') return { success: false, error: 'Record not found.' };
+    throw e;
+  }
+
+  return { success: true };
+}
+
+export async function deleteImpactRecordAction(id: string): Promise<ActionResult> {
+  const business = await getAuthenticatedBusiness();
+  if (!business) return { success: false, error: 'Unauthorized' };
+
+  try {
+    await prisma.businessImpactRecord.delete({
+      where: { id, businessId: business.id },
+    });
+  } catch (e: unknown) {
+    const err = e as { code?: string };
+    if (err.code === 'P2025') return { success: false, error: 'Record not found.' };
+    throw e;
+  }
 
   return { success: true };
 }

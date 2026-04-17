@@ -53,7 +53,12 @@ const OfferDetailTrigger = ({ offer }: OfferDetailTriggerProps) => {
       {/* Accessible button — replaces the previous role="button" HStack */}
       <button
         onClick={() => setOpen(true)}
-        style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+        style={{
+          background: 'none',
+          border: 'none',
+          padding: 0,
+          cursor: 'pointer',
+        }}
       >
         <HStack gap="0">
           <Text
@@ -108,7 +113,7 @@ const OfferDetailTrigger = ({ offer }: OfferDetailTriggerProps) => {
               {/* Body */}
               <Dialog.Body px="6" py="5">
                 <Stack gap="5">
-                  <Text color="#212325" fontSize="15px" lineHeight="1.6">
+                  <Text color="#000000" fontSize="15px" lineHeight="1.6">
                     {offer.description}
                   </Text>
 

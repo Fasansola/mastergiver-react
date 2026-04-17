@@ -9,7 +9,7 @@ export interface CauseItem {
   name: string;
   slug: string;
   color: string;
-  icon: string;
+  icon: string | null;
 }
 
 export interface SkillItem {

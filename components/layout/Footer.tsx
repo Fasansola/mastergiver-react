@@ -31,7 +31,7 @@ const Footer = () => {
           align="start"
           gap={{ base: '12', lg: '0' }}
         >
-          <Box w={{ base: '100%', lg: '33%' }}>
+          <Box w={{ base: '100%', lg: '20%' }}>
             <Link href="/">
               <Image src={logo} alt="MasterGiver Logo" />
             </Link>
@@ -42,7 +42,7 @@ const Footer = () => {
             direction={{ base: 'column', md: 'row' }}
             align="start"
             justify={{ md: 'space-between' }}
-            w={{ base: '100%', lg: '66%' }}
+            w={{ base: '100%', lg: '80%' }}
             gap={{ base: '10', md: '0' }}
           >
             <Stack gap="6">
@@ -51,13 +51,13 @@ const Footer = () => {
                 fontWeight="700"
                 color="text.primary"
               >
-                Resources
+                Products
               </Heading>
               <Stack gap="4">
-                <FooterNavItem href="">FAQ</FooterNavItem>
-                <FooterNavItem href="">Blog</FooterNavItem>
-                <FooterNavItem href="/business/signup">
-                  Register Your Organisation
+                <FooterNavItem href="/">Businesses</FooterNavItem>
+                <FooterNavItem href="/individuals">Individuals</FooterNavItem>
+                <FooterNavItem href="/reputation">
+                  Community Impact and Reputation
                 </FooterNavItem>
               </Stack>
             </Stack>
@@ -78,9 +78,29 @@ const Footer = () => {
                 Company
               </Heading>
               <Stack gap="4">
-                <FooterNavItem href="">About Us</FooterNavItem>
-                <FooterNavItem href="">Security</FooterNavItem>
-                <FooterNavItem href="">Legal</FooterNavItem>
+                <FooterNavItem href="/">About MasterGiver</FooterNavItem>
+                <FooterNavItem href="/partner">Partner</FooterNavItem>
+              </Stack>
+            </Stack>
+
+            <Separator
+              orientation="vertical"
+              h="158px"
+              borderColor="border.default"
+              display={{ base: 'none', md: 'block' }}
+            />
+
+            <Stack gap="6">
+              <Heading
+                className="font-body"
+                fontWeight="700"
+                color="text.primary"
+              >
+                Legal
+              </Heading>
+              <Stack gap="4">
+                <FooterNavItem href="/terms">Terms of use</FooterNavItem>
+                <FooterNavItem href="/privacy">Privacy</FooterNavItem>
               </Stack>
             </Stack>
 

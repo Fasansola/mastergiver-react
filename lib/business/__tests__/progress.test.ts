@@ -33,6 +33,7 @@ const empty: BusinessForProgress = {
   communityEvents: [],
   endorsements: [],
   offers: [],
+  impactRecords: [],
 };
 
 /** A fully completed business — every section has at least the minimum data. */
@@ -47,6 +48,7 @@ const full: BusinessForProgress = {
   communityEvents: [{ id: 'e1' }],
   endorsements: [{ id: 'en1' }],
   offers: [{ id: 'o1' }],
+  impactRecords: [{ id: 'ir1' }],
 };
 
 // ---------------------------------------------------------------------------
@@ -58,27 +60,27 @@ describe('calculateProgress', () => {
     expect(calculateProgress(empty)).toBe(0);
   });
 
-  it('returns 100 when all 7 sections are complete', () => {
+  it('returns 100 when all 8 sections are complete', () => {
     expect(calculateProgress(full)).toBe(100);
   });
 
-  it('returns ~14 (rounded) when exactly 1 section is complete', () => {
+  it('returns ~13 (rounded) when exactly 1 section is complete', () => {
     // Only About Us filled in (requires both companyName and aboutUs)
     const oneSection: BusinessForProgress = { ...empty, companyName: 'Acme', aboutUs: 'We give back.' };
-    expect(calculateProgress(oneSection)).toBe(14); // Math.round(1/7 * 100)
+    expect(calculateProgress(oneSection)).toBe(13); // Math.round(1/8 * 100)
   });
 
-  it('returns ~29 when 2 sections are complete', () => {
+  it('returns 25 when 2 sections are complete', () => {
     const two: BusinessForProgress = {
       ...empty,
       companyName: 'Acme',
       aboutUs: 'We give back.',
       yearsOfInvolvement: 3,
     };
-    expect(calculateProgress(two)).toBe(29); // Math.round(2/7 * 100)
+    expect(calculateProgress(two)).toBe(25); // Math.round(2/8 * 100)
   });
 
-  it('returns ~43 when 3 sections are complete', () => {
+  it('returns ~38 when 3 sections are complete', () => {
     const three: BusinessForProgress = {
       ...empty,
       companyName: 'Acme',
@@ -86,10 +88,10 @@ describe('calculateProgress', () => {
       yearsOfInvolvement: 3,
       partners: [{ id: 'p1' }],
     };
-    expect(calculateProgress(three)).toBe(43); // Math.round(3/7 * 100)
+    expect(calculateProgress(three)).toBe(38); // Math.round(3/8 * 100)
   });
 
-  it('returns ~57 when 4 sections are complete', () => {
+  it('returns 50 when 4 sections are complete', () => {
     const four: BusinessForProgress = {
       ...empty,
       companyName: 'Acme',
@@ -98,10 +100,10 @@ describe('calculateProgress', () => {
       partners: [{ id: 'p1' }],
       causes: [{ id: 'c1' }],
     };
-    expect(calculateProgress(four)).toBe(57); // Math.round(4/7 * 100)
+    expect(calculateProgress(four)).toBe(50); // Math.round(4/8 * 100)
   });
 
-  it('returns ~71 when 5 sections are complete', () => {
+  it('returns ~63 when 5 sections are complete', () => {
     const five: BusinessForProgress = {
       ...empty,
       companyName: 'Acme',
@@ -111,10 +113,10 @@ describe('calculateProgress', () => {
       causes: [{ id: 'c1' }],
       communityEvents: [{ id: 'e1' }],
     };
-    expect(calculateProgress(five)).toBe(71); // Math.round(5/7 * 100)
+    expect(calculateProgress(five)).toBe(63); // Math.round(5/8 * 100)
   });
 
-  it('returns ~86 when 6 sections are complete', () => {
+  it('returns 75 when 6 sections are complete', () => {
     const six: BusinessForProgress = {
       ...empty,
       companyName: 'Acme',
@@ -125,13 +127,13 @@ describe('calculateProgress', () => {
       communityEvents: [{ id: 'e1' }],
       endorsements: [{ id: 'en1' }],
     };
-    expect(calculateProgress(six)).toBe(86); // Math.round(6/7 * 100)
+    expect(calculateProgress(six)).toBe(75); // Math.round(6/8 * 100)
   });
 
   // --- Section 1: About Us ---
 
   it('Section 1 (About Us): both companyName and aboutUs must be present', () => {
-    expect(calculateProgress({ ...empty, companyName: 'A', aboutUs: 'We care.' })).toBe(14);
+    expect(calculateProgress({ ...empty, companyName: 'A', aboutUs: 'We care.' })).toBe(13);
   });
 
   it('Section 1 (About Us): companyName alone is NOT complete', () => {
@@ -153,25 +155,25 @@ describe('calculateProgress', () => {
   // --- Section 2: Impact Summary ---
 
   it('Section 2: complete when only yearsOfInvolvement is set', () => {
-    expect(calculateProgress({ ...empty, yearsOfInvolvement: 1 })).toBe(14);
+    expect(calculateProgress({ ...empty, yearsOfInvolvement: 1 })).toBe(13);
   });
 
   it('Section 2: complete when only totalContributions is set', () => {
-    expect(calculateProgress({ ...empty, totalContributions: 500 })).toBe(14);
+    expect(calculateProgress({ ...empty, totalContributions: 500 })).toBe(13);
   });
 
   it('Section 2: complete when only activePartners is set', () => {
-    expect(calculateProgress({ ...empty, activePartners: 0 })).toBe(14);
+    expect(calculateProgress({ ...empty, activePartners: 0 })).toBe(13);
   });
 
   it('Section 2: NOT complete when all three are null', () => {
     expect(calculateProgress(empty)).toBe(0);
   });
 
-  // --- Sections 3–7: relation-based ---
+  // --- Sections 3–8: relation-based ---
 
   it('Section 3 (Partners): complete with 1 partner', () => {
-    expect(calculateProgress({ ...empty, partners: [{ id: 'p1' }] })).toBe(14);
+    expect(calculateProgress({ ...empty, partners: [{ id: 'p1' }] })).toBe(13);
   });
 
   it('Section 3 (Partners): NOT complete with empty array', () => {
@@ -179,19 +181,23 @@ describe('calculateProgress', () => {
   });
 
   it('Section 4 (Areas of Impact): complete with 1 cause', () => {
-    expect(calculateProgress({ ...empty, causes: [{ id: 'c1' }] })).toBe(14);
+    expect(calculateProgress({ ...empty, causes: [{ id: 'c1' }] })).toBe(13);
   });
 
   it('Section 5 (Community Events): complete with 1 event', () => {
-    expect(calculateProgress({ ...empty, communityEvents: [{ id: 'e1' }] })).toBe(14);
+    expect(calculateProgress({ ...empty, communityEvents: [{ id: 'e1' }] })).toBe(13);
   });
 
   it('Section 6 (Endorsements): complete with 1 endorsement', () => {
-    expect(calculateProgress({ ...empty, endorsements: [{ id: 'en1' }] })).toBe(14);
+    expect(calculateProgress({ ...empty, endorsements: [{ id: 'en1' }] })).toBe(13);
   });
 
   it('Section 7 (Offers): complete with 1 offer', () => {
-    expect(calculateProgress({ ...empty, offers: [{ id: 'o1' }] })).toBe(14);
+    expect(calculateProgress({ ...empty, offers: [{ id: 'o1' }] })).toBe(13);
+  });
+
+  it('Section 8 (Impact Record): complete with 1 impact record', () => {
+    expect(calculateProgress({ ...empty, impactRecords: [{ id: 'ir1' }] })).toBe(13);
   });
 
   it('multiple entries in a relation still count as one completed section', () => {
@@ -200,7 +206,7 @@ describe('calculateProgress', () => {
       ...empty,
       partners: [{ id: 'p1' }, { id: 'p2' }, { id: 'p3' }],
     };
-    expect(calculateProgress(manyPartners)).toBe(14); // only section 3
+    expect(calculateProgress(manyPartners)).toBe(13); // only section 3
   });
 });
 
@@ -209,8 +215,8 @@ describe('calculateProgress', () => {
 // ---------------------------------------------------------------------------
 
 describe('getSectionCompletionStatus', () => {
-  it('returns 7 booleans', () => {
-    expect(getSectionCompletionStatus(empty)).toHaveLength(7);
+  it('returns 8 booleans', () => {
+    expect(getSectionCompletionStatus(empty)).toHaveLength(8);
   });
 
   it('all false when nothing is filled in', () => {
@@ -232,7 +238,7 @@ describe('getSectionCompletionStatus', () => {
       causes: [{ id: 'c1' }],    // section 4
       offers: [{ id: 'o1' }],    // section 7
     };
-    const [s1, s2, s3, s4, s5, s6, s7] = getSectionCompletionStatus(partial);
+    const [s1, s2, s3, s4, s5, s6, s7, s8] = getSectionCompletionStatus(partial);
     expect(s1).toBe(true);
     expect(s2).toBe(false);
     expect(s3).toBe(false);
@@ -240,12 +246,13 @@ describe('getSectionCompletionStatus', () => {
     expect(s5).toBe(false);
     expect(s6).toBe(false);
     expect(s7).toBe(true);
+    expect(s8).toBe(false);
   });
 
   it('is consistent with calculateProgress', () => {
     // The count of trues should match what calculateProgress uses
     const status = getSectionCompletionStatus(full);
     const trueCount = status.filter(Boolean).length;
-    expect(calculateProgress(full)).toBe(Math.round((trueCount / 7) * 100));
+    expect(calculateProgress(full)).toBe(Math.round((trueCount / 8) * 100));
   });
 });

@@ -22,10 +22,7 @@ const schema = z.object({
   website: z.string().optional(),
 });
 
-const NOTIFY_RECIPIENTS = [
-  'carlos@mastergiver.com',
-  'justwpstudio@gmail.com',
-];
+const NOTIFY_RECIPIENTS = ['carlos@mastergiver.com', 'justwpstudio@gmail.com'];
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -44,19 +41,19 @@ function buildHtml(data: {
       <table style="width:100%;border-collapse:collapse;">
         <tr>
           <td style="padding:12px 0;border-bottom:1px solid #eee;font-weight:700;color:#575C62;width:40%;font-size:13px;text-transform:uppercase;letter-spacing:1px;">Contact Name</td>
-          <td style="padding:12px 0;border-bottom:1px solid #eee;color:#212325;">${data.contactName}</td>
+          <td style="padding:12px 0;border-bottom:1px solid #eee;color:#000000;">${data.contactName}</td>
         </tr>
         <tr>
           <td style="padding:12px 0;border-bottom:1px solid #eee;font-weight:700;color:#575C62;font-size:13px;text-transform:uppercase;letter-spacing:1px;">Organization</td>
-          <td style="padding:12px 0;border-bottom:1px solid #eee;color:#212325;">${data.organizationName}</td>
+          <td style="padding:12px 0;border-bottom:1px solid #eee;color:#000000;">${data.organizationName}</td>
         </tr>
         <tr>
           <td style="padding:12px 0;border-bottom:1px solid #eee;font-weight:700;color:#575C62;font-size:13px;text-transform:uppercase;letter-spacing:1px;">Email</td>
-          <td style="padding:12px 0;border-bottom:1px solid #eee;color:#212325;">${data.email}</td>
+          <td style="padding:12px 0;border-bottom:1px solid #eee;color:#000000;">${data.email}</td>
         </tr>
         <tr>
           <td style="padding:12px 0;font-weight:700;color:#575C62;font-size:13px;text-transform:uppercase;letter-spacing:1px;">Website / Network</td>
-          <td style="padding:12px 0;color:#212325;">${data.website || '—'}</td>
+          <td style="padding:12px 0;color:#000000;">${data.website || '—'}</td>
         </tr>
       </table>
       <p style="color:#9CA3AF;font-size:12px;margin-top:32px;">
@@ -92,7 +89,10 @@ export async function POST(req: NextRequest) {
 
   const anyFailed = results.some((r) => r.error !== null);
   if (anyFailed) {
-    console.error('Partner email send errors:', results.map((r) => r.error));
+    console.error(
+      'Partner email send errors:',
+      results.map((r) => r.error)
+    );
     return NextResponse.json(
       { error: 'Failed to send notification. Please try again.' },
       { status: 500 }

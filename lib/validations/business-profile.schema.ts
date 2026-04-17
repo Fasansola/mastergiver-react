@@ -68,7 +68,7 @@ export type PartnerInput = z.infer<typeof partnerSchema>;
 // ---------------------------------------------------------------------------
 
 export const areasOfImpactSchema = z.object({
-  causeIds: z.array(z.string()).min(1, 'Please select at least one area'),
+  causeIds: z.array(z.string()),
 });
 
 export type AreasOfImpactInput = z.infer<typeof areasOfImpactSchema>;
@@ -78,7 +78,7 @@ export type AreasOfImpactInput = z.infer<typeof areasOfImpactSchema>;
 // ---------------------------------------------------------------------------
 
 export const communityEventSchema = z.object({
-  photo: z.string().nullable().optional(),
+  photo: z.string({ error: 'Photo is required' }).min(1, 'Photo is required'),
   description: z.string().min(1, 'Description is required').max(1000),
   externalUrl: z
     .string()
@@ -133,3 +133,25 @@ export const offerSchema = z.object({
 });
 
 export type OfferInput = z.infer<typeof offerSchema>;
+
+// ---------------------------------------------------------------------------
+// Section 8 — Impact Record (one entry at a time)
+// ---------------------------------------------------------------------------
+
+export const impactRecordSchema = z.object({
+  title: z.string().min(1, 'Title is required'),
+  causeId: z.string().min(1, 'Area of impact is required'),
+  organization: z.string().optional().nullable(),
+  impactType: z.enum(['ONE_TIME', 'ONGOING']),
+  startYear: z.number().int().min(1900).max(2200),
+  endYear: z.number().int().min(1900).max(2200).optional().nullable(),
+  isPresent: z.boolean(),
+  contributionType: z
+    .enum(['DONATION', 'SPONSORSHIP', 'VOLUNTEER_WORK', 'EVENT_PROGRAM', 'IN_KIND_SUPPORT'])
+    .optional()
+    .nullable(),
+  amount: z.number().positive().optional().nullable(),
+  details: z.string().max(500).optional().nullable(),
+});
+
+export type ImpactRecordInput = z.infer<typeof impactRecordSchema>;

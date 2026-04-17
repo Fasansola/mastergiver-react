@@ -15,6 +15,46 @@ function generateSlug(name: string): string {
 async function main() {
   console.log('🌱 Starting seed...');
 
+  // ── Business causes ────────────────────────────────────────────────────────
+  const businessCauses = [
+    { name: 'Education', color: '#6F8FAF' },
+    { name: 'Youth Sports', color: '#5FA3A8' },
+    { name: 'Community Events', color: '#A88F6F' },
+    { name: 'Health & Medical', color: '#C46A6A' },
+    { name: 'Food & Hunger', color: '#D08A5C' },
+    { name: 'Housing & Homelessness', color: '#A67C6B' },
+    { name: 'Small Business Support', color: '#6FA87E' },
+    { name: 'Environment', color: '#5FAF6F' },
+    { name: 'Animals', color: '#CFA77A' },
+    { name: 'Families & Children', color: '#D49A8A' },
+    { name: 'Arts & Culture', color: '#9C7AB8' },
+    { name: 'Disaster Relief', color: '#C56B6B' },
+    { name: 'Veterans', color: '#6B7FA3' },
+    { name: 'Public Safety', color: '#5C6F7A' },
+    { name: 'Faith-Based', color: '#9A8C7C' },
+    { name: 'Other Community Support', color: '#B0B7BF' },
+  ];
+
+  for (const cause of businessCauses) {
+    const slug = generateSlug(cause.name);
+    await prisma.cause.upsert({
+      where: { slug_panel: { slug, panel: 'BUSINESS' } },
+      update: { name: cause.name, color: cause.color, isActive: true },
+      create: {
+        name: cause.name,
+        slug,
+        color: cause.color,
+        source: 'PREDEFINED',
+        panel: 'BUSINESS',
+        isActive: true,
+      },
+    });
+  }
+
+  console.log(`✅ ${businessCauses.length} business causes seeded`);
+
+  // ── Skills ─────────────────────────────────────────────────────────────────
+
   // Delete all existing skills first
   await prisma.skill.deleteMany({});
   console.log('🗑️ Existing skills deleted');

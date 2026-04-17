@@ -13,8 +13,7 @@
 
 import { forwardRef, useState } from 'react';
 
-interface BusinessPasswordInputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
+interface BusinessPasswordInputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 const BusinessPasswordInput = forwardRef<
   HTMLInputElement,
@@ -31,7 +30,7 @@ const BusinessPasswordInput = forwardRef<
         style={{
           background: '#F9FAFB',
           border: '1px solid #F3F4F6',
-          height: '42px',
+          height: '48px',
           borderRadius: '6px',
           // Extra right padding so text doesn't slide under the toggle button
           padding: '10px 48px 10px 16px',
@@ -39,7 +38,7 @@ const BusinessPasswordInput = forwardRef<
           width: '100%',
           outline: 'none',
           boxSizing: 'border-box',
-          color: '#212325',
+          color: '#000000',
           ...style, // allow callers to override individual properties
         }}
       />

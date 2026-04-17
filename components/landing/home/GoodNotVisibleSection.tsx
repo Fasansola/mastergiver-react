@@ -60,8 +60,11 @@ const GoodNotVisibleSection = () => {
         gap="10"
         w="100%"
       >
-        <Box textAlign="center" w="100%" maxW="866px">
-          <LandingH>The Good You Do Isn&apos;t Automatically Visible</LandingH>
+        <Box textAlign="center" w="100%" maxW="966px">
+          <LandingH>
+            The Good Your Business Does Isn’t Being Seen. And That’s Costing
+            You.
+          </LandingH>
         </Box>
 
         <Stack
@@ -90,7 +93,7 @@ const GoodNotVisibleSection = () => {
               fontWeight="700"
               fontSize={{ base: '22px', md: '24px', lg: '28px' }}
               lineHeight="120%"
-              color="brand.primary"
+              color="text.primary"
             >
               But online? It&apos;s like none of it ever happened.
             </Heading>
@@ -116,7 +119,7 @@ const GoodNotVisibleSection = () => {
             borderLeft="4px solid"
             borderColor="brand.primary"
             borderRadius="12px"
-            bg="#E9F1FF"
+            bg="#EEEDFF"
             flexShrink="0"
           >
             <Text
@@ -132,7 +135,11 @@ const GoodNotVisibleSection = () => {
           </Stack>
         </Stack>
 
-        <Grid gap="4" templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)' }}>
+        <Grid
+          gap="8"
+          templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)' }}
+          // maxW="966px"
+        >
           {whatWeDo.map((item, i) => (
             <WhatWeDoBox
               image={item.image}

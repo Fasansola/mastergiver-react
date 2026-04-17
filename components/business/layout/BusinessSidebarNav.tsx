@@ -70,7 +70,7 @@ const inactiveLabelStyle: React.CSSProperties = {
   fontSize: '18px',
   lineHeight: '20px',
   letterSpacing: '-0.15px',
-  color: '#212325',
+  color: '#000000',
 };
 
 const BusinessSidebarNav = () => {
@@ -129,7 +129,7 @@ const BusinessSidebarNav = () => {
                 fontWeight="500"
                 fontSize="subheading"
                 style={{
-                  color: isActive ? '#FFFFFF' : '#212325',
+                  color: isActive ? '#FFFFFF' : '#000000',
                 }}
               >
                 {item.label}

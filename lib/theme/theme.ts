@@ -25,7 +25,7 @@ const config = defineConfig({
         },
         text: {
           heading: { value: '#27262D' },
-          primary: { value: '#212325' }, // Main text
+          primary: { value: '#000000' }, // Main text
           white: { value: '#FFFFFF' }, // White cards/boxes
           secondary: { value: '#575C62' }, // Muted text
           link: { value: '#5851BF' }, // Link text

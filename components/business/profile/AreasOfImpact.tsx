@@ -14,7 +14,7 @@ import { Flex, Grid, Image, Text } from '@chakra-ui/react';
 interface Cause {
   id: string;
   name: string;
-  icon: string; // URL to the cause's icon image
+  icon: string | null;
   color: string; // hex colour from the Cause model, e.g. "#A3E4D7"
 }
 
@@ -34,20 +34,22 @@ const AreasOfImpact = ({ causes }: AreasOfImpactProps) => {
         <Flex
           key={cause.id}
           gap="1"
-          py={{ base: '1.5', lg: '2' }}
-          pl="2"
-          pr={{ base: '4', lg: '5' }}
+          py={{ base: '3', lg: '4' }}
+          // pl="2"
+          px={{ base: '4', lg: '5' }}
           bgColor={cause.color}
           borderRadius="12px"
           align="center"
         >
-          <Image
-            src={cause.icon}
-            alt={cause.name}
-            width={9}
-            height={9}
-            objectFit="contain"
-          />
+          {cause.icon && (
+            <Image
+              src={cause.icon}
+              alt={cause.name}
+              width={9}
+              height={9}
+              objectFit="contain"
+            />
+          )}
           <Text fontWeight="500" fontSize="subheading" color="white">
             {cause.name}
           </Text>

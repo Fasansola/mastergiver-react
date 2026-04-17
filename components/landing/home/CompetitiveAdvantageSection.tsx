@@ -35,7 +35,7 @@ const CompetitiveAdvantageSection = () => {
               Turn Community Impact Into Competitive Advantage
             </LandingH>
           </Stack>
-          <Text color="text.primary" maxW="1032px">
+          <Text color="text.primary" maxW="800px">
             You already invest in: Marketing, Ads, SEO, Brand awareness.
             MasterGiver doesn&apos;t replace those. It strengthens all of them
             by making your reputation visible to AI, search engines, and
@@ -89,7 +89,6 @@ const CompetitiveAdvantageSection = () => {
                   / year
                 </Span>
               </Heading>
-              <Text>That&apos;s just $4.92/month</Text>
             </Stack>
 
             <Stack
@@ -108,8 +107,8 @@ const CompetitiveAdvantageSection = () => {
                 textAlign="start"
                 color="brand.primary"
               >
-                Less than $5/month to ensure your reputation signals show up
-                and drive new customers to your business.
+                Less than $5/month to ensure your reputation signals show up and
+                drive new customers to your business.
               </Text>
             </Stack>
           </Stack>
@@ -157,8 +156,13 @@ const CompetitiveAdvantageSection = () => {
           borderRadius="16px"
           textAlign="center"
           gap="10"
+          display="none"
         >
-          <Heading className="font-display" fontSize={{ base: '22px', md: '28px', lg: '32px' }} lineHeight="120%">
+          <Heading
+            className="font-display"
+            fontSize={{ base: '22px', md: '28px', lg: '32px' }}
+            lineHeight="120%"
+          >
             What You&apos;re Already Spending vs. What You Get
           </Heading>
           <Stack gap="6">

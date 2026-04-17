@@ -11,7 +11,7 @@
  */
 
 import { type SearchParams } from 'next/dist/server/request/search-params';
-import BusinessAuthCard from '@/components/business/auth/BusinessAuthCard';
+import { Stack } from '@chakra-ui/react';
 import ConfirmPage from '@/components/business/confirm/ConfirmPage';
 
 interface ConfirmPageProps {
@@ -22,12 +22,20 @@ const BusinessConfirmPage = async ({ searchParams }: ConfirmPageProps) => {
   const params = await searchParams;
 
   // Stripe appends ?session_id=cs_... to the success_url after payment
-  const sessionId = typeof params.session_id === 'string' ? params.session_id : null;
+  const sessionId =
+    typeof params.session_id === 'string' ? params.session_id : null;
 
   return (
-    <BusinessAuthCard>
+    <Stack
+      bgColor="#FFFFFF"
+      maxW="1260px"
+      w="100%"
+      p={{ base: '8', md: '16' }}
+      borderRadius="16px"
+      boxShadow="0px 1px 2px 0px #4646490F, 0px 5px 3px 0px #4646490A"
+    >
       <ConfirmPage sessionId={sessionId} />
-    </BusinessAuthCard>
+    </Stack>
   );
 };
 

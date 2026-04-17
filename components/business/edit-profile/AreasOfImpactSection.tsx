@@ -17,7 +17,11 @@ import { saveAreasOfImpactAction } from '@/lib/actions/business-profile.actions'
 import { editProfileBTNStyle } from '@/components/business/shared/styles';
 import { HStack, Stack, Text } from '@chakra-ui/react';
 
-interface Cause { id: string; name: string; color: string }
+interface Cause {
+  id: string;
+  name: string;
+  color: string;
+}
 
 interface AreasOfImpactSectionProps {
   onSave: () => void;
@@ -25,9 +29,18 @@ interface AreasOfImpactSectionProps {
   selectedCauseIds: string[];
 }
 
-const AreasOfImpactSection = ({ onSave, allCauses, selectedCauseIds }: AreasOfImpactSectionProps) => {
+const AreasOfImpactSection = ({
+  onSave,
+  allCauses,
+  selectedCauseIds,
+}: AreasOfImpactSectionProps) => {
   const router = useRouter();
-  const [selected, setSelected] = useState<Set<string>>(new Set(selectedCauseIds));
+  // Filter to only IDs present in allCauses — drops any stale individual-panel
+  // cause IDs that may have been saved before the business cause list existed.
+  const validCauseIds = new Set(allCauses.map((c) => c.id));
+  const [selected, setSelected] = useState<Set<string>>(
+    new Set(selectedCauseIds.filter((id) => validCauseIds.has(id)))
+  );
   const [serverError, setServerError] = useState<string | null>(null);
 
   const toggle = (id: string) =>
@@ -38,9 +51,13 @@ const AreasOfImpactSection = ({ onSave, allCauses, selectedCauseIds }: AreasOfIm
     });
 
   const mutation = useMutation({
-    mutationFn: () => saveAreasOfImpactAction({ causeIds: Array.from(selected) }),
+    mutationFn: () =>
+      saveAreasOfImpactAction({ causeIds: Array.from(selected) }),
     onSuccess: (result) => {
-      if (!result.success) { setServerError(result.error); return; }
+      if (!result.success) {
+        setServerError(result.error);
+        return;
+      }
       router.refresh();
       onSave();
     },
@@ -49,7 +66,8 @@ const AreasOfImpactSection = ({ onSave, allCauses, selectedCauseIds }: AreasOfIm
   return (
     <Stack gap="5">
       <Text style={{ fontSize: '14px', color: '#575C62' }}>
-        Select the cause areas that reflect your business&apos;s community focus.
+        Select the cause areas that reflect your business&apos;s community
+        focus.
       </Text>
 
       {/* Chip grid */}
@@ -66,7 +84,7 @@ const AreasOfImpactSection = ({ onSave, allCauses, selectedCauseIds }: AreasOfIm
                 borderRadius: '999px',
                 border: `2px solid ${isSelected ? '#2F2B77' : '#E5E7EB'}`,
                 background: isSelected ? '#2F2B77' : '#FFFFFF',
-                color: isSelected ? '#FFFFFF' : '#212325',
+                color: isSelected ? '#FFFFFF' : '#000000',
                 fontSize: '14px',
                 fontWeight: isSelected ? 700 : 400,
                 cursor: 'pointer',
@@ -79,17 +97,22 @@ const AreasOfImpactSection = ({ onSave, allCauses, selectedCauseIds }: AreasOfIm
         })}
       </HStack>
 
-      {selected.size === 0 && (
-        <Text style={{ color: '#9CA3AF', fontSize: '13px' }}>Please select at least one area.</Text>
+      {serverError && (
+        <Text style={{ color: '#C53030', fontSize: '14px' }}>
+          {serverError}
+        </Text>
       )}
 
-      {serverError && <Text style={{ color: '#C53030', fontSize: '14px' }}>{serverError}</Text>}
-
-      <HStack align="center" justify={{ base: '', md: 'end' }} gap="6" flexWrap="wrap">
+      <HStack
+        align="center"
+        justify={{ base: '', md: 'end' }}
+        gap="6"
+        flexWrap="wrap"
+      >
         <button
           type="button"
           onClick={() => mutation.mutate()}
-          disabled={mutation.isPending || selected.size === 0}
+          disabled={mutation.isPending}
           style={editProfileBTNStyle}
         >
           {mutation.isPending ? 'Saving…' : 'Save Section'}

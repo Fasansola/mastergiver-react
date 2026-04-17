@@ -9,7 +9,7 @@ const WhatWeDoBox = ({ image, title, description }: Props) => {
     <Stack
       p={{ base: '5', lg: '10' }}
       gap="6"
-      bg="#F1F6FF"
+      bg="#EEEDFF"
       boxShadow="0px 1px 2px 0px #4646490F, 0px 5px 3px 0px #4646490A"
       borderRadius="12px"
       align={{ base: 'center', md: 'start' }}
@@ -30,14 +30,18 @@ const WhatWeDoBox = ({ image, title, description }: Props) => {
         <NextImage alt={title} src={image} width="40" height="40" />
       </Stack>
       <Stack gap="2">
-        <Heading className="font-display" fontSize={{ base: '20px', lg: '28px' }} color="brand.primary">
+        <Heading
+          className="font-display"
+          fontSize={{ base: '20px', lg: '28px' }}
+          color="brand.primary"
+        >
           {title}
         </Heading>
         <Text
           color="text.primary"
           className="font-body"
-          lineHeight="180%"
-          fontSize="body"
+          lineHeight="160%"
+          fontSize="18px"
         >
           {description}
         </Text>

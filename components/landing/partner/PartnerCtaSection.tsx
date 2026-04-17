@@ -47,7 +47,7 @@ const PartnerCtaSection = () => {
               </Text>
             </Stack>
             <Stack gap="14">
-              <Stack fontWeight="500!" gap="4">
+              <Stack gap="4">
                 {[
                   'Your custom $20 partner discount code',
                   'A copy-and-paste email template ready to send to your members, sponsors, or supporters',
@@ -82,8 +82,8 @@ const PartnerCtaSection = () => {
 
               <Stack gap="2">
                 <Text>
-                  No cost. No obligation. Just a simple way to offer value to
-                  your network.
+                  No cost. No obligation. <br />
+                  Just a simple way to offer value to your network.
                 </Text>
               </Stack>
             </Stack>

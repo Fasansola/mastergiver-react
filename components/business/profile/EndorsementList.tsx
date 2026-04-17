@@ -38,7 +38,7 @@ const EndorsementList = ({ endorsements }: EndorsementListProps) => {
             style={{
               fontSize: '16px',
               lineHeight: '160%',
-              color: '#212325',
+              color: '#000000',
               fontStyle: 'italic',
               margin: 0,
               marginBottom: '12px',

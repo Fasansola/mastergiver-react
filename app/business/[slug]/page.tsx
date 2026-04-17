@@ -31,6 +31,7 @@ import PartnerCards from '@/components/business/profile/PartnerCards';
 import CommunityGallery from '@/components/business/profile/CommunityGallery';
 import EndorsementList from '@/components/business/profile/EndorsementList';
 import OfferCards from '@/components/business/profile/OfferCards';
+import ImpactRecordPublic from '@/components/business/profile/ImpactRecordPublic';
 import { Box, HStack, Stack, Container, Heading, Text } from '@chakra-ui/react';
 import BusinessHeader from '@/components/business/layout/BusinessHeader';
 import Image from 'next/image';
@@ -41,7 +42,9 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params;
 
   const business = await prisma.business.findUnique({
@@ -93,6 +96,10 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
       communityEvents: { orderBy: { createdAt: 'asc' } },
       endorsements: { orderBy: { createdAt: 'asc' } },
       offers: { orderBy: { createdAt: 'asc' } },
+      impactRecords: {
+        include: { cause: true },
+        orderBy: { createdAt: 'desc' },
+      },
     },
   });
 
@@ -122,6 +129,22 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
     color: bc.cause.color,
   }));
 
+  // Serialise impact records
+  const impactRecords = business.impactRecords.map((r) => ({
+    id: r.id,
+    title: r.title,
+    causeName: r.cause?.name ?? null,
+    organization: r.organization,
+    impactType: r.impactType as 'ONE_TIME' | 'ONGOING',
+    startYear: r.startYear,
+    endYear: r.endYear,
+    isPresent: r.isPresent,
+    contributionType: r.contributionType as string | null,
+    amount: r.amount?.toString() ?? null,
+    details: r.details,
+  }));
+  const hasImpactRecord = impactRecords.length > 0;
+
   // Determine which sections have data — sections with no content are not rendered
   const hasImpact =
     business.yearsOfInvolvement !== null ||
@@ -133,8 +156,7 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
   const hasEndorsements = business.endorsements.length > 0;
   const hasOffers = offers.length > 0;
 
-  const BASE_URL =
-    process.env.NEXT_PUBLIC_APP_URL ?? 'https://mastergiver.com';
+  const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://mastergiver.com';
 
   // Schema.org JSON-LD — helps search engines and AI understand this business
   const jsonLd = {
@@ -258,16 +280,26 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
                     borderRadius="20px"
                     boxShadow="0px 1px 2px 0px #4646490F, 0px 1px 3px 0px #4646490A"
                   >
-                    <Heading
-                      className="font-display"
-                      fontWeight="700"
-                      fontSize={{ base: '24px', md: '32px', lg: '40px' }}
-                      color="text.businessH"
-                      textAlign="center"
-                      lineHeight="120%"
-                    >
-                      Impact Summary
-                    </Heading>
+                    <Stack gap="2" align="center">
+                      <Heading
+                        className="font-display"
+                        fontWeight="700"
+                        fontSize={{ base: '24px', md: '32px', lg: '40px' }}
+                        color="text.businessH"
+                        textAlign="center"
+                        lineHeight="120%"
+                      >
+                        Impact Summary
+                      </Heading>
+                      <Text
+                        className="font-body"
+                        fontSize="small"
+                        color="text.secondary"
+                        textAlign="center"
+                      >
+                        Updated regularly to reflect ongoing community impact.
+                      </Text>
+                    </Stack>
                     <ImpactStats
                       yearsOfInvolvement={business.yearsOfInvolvement}
                       totalContributions={totalContributions}
@@ -399,6 +431,44 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
                     Community Offers
                   </Heading>
                   <OfferCards offers={offers} />
+                </Stack>
+              )}
+
+              {hasImpactRecord && (
+                <Stack
+                  w="100%"
+                  bgColor="white"
+                  p={{ base: '5', md: '7', lg: '10' }}
+                  align="center"
+                  border="solid 0.5px #DCDFE3"
+                  gap={{ base: '8', lg: '14' }}
+                  borderRadius="20px"
+                  boxShadow="0px 1px 2px 0px #4646490F, 0px 1px 3px 0px #4646490A"
+                >
+                  <Stack gap="4">
+                    <Heading
+                      className="font-display"
+                      fontWeight="700"
+                      fontSize={{ base: '24px', md: '32px', lg: '40px' }}
+                      color="text.businessH"
+                      textAlign="center"
+                      lineHeight="120%"
+                    >
+                      Impact Record
+                    </Heading>
+
+                    {/* Subtext */}
+                    <Text
+                      className="font-body"
+                      fontSize="body"
+                      color="text.secondary"
+                      textAlign="center"
+                    >
+                      A continuously updated record of this business&apos;s
+                      community impact.
+                    </Text>
+                  </Stack>
+                  <ImpactRecordPublic records={impactRecords} />
                 </Stack>
               )}
             </Stack>

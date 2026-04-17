@@ -34,7 +34,7 @@ const influenceBox = [
   {
     title: 'Search & AI discovery',
     description:
-      "Structured profiles are indexed by Google and surfaced by AI tools like ChatGPT and Perplexity when someone asks \"who's the best [service] near me.",
+      'Structured profiles are indexed by Google and surfaced by AI tools like ChatGPT and Perplexity when someone asks "who\'s the best [service] near me.',
   },
   {
     title: 'Trust at the decision moment',
@@ -50,115 +50,128 @@ const influenceBox = [
 
 const ReturnOnReputationSection = () => {
   return (
-    <Stack bgColor="#F7F8FA" borderY="1px solid #E9EAED">
-      <Container
-        py={{ base: '60px', lg: '100px' }}
-        alignItems="center"
-        display="flex"
-        flexDir="column"
-        gap={{ base: '12', lg: '20' }}
-      >
-        <Stack gap="12">
-          <Stack textAlign="center" align="center" gap="6">
-            <Text color="brand.primary" fontSize="heading" fontWeight="500">
-              THE RETURN ON REPUTATION
-            </Text>
-            <Stack w="100%" maxW="872px">
-              <LandingH>
-                A reputation profile that works while you work.
-              </LandingH>
-            </Stack>
-            <Text color="text.primary" maxW="1032px">
-              Unlike advertising spend that stops the moment you pause it, a
-              structured reputation profile compounds over time — building
-              indexed, discoverable trust that search engines and AI tools
-              surface to customers when it matters most.
-            </Text>
-          </Stack>
-
-          <Grid
-            templateColumns={{
-              base: '1fr',
-              md: 'repeat(2, 1fr)',
-              lg: 'repeat(3, 1fr)',
-            }}
-            gap="4"
-          >
-            {pricingBox.map((item, i) => (
-              <PricingValueBox
-                key={i}
-                price={item.price}
-                title={item.title}
-                description={item.description}
-              />
-            ))}
-          </Grid>
-        </Stack>
-
-        <Stack gap="12" textAlign="center" align="center">
-          <Heading
-            className="font-display"
-            fontWeight="700"
-            fontSize={{ base: '26px', md: '36px', lg: '46px' }}
-            lineHeight="120%"
-            color="brand.primary"
-          >
-            How a profile actually influences customer decisions
-          </Heading>
-
-          <Grid
-            templateColumns={{ base: '1fr', lg: 'repeat(3, 1fr)' }}
-            gap="10"
-          >
-            {influenceBox.map((item, i) => (
-              <Stack gap="4" key={i} align="start" textAlign="start">
-                <Heading
-                  className="font-display"
-                  fontSize={{ base: '20px', md: '24px', lg: '28px' }}
-                  color="brand.primary"
-                  fontWeight="500"
-                >
-                  {item.title}
-                </Heading>
-                <Text
-                  color="text.primary"
-                  className="font-body"
-                  lineHeight="180%"
-                  fontSize="body"
-                >
-                  {item.description}
-                </Text>
+    <>
+      <Stack bgColor="#F7F8FA" borderY="1px solid #E9EAED">
+        <Container
+          py={{ base: '60px', lg: '100px' }}
+          alignItems="center"
+          display="flex"
+          flexDir="column"
+          gap={{ base: '12', lg: '20' }}
+        >
+          <Stack gap="12">
+            <Stack textAlign="center" align="center" gap="6">
+              <Text color="brand.primary" fontSize="heading" fontWeight="500">
+                THE RETURN ON REPUTATION
+              </Text>
+              <Stack w="100%" maxW="872px">
+                <LandingH>
+                  A reputation profile that works while you work.
+                </LandingH>
               </Stack>
-            ))}
-          </Grid>
+              <Text color="text.primary" maxW="1032px">
+                Unlike advertising spend that stops the moment you pause it, a
+                structured reputation profile compounds over time — building
+                indexed, discoverable trust that search engines and AI tools
+                surface to customers when it matters most.
+              </Text>
+            </Stack>
 
-          <Stack
-            p={{ base: '5', lg: '8' }}
-            borderRadius="0 16px 16px 0"
-            border="1px solid"
-            borderLeft="4px solid"
-            borderColor="#BDBDFA"
-            bg="#FFFFFF"
-            maxW="1032px"
-          >
-            <Text
-              className="font-body"
-              fontSize={{ base: '16px', lg: '20px' }}
-              lineHeight="150%"
-              textAlign="start"
+            <Grid
+              templateColumns={{
+                base: '1fr',
+                md: 'repeat(2, 1fr)',
+                lg: 'repeat(3, 1fr)',
+              }}
+              gap="4"
             >
-              <b>
-                Reputation is the one asset your competitors can&apos;t easily
-                copy.
-              </b>{' '}
-              A profile built today keeps generating trust signals — in search
-              results, AI answers, and customer conversations — long after
-              it&apos;s set up.
-            </Text>
+              {pricingBox.map((item, i) => (
+                <PricingValueBox
+                  key={i}
+                  price={item.price}
+                  title={item.title}
+                  description={item.description}
+                />
+              ))}
+            </Grid>
           </Stack>
-        </Stack>
-      </Container>
-    </Stack>
+        </Container>
+      </Stack>
+
+      <Stack bgColor="#fff" borderY="1px solid #E9EAED">
+        <Container
+          py={{ base: '60px', lg: '100px' }}
+          alignItems="center"
+          display="flex"
+          flexDir="column"
+          gap={{ base: '12', lg: '20' }}
+        >
+          <Stack gap="16" textAlign="center" align="center">
+            <Heading
+              className="font-display"
+              fontWeight="700"
+              fontSize={{ base: '26px', md: '36px', lg: '46px' }}
+              lineHeight="120%"
+              color="brand.primary"
+            >
+              How a profile actually influences customer decisions
+            </Heading>
+
+            <Grid
+              templateColumns={{ base: '1fr', lg: 'repeat(3, 1fr)' }}
+              gap="10"
+              maxW="1280px"
+            >
+              {influenceBox.map((item, i) => (
+                <Stack gap="4" key={i} align="start" textAlign="start">
+                  <Heading
+                    className="font-display"
+                    fontSize={{ base: '20px', md: '24px', lg: '28px' }}
+                    color="brand.primary"
+                    fontWeight="500"
+                  >
+                    {item.title}
+                  </Heading>
+                  <Text
+                    color="text.primary"
+                    className="font-body"
+                    lineHeight="180%"
+                    fontSize="body"
+                  >
+                    {item.description}
+                  </Text>
+                </Stack>
+              ))}
+            </Grid>
+
+            <Stack
+              p={{ base: '5', lg: '8' }}
+              borderRadius="0 16px 16px 0"
+              border="1px solid"
+              borderLeft="4px solid"
+              borderColor="#BDBDFA"
+              bg="#FFFFFF"
+              maxW="1032px"
+            >
+              <Text
+                className="font-body"
+                fontSize={{ base: '16px', lg: '20px' }}
+                lineHeight="150%"
+                textAlign="start"
+              >
+                <b>
+                  Reputation is the one asset your competitors can&apos;t easily
+                  copy.
+                </b>{' '}
+                A profile built today keeps generating trust signals — in search
+                results, AI answers, and customer conversations — long after
+                it&apos;s set up.
+              </Text>
+            </Stack>
+          </Stack>
+        </Container>
+      </Stack>
+    </>
   );
 };
 

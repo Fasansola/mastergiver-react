@@ -8,7 +8,7 @@ const dynamic = import('next/dynamic');
 async function getCausesAndSkills() {
   const [causes, skills] = await Promise.all([
     prisma.cause.findMany({
-      where: { isActive: true },
+      where: { isActive: true, panel: 'INDIVIDUAL' },
       orderBy: { name: 'asc' },
       select: {
         id: true,

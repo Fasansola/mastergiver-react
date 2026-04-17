@@ -69,7 +69,7 @@ const PartnerForm = () => {
           fontWeight="700"
           color="brand.primary"
         >
-          You're in!
+          You&apos;re in!
         </Text>
         <Text className="font-body" color="text.primary" lineHeight="170%">
           Check your inbox — your partner toolkit is on its way.
@@ -141,7 +141,7 @@ const PartnerForm = () => {
         {/* Website or Network */}
         <Stack gap="1">
           <label style={labelStyle} htmlFor="website">
-            Website or Network
+            Website URL
             <span
               style={{
                 fontWeight: 400,
@@ -152,7 +152,7 @@ const PartnerForm = () => {
                 marginLeft: '6px',
               }}
             >
-              (optional but recommended)
+              (optional)
             </span>
           </label>
           <input

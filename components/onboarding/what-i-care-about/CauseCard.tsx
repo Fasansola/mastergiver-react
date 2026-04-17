@@ -22,7 +22,7 @@ export function CauseCard({ cause }: CausesCardProps) {
     >
       <HStack gap="2">
         {/* Color chip */}
-        <Image alt={cause.name} src={cause.icon} width={36} height={36} />
+        {cause.icon && <Image alt={cause.name} src={cause.icon} width={36} height={36} />}
         <Span textStyle="sm" fontWeight="medium">
           {cause.name}
         </Span>

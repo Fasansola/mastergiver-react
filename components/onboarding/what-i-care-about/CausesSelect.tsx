@@ -13,7 +13,7 @@ interface CausesComboboxItem {
   label: string;
   value: string;
   color: string;
-  icon: string;
+  icon: string | null;
   slug: string;
 }
 
@@ -90,12 +90,14 @@ const CausesSelect = ({ causes }: CausesSelectProps) => {
                   cursor="pointer"
                   gap="3"
                 >
-                  <Image
-                    alt={item.label}
-                    src={item.icon}
-                    width={36}
-                    height={36}
-                  />
+                  {item.icon && (
+                    <Image
+                      alt={item.label}
+                      src={item.icon}
+                      width={36}
+                      height={36}
+                    />
+                  )}
                   <Span flex={1}>{item.label}</Span>
                 </HStack>
                 <Combobox.ItemIndicator />

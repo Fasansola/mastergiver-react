@@ -38,7 +38,9 @@ export default function Home() {
       <BusinessHeader bgColor="linear-gradient(107.69deg, #F3F6FF 0%, #F1F5FF 100%)" />
       <HomeHeroSection />
       <GoodNotVisibleSection />
-      <ReputationRulesSection />
+      <Stack display="none">
+        <ReputationRulesSection />
+      </Stack>
       <CommunityImpactSection />
       <WhatYouGetSection />
       <WhoItsForSection />

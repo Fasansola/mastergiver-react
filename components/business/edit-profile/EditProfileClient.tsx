@@ -21,6 +21,7 @@ import AreasOfImpactSection from './AreasOfImpactSection';
 import CommunityEventsSection from './CommunityEventsSection';
 import EndorsementsSection from './EndorsementsSection';
 import OffersSection from './OffersSection';
+import ImpactRecordSection from './ImpactRecordSection';
 import { publishBusinessAction } from '@/lib/actions/business-profile.actions';
 import { primaryButtonStyle } from '@/components/business/shared/styles';
 import type {
@@ -85,6 +86,20 @@ interface BusinessData {
     link: string | null;
     offerCode: string | null;
     expiresAt: string | null;
+  }[];
+  impactRecords: {
+    id: string;
+    title: string;
+    causeId: string | null;
+    causeName: string | null;
+    organization: string | null;
+    impactType: 'ONE_TIME' | 'ONGOING';
+    startYear: number;
+    endYear: number | null;
+    isPresent: boolean;
+    contributionType: string | null;
+    amount: string | null;
+    details: string | null;
   }[];
 }
 
@@ -154,6 +169,7 @@ const EditProfileClient = ({
     { title: 'In the Community' },
     { title: 'Community Endorsements' },
     { title: 'Community Offers' },
+    { title: 'Impact Record' },
   ];
 
   return (
@@ -178,7 +194,7 @@ const EditProfileClient = ({
 
         <BusinessProgressBar
           percent={Math.round(
-            (sectionCompletion.filter(Boolean).length / 7) * 100
+            (sectionCompletion.filter(Boolean).length / 8) * 100
           )}
         />
 
@@ -275,6 +291,20 @@ const EditProfileClient = ({
             onClose={close}
           >
             <OffersSection onSave={close} initialOffers={business.offers} />
+          </SectionAccordion>
+
+          <SectionAccordion
+            number={8}
+            title={sections[7].title}
+            isComplete={sectionCompletion[7]}
+            isOpen={openSection === 8}
+            onOpen={() => open(8)}
+            onClose={close}
+          >
+            <ImpactRecordSection
+              allCauses={allCauses}
+              initialRecords={business.impactRecords}
+            />
           </SectionAccordion>
         </Stack>
 

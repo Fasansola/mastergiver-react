@@ -25,14 +25,18 @@ const EditProfilePage = async () => {
       communityEvents: true,
       endorsements: true,
       offers: true,
+      impactRecords: {
+        include: { cause: true },
+        orderBy: { createdAt: 'desc' },
+      },
     },
   });
 
   if (!business) redirect('/business/signup');
 
-  // All active causes for the Areas of Impact chip grid
+  // All active business-panel causes for the Areas of Impact chip grid
   const allCauses = await prisma.cause.findMany({
-    where: { isActive: true },
+    where: { isActive: true, panel: 'BUSINESS' },
     orderBy: { name: 'asc' },
     select: { id: true, name: true, color: true },
   });
@@ -83,6 +87,20 @@ const EditProfilePage = async () => {
       // Convert Date to a date-input-compatible string (YYYY-MM-DD)
       expiresAt: o.expiresAt ? o.expiresAt.toISOString().split('T')[0] : null,
     })),
+    impactRecords: business.impactRecords.map((r) => ({
+      id: r.id,
+      title: r.title,
+      causeId: r.causeId,
+      causeName: r.cause?.name ?? null,
+      organization: r.organization,
+      impactType: r.impactType as 'ONE_TIME' | 'ONGOING',
+      startYear: r.startYear,
+      endYear: r.endYear,
+      isPresent: r.isPresent,
+      contributionType: r.contributionType as string | null,
+      amount: r.amount?.toString() ?? null,
+      details: r.details,
+    })),
   };
 
   // Compute which sections are already complete for the accordion indicators
@@ -97,6 +115,7 @@ const EditProfilePage = async () => {
     communityEvents: business.communityEvents,
     endorsements: business.endorsements,
     offers: business.offers,
+    impactRecords: business.impactRecords,
   });
 
   return (

@@ -8,10 +8,9 @@ const LightCheck = ({ item }: CheckProps) => {
     <HStack align="start" gap="4">
       <Image src={LightCheckIcon} alt="Light check" />
       <Text
-        fontWeight="500"
         color="white"
         className="font-body"
-        fontSize="18px"
+        fontSize={{ base: '18px', lg: '21px' }}
         lineHeight="160%"
       >
         {item}

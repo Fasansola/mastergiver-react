@@ -20,8 +20,9 @@ const WhoItsForSection = () => {
       <Stack
         h={{ base: '420px', lg: '100%' }}
         w={{ base: '100%', lg: '50%' }}
+        maxW="780px"
         position={{ base: 'static', lg: 'absolute' }}
-        right="0"
+        right="calc(50% - 1440px / 2)"
         order={{ base: 2, lg: 0 }}
         flexShrink="0"
         style={{
@@ -57,7 +58,7 @@ const WhoItsForSection = () => {
                   It&apos;s a strong fit if your business:
                 </Text>
 
-                <Stack fontWeight="500" gap="4">
+                <Stack gap="4">
                   {[
                     'Actively supports causes, nonprofits, or community initiatives',
                     'Cares about being recognized for how it operates, not just what it sells',

@@ -67,7 +67,7 @@ font-family: SF Pro
 font-weight: 400
 font-size: 16px
 line-height: 150%
-color: #212325
+color: #000000
 text-align: center
 ```
 
@@ -170,7 +170,7 @@ height: 56px
 border-radius: 14px
 padding: 12px 16px
 gap: 16px
-text: SF Pro, 510 weight, 18px, line-height 20px, letter-spacing -0.15px, color #212325
+text: SF Pro, 510 weight, 18px, line-height 20px, letter-spacing -0.15px, color #000000
 ```
 
 ---

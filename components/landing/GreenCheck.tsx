@@ -7,7 +7,7 @@ const GreenCheck = ({ item }: CheckProps) => {
   return (
     <HStack>
       <Image src={GreenCheckIcon} alt="Green check" />
-      <Text fontWeight="500" color="text.primary" className="font-body">
+      <Text color="text.primary" className="font-body">
         {item}
       </Text>
     </HStack>

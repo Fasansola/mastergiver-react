@@ -46,7 +46,7 @@ interface CommunityEventsSectionProps {
 }
 
 const blank: CommunityEventInput = {
-  photo: null,
+  photo: '',
   description: '',
   externalUrl: '',
 };
@@ -152,7 +152,7 @@ const CommunityEventsSection = ({
           onEdit={() => {
             setEditingId(e.id);
             reset({
-              photo: e.photo,
+              photo: e.photo ?? '',
               description: e.description,
               externalUrl: (e.externalUrl ?? '').replace(/^https?:\/\//, ''),
             });
@@ -173,12 +173,15 @@ const CommunityEventsSection = ({
 
       <Stack gap="4">
         <Stack gap="1">
-          <label style={labelStyle}>Photo (optional)</label>
+          <label style={labelStyle}>Photo *</label>
           <ImageUploadInput
             value={photoValue ?? null}
-            onChange={(url) => setValue('photo', url)}
+            onChange={(url: string | null) => setValue('photo', url ?? '', { shouldValidate: true })}
             label="photo"
           />
+          {errors.photo && (
+            <Text style={errorTextStyle}>{errors.photo.message}</Text>
+          )}
         </Stack>
 
         <Stack gap="1">

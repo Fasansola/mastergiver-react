@@ -55,12 +55,20 @@ const CommunityFitsSection = () => {
                 Where Community Impact Fits in Modern Marketing
               </LandingH>
               <Stack gap="6">
-                <Text className="font-body" lineHeight="170%" color="text.primary">
+                <Text
+                  className="font-body"
+                  lineHeight="170%"
+                  color="text.primary"
+                >
                   There are five layers that make up a complete local business
-                  reputation. Most businesses have invested in the bottom layers.
-                  Very few have addressed the top.
+                  reputation. Most businesses have invested in the bottom
+                  layers. Very few have addressed the top.
                 </Text>
-                <Text className="font-body" lineHeight="170%" color="text.primary">
+                <Text
+                  className="font-body"
+                  lineHeight="170%"
+                  color="text.primary"
+                >
                   Most businesses have Discovery and Proof in place. Many have
                   some Authority signals. Almost none have Community Impact
                   organized into anything structured or visible.
@@ -76,11 +84,11 @@ const CommunityFitsSection = () => {
                     direction={{ base: 'column', md: 'row' }}
                     key={i}
                   >
-                    <NextImage alt={title} src={image} width={52} height={52} />
-                    <Stack gap="4">
+                    <NextImage alt={title} src={image} width={48} height={48} />
+                    <Stack gap="1">
                       <Heading
-                        className="font-display"
-                        fontSize="28px"
+                        className="font-body"
+                        fontSize="subheading"
                         color="brand.primary"
                       >
                         {title}

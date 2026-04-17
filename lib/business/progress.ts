@@ -26,16 +26,17 @@ export type BusinessForProgress = {
   totalContributions: unknown; // Prisma Decimal — we only need null-check
   activePartners: number | null;
 
-  // Sections 3–7 — relation-based (complete = at least one record saved)
+  // Sections 3–8 — relation-based (complete = at least one record saved)
   causes: unknown[];         // Section 4 — Areas of Impact
   partners: unknown[];       // Section 3 — Community Partners
   communityEvents: unknown[]; // Section 5 — In the Community
   endorsements: unknown[];   // Section 6 — Endorsements
   offers: unknown[];         // Section 7 — Community Offers
+  impactRecords: unknown[];  // Section 8 — Impact Record
 };
 
 /** How many sections exist in total. */
-const TOTAL_SECTIONS = 7;
+const TOTAL_SECTIONS = 8;
 
 /**
  * Returns true when the "About Us" section has enough content to be published.
@@ -76,6 +77,7 @@ export function calculateProgress(business: BusinessForProgress): number {
     business.communityEvents.length > 0,          // Section 5
     business.endorsements.length > 0,             // Section 6
     business.offers.length > 0,                   // Section 7
+    business.impactRecords.length > 0,            // Section 8
   ].filter(Boolean).length;
 
   return Math.round((completedSections / TOTAL_SECTIONS) * 100);
@@ -94,5 +96,6 @@ export function getSectionCompletionStatus(business: BusinessForProgress): boole
     business.communityEvents.length > 0,
     business.endorsements.length > 0,
     business.offers.length > 0,
+    business.impactRecords.length > 0,
   ];
 }

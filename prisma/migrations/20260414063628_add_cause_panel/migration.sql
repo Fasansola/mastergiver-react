@@ -1,0 +1,6 @@
+-- CreateEnum
+CREATE TYPE "CausePanel" AS ENUM ('INDIVIDUAL', 'BUSINESS');
+
+-- AlterTable
+ALTER TABLE "causes" ADD COLUMN     "panel" "CausePanel" NOT NULL DEFAULT 'INDIVIDUAL',
+ALTER COLUMN "icon" DROP NOT NULL;

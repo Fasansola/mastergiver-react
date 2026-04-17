@@ -35,7 +35,7 @@ const ProfileAboutUs = ({ aboutUs, website }: ProfileAboutUsProps) => {
         style={{
           fontSize: '16px',
           lineHeight: '160%',
-          color: '#212325',
+          color: '#000000',
           whiteSpace: 'pre-wrap',
           marginBottom: website ? '16px' : 0,
         }}
@@ -47,7 +47,12 @@ const ProfileAboutUs = ({ aboutUs, website }: ProfileAboutUsProps) => {
           href={website}
           target="_blank"
           rel="noopener noreferrer"
-          style={{ fontSize: '15px', color: '#2F2B77', fontWeight: 600, textDecoration: 'none' }}
+          style={{
+            fontSize: '15px',
+            color: '#2F2B77',
+            fontWeight: 600,
+            textDecoration: 'none',
+          }}
         >
           {website.replace(/^https?:\/\//, '')} ↗
         </a>

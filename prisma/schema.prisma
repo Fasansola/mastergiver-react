@@ -118,27 +118,37 @@ enum ProfileStatus {
 // ============================================
 
 model Cause {
-  id    String @id @default(cuid())
-  name  String @unique
-  slug  String @unique
+  id    String  @id @default(cuid())
+  name  String
+  slug  String
   color String
-  icon  String
+  icon  String? // Optional — business panel causes have no icon
 
   source   CauseSource @default(PREDEFINED)
+  panel    CausePanel  @default(INDIVIDUAL) // Which panel this cause belongs to
   isActive Boolean     @default(true)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  profiles   ProfileCause[]
-  businesses BusinessCause[] // Phase 2: allows businesses to link to causes
+  profiles      ProfileCause[]
+  businesses    BusinessCause[] // Phase 2: allows businesses to link to causes
+  impactRecords BusinessImpactRecord[] // Phase 2: impact record entries
 
+  // Same name/slug is allowed in different panels
+  @@unique([name, panel])
+  @@unique([slug, panel])
   @@map("causes")
 }
 
 enum CauseSource {
   PREDEFINED
   USER_CUSTOM
+}
+
+enum CausePanel {
+  INDIVIDUAL // Shown in the individual user onboarding/settings
+  BUSINESS   // Shown in the business panel areas of impact
 }
 
 model ProfileCause {
@@ -323,6 +333,7 @@ model Business {
   communityEvents BusinessCommunityEvent[]
   endorsements    BusinessEndorsement[]
   offers          BusinessOffer[]
+  impactRecords   BusinessImpactRecord[] // Section 8 — Impact Record
 
   @@map("businesses")
 }
@@ -407,4 +418,45 @@ model BusinessOffer {
   business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
 
   @@map("business_offers")
+}
+
+// ---------------------------------------------------------------------------
+// Section 8 — Impact Record (Phase 2)
+// ---------------------------------------------------------------------------
+
+enum ImpactType {
+  ONE_TIME
+  ONGOING
+}
+
+enum ContributionType {
+  DONATION
+  SPONSORSHIP
+  VOLUNTEER_WORK
+  EVENT_PROGRAM
+  IN_KIND_SUPPORT
+}
+
+// Stores individual community impact log entries for a business
+model BusinessImpactRecord {
+  id               String            @id @default(cuid())
+  businessId       String
+  title            String
+  causeId          String?
+  organization     String?
+  impactType       ImpactType
+  startYear        Int
+  endYear          Int?
+  isPresent        Boolean           @default(false)
+  contributionType ContributionType?
+  amount           Decimal?
+  details          String?           @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  cause    Cause?   @relation(fields: [causeId], references: [id])
+
+  @@map("business_impact_records")
 }
