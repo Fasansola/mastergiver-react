@@ -363,19 +363,14 @@ const ImpactRecordSection = ({
                         </Text>
                       </HStack>
                       <HStack gap="4" mt="1">
-                        <Box
-                          as="button"
-                          type="button"
-                          v
+                        <button
                           onClick={() => startEdit(record)}
                           style={{ ...editProfileBTNStyle, fontSize: '13px' }}
                         >
                           Edit
-                        </Box>
+                        </button>
                         <Separator orientation="vertical" height="4" />
-                        <Box
-                          as="button"
-                          type="button"
+                        <button
                           onClick={() => {
                             if (window.confirm('Delete this entry?'))
                               deleteMutation.mutate(record.id);
@@ -387,7 +382,7 @@ const ImpactRecordSection = ({
                           }}
                         >
                           {deleteMutation.isPending ? '…' : 'Delete'}
-                        </Box>
+                        </button>
                       </HStack>
                     </Stack>
                   </Box>
@@ -401,14 +396,13 @@ const ImpactRecordSection = ({
       {/* Add / Edit form */}
       {!showForm ? (
         <Stack gap="2">
-          <Box
-            as="button"
+          <button
             type="button"
             onClick={() => setShowForm(true)}
             style={editProfileBTNStyle}
           >
             + Add Impact Entry
-          </Box>
+          </button>
           <Text fontSize="12px" color="text.secondary">
             Start with recent impact and also go back and add past years to
             strengthen your record.
@@ -466,7 +460,6 @@ const ImpactRecordSection = ({
                         <Box
                           as="button"
                           key={cause.id}
-                          type="button"
                           onClick={() => field.onChange(cause.id)}
                           px="3"
                           py="1.5"
@@ -707,22 +700,20 @@ const ImpactRecordSection = ({
             )}
 
             <HStack gap="5" pt="1">
-              <Box
-                as="button"
+              <button
                 type="submit"
                 disabled={isPending}
                 style={editProfileBTNStyle}
               >
                 {isPending ? 'Saving…' : 'Save Entry'}
-              </Box>
-              <Box
-                as="button"
+              </button>
+              <button
                 type="button"
                 onClick={cancelForm}
                 style={{ ...editProfileBTNStyle, color: '#9CA3AF' }}
               >
                 Cancel
-              </Box>
+              </button>
             </HStack>
           </Stack>
         </Box>

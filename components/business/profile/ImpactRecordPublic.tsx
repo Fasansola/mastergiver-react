@@ -233,7 +233,6 @@ const ImpactRecordPublic = ({ records }: ImpactRecordPublicProps) => {
           <HStack justify="center">
             <Box
               as="button"
-              type="button"
               onClick={() => setModalOpen(true)}
               px="7"
               py="3"
@@ -292,7 +291,6 @@ const ImpactRecordPublic = ({ records }: ImpactRecordPublicProps) => {
                 </Heading>
                 <Box
                   as="button"
-                  type="button"
                   onClick={() => setModalOpen(false)}
                   bg="transparent"
                   border="none"
