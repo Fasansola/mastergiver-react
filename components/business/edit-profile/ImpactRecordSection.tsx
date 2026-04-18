@@ -278,7 +278,7 @@ const ImpactRecordSection = ({
       >
         <Text fontSize="small" color="brand.primary" fontWeight="500">
           A longer history of community impact builds a stronger, more credible
-          profile.
+          profile. Add community impact from past years here at any time.
         </Text>
       </Box>
 
@@ -294,7 +294,7 @@ const ImpactRecordSection = ({
           textAlign="center"
         >
           <Text fontSize="small" color="text.secondary">
-            No entries yet. Tip: You can add impact from past years at any time.
+            No entries yet.
           </Text>
         </Box>
       ) : (

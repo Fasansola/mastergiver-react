@@ -25,7 +25,7 @@ import {
   inputStyle,
   labelStyle,
   errorTextStyle,
-  editProfileBTNStyle,
+  primaryButtonStyle,
 } from '@/components/business/shared/styles';
 import {
   HStack,
@@ -507,7 +507,7 @@ const AboutUsSection = ({ onSave, defaultValues }: AboutUsSectionProps) => {
             <button
               type="submit"
               disabled={mutation.isPending}
-              style={editProfileBTNStyle}
+              style={primaryButtonStyle(mutation.isPending)}
             >
               {mutation.isPending ? 'Saving…' : 'Save Section'}
             </button>

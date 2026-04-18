@@ -27,6 +27,7 @@ import {
   labelStyle,
   errorTextStyle,
   editProfileBTNStyle,
+  primaryButtonStyle,
 } from '@/components/business/shared/styles';
 import { HStack, Stack, Text } from '@chakra-ui/react';
 import Add from '@/public/business-assets/GreyAdd.svg';
@@ -232,7 +233,7 @@ const EndorsementsSection = ({
             type="button"
             onClick={handleSaveSection}
             disabled={saveMutation.isPending}
-            style={editProfileBTNStyle}
+            style={primaryButtonStyle(saveMutation.isPending)}
           >
             {saveMutation.isPending ? 'Saving…' : 'Save Section'}
           </button>

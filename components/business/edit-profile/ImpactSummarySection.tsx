@@ -21,7 +21,7 @@ import {
   inputStyle,
   labelStyle,
   errorTextStyle,
-  editProfileBTNStyle,
+  primaryButtonStyle,
 } from '@/components/business/shared/styles';
 import { HStack, Stack, Text, Input, InputGroup } from '@chakra-ui/react';
 
@@ -131,7 +131,7 @@ const ImpactSummarySection = ({
           <button
             type="submit"
             disabled={mutation.isPending}
-            style={editProfileBTNStyle}
+            style={primaryButtonStyle(mutation.isPending)}
           >
             {mutation.isPending ? 'Saving…' : 'Save Section'}
           </button>

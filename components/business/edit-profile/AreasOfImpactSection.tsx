@@ -14,7 +14,7 @@ import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { saveAreasOfImpactAction } from '@/lib/actions/business-profile.actions';
-import { editProfileBTNStyle } from '@/components/business/shared/styles';
+import { primaryButtonStyle } from '@/components/business/shared/styles';
 import { HStack, Stack, Text } from '@chakra-ui/react';
 
 interface Cause {
@@ -113,7 +113,7 @@ const AreasOfImpactSection = ({
           type="button"
           onClick={() => mutation.mutate()}
           disabled={mutation.isPending}
-          style={editProfileBTNStyle}
+          style={primaryButtonStyle(mutation.isPending)}
         >
           {mutation.isPending ? 'Saving…' : 'Save Section'}
         </button>
