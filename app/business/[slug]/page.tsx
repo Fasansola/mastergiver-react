@@ -209,7 +209,10 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
             {/* Header — logo + name + about + tagline */}
             <ProfileHeader
               companyName={business.companyName ?? ''}
-              companyAddress={business.address ?? ''}
+              companyAddress={business.address}
+              city={business.city}
+              state={business.state}
+              zipCode={business.zipCode}
               aboutUs={business.aboutUs ?? ''}
               website={business.website ?? ''}
               tagline={business.tagline}

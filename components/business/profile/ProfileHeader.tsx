@@ -18,6 +18,9 @@ interface ProfileHeaderProps {
   tagline: string | null;
   logo: string | null;
   companyAddress?: string | null;
+  city?: string | null;
+  state?: string | null;
+  zipCode?: string | null;
   aboutUs?: string;
   website?: string;
 }
@@ -36,9 +39,13 @@ const ProfileHeader = ({
   tagline,
   logo,
   companyAddress,
+  city,
+  state,
+  zipCode,
   aboutUs,
   website,
 }: ProfileHeaderProps) => {
+  const locationLine = [city, state, zipCode].filter(Boolean).join(', ');
   return (
     <Stack
       w={{ base: 'full', lg: '440px' }}
@@ -96,6 +103,11 @@ const ProfileHeader = ({
           {companyAddress && (
             <Text className="font-body" color="text.primary" textAlign="center">
               {companyAddress}
+            </Text>
+          )}
+          {locationLine && (
+            <Text className="font-body" color="text.secondary" fontSize="small" textAlign="center">
+              {locationLine}
             </Text>
           )}
         </Stack>
