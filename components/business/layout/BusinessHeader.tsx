@@ -52,9 +52,7 @@ const BusinessHeader = async ({ isDashboard, bgColor }: BusinessHeaderProps) => 
       bg={bgColor ? bgColor : 'background.white'}
       borderColor="border.accentBorder"
       borderWidth="1px"
-      position="sticky"
-      top="0"
-      zIndex="banner"
+      style={{ position: 'sticky', top: 0, zIndex: 1000 }}
     >
       <Container className="flex align-middle justify-between">
         {/* Logo — links to home */}
