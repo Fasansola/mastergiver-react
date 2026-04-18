@@ -32,9 +32,10 @@ import CommunityGallery from '@/components/business/profile/CommunityGallery';
 import EndorsementList from '@/components/business/profile/EndorsementList';
 import OfferCards from '@/components/business/profile/OfferCards';
 import ImpactRecordPublic from '@/components/business/profile/ImpactRecordPublic';
-import { Box, HStack, Stack, Container, Heading, Text } from '@chakra-ui/react';
+import { Box, Flex, HStack, Stack, Container, Heading, Text } from '@chakra-ui/react';
 import BusinessHeader from '@/components/business/layout/BusinessHeader';
 import Image from 'next/image';
+import LogoWhite from '@/public/brand-assets/logo-white.svg';
 
 import Certified from '@/public/business-assets/Certified.svg';
 
@@ -189,15 +190,29 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
       <BusinessHeader />
       {/* White profile card centred on the page */}
       <Stack gap="0">
-        <Box
-          bgImage={
-            business.coverPhoto ? `url(${business.coverPhoto})` : undefined
-          }
-          bgSize="cover"
-          bgPos={{ base: 'center center', md: '50% -80px' }}
-          bgRepeat="no-repeat"
-          minH={{ base: '340px', md: '400px' }}
-        />
+        {business.coverPhoto ? (
+          <Box
+            bgImage={`url(${business.coverPhoto})`}
+            bgSize="cover"
+            bgPos={{ base: 'center center', md: '50% -80px' }}
+            bgRepeat="no-repeat"
+            minH={{ base: '340px', md: '400px' }}
+          />
+        ) : (
+          /* Branded fallback banner — shown when no cover photo is uploaded */
+          <Flex
+            minH={{ base: '340px', md: '400px' }}
+            align="center"
+            justify="center"
+            style={{
+              background: 'linear-gradient(135deg, #2F2B77 0%, #1a1750 50%, #3d3a8c 100%)',
+            }}
+          >
+            <Box w={{ base: '180px', md: '240px' }} opacity={0.35}>
+              <Image src={LogoWhite} alt="MasterGiver" style={{ width: '100%', height: 'auto' }} />
+            </Box>
+          </Flex>
+        )}
         <Container>
           <Stack
             direction={{ base: 'column', lg: 'row' }}
@@ -308,6 +323,42 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
                       totalContributions={totalContributions}
                       activePartners={business.activePartners}
                     />
+                  </Stack>
+                )}
+
+                {hasImpactRecord && (
+                  <Stack
+                    w="100%"
+                    bgColor="white"
+                    p={{ base: '5', md: '7', lg: '10' }}
+                    align="center"
+                    border="solid 0.5px #DCDFE3"
+                    gap={{ base: '8', lg: '14' }}
+                    borderRadius="20px"
+                    boxShadow="0px 1px 2px 0px #4646490F, 0px 1px 3px 0px #4646490A"
+                  >
+                    <Stack gap="4">
+                      <Heading
+                        className="font-display"
+                        fontWeight="700"
+                        fontSize={{ base: '24px', md: '32px', lg: '40px' }}
+                        color="text.businessH"
+                        textAlign="center"
+                        lineHeight="120%"
+                      >
+                        Impact Record
+                      </Heading>
+                      <Text
+                        className="font-body"
+                        fontSize="body"
+                        color="text.secondary"
+                        textAlign="center"
+                      >
+                        A continuously updated record of this business&apos;s
+                        community impact.
+                      </Text>
+                    </Stack>
+                    <ImpactRecordPublic records={impactRecords} />
                   </Stack>
                 )}
               </Stack>
@@ -437,43 +488,6 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
                 </Stack>
               )}
 
-              {hasImpactRecord && (
-                <Stack
-                  w="100%"
-                  bgColor="white"
-                  p={{ base: '5', md: '7', lg: '10' }}
-                  align="center"
-                  border="solid 0.5px #DCDFE3"
-                  gap={{ base: '8', lg: '14' }}
-                  borderRadius="20px"
-                  boxShadow="0px 1px 2px 0px #4646490F, 0px 1px 3px 0px #4646490A"
-                >
-                  <Stack gap="4">
-                    <Heading
-                      className="font-display"
-                      fontWeight="700"
-                      fontSize={{ base: '24px', md: '32px', lg: '40px' }}
-                      color="text.businessH"
-                      textAlign="center"
-                      lineHeight="120%"
-                    >
-                      Impact Record
-                    </Heading>
-
-                    {/* Subtext */}
-                    <Text
-                      className="font-body"
-                      fontSize="body"
-                      color="text.secondary"
-                      textAlign="center"
-                    >
-                      A continuously updated record of this business&apos;s
-                      community impact.
-                    </Text>
-                  </Stack>
-                  <ImpactRecordPublic records={impactRecords} />
-                </Stack>
-              )}
             </Stack>
           </Stack>
         </Container>

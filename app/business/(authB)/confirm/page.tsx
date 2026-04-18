@@ -28,7 +28,7 @@ const BusinessConfirmPage = async ({ searchParams }: ConfirmPageProps) => {
   return (
     <Stack
       bgColor="#FFFFFF"
-      maxW="1260px"
+      maxW="1000px"
       w="100%"
       p={{ base: '8', md: '16' }}
       borderRadius="16px"

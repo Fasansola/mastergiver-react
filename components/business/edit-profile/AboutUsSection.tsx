@@ -72,6 +72,11 @@ const AboutUsSection = ({ onSave, defaultValues }: AboutUsSectionProps) => {
       router.refresh();
       onSave();
     },
+    onError: (err) => {
+      setServerError(
+        err instanceof Error ? err.message : 'Save failed. Please try again.'
+      );
+    },
   });
 
   const logo = watch('logo');
@@ -83,8 +88,34 @@ const AboutUsSection = ({ onSave, defaultValues }: AboutUsSectionProps) => {
   const [coverUploading, setCoverUploading] = useState(false);
   const [logoError, setLogoError] = useState<string | null>(null);
   const [coverError, setCoverError] = useState<string | null>(null);
+  const [coverRatioWarning, setCoverRatioWarning] = useState<string | null>(null);
   const logoInputRef = useRef<HTMLInputElement>(null);
   const coverInputRef = useRef<HTMLInputElement>(null);
+
+  /**
+   * Reads a File's intrinsic dimensions and warns if the aspect ratio deviates
+   * more than 25 % from the ideal 4 : 1 (16 : 4) cover photo ratio.
+   */
+  const checkCoverRatio = (file: File) => {
+    const url = URL.createObjectURL(file);
+    const img = new window.Image();
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      const ratio = img.naturalWidth / img.naturalHeight;
+      const IDEAL = 4; // 16 : 4
+      const TOLERANCE = 0.25; // ±25 %
+      if (Math.abs(ratio - IDEAL) / IDEAL > TOLERANCE) {
+        const w = img.naturalWidth;
+        const h = img.naturalHeight;
+        setCoverRatioWarning(
+          `Your image (${w} × ${h}px, ratio ${(ratio).toFixed(2)}:1) doesn't match the recommended 16:4 ratio. It may appear cropped or distorted. Ideal size is 1600 × 400px.`
+        );
+      } else {
+        setCoverRatioWarning(null);
+      }
+    };
+    img.src = url;
+  };
 
   const handleUpload = async (
     file: File,
@@ -298,7 +329,7 @@ const AboutUsSection = ({ onSave, defaultValues }: AboutUsSectionProps) => {
                   color={coverPhoto ? 'whiteAlpha.800' : 'text.primary'}
                   fontSize="13px"
                 >
-                  Optimal dimensions 1200 x 410px
+                  Optimal dimensions 1600 x 400px | Aspect ratio of 16 : 4
                 </Text>
               </Stack>
 
@@ -311,7 +342,8 @@ const AboutUsSection = ({ onSave, defaultValues }: AboutUsSectionProps) => {
                 style={{ display: 'none' }}
                 onChange={(e) => {
                   const file = e.target.files?.[0];
-                  if (file)
+                  if (file) {
+                    checkCoverRatio(file);
                     handleUpload(
                       file,
                       setCoverUploading,
@@ -319,6 +351,7 @@ const AboutUsSection = ({ onSave, defaultValues }: AboutUsSectionProps) => {
                       'coverPhoto',
                       coverInputRef
                     );
+                  }
                 }}
               />
 
@@ -346,7 +379,7 @@ const AboutUsSection = ({ onSave, defaultValues }: AboutUsSectionProps) => {
                 {coverPhoto && (
                   <button
                     type="button"
-                    onClick={() => setValue('coverPhoto', null)}
+                    onClick={() => { setValue('coverPhoto', null); setCoverRatioWarning(null); }}
                     style={{
                       color: 'white',
                       fontWeight: '600',
@@ -362,6 +395,24 @@ const AboutUsSection = ({ onSave, defaultValues }: AboutUsSectionProps) => {
               {coverError && (
                 <Text style={{ fontSize: '12px', color: '#FEB2B2' }}>
                   {coverError}
+                </Text>
+              )}
+
+              {coverRatioWarning && (
+                <Text
+                  style={{
+                    fontSize: '12px',
+                    color: '#92400E',
+                    backgroundColor: '#FFFBEB',
+                    border: '1px solid #FCD34D',
+                    borderRadius: '6px',
+                    padding: '8px 12px',
+                    maxWidth: '340px',
+                    textAlign: 'center',
+                    lineHeight: '1.5',
+                  }}
+                >
+                  ⚠ {coverRatioWarning}
                 </Text>
               )}
             </Stack>

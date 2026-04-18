@@ -166,12 +166,12 @@ const EditProfileClient = ({
   const sections = [
     { title: 'About Us' },
     { title: 'Impact Summary' },
+    { title: 'Impact Record' },
     { title: 'Our Community Partners & Programs' },
     { title: 'Areas of Impact' },
     { title: 'In the Community' },
     { title: 'Community Endorsements' },
     { title: 'Community Offers' },
-    { title: 'Impact Record' },
   ];
 
   return (
@@ -230,9 +230,23 @@ const EditProfileClient = ({
           <SectionAccordion
             number={3}
             title={sections[2].title}
-            isComplete={sectionCompletion[2]}
+            isComplete={sectionCompletion[7]}
             isOpen={openSection === 3}
             onOpen={() => open(3)}
+            onClose={close}
+          >
+            <ImpactRecordSection
+              allCauses={allCauses}
+              initialRecords={business.impactRecords}
+            />
+          </SectionAccordion>
+
+          <SectionAccordion
+            number={4}
+            title={sections[3].title}
+            isComplete={sectionCompletion[2]}
+            isOpen={openSection === 4}
+            onOpen={() => open(4)}
             onClose={close}
           >
             <PartnersSection
@@ -242,11 +256,11 @@ const EditProfileClient = ({
           </SectionAccordion>
 
           <SectionAccordion
-            number={4}
-            title={sections[3].title}
+            number={5}
+            title={sections[4].title}
             isComplete={sectionCompletion[3]}
-            isOpen={openSection === 4}
-            onOpen={() => open(4)}
+            isOpen={openSection === 5}
+            onOpen={() => open(5)}
             onClose={close}
           >
             <AreasOfImpactSection
@@ -257,11 +271,11 @@ const EditProfileClient = ({
           </SectionAccordion>
 
           <SectionAccordion
-            number={5}
-            title={sections[4].title}
+            number={6}
+            title={sections[5].title}
             isComplete={sectionCompletion[4]}
-            isOpen={openSection === 5}
-            onOpen={() => open(5)}
+            isOpen={openSection === 6}
+            onOpen={() => open(6)}
             onClose={close}
           >
             <CommunityEventsSection
@@ -271,11 +285,11 @@ const EditProfileClient = ({
           </SectionAccordion>
 
           <SectionAccordion
-            number={6}
-            title={sections[5].title}
+            number={7}
+            title={sections[6].title}
             isComplete={sectionCompletion[5]}
-            isOpen={openSection === 6}
-            onOpen={() => open(6)}
+            isOpen={openSection === 7}
+            onOpen={() => open(7)}
             onClose={close}
           >
             <EndorsementsSection
@@ -285,28 +299,14 @@ const EditProfileClient = ({
           </SectionAccordion>
 
           <SectionAccordion
-            number={7}
-            title={sections[6].title}
-            isComplete={sectionCompletion[6]}
-            isOpen={openSection === 7}
-            onOpen={() => open(7)}
-            onClose={close}
-          >
-            <OffersSection onSave={close} initialOffers={business.offers} />
-          </SectionAccordion>
-
-          <SectionAccordion
             number={8}
             title={sections[7].title}
-            isComplete={sectionCompletion[7]}
+            isComplete={sectionCompletion[6]}
             isOpen={openSection === 8}
             onOpen={() => open(8)}
             onClose={close}
           >
-            <ImpactRecordSection
-              allCauses={allCauses}
-              initialRecords={business.impactRecords}
-            />
+            <OffersSection onSave={close} initialOffers={business.offers} />
           </SectionAccordion>
         </Stack>
 
@@ -314,37 +314,16 @@ const EditProfileClient = ({
         <div
           style={{
             display: 'flex',
-            alignItems: 'flex-start',
-            gap: '16px',
+            flexDirection: 'row',
+            alignItems: 'center',
             flexWrap: 'wrap',
+            gap: '16px',
           }}
         >
-          {/* Preview Profile */}
-          <a
-            href={`/business/${business.slug}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              padding: '14px 28px',
-              borderRadius: '8px',
-              border: '2px solid #2F2B77',
-              color: '#2F2B77',
-              fontWeight: 700,
-              fontSize: '16px',
-              textDecoration: 'none',
-              background: '#FFFFFF',
-            }}
-          >
-            Preview Profile ↗
-          </a>
-
-          {/* Publish Profile */}
+          {/* Publish Profile — hidden once published */}
           {!business.published && !publishedSuccess && (
             <div
-              style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}
+              style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}
             >
               {(() => {
                 const canPublish = sectionCompletion[0] && sectionCompletion[1];
@@ -374,7 +353,7 @@ const EditProfileClient = ({
                         : 'Publish Profile'}
                     </button>
                     {nudge && (
-                      <span style={{ fontSize: '13px', color: '#C05621' }}>
+                      <span style={{ fontSize: '13px', color: '#C05621', textAlign: 'center' }}>
                         {nudge}
                       </span>
                     )}
@@ -384,17 +363,39 @@ const EditProfileClient = ({
             </div>
           )}
 
-          {/* Success state */}
-          {(business.published || publishedSuccess) && (
-            <span
-              style={{ color: '#38A169', fontWeight: 700, fontSize: '15px' }}
-            >
+          {/* First-publish confirmation — only the local success state, not on reload */}
+          {publishedSuccess && (
+            <span style={{ color: '#38A169', fontWeight: 700, fontSize: '15px' }}>
               ✓ Profile published
             </span>
           )}
 
+          {/* Preview Profile — only shown once the profile is published */}
+          {(business.published || publishedSuccess) && (
+            <a
+              href={`/business/${business.slug}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '14px 28px',
+                borderRadius: '8px',
+                border: '2px solid #2F2B77',
+                color: '#2F2B77',
+                fontWeight: 700,
+                fontSize: '16px',
+                textDecoration: 'none',
+                background: '#FFFFFF',
+              }}
+            >
+              Preview Profile ↗
+            </a>
+          )}
+
           {publishError && (
-            <span style={{ color: '#C53030', fontSize: '14px' }}>
+            <span style={{ color: '#C53030', fontSize: '14px', textAlign: 'center' }}>
               {publishError}
             </span>
           )}

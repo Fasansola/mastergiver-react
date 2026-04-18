@@ -17,7 +17,11 @@ const WhatYouGetBox = ({ image, title, description }: Props) => {
     >
       <Stack gap="10" align="center">
         <NextImage alt={title} src={image} width="100" height="100" />
-        <Heading className="font-display" fontSize={{ base: '20px', lg: '28px' }} color="brand.primary">
+        <Heading
+          className="font-display"
+          fontSize={{ base: '20px', lg: '28px' }}
+          color="brand.primary"
+        >
           {title}
         </Heading>
       </Stack>
@@ -25,7 +29,7 @@ const WhatYouGetBox = ({ image, title, description }: Props) => {
       <Text
         color="text.primary"
         className="font-body"
-        lineHeight="180%"
+        lineHeight="160%"
         fontSize="body"
         maxW="360px"
       >

@@ -121,16 +121,10 @@ const Footer = () => {
               </Heading>
               <Stack gap="4">
                 <FooterNavItem
-                  href="mailto:support@mastergiver.org"
+                  href="mailto:support@mastergiver.com"
                   image={MailIcon}
                 >
-                  support@mastergiver.org
-                </FooterNavItem>
-                <FooterNavItem
-                  href="https://maps.app.goo.gl/q56MWRnPEzZZW2nZ9"
-                  image={MapIcon}
-                >
-                  75 Fifth St, Suite 2200, Atlanta, GA 30308
+                  support@mastergiver.com
                 </FooterNavItem>
               </Stack>
             </Stack>

@@ -24,11 +24,14 @@ interface AreasOfImpactProps {
 
 const AreasOfImpact = ({ causes }: AreasOfImpactProps) => {
   return (
-    <Grid
+    <Flex
       gap="4"
       w="100%"
       columnSpan={{ base: '1', md: '3' }}
-      templateColumns={{ base: '1fr', lg: 'repeat(2, 1fr)' }}
+      flexWrap="wrap"
+      align="center"
+      justify="center"
+      // templateColumns={{ base: '1fr', lg: 'repeat(2, 1fr)' }}
     >
       {causes.map((cause) => (
         <Flex
@@ -55,7 +58,7 @@ const AreasOfImpact = ({ causes }: AreasOfImpactProps) => {
           </Text>
         </Flex>
       ))}
-    </Grid>
+    </Flex>
   );
 };
 

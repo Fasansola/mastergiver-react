@@ -15,7 +15,7 @@ const FooterNavItem = ({ image, href, children }: FooterNavItemProps) => {
       <HStack
         gap="2"
         align="center"
-        fontWeight="500"
+        // fontWeight="500"
         fontSize="small"
         color="text.primary"
         _hover={{ color: 'brand.primary' }}

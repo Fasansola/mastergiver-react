@@ -62,21 +62,26 @@ export async function saveAboutUsAction(data: AboutUsInput): Promise<ActionResul
   const { logo, coverPhoto, companyName, address, city, state, zipCode, aboutUs, tagline, website } =
     parsed.data;
 
-  await prisma.business.update({
-    where: { id: business.id },
-    data: {
-      ...(logo !== undefined && { logo }),
-      ...(coverPhoto !== undefined && { coverPhoto }),
-      companyName,
-      ...(address !== undefined && { address }),
-      ...(city !== undefined && { city }),
-      ...(state !== undefined && { state }),
-      ...(zipCode !== undefined && { zipCode }),
-      ...(aboutUs !== undefined && { aboutUs }),
-      ...(tagline !== undefined && { tagline }),
-      ...(website !== undefined && { website: website || null }),
-    },
-  });
+  try {
+    await prisma.business.update({
+      where: { id: business.id },
+      data: {
+        ...(logo !== undefined && { logo }),
+        ...(coverPhoto !== undefined && { coverPhoto }),
+        companyName,
+        ...(address !== undefined && { address }),
+        ...(city !== undefined && { city }),
+        ...(state !== undefined && { state }),
+        ...(zipCode !== undefined && { zipCode }),
+        ...(aboutUs !== undefined && { aboutUs }),
+        ...(tagline !== undefined && { tagline }),
+        ...(website !== undefined && { website: website || null }),
+      },
+    });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Database error';
+    return { success: false, error: message };
+  }
 
   return { success: true };
 }

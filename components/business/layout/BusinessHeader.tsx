@@ -28,7 +28,10 @@ interface BusinessHeaderProps {
   bgColor?: string;
 }
 
-const BusinessHeader = async ({ isDashboard, bgColor }: BusinessHeaderProps) => {
+const BusinessHeader = async ({
+  isDashboard,
+  bgColor,
+}: BusinessHeaderProps) => {
   // On public pages check whether the visitor has an active business session.
   // Skip the DB call entirely in dashboard mode — middleware already confirmed it.
   let hasBusinessSession = false;
@@ -53,45 +56,45 @@ const BusinessHeader = async ({ isDashboard, bgColor }: BusinessHeaderProps) => 
         align="center"
         justify="center"
         bg={bgColor ? bgColor : 'background.white'}
-        borderColor="border.accentBorder"
-        borderBottom="1px solid"
+        borderBottom="1px solid #DCDFE3"
+        borderColor="border.default"
         style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000 }}
       >
-      <Container className="flex align-middle justify-between">
-        {/* Logo — links to home */}
-        <Link href="/">
-          <HStack align="start">
-            <Image
-              src={siteLogo}
-              alt="MasterGiver Logo"
-              width={140}
-              height={60}
-            />
-          </HStack>
-        </Link>
+        <Container className="flex align-middle justify-between">
+          {/* Logo — links to home */}
+          <Link href="/">
+            <HStack align="start">
+              <Image
+                src={siteLogo}
+                alt="MasterGiver Logo"
+                width={140}
+                height={60}
+              />
+            </HStack>
+          </Link>
 
-        {isDashboard ? (
-          /* Mobile hamburger — only in dashboard context, hidden at lg+ */
-          <Box display={{ base: 'flex', lg: 'none' }} alignItems="center">
-            <BusinessMobileMenu>
-              <BusinessSidebar isDrawer />
-            </BusinessMobileMenu>
-          </Box>
-        ) : !hasBusinessSession ? (
-          <>
-            {/* Desktop auth buttons — hidden on mobile */}
-            <Box display={{ base: 'none', lg: 'flex' }} alignItems="center">
-              <BusinessHeaderButtons />
-            </Box>
-
-            {/* Mobile — Login + Sign Up */}
+          {isDashboard ? (
+            /* Mobile hamburger — only in dashboard context, hidden at lg+ */
             <Box display={{ base: 'flex', lg: 'none' }} alignItems="center">
-              <BusinessHeaderButtons />
+              <BusinessMobileMenu>
+                <BusinessSidebar isDrawer />
+              </BusinessMobileMenu>
             </Box>
-          </>
-        ) : null}
-      </Container>
-    </Flex>
+          ) : !hasBusinessSession ? (
+            <>
+              {/* Desktop auth buttons — hidden on mobile */}
+              <Box display={{ base: 'none', lg: 'flex' }} alignItems="center">
+                <BusinessHeaderButtons />
+              </Box>
+
+              {/* Mobile — Login + Sign Up */}
+              <Box display={{ base: 'flex', lg: 'none' }} alignItems="center">
+                <BusinessHeaderButtons />
+              </Box>
+            </>
+          ) : null}
+        </Container>
+      </Flex>
     </>
   );
 };

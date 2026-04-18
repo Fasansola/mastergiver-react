@@ -47,7 +47,7 @@ const CommunityImpactSection = () => {
           <Stack w="100%" maxW="872px">
             <LandingH>MasterGiver Makes Your Community Impact Visible</LandingH>
           </Stack>
-          <Text color="text.primary" maxW="880px">
+          <Text color="text.primary" maxW="880px" fontSize="body">
             MasterGiver exists to make sure the good your business does is
             recognized, understood, and rewarded. We translate your real-world
             actions — charitable giving, sponsorships, and community involvement

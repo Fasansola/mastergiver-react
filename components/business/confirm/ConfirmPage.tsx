@@ -211,11 +211,11 @@ const PaymentPrompt = ({
 
     {/* ── Right column: pricing + CTA ── */}
     <Stack
-      gap="6"
+      gap="8"
       w={{ base: '100%', md: '440px' }}
       flexShrink={0}
       pl={{ base: '0', md: '12' }}
-      justify="space-between"
+      justify="end"
     >
       {/* Price block */}
       <Stack gap="1">

@@ -15,6 +15,7 @@ import Image from 'next/image';
 import impact from '@/public/business-assets/impact.svg';
 import donated from '@/public/business-assets/donated.svg';
 import partnership from '@/public/business-assets/partnership.svg';
+import { LuHeart } from 'react-icons/lu';
 
 interface ImpactStatsProps {
   yearsOfInvolvement: number | null;
@@ -50,7 +51,11 @@ const StatItem = ({ image, value, label }: StatItemProps) => (
     border="solid 0.5px #E9EAED"
     boxShadow="0px 1px 3px 0px #0000000A"
   >
-    <Image src={image} alt={label} width="48" height="48" />
+    {image === 'heart' ? (
+      <LuHeart size={48} />
+    ) : (
+      <Image src={image} alt={label} width="48" height="48" />
+    )}
     <Stack textAlign="center">
       <Heading
         className="font-body"
@@ -88,7 +93,7 @@ const ImpactStats = ({
   }
   if (totalContributions !== null) {
     stats.push({
-      image: donated.src,
+      image: 'heart',
       value: `${formatContributions(totalContributions)}+`,
       label: 'Total Donated',
     });

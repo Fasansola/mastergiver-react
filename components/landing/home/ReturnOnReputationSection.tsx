@@ -118,9 +118,9 @@ const ReturnOnReputationSection = () => {
             </Heading>
 
             <Grid
-              templateColumns={{ base: '1fr', lg: 'repeat(3, 1fr)' }}
-              gap="10"
-              maxW="1280px"
+              templateColumns={{ base: '1fr', lg: '1fr 1.1fr 1.1fr' }}
+              gap="14"
+              maxW="1440px"
             >
               {influenceBox.map((item, i) => (
                 <Stack gap="4" key={i} align="start" textAlign="start">
@@ -137,6 +137,7 @@ const ReturnOnReputationSection = () => {
                     className="font-body"
                     lineHeight="180%"
                     fontSize="body"
+                    maxW="400px"
                   >
                     {item.description}
                   </Text>
