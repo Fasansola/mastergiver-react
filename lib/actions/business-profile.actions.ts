@@ -59,7 +59,7 @@ export async function saveAboutUsAction(data: AboutUsInput): Promise<ActionResul
   const parsed = aboutUsSchema.safeParse(data);
   if (!parsed.success) return { success: false, error: 'Invalid input.' };
 
-  const { logo, coverPhoto, companyName, address, city, zipCode, aboutUs, tagline, website } =
+  const { logo, coverPhoto, companyName, address, city, state, zipCode, aboutUs, tagline, website } =
     parsed.data;
 
   await prisma.business.update({
@@ -70,6 +70,7 @@ export async function saveAboutUsAction(data: AboutUsInput): Promise<ActionResul
       companyName,
       ...(address !== undefined && { address }),
       ...(city !== undefined && { city }),
+      ...(state !== undefined && { state }),
       ...(zipCode !== undefined && { zipCode }),
       ...(aboutUs !== undefined && { aboutUs }),
       ...(tagline !== undefined && { tagline }),

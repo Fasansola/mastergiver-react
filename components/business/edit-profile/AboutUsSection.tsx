@@ -398,7 +398,7 @@ const AboutUsSection = ({ onSave, defaultValues }: AboutUsSectionProps) => {
             />
           </Stack>
 
-          {/* City + Zip in a row — stacks to column on mobile */}
+          {/* City + State + Zip in a row — stacks to column on mobile */}
           <Stack direction={{ base: 'column', md: 'row' }} gap="3">
             <Stack width="100%">
               <label style={labelStyle} htmlFor="city">
@@ -409,6 +409,17 @@ const AboutUsSection = ({ onSave, defaultValues }: AboutUsSectionProps) => {
                 {...register('city')}
                 style={inputStyle}
                 placeholder="Chicago"
+              />
+            </Stack>
+            <Stack width="100%">
+              <label style={labelStyle} htmlFor="state">
+                State
+              </label>
+              <input
+                id="state"
+                {...register('state')}
+                style={inputStyle}
+                placeholder="IL"
               />
             </Stack>
             <Stack width="100%">

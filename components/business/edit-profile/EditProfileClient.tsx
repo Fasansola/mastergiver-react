@@ -51,6 +51,7 @@ interface BusinessData {
   companyName: string | null;
   address: string | null;
   city: string | null;
+  state: string | null;
   zipCode: string | null;
   aboutUs: string | null;
   tagline: string | null;
@@ -146,6 +147,7 @@ const EditProfileClient = ({
     companyName: business.companyName ?? '',
     address: business.address,
     city: business.city,
+    state: business.state,
     zipCode: business.zipCode,
     aboutUs: business.aboutUs,
     tagline: business.tagline,

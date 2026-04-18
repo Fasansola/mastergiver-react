@@ -52,6 +52,7 @@ const EditProfilePage = async () => {
     companyName: business.companyName,
     address: business.address,
     city: business.city,
+    state: business.state,
     zipCode: business.zipCode,
     aboutUs: business.aboutUs,
     tagline: business.tagline,

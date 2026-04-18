@@ -17,6 +17,7 @@ export const aboutUsSchema = z.object({
   companyName: z.string().min(1, 'Company name is required').max(100),
   address: z.string().max(200).nullable().optional(),
   city: z.string().max(100).nullable().optional(),
+  state: z.string().max(100).nullable().optional(),
   zipCode: z.string().max(20).nullable().optional(),
   aboutUs: z.string().max(500, 'About Us must be 500 characters or fewer').nullable().optional(),
   tagline: z.string().max(200).nullable().optional(),
