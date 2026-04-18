@@ -45,15 +45,18 @@ const BusinessHeader = async ({ isDashboard, bgColor }: BusinessHeaderProps) => 
   }
 
   return (
-    <Flex
-      height={100}
-      align="center"
-      justify="center"
-      bg={bgColor ? bgColor : 'background.white'}
-      borderColor="border.accentBorder"
-      borderWidth="1px"
-      style={{ position: 'sticky', top: 0, zIndex: 1000 }}
-    >
+    <>
+      {/* Spacer keeps 100px gap in the document flow so content doesn't slide under the fixed header */}
+      <Box height="100px" flexShrink={0} />
+      <Flex
+        height="100px"
+        align="center"
+        justify="center"
+        bg={bgColor ? bgColor : 'background.white'}
+        borderColor="border.accentBorder"
+        borderBottom="1px solid"
+        style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000 }}
+      >
       <Container className="flex align-middle justify-between">
         {/* Logo — links to home */}
         <Link href="/">
@@ -89,6 +92,7 @@ const BusinessHeader = async ({ isDashboard, bgColor }: BusinessHeaderProps) => 
         ) : null}
       </Container>
     </Flex>
+    </>
   );
 };
 
