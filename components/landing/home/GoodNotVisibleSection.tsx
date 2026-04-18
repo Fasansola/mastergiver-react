@@ -138,7 +138,7 @@ const GoodNotVisibleSection = () => {
         <Grid
           gap="8"
           templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)' }}
-          // maxW="966px"
+          maxW="966px"
         >
           {whatWeDo.map((item, i) => (
             <WhatWeDoBox
