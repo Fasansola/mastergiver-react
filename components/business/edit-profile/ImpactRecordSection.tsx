@@ -460,7 +460,7 @@ const ImpactRecordSection = ({
                         <Box
                           as="button"
                           key={cause.id}
-                          onClick={() => field.onChange(cause.id)}
+                          onClick={(e: React.MouseEvent) => { e.preventDefault(); field.onChange(cause.id); }}
                           px="3"
                           py="1.5"
                           borderRadius="999px"

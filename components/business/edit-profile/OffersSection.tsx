@@ -276,7 +276,7 @@ const OffersSection = ({ onSave, initialOffers }: OffersSectionProps) => {
             type="button"
             onClick={handleSaveSection}
             disabled={saveMutation.isPending}
-            style={primaryButtonStyle(saveMutation.isPending)}
+            style={primaryButtonStyle(saveMutation.isPending, false)}
           >
             {saveMutation.isPending ? 'Saving…' : 'Save Section'}
           </button>

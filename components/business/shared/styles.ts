@@ -47,7 +47,7 @@ export const errorTextStyle: CSSProperties = {
  * Primary button style — uses a function so disabled state can adjust the background.
  * Usage: style={primaryButtonStyle(isSubmitting)}
  */
-export const primaryButtonStyle = (disabled: boolean): CSSProperties => ({
+export const primaryButtonStyle = (disabled: boolean, fullWidth = true): CSSProperties => ({
   background: disabled ? '#8B88BB' : '#2F2B77',
   whiteSpace: 'normal',
   borderRadius: '8px',
@@ -59,7 +59,8 @@ export const primaryButtonStyle = (disabled: boolean): CSSProperties => ({
   lineHeight: '160%',
   border: 'none',
   cursor: disabled ? 'not-allowed' : 'pointer',
-  width: '100%',
+  width: fullWidth ? '100%' : 'auto',
+  minWidth: fullWidth ? undefined : '180px',
   marginTop: '8px',
   transition: 'background 0.2s',
 });

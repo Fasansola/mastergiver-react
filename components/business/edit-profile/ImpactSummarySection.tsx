@@ -131,7 +131,7 @@ const ImpactSummarySection = ({
           <button
             type="submit"
             disabled={mutation.isPending}
-            style={primaryButtonStyle(mutation.isPending)}
+            style={primaryButtonStyle(mutation.isPending, false)}
           >
             {mutation.isPending ? 'Saving…' : 'Save Section'}
           </button>
