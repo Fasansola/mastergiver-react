@@ -3,7 +3,7 @@
 /**
  * Section 2 — Impact Summary
  *
- * Fields: Years of Community Involvement, Total Contributions ($), Active Partners.
+ * Fields: Years of Community Involvement, Total Contributions ($), Volunteer Hours.
  * Any one field being populated marks this section as complete.
  */
 
@@ -112,7 +112,7 @@ const ImpactSummarySection = ({
 
         <Stack gap="1">
           <label style={labelStyle} htmlFor="activePartners">
-            Active Community Partners &amp; Programs
+            Volunteer Hours
           </label>
           <input
             id="activePartners"
@@ -120,7 +120,7 @@ const ImpactSummarySection = ({
             min={0}
             {...register('activePartners', { valueAsNumber: true })}
             style={inputStyle}
-            placeholder="e.g. 12"
+            placeholder="e.g. 500"
           />
           {errors.activePartners && (
             <Text style={errorTextStyle}>{errors.activePartners.message}</Text>

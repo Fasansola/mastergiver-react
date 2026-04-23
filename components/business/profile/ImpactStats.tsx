@@ -4,7 +4,7 @@
  * Displays the three Impact Summary numbers as a horizontal stat strip:
  *   - Years of Community Involvement
  *   - Total Community Contributions ($)
- *   - Active Community Partners & Programs
+ *   - Volunteer Hours
  *
  * Only stats with non-null values are rendered. If all three are null this
  * component should not be mounted (the page guards this before rendering).
@@ -102,7 +102,7 @@ const ImpactStats = ({
     stats.push({
       image: partnership.src,
       value: `${activePartners}`,
-      label: 'Active Partnerships',
+      label: 'Volunteer Hours',
     });
   }
 
