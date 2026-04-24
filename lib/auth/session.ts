@@ -4,6 +4,12 @@ import { prisma } from '../prisma';
 import { redirect } from 'next/navigation';
 import type { BusinessStatus } from '@prisma/client';
 
+const STATUS_DESTINATIONS: Record<BusinessStatus, string> = {
+  ACTIVE: '/business/dashboard/edit-profile',
+  PENDING: '/business/confirm',
+  SUSPENDED: '/business/suspended',
+};
+
 // Get current authenticated user (server side only)
 // Cached per request to have multiple DB calls
 export const getCurrentUser = cache(async () => {
@@ -18,6 +24,7 @@ export const getCurrentUser = cache(async () => {
     include: {
       onboarding: true,
       profile: true,
+      business: { select: { status: true } },
     },
   });
 
@@ -45,6 +52,11 @@ export async function requireCompletedOnboarding() {
     redirect('/login');
   }
 
+  // Business users have no individual onboarding — send them to their own panel
+  if (user.business) {
+    redirect(STATUS_DESTINATIONS[user.business.status]);
+  }
+
   if (!user.onboarding?.isCompleted) {
     redirect('/onboarding');
   }
@@ -61,6 +73,11 @@ export async function requireIncompleteOnboarding() {
     redirect('/login');
   }
 
+  // Business users have no individual onboarding — send them to their own panel
+  if (user.business) {
+    redirect(STATUS_DESTINATIONS[user.business.status]);
+  }
+
   if (user.onboarding?.isCompleted) {
     redirect('/dashboard');
   }
@@ -73,12 +90,6 @@ export async function requireIncompleteOnboarding() {
 //
 // Destination is based on business status so the user always lands somewhere
 // meaningful rather than bouncing through middleware redirects.
-const STATUS_DESTINATIONS: Record<BusinessStatus, string> = {
-  ACTIVE: '/business/dashboard/edit-profile',
-  PENDING: '/business/confirm',
-  SUSPENDED: '/business/suspended',
-};
-
 export async function redirectIfBusinessSession() {
   const session = await auth();
   if (!session?.user?.id) return;
