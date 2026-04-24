@@ -26,11 +26,13 @@ import { prisma } from '@/lib/prisma';
 interface BusinessHeaderProps {
   isDashboard?: boolean;
   bgColor?: string;
+  hideAuthButtons?: boolean;
 }
 
 const BusinessHeader = async ({
   isDashboard,
   bgColor,
+  hideAuthButtons,
 }: BusinessHeaderProps) => {
   // On public pages check whether the visitor has an active business session.
   // Skip the DB call entirely in dashboard mode — middleware already confirmed it.
@@ -80,7 +82,7 @@ const BusinessHeader = async ({
                 <BusinessSidebar isDrawer />
               </BusinessMobileMenu>
             </Box>
-          ) : !hasBusinessSession ? (
+          ) : !hasBusinessSession && !hideAuthButtons ? (
             <>
               {/* Desktop auth buttons — hidden on mobile */}
               <Box display={{ base: 'none', lg: 'flex' }} alignItems="center">

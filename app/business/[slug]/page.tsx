@@ -186,7 +186,7 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <BusinessHeader />
+      <BusinessHeader hideAuthButtons />
       {/* White profile card centred on the page */}
       <Stack gap="0">
         {business.coverPhoto && (
