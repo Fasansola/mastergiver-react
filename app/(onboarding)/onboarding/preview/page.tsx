@@ -71,9 +71,9 @@ async function getProfilePreviewData(userId: string) {
       },
     }),
 
-    // All predefined causes for the edit dropdown
+    // All predefined causes for the edit dropdown — individual panel only
     prisma.cause.findMany({
-      where: { isActive: true },
+      where: { isActive: true, panel: 'INDIVIDUAL' },
       orderBy: { name: 'asc' },
       select: {
         id: true,

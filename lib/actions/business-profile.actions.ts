@@ -169,9 +169,15 @@ export async function deletePartnerAction(id: string): Promise<ActionResult> {
   const business = await getAuthenticatedBusiness();
   if (!business) return { success: false, error: 'Unauthorized' };
 
-  await prisma.businessPartner.deleteMany({
-    where: { id, businessId: business.id },
-  });
+  try {
+    await prisma.businessPartner.delete({
+      where: { id, businessId: business.id },
+    });
+  } catch (e: unknown) {
+    const err = e as { code?: string };
+    if (err.code === 'P2025') return { success: false, error: 'Partner not found.' };
+    throw e;
+  }
 
   return { success: true };
 }
@@ -260,9 +266,15 @@ export async function deleteCommunityEventAction(id: string): Promise<ActionResu
   const business = await getAuthenticatedBusiness();
   if (!business) return { success: false, error: 'Unauthorized' };
 
-  await prisma.businessCommunityEvent.deleteMany({
-    where: { id, businessId: business.id },
-  });
+  try {
+    await prisma.businessCommunityEvent.delete({
+      where: { id, businessId: business.id },
+    });
+  } catch (e: unknown) {
+    const err = e as { code?: string };
+    if (err.code === 'P2025') return { success: false, error: 'Event not found.' };
+    throw e;
+  }
 
   return { success: true };
 }
@@ -324,9 +336,15 @@ export async function deleteEndorsementAction(id: string): Promise<ActionResult>
   const business = await getAuthenticatedBusiness();
   if (!business) return { success: false, error: 'Unauthorized' };
 
-  await prisma.businessEndorsement.deleteMany({
-    where: { id, businessId: business.id },
-  });
+  try {
+    await prisma.businessEndorsement.delete({
+      where: { id, businessId: business.id },
+    });
+  } catch (e: unknown) {
+    const err = e as { code?: string };
+    if (err.code === 'P2025') return { success: false, error: 'Endorsement not found.' };
+    throw e;
+  }
 
   return { success: true };
 }
@@ -393,9 +411,15 @@ export async function deleteOfferAction(id: string): Promise<ActionResult> {
   const business = await getAuthenticatedBusiness();
   if (!business) return { success: false, error: 'Unauthorized' };
 
-  await prisma.businessOffer.deleteMany({
-    where: { id, businessId: business.id },
-  });
+  try {
+    await prisma.businessOffer.delete({
+      where: { id, businessId: business.id },
+    });
+  } catch (e: unknown) {
+    const err = e as { code?: string };
+    if (err.code === 'P2025') return { success: false, error: 'Offer not found.' };
+    throw e;
+  }
 
   return { success: true };
 }
