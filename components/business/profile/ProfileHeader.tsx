@@ -57,7 +57,6 @@ const ProfileHeader = ({
       border="0.5px solid #DCDFE3"
       borderRadius="20px"
       boxShadow="0px 1px 2px 0px #4646490F, 0px 1px 3px 0px #4646490A"
-      mt={{ base: '-28', lg: '-32' }}
       pos={{ base: 'static', lg: 'sticky' }}
       top="140px"
     >
