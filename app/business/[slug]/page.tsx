@@ -35,7 +35,6 @@ import ImpactRecordPublic from '@/components/business/profile/ImpactRecordPublic
 import { Box, Flex, HStack, Stack, Container, Heading, Text } from '@chakra-ui/react';
 import BusinessHeader from '@/components/business/layout/BusinessHeader';
 import Image from 'next/image';
-import LogoWhite from '@/public/brand-assets/logo-white.svg';
 
 import Certified from '@/public/business-assets/Certified.svg';
 
@@ -199,7 +198,11 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
             minH={{ base: '340px', md: '400px' }}
           />
         ) : (
-          /* Branded fallback banner — shown when no cover photo is uploaded */
+          /* Branded fallback banner — shown when no cover photo is uploaded.
+             Shows the business logo centred on the brand gradient, or large
+             company initials when no logo has been uploaded. The MasterGiver
+             logo is intentionally NOT shown here — it already appears in the
+             site header above. */
           <Flex
             minH={{ base: '340px', md: '400px' }}
             align="center"
@@ -208,9 +211,49 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
               background: 'linear-gradient(135deg, #2F2B77 0%, #1a1750 50%, #3d3a8c 100%)',
             }}
           >
-            <Box w={{ base: '180px', md: '240px' }} opacity={0.35}>
-              <Image src={LogoWhite} alt="MasterGiver" style={{ width: '100%', height: 'auto' }} />
-            </Box>
+            {business.logo ? (
+              /* Business has a logo — show it in a white circular frame */
+              <Box
+                bg="white"
+                borderRadius="full"
+                w={{ base: '140px', md: '180px' }}
+                h={{ base: '140px', md: '180px' }}
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                boxShadow="0px 8px 32px rgba(0,0,0,0.24)"
+                overflow="hidden"
+                p="4"
+              >
+                <Image
+                  src={business.logo}
+                  alt={business.companyName ?? ''}
+                  width={140}
+                  height={140}
+                  style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                />
+              </Box>
+            ) : (
+              /* No logo — show company initials in a white circle */
+              <Box
+                bg="white"
+                borderRadius="full"
+                w={{ base: '140px', md: '180px' }}
+                h={{ base: '140px', md: '180px' }}
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                boxShadow="0px 8px 32px rgba(0,0,0,0.24)"
+              >
+                <span style={{ color: '#2F2B77', fontWeight: 800, fontSize: '52px', lineHeight: 1 }}>
+                  {(business.companyName ?? '')
+                    .split(' ')
+                    .slice(0, 2)
+                    .map((w: string) => w[0]?.toUpperCase() ?? '')
+                    .join('')}
+                </span>
+              </Box>
+            )}
           </Flex>
         )}
         <Container>
