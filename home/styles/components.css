@@ -1,0 +1,496 @@
+/* THIS IS WHERE ALL THE STYLES FOR THE FORMS, BUTTONS & .... ARE STORED */
+
+
+/* PRIMARY COMPONENTS */
+
+
+/* BUTTONS */
+.button-div {
+    display: flex;
+}
+
+.button {
+    padding: 16px 32px;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    /* min-width: 140px; */
+    line-height: inherit;
+}
+
+.small-btn {
+    padding: 12px 24px !important;
+}
+
+
+.dark-button {
+    background-color: var(--primary-purple);
+    color: var(--white);
+}
+
+.dark-button:hover {
+    background-color: var(--secondary-purple);
+}
+
+.light-button {
+    background-color: var(--light-hue);
+}
+
+.light-button:hover {
+    background-color: var(--light-hue-secondary);
+}
+
+.green-button {
+    background-color: var(--brand-green);
+    color: var(--white);
+}
+
+.green-button:hover {
+    background-color: var(--success-green);
+    color: var(--white);
+}
+
+
+/* SECONDARY ACTIONS */
+
+.clickable {
+    cursor: pointer;
+}
+
+
+@media only screen and (max-width: 576px) {
+    .button {
+        /* width: 90vw; */
+        min-width: 0;
+    }
+
+    button.button {
+        width: 100%;
+    }
+}
+
+/* This is for the button tag not class */
+
+button {
+    font-size: 1rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+
+
+/* FORMS */
+
+.forms {
+    display: flex;
+    flex-direction: column;
+}
+
+.forms-div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+}
+
+
+.forms-split-div {
+    display: flex;
+    width: 100%;
+    gap: 16px;
+}
+
+
+
+.forms label {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.forms label.required::after {
+    content: " *";
+    color: #AF2A1A;
+}
+
+.forms .input {
+    padding: 14px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--brand-gray);
+    width: 100%;
+}
+
+.forms .input:focus {
+    outline: var(--secondary-purple);
+    border: 1px solid var(--secondary-purple);
+}
+
+
+*::placeholder {
+    color: #575C62;
+    font-size: 1rem;
+}
+
+
+.password-container {
+    position: relative;
+}
+
+.eye {
+    fill: var(--secondary-purple);
+    position: absolute;
+    right: 12px;
+    top: 70%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+    width: 20px;
+}
+
+.eye:focus {
+    outline: none;
+}
+
+
+/* SETUP CHECKBOX */
+.checkbox-div {
+    margin-top: 8px;
+}
+
+.checkbox-div label {
+    font-size: 0.875rem;
+    font-weight: 400;
+}
+
+
+.radio-div input {
+    margin-top: 6px;
+}
+
+.policy-text {
+    flex: 1;
+}
+
+.checkbox-div input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--brand-gray);
+    padding: 0;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+}
+
+.checkbox-div input[type="checkbox"]:checked {
+    background-color: var(--primary-purple);
+    border-color: var(--primary-purple);
+    position: relative;
+}
+
+.checkbox-div input[type="checkbox"]:checked::before {
+    color: white;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.forms-submit-button {
+    margin-top: 24px;
+}
+
+.forms-warning {
+    flex-direction: row !important;
+    align-items: center;
+}
+
+.forms-warning img {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+
+
+
+
+/* FORMS DROPDOWN LIST */
+
+.dropdown-list {
+    display: flex;
+    visibility: hidden;
+    width: 100%;
+    flex-direction: column;
+    gap: 12px;
+    background-color: var(--white);
+    padding-top: 12px;
+    top: 100%;
+    margin-top: 10px;
+    border: 1px solid var(--brand-gray);
+    border-radius: 8px;
+    z-index: 100;
+}
+
+
+.dropdown {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: visibility 0s, opacity 0.2s, transform 0.2s;
+}
+
+
+.dropdown-h {
+    padding: 0 24px;
+}
+
+.dropdown-ul {
+    display: flex;
+    flex-direction: column;
+    max-height: 360px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.dropdown-ul>* {
+    padding: 12px 24px;
+    transition: all 0.2s;
+}
+
+.dropdown-ul>*:last-child {
+    border-radius: 0 0 8px 8px;
+}
+
+
+.dropdown-ul li:hover {
+    background-color: var(--secondary-purple);
+    color: var(--white);
+}
+
+
+.dropdown-btn {
+    display: flex;
+    padding: 0 24px;
+}
+
+.dropdown-btn .button {
+    margin: 6px 0 24px 0;
+}
+
+/* UPLOAD IMAGES BUTTONS */
+
+.upload-form {
+    gap: 32px;
+}
+
+
+.upload-form>div {
+    gap: 24px;
+}
+
+.upload-form>div>div {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.upload-form>div>div>div {
+    align-items: center;
+    display: flex;
+    gap: 12px;
+}
+
+.upload-image-icon {
+    width: 136px;
+    height: 136px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.upload-image-button {
+    padding: 10px 24px;
+    border: 1px solid var(--brand-gray);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+
+.icons-text {
+    gap: 12px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+
+
+/* FORMS RESPONSIVE */
+
+
+/* STRAIGHT LINE */
+
+.line {
+    width: 100%;
+    border: 1px solid var(--brand-gray);
+}
+
+
+
+
+/* ELEMENTS YET TO BE DECIDED */
+
+/* WHAT I CARE ABOUT PAGE */
+
+
+.items-container {
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+
+.items-box {
+    align-items: center;
+    gap: 16px;
+    border: 1px solid var(--brand-gray);
+    padding: 8px 12px;
+    border-radius: 12px;
+    transition: all 0.3s;
+    background-color: var(--white);
+}
+
+.items-box:hover {
+    background-color: var(--light-hue);
+}
+
+
+/* ORGANIZATION SEARCH */
+
+.organizations-search {
+    display: flex;
+    gap: 8px;
+    height: 56px !important;
+    border-radius: 4px !important;
+    margin-top: 18px;
+}
+
+.organizations-search-input {
+    font-size: 1rem;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.organizations-search-input:focus {
+    outline: none;
+}
+
+
+.items-box.organization-items-box {
+    display: flex;
+    height: 64px;
+    border-radius: 4px;
+    gap: 32px;
+    padding: 12px;
+}
+
+.add-manual-element {
+    padding-left: 24px !important;
+}
+
+
+.organization-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px;
+    margin: 0 24px;
+    border-top: 1px solid var(--brand-gray);
+    border-radius: 0 !important;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.organization-item:hover {
+    background-color: var(--light-hue);
+}
+
+.organization-item.selected {
+    background-color: var(--light-hue);
+}
+
+
+.organization-item>div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+
+.organization-logo {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+}
+
+
+.organization-location {
+    display: flex;
+    gap: 4px;
+}
+
+.organization-info {
+    display: flex;
+    gap: 12px;
+}
+
+.organization-footer {
+    display: flex;
+    border-top: 1px solid var(--brand-gray);
+    justify-content: center;
+    padding: 16px 0;
+    color: var(--primary-purple);
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+
+.organization-footer:hover {
+    background-color: var(--light-hue);
+}
+
+
+#user-organization {
+    margin-top: 8px;
+}
+
+
+.add-manually {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+#add-user-organization {
+    display: none;
+}
+
+
+
+/* PREVIEW ELEMENTS PAGE */
+.element-form-field {
+    display: none;
+}
+
+
+.edit-icons-text {
+    gap: 4px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}

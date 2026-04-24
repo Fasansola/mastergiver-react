@@ -23,6 +23,7 @@ import {
 import { sendEmail } from '@/lib/email/client';
 import VerifyEmail from '@/lib/email/templates/verify-email';
 import ResetPassword from '@/lib/email/templates/reset-password';
+import { addMailerLiteSubscriber } from '@/lib/email/mailerlite';
 import type { ActionResult } from '@/lib/types/actions';
 
 // SIGN UP A NEW USER
@@ -91,6 +92,9 @@ export async function signUpAction(data: SignUpInput): Promise<ActionResult<{ me
         },
       },
     });
+
+    // Add to MailerLite — fire-and-forget, never blocks signup
+    addMailerLiteSubscriber({ email, firstName, lastName });
 
     // Generate verification token
     const verificationToken = await createVerificationToken(email);

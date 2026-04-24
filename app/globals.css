@@ -20,6 +20,12 @@
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif !important;
 }
 
+/* Individual / user-facing pages use Poppins. Higher specificity overrides font-body. */
+.font-poppins,
+.font-poppins * {
+  font-family: var(--font-poppins), Helvetica, sans-serif !important;
+}
+
 /* font-display has higher two-class specificity so it overrides font-body * */
 .font-body .font-display,
 .font-display {

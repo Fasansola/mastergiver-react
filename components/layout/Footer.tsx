@@ -55,7 +55,7 @@ const Footer = () => {
               </Heading>
               <Stack gap="4">
                 <FooterNavItem href="/">Businesses</FooterNavItem>
-                <FooterNavItem href="/individuals">Individuals</FooterNavItem>
+                <FooterNavItem href="/individual">Individuals</FooterNavItem>
                 <FooterNavItem href="/reputation">
                   Community Impact and Reputation
                 </FooterNavItem>
