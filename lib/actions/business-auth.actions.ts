@@ -35,6 +35,7 @@ import {
 } from '@/lib/auth/token';
 import { sendEmail } from '@/lib/email/client';
 import ResetPassword from '@/lib/email/templates/reset-password';
+import { addMailerLiteSubscriber } from '@/lib/email/mailerlite';
 import type { ActionResult } from '@/lib/types/actions';
 
 // ---------------------------------------------------------------------------
@@ -90,6 +91,14 @@ export async function businessSignUpAction(
           },
         },
       },
+    });
+
+    // Add to MailerLite business group — fire-and-forget, never blocks signup
+    addMailerLiteSubscriber({
+      email,
+      firstName: businessName,
+      lastName: '',
+      groupId: process.env.MAILERLITE_BUSINESS_GROUP_ID,
     });
 
     // Sign the user in immediately so they arrive at /business/confirm with an active session

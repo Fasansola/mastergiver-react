@@ -1,9 +1,13 @@
 /**
  * MailerLite integration helper.
  *
- * Adds a new subscriber to MailerLite when a user creates an account.
- * If MAILERLITE_GROUP_ID is set, the subscriber is added to that group
- * so any automation tied to the group fires automatically.
+ * Adds a new subscriber to a specific MailerLite group when a user creates
+ * an account. The group ID is passed by the caller so individual and business
+ * signups can each target their own group and automation.
+ *
+ * Required env var:  MAILERLITE_API_KEY
+ * Individual group:  MAILERLITE_INDIVIDUAL_GROUP_ID
+ * Business group:    MAILERLITE_BUSINESS_GROUP_ID
  *
  * Failures are logged but never thrown — a MailerLite outage must never
  * block account creation.
@@ -15,10 +19,12 @@ export async function addMailerLiteSubscriber({
   email,
   firstName,
   lastName,
+  groupId,
 }: {
   email: string;
   firstName: string;
   lastName: string;
+  groupId?: string;
 }): Promise<void> {
   const apiKey = process.env.MAILERLITE_API_KEY;
 
@@ -28,8 +34,6 @@ export async function addMailerLiteSubscriber({
   }
 
   try {
-    const groupId = process.env.MAILERLITE_GROUP_ID;
-
     const body: Record<string, unknown> = {
       email,
       fields: {
@@ -40,7 +44,6 @@ export async function addMailerLiteSubscriber({
       status: 'active',
     };
 
-    // If a group ID is configured, include it so the welcome automation fires
     if (groupId) {
       body.groups = [groupId];
     }

@@ -93,8 +93,13 @@ export async function signUpAction(data: SignUpInput): Promise<ActionResult<{ me
       },
     });
 
-    // Add to MailerLite — fire-and-forget, never blocks signup
-    addMailerLiteSubscriber({ email, firstName, lastName });
+    // Add to MailerLite individual group — fire-and-forget, never blocks signup
+    addMailerLiteSubscriber({
+      email,
+      firstName,
+      lastName,
+      groupId: process.env.MAILERLITE_INDIVIDUAL_GROUP_ID,
+    });
 
     // Generate verification token
     const verificationToken = await createVerificationToken(email);
