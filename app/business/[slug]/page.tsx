@@ -32,7 +32,7 @@ import CommunityGallery from '@/components/business/profile/CommunityGallery';
 import EndorsementList from '@/components/business/profile/EndorsementList';
 import OfferCards from '@/components/business/profile/OfferCards';
 import ImpactRecordPublic from '@/components/business/profile/ImpactRecordPublic';
-import { HStack, Stack, Container, Heading, Text } from '@chakra-ui/react';
+import { Box, HStack, Stack, Container, Heading, Text } from '@chakra-ui/react';
 import BusinessHeader from '@/components/business/layout/BusinessHeader';
 import Image from 'next/image';
 
@@ -189,6 +189,15 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
       <BusinessHeader />
       {/* White profile card centred on the page */}
       <Stack gap="0">
+        {business.coverPhoto && (
+          <Box
+            bgImage={`url(${business.coverPhoto})`}
+            bgSize="cover"
+            bgPos={{ base: 'center center', md: '50% -80px' }}
+            bgRepeat="no-repeat"
+            minH={{ base: '340px', md: '400px' }}
+          />
+        )}
         <Container>
           <Stack
             direction={{ base: 'column', lg: 'row' }}
