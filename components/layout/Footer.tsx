@@ -23,7 +23,7 @@ import FooterNavItem from './FooterNavItem';
 
 const Footer = () => {
   return (
-    <Stack bgColor="white" gap="0">
+    <Stack id="site-footer" bgColor="white" gap="0">
       <Container py={{ base: '60px', lg: '100px' }}>
         {/* Logo + nav columns */}
         <Stack
@@ -54,8 +54,8 @@ const Footer = () => {
                 Products
               </Heading>
               <Stack gap="4">
-                <FooterNavItem href="/">Businesses</FooterNavItem>
-                <FooterNavItem href="/individual">Individuals</FooterNavItem>
+                <FooterNavItem href="/">Home</FooterNavItem>
+                {/* <FooterNavItem href="/individual">Individuals</FooterNavItem> */}
                 <FooterNavItem href="/reputation">
                   Community Impact and Reputation
                 </FooterNavItem>

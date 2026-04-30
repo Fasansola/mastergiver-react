@@ -13,13 +13,14 @@
  *      the user is already signed in (edge case — middleware redirects them away).
  */
 
-import { Box, Button, Container, Flex, HStack } from '@chakra-ui/react';
+import { Box, Container, Flex, HStack } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import siteLogo from '@/public/brand-assets/Mastergiver_logo.svg';
 import BusinessMobileMenu from './BusinessMobileMenu';
 import BusinessSidebar from './BusinessSidebar';
 import BusinessHeaderButtons from './BusinessHeaderButtons';
+import StickyHeaderWrapper from '@/components/layout/StickyHeaderWrapper';
 import { auth } from '@/lib/auth/auth';
 import { prisma } from '@/lib/prisma';
 
@@ -53,50 +54,46 @@ const BusinessHeader = async ({
     <>
       {/* Spacer keeps 100px gap in the document flow so content doesn't slide under the fixed header */}
       <Box height="100px" flexShrink={0} />
-      <Flex
-        height="100px"
-        align="center"
-        justify="center"
-        bg={bgColor ? bgColor : 'background.white'}
-        borderBottom="1px solid #DCDFE3"
-        borderColor="border.default"
-        style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000 }}
+      <StickyHeaderWrapper
+        style={{ background: bgColor ?? 'white', borderBottom: '1px solid #DCDFE3' }}
       >
-        <Container className="flex align-middle justify-between">
-          {/* Logo — links to home */}
-          <Link href="/">
-            <HStack align="start">
-              <Image
-                src={siteLogo}
-                alt="MasterGiver Logo"
-                width={140}
-                height={60}
-              />
-            </HStack>
-          </Link>
+        <Flex height="100px" align="center" justify="center">
+          <Container className="flex align-middle justify-between">
+            {/* Logo — links to home */}
+            <Link href="/">
+              <HStack align="start">
+                <Image
+                  src={siteLogo}
+                  alt="MasterGiver Logo"
+                  width={140}
+                  height={60}
+                />
+              </HStack>
+            </Link>
 
-          {isDashboard ? (
-            /* Mobile hamburger — only in dashboard context, hidden at lg+ */
-            <Box display={{ base: 'flex', lg: 'none' }} alignItems="center">
-              <BusinessMobileMenu>
-                <BusinessSidebar isDrawer />
-              </BusinessMobileMenu>
-            </Box>
-          ) : !hasBusinessSession && !hideAuthButtons ? (
-            <>
-              {/* Desktop auth buttons — hidden on mobile */}
-              <Box display={{ base: 'none', lg: 'flex' }} alignItems="center">
-                <BusinessHeaderButtons />
-              </Box>
-
-              {/* Mobile — Login + Sign Up */}
+            {isDashboard ? (
+              /* Mobile hamburger — only in dashboard context, hidden at lg+ */
               <Box display={{ base: 'flex', lg: 'none' }} alignItems="center">
-                <BusinessHeaderButtons />
+                <BusinessMobileMenu>
+                  <BusinessSidebar isDrawer />
+                </BusinessMobileMenu>
               </Box>
-            </>
-          ) : null}
-        </Container>
-      </Flex>
+            ) : !hasBusinessSession && !hideAuthButtons ? (
+              <>
+                {/* Desktop auth buttons — hidden on mobile */}
+                <Box display={{ base: 'none', lg: 'flex' }} alignItems="center">
+                  <BusinessHeaderButtons />
+                </Box>
+
+                {/* Mobile — Login + Sign Up */}
+                <Box display={{ base: 'flex', lg: 'none' }} alignItems="center">
+                  <BusinessHeaderButtons />
+                </Box>
+              </>
+            ) : null}
+          </Container>
+        </Flex>
+      </StickyHeaderWrapper>
     </>
   );
 };
