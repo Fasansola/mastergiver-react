@@ -207,6 +207,7 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
             align="start"
             gap={{ base: '6', lg: '12' }}
             px={{ base: '0', md: '4', lg: '12' }}
+            pt={{ base: business.coverPhoto ? '0' : '8', lg: '0' }}
             pb={{ base: '10', lg: '20' }}
           >
             {/* Header — logo + name + about + tagline */}
@@ -220,6 +221,7 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
               website={business.website ?? ''}
               tagline={business.tagline}
               logo={business.logo}
+              hasCoverPhoto={!!business.coverPhoto}
             />
 
             {/* Content sections */}

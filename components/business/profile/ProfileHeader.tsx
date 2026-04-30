@@ -23,6 +23,7 @@ interface ProfileHeaderProps {
   zipCode?: string | null;
   aboutUs?: string;
   website?: string;
+  hasCoverPhoto?: boolean;
 }
 
 /** Returns the first letter of each word (up to 2) for an initials avatar. */
@@ -44,6 +45,7 @@ const ProfileHeader = ({
   zipCode,
   aboutUs,
   website,
+  hasCoverPhoto = false,
 }: ProfileHeaderProps) => {
   const locationLine = [city, state, zipCode].filter(Boolean).join(', ');
   return (
@@ -57,7 +59,7 @@ const ProfileHeader = ({
       border="0.5px solid #DCDFE3"
       borderRadius="20px"
       boxShadow="0px 1px 2px 0px #4646490F, 0px 1px 3px 0px #4646490A"
-      mt={{ base: '0', lg: '-32' }}
+      mt={{ base: '0', lg: hasCoverPhoto ? '-32' : '10' }}
       pos={{ base: 'static', lg: 'sticky' }}
       top="140px"
     >
