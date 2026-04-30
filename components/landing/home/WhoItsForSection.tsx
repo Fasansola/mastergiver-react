@@ -41,7 +41,10 @@ const WhoItsForSection = () => {
             maxW={{ base: '100%', lg: '568px' }}
             pr={{ base: '0', lg: '64px' }}
           >
-            <LandingH>Who MasterGiver Is Built For</LandingH>
+            <LandingH>
+              Who MasterGiver <br className="sm-mobile-only" />
+              Is Built For
+            </LandingH>
             <Stack gap="8">
               <Text>
                 MasterGiver is designed for businesses that understand
@@ -50,10 +53,10 @@ const WhoItsForSection = () => {
 
               <Stack gap="7">
                 <Text
-                  className="font-display"
-                  fontSize={{ base: '22px', md: '24px', lg: '28px' }}
+                  className="font-body"
+                  // fontSize={{ base: '22px', md: '24px', lg: '28px' }}
                   lineHeight="130%"
-                  fontWeight="700"
+                  // fontWeight="700"
                 >
                   It&apos;s a strong fit if your business:
                 </Text>

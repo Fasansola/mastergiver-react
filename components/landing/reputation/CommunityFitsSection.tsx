@@ -85,7 +85,7 @@ const CommunityFitsSection = () => {
                     key={i}
                   >
                     <NextImage alt={title} src={image} width={48} height={48} />
-                    <Stack gap="1">
+                    <Stack gap="1" maxW="320px">
                       <Heading
                         className="font-body"
                         fontSize="subheading"

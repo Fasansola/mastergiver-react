@@ -10,8 +10,8 @@ const BrandCheck = ({ item }: CheckProps) => {
       <Text
         color="text.primary"
         className="font-body"
-        fontSize="18px"
-        lineHeight="160%"
+        // fontSize="18px"
+        lineHeight="140%"
       >
         {item}
       </Text>

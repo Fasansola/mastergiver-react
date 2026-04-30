@@ -33,7 +33,11 @@ const HomeHeroSection = () => {
           align="center"
         >
           <Stack w={{ base: '100%', lg: '50%' }} gap="10">
-            <Stack gap="6" maxW={{ base: '100%', lg: '640px' }}>
+            <Stack
+              gap="6"
+              maxW={{ base: '100%', lg: '640px' }}
+              textAlign={{ base: 'center', md: 'left' }}
+            >
               <Heading
                 className="font-display"
                 fontWeight="700"
@@ -74,7 +78,8 @@ const HomeHeroSection = () => {
                     whiteSpace="normal"
                     boxShadow="0px 8px 10px -6px #E2E1FF, 0px 20px 25px -5px #D4D1FF"
                   >
-                    Get Your MasterGiver Reputation Profile™
+                    Get Your MasterGiver <br className="sm-mobile-only" />
+                    Reputation Profile™
                   </Button>
                 </Link>
               </Box>

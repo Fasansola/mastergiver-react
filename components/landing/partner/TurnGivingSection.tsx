@@ -27,7 +27,10 @@ const TurnGivingSection = () => {
             />
           </Stack>
 
-          <Stack w={{ base: '100%', lg: '45%' }} gap={{ base: '10', lg: '60px' }}>
+          <Stack
+            w={{ base: '100%', lg: '45%' }}
+            gap={{ base: '10', lg: '60px' }}
+          >
             <Stack gap="6" maxW={{ base: '100%', lg: '640px' }}>
               <LandingH>We turn giving into a visible business asset.</LandingH>
               <Stack
@@ -47,7 +50,7 @@ const TurnGivingSection = () => {
               </Stack>
             </Stack>
             <Stack gap="14">
-              <Stack fontWeight="500!" gap="4">
+              <Stack gap="4">
                 {[
                   'Highlight community involvement and sponsorships',
                   'Build credibility and trust with local customers',

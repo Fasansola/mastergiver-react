@@ -126,7 +126,7 @@ const CompetitiveAdvantageSection = () => {
 
           <Separator borderColor="border.default" width="100%" />
 
-          <Link href="/reputation" className="w-full">
+          <Link href="/business/signup" className="w-full">
             <Button
               bg="#2F2B77"
               color="white"

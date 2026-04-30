@@ -21,11 +21,7 @@ const HomeCtaSection = () => {
         alignItems="center"
         justifyContent="center"
       >
-        <Stack
-          maxW={{ base: '100%', lg: '750px' }}
-          textAlign="center"
-          gap="8"
-        >
+        <Stack maxW={{ base: '100%', lg: '750px' }} textAlign="center" gap="8">
           <Stack gap="6" maxW="100%">
             <Heading
               className="font-display"
@@ -33,7 +29,8 @@ const HomeCtaSection = () => {
               fontSize={{ base: '34px', md: '46px', lg: '60px' }}
               lineHeight="120%"
             >
-              Make Sure Your Reputation Works for You
+              Make Sure Your Reputation Works <br className="sm-mobile-only" />
+              for You
             </Heading>
             <Stack gap="2">
               <Text>You&apos;re already doing good in your community.</Text>

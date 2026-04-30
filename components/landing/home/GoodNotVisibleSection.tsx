@@ -60,10 +60,10 @@ const GoodNotVisibleSection = () => {
         gap="10"
         w="100%"
       >
-        <Box textAlign="center" w="100%" maxW="966px">
+        <Box textAlign="center" w="100%" maxW="">
           <LandingH>
-            The Good Your Business Does Isn’t Being Seen. And That’s Costing
-            You.
+            The Good Your Business Does Isn’t Being Seen. <br />
+            And That’s Costing You.
           </LandingH>
         </Box>
 
@@ -89,9 +89,10 @@ const GoodNotVisibleSection = () => {
             </HStack>
 
             <Heading
-              className="font-display"
-              fontWeight="700"
-              fontSize={{ base: '22px', md: '24px', lg: '28px' }}
+              className="font-body"
+              fontWeight="400"
+              // fontSize={{ base: '22px', md: '24px', lg: '28px' }}
+              fontSize="16px"
               lineHeight="120%"
               color="text.primary"
             >
@@ -102,7 +103,7 @@ const GoodNotVisibleSection = () => {
               <Text>
                 Your website doesn&apos;t surface it in a meaningful way. Search
                 engines don&apos;t understand it. AI tools don&apos;t recognize
-                it when deciding which businesses to recommend
+                it when deciding which businesses to recommend.
               </Text>
               <Text>
                 So the very things that make your business different — your

@@ -28,13 +28,13 @@ const benefits = [
     image: MissionIcon,
     title: 'Reinforces Your Mission',
     description:
-      "Sharing this MasterGiver signals your organization's commitment to the local business community.",
+      "Sharing MasterGiver signals your organization's commitment to the local business community.",
   },
   {
     image: CalenderIcon,
     title: 'Zero Ongoing Management',
     description:
-      "Sharing this MasterGiver signals your organization's commitment to the local business community.",
+      'No cost, no contracts, and no management time. Share once and MasterGiver handles the rest.',
   },
 ];
 

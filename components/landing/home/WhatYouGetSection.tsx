@@ -31,7 +31,7 @@ const whatYouGet = [
     image: CredibitilyIcon.src,
     title: 'Independent Third-Party Credibility',
     description:
-      'Your reputation lives on a neutral platform — not just your own website — increasing trust with both algorithms and people.',
+      'Your reputation lives on a neutral platform not just your own website increasing trust with both algorithms and people.',
   },
   {
     image: BadgeIcon.src,
@@ -49,7 +49,7 @@ const whatYouGet = [
     image: GrowthIcon.src,
     title: 'Ongoing Updates as You Grow',
     description:
-      "Your reputation isn't static. As your giving and involvement evolve, your profile grows with it — keeping your signals current and relevant",
+      "Your reputation isn't static. As your giving and involvement evolve, your profile grows with it, keeping your signals current and relevant",
   },
 ];
 

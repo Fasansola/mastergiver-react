@@ -53,8 +53,8 @@ const CommunityGallery = ({ events }: CommunityGalleryProps) => {
           <Stack py="4" px="6" gap="2">
             <Text
               fontSize="14px"
-              color="brand.primary"
               className="font-body"
+              color="text.primary"
               fontWeight="700"
             >
               {e.description}

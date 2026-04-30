@@ -32,7 +32,7 @@ const BusinessHeaderButtons = ({
         px="3"
         _hover={{ bg: 'transparent', opacity: 0.7 }}
       >
-        <Link href="/business/signin">Sign in</Link>
+        <Link href="/business/signin">Log In</Link>
       </Button>
 
       {/* Desktop: "Login" — hidden below lg */}

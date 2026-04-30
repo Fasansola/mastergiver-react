@@ -20,7 +20,7 @@ const MasterGiverProfileSection = () => {
           gap={{ base: '10', lg: '6' }}
           align="center"
         >
-          <Stack w={{ base: '100%', lg: '50%' }} gap="60px">
+          <Stack w={{ base: '100%', lg: '50%' }} gap="40px">
             <Stack gap="6" maxW={{ base: '100%', lg: '640px' }}>
               <LandingH>The MasterGiver Reputation Profile™</LandingH>
               <Stack
@@ -36,7 +36,7 @@ const MasterGiverProfileSection = () => {
               </Stack>
             </Stack>
             <Stack gap="14">
-              <Stack fontWeight="500" gap="4">
+              <Stack gap="4">
                 {[
                   'Organizes community involvement into a public record customers trust and AI references.',
                   'Provides a Verified Impact Badge for your website and marketing materials.',
@@ -46,7 +46,7 @@ const MasterGiverProfileSection = () => {
                 ))}
               </Stack>
               <Box w={{ base: '100%', lg: 'fit-content' }}>
-                <Link href="/business/signup">
+                <Link href="/business/tess-the-tooth-fairy">
                   <Button
                     bg="#2F2B77"
                     color="white"
@@ -61,7 +61,7 @@ const MasterGiverProfileSection = () => {
                     whiteSpace="normal"
                     boxShadow="0px 8px 10px -6px #E2E1FF, 0px 20px 25px -5px #D4D1FF"
                   >
-                    Get Your Reputation Profile
+                    View Example Reputation Profile
                   </Button>
                 </Link>
               </Box>

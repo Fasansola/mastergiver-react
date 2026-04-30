@@ -62,6 +62,7 @@ select:-webkit-autofill {
   -webkit-text-fill-color: #575C62 !important;
   transition: background-color 5000s ease-in-out 0s;
 }
+
 .offer-claim-btn {
   display: block;
   width: 100%;
@@ -80,4 +81,15 @@ select:-webkit-autofill {
 
 .offer-claim-btn:hover {
   background: #3d3899;
+}
+
+/* Visibility utilities — mobile-only (< 768px) */
+.sm-mobile-only {
+  display: block;
+}
+
+@media (min-width: 508px) {
+  .sm-mobile-only {
+    display: none !important;
+  }
 }

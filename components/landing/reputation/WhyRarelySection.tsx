@@ -37,9 +37,15 @@ const WhyRarelySection = () => {
       >
         <Stack textAlign="center" align="center" gap="6">
           <Stack w="100%" maxW="872px">
-            <LandingH>
+            <Heading
+              className="font-display"
+              fontWeight="700"
+              fontSize={{ base: '28px', md: '44px', lg: '56px' }}
+              lineHeight="120%"
+              color="brand.primary"
+            >
               Why Community Impact Rarely Becomes a Reputation Signal
-            </LandingH>
+            </Heading>
           </Stack>
           <Text color="text.primary" maxW="1032px">
             Local businesses contribute to their communities in real and
@@ -81,7 +87,11 @@ const WhyRarelySection = () => {
                 >
                   <NextImage alt={title} src={image} width={60} height={60} />
                 </Stack>
-                <Heading className="font-display" fontSize="28px">
+                <Heading
+                  className="font-display"
+                  fontSize="28px"
+                  maxW={{ base: i === 0 ? '' : '300px', lg: 'fit-content' }}
+                >
                   {title}
                 </Heading>
               </Stack>

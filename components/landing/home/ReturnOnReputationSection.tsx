@@ -110,7 +110,8 @@ const ReturnOnReputationSection = () => {
             <Heading
               className="font-display"
               fontWeight="700"
-              fontSize={{ base: '26px', md: '36px', lg: '46px' }}
+              // fontSize={{ base: '26px', md: '36px', lg: '46px' }}
+              fontSize={{ base: '36px', lg: '46px' }}
               lineHeight="120%"
               color="brand.primary"
             >

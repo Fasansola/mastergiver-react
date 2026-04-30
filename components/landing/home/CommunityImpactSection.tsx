@@ -49,11 +49,14 @@ const CommunityImpactSection = () => {
           </Stack>
           <Text color="text.primary" maxW="880px" fontSize="body">
             MasterGiver exists to make sure the good your business does is
-            recognized, understood, and rewarded. We translate your real-world
-            actions — charitable giving, sponsorships, and community involvement
-            — into verified reputation signals AI and search engines can read
-            and trust. So your business doesn&apos;t just do good, but turns
-            trust and visibility into growth.
+            recognized, understood, and rewarded.{' '}
+            <br className="sm-mobile-only" />
+            <br className="sm-mobile-only" />
+            We translate your real-world actions — charitable giving,
+            sponsorships, and community involvement — into verified reputation
+            signals AI and search engines can read and trust. So your business
+            doesn&apos;t just do good, but turns trust and visibility into
+            growth.
           </Text>
         </Stack>
 
@@ -92,7 +95,8 @@ const CommunityImpactSection = () => {
               whiteSpace="normal"
               boxShadow="0px 8px 10px -6px #E2E1FF, 0px 20px 25px -5px #D4D1FF"
             >
-              See how the MasterGiver Reputation Profile™ works
+              See how the MasterGiver <br className="sm-mobile-only" />
+              Reputation Profile™ works
             </Button>
           </Link>
         </Box>

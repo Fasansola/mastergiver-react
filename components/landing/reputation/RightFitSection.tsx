@@ -22,7 +22,7 @@ const rightFit = [
     image: IntentionalIcon,
     title: 'Want to Be Intentional',
     description:
-      'A natural starting point for businesses wanting a structure to build their community involvement into over time.',
+      'A natural starting point for businesses wanting a structure to build their community involvement over time.',
   },
   {
     image: MarketingIcon,
@@ -52,10 +52,7 @@ const RightFitSection = () => {
           </Text>
         </Stack>
 
-        <Grid
-          templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }}
-          gap="5"
-        >
+        <Grid templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }} gap="5">
           {rightFit.map(({ image, title, description }, i) => (
             <CommunityRepBox
               key={i}

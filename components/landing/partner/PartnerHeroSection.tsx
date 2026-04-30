@@ -21,7 +21,11 @@ const PartnerHeroSection = () => {
           align="center"
         >
           <Stack w={{ base: '100%', lg: '50%' }} gap="10">
-            <Stack gap="10" maxW={{ base: '100%', lg: '640px' }}>
+            <Stack
+              gap="10"
+              maxW={{ base: '100%', lg: '640px' }}
+              textAlign={{ base: 'center', md: 'left' }}
+            >
               <Heading
                 className="font-display"
                 fontWeight="700"

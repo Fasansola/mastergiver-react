@@ -34,7 +34,7 @@ const OrgsSection = () => {
             </Stack>
 
             <Stack gap="14">
-              <Stack fontWeight="500!" gap="4">
+              <Stack gap="4">
                 {[
                   'Nonprofit Org',
                   'Local Initiatives & Programs',

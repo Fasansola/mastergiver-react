@@ -5,9 +5,9 @@ import { CheckProps } from '@/lib/types/landing';
 
 const GreenCheck = ({ item }: CheckProps) => {
   return (
-    <HStack>
+    <HStack align="start">
       <Image src={GreenCheckIcon} alt="Green check" />
-      <Text color="text.primary" className="font-body">
+      <Text color="text.primary" className="font-body" lineHeight="140%">
         {item}
       </Text>
     </HStack>
