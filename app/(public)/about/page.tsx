@@ -66,7 +66,7 @@ const AboutPage = () => {
               lineHeight="120%"
               color="brand.primary"
             >
-              The Good Businesses Do Isn&apos;t Being Seen the Way It Should
+              The Good You Do Is Invisible. And It&apos;s Costing You.
             </Heading>
 
             <Stack gap="5">
