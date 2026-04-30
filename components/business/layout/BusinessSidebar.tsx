@@ -11,7 +11,9 @@
  */
 
 import BusinessSidebarNav from './BusinessSidebarNav';
-import { Heading, Stack } from '@chakra-ui/react';
+import { Heading, Stack, Text, HStack, Link } from '@chakra-ui/react';
+import Image from 'next/image';
+import MailIcon from '@/public/components-assets/mail.svg';
 
 interface BusinessSidebarProps {
   isDrawer?: boolean;
@@ -41,6 +43,45 @@ const BusinessSidebar = ({ isDrawer = false }: BusinessSidebarProps) => {
         Settings
       </Heading>
       <BusinessSidebarNav />
+
+      {/* Contact Us box — pushed away from nav with top margin */}
+      <Stack
+        mt="8"
+        p="5"
+        gap="3"
+        bgColor="white"
+        borderRadius="16px"
+        border="1px solid"
+        borderColor="border.default"
+        boxShadow="0px 1px 2px 0px #4646490F, 0px 1px 3px 0px #4646490A"
+      >
+        <Heading
+          fontSize="subheading"
+          fontWeight="700"
+          color="text.primary"
+          className="font-body"
+          textTransform="uppercase"
+          letterSpacing="1.16px"
+        >
+          Contact Us
+        </Heading>
+        <HStack gap="2" align="center">
+          <Image src={MailIcon} alt="" width={18} height={18} style={{ flexShrink: 0 }} />
+          <Link
+            href="mailto:support@mastergiver.com"
+            style={{ textDecoration: 'none' }}
+          >
+            <Text
+              fontSize="14px"
+              fontWeight="500"
+              color="text.secondary"
+              _hover={{ color: 'brand.primary' }}
+            >
+              support@mastergiver.com
+            </Text>
+          </Link>
+        </HStack>
+      </Stack>
     </Stack>
   );
 };
