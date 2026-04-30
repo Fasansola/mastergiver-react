@@ -78,7 +78,7 @@ const Footer = () => {
                 Company
               </Heading>
               <Stack gap="4">
-                <FooterNavItem href="/">About MasterGiver</FooterNavItem>
+                <FooterNavItem href="/about">About MasterGiver</FooterNavItem>
                 <FooterNavItem href="/partner">Partner</FooterNavItem>
               </Stack>
             </Stack>
@@ -117,7 +117,7 @@ const Footer = () => {
                 fontWeight="700"
                 color="text.primary"
               >
-                Contact Info
+                Contact Us
               </Heading>
               <Stack gap="4">
                 <FooterNavItem
