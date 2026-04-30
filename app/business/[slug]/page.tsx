@@ -67,13 +67,16 @@ export async function generateMetadata({
     business.aboutUs?.slice(0, 155) ??
     `See how ${business.companyName} gives back to the community on MasterGiver.`;
 
+  const canonicalUrl = `https://mastergiver.com/business/${slug}`;
+
   return {
     title,
     description,
+    alternates: { canonical: canonicalUrl },
     openGraph: {
       title: `${title} | MasterGiver`,
       description,
-      url: `https://mastergiver.com/business/${slug}`,
+      url: canonicalUrl,
       images: business.logo ? [{ url: business.logo }] : [],
     },
     twitter: {

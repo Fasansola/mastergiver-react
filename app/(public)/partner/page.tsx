@@ -13,10 +13,12 @@ export const metadata: Metadata = {
   title: 'Become a Community Partner | MasterGiver',
   description:
     'Partner with MasterGiver to connect nonprofits, chambers, and associations with businesses committed to verified community impact.',
+  alternates: { canonical: 'https://mastergiver.com/partner' },
   openGraph: {
     title: 'Become a Community Partner | MasterGiver',
     description:
       'Partner with MasterGiver to connect nonprofits, chambers, and associations with businesses committed to verified community impact.',
+    url: 'https://mastergiver.com/partner',
   },
   twitter: {
     card: 'summary_large_image',

@@ -16,6 +16,19 @@ export const metadata: Metadata = {
   title: 'Show Off Your Good Side | MasterGiver',
   description:
     'Build your MasterGiver profile to track your charitable efforts, share your impact, and let the world see your commitment to doing good.',
+  alternates: { canonical: 'https://mastergiver.com/individual' },
+  openGraph: {
+    title: 'Show Off Your Good Side | MasterGiver',
+    description:
+      'Build your MasterGiver profile to track your charitable efforts, share your impact, and let the world see your commitment to doing good.',
+    url: 'https://mastergiver.com/individual',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Show Off Your Good Side | MasterGiver',
+    description:
+      'Build your MasterGiver profile to track your charitable efforts, share your impact, and let the world see your commitment to doing good.',
+  },
 };
 
 export default function IndividualPage() {

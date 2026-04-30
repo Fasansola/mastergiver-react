@@ -29,13 +29,16 @@ export async function generateMetadata({
   const description = profile.aboutMe
     ? profile.aboutMe.slice(0, 155)
     : `View ${fullName}'s philanthropic profile on MasterGiver.`;
+  const canonicalUrl = `https://mastergiver.com/profile/${username}`;
 
   return {
     title,
     description,
+    alternates: { canonical: canonicalUrl },
     openGraph: {
       title,
       description,
+      url: canonicalUrl,
       ...(profile.profilePicture ? { images: [{ url: profile.profilePicture }] } : {}),
     },
     twitter: { card: 'summary', title, description },
@@ -65,8 +68,31 @@ export default async function PublicProfilePage({
   // Show 404 if profile doesn't exist or isn't published
   if (!profile) notFound();
 
+  const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://mastergiver.com';
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: `${profile.firstName} ${profile.lastName}`,
+    url: `${BASE_URL}/profile/${username}`,
+    ...(profile.profilePicture && { image: profile.profilePicture }),
+    ...(profile.aboutMe && { description: profile.aboutMe }),
+    ...(profile.city && profile.state && {
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: profile.city,
+        addressRegion: profile.state,
+      },
+    }),
+    sameAs: [`${BASE_URL}/profile/${username}`],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Stack
         align="center"
         height="40px"

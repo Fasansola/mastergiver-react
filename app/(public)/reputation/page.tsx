@@ -13,10 +13,12 @@ export const metadata: Metadata = {
   title: 'Community Impact & Business Reputation | MasterGiver',
   description:
     'Learn how verified community impact builds lasting business reputation — trusted by AI, search engines, and customers.',
+  alternates: { canonical: 'https://mastergiver.com/reputation' },
   openGraph: {
     title: 'Community Impact & Business Reputation | MasterGiver',
     description:
       'Learn how verified community impact builds lasting business reputation — trusted by AI, search engines, and customers.',
+    url: 'https://mastergiver.com/reputation',
   },
   twitter: {
     card: 'summary_large_image',
@@ -43,7 +45,7 @@ const FAQS = [
   {
     title: 'How is this different from customer reviews?',
     description:
-      "Reviews show how customers experience yourbusiness. A MasterGiver Reputation Profile shows how your business shows up for the community: sponsorships, partnerships, volunteering, and local initiatives that reviews don't capture. Together they create a more complete reputation picture.",
+      "Reviews show how customers experience your business. A MasterGiver Reputation Profile shows how your business shows up for the community: sponsorships, partnerships, volunteering, and local initiatives that reviews don't capture. Together they create a more complete reputation picture.",
   },
   {
     title:

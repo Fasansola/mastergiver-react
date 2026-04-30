@@ -14,10 +14,12 @@ export const metadata: Metadata = {
   title: 'Community Impact & Business Reputation | About MasterGiver',
   description:
     'Community impact is one of the most overlooked drivers of business reputation. MasterGiver helps businesses turn their community involvement into trust, visibility, and growth.',
+  alternates: { canonical: 'https://mastergiver.com/about' },
   openGraph: {
     title: 'Community Impact & Business Reputation | About MasterGiver',
     description:
       'Community impact is one of the most overlooked drivers of business reputation. MasterGiver helps businesses turn their community involvement into trust, visibility, and growth.',
+    url: 'https://mastergiver.com/about',
   },
   twitter: {
     card: 'summary_large_image',

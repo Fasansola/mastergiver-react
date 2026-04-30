@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   title: 'Get Discovered for the Good Your Business Does',
   description:
     'MasterGiver turns your charitable giving and community involvement into verified reputation signals so AI recommends you, search engines rank you higher, and customers choose you.',
+  alternates: { canonical: 'https://mastergiver.com' },
   openGraph: {
     title: 'Get Discovered for the Good Your Business Does | MasterGiver',
     description:
