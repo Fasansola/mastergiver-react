@@ -49,10 +49,10 @@ const BusinessHeaderButtons = ({
         <Link href="/business/signin">Login</Link>
       </Button>
 
-      {/* Sign Up — primary filled, hidden on mobile */}
+      {/* Sign Up — primary filled, visible on all breakpoints */}
       <Button
         asChild
-        display={{ base: 'none', lg: 'flex' }}
+        display="flex"
         bg="#2F2B77"
         color="white"
         h="56px"
