@@ -13,7 +13,7 @@
  *      the user is already signed in (edge case — middleware redirects them away).
  */
 
-import { Box, Container, Flex, HStack } from '@chakra-ui/react';
+import { Box, Button, Container, Flex, HStack } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import siteLogo from '@/public/brand-assets/Mastergiver_logo.svg';
@@ -38,15 +38,28 @@ const BusinessHeader = async ({
   // On public pages check whether the visitor has an active business session.
   // Skip the DB call entirely in dashboard mode — middleware already confirmed it.
   let hasBusinessSession = false;
+  let dashboardHref: string | null = null;
 
   if (!isDashboard) {
     const session = await auth();
     if (session?.user?.id) {
       const business = await prisma.business.findUnique({
         where: { ownerId: session.user.id },
-        select: { id: true },
+        select: { id: true, status: true },
       });
-      hasBusinessSession = !!business;
+      if (business) {
+        hasBusinessSession = true;
+        // Route to the appropriate business destination based on status
+        dashboardHref =
+          business.status === 'ACTIVE'
+            ? '/business/dashboard'
+            : business.status === 'PENDING'
+            ? '/business/confirm'
+            : '/business/suspended';
+      } else {
+        // Individual user session
+        dashboardHref = '/dashboard';
+      }
     }
   }
 
@@ -78,14 +91,31 @@ const BusinessHeader = async ({
                   <BusinessSidebar isDrawer />
                 </BusinessMobileMenu>
               </Box>
-            ) : !hasBusinessSession && !hideAuthButtons ? (
+            ) : dashboardHref ? (
+              /* Logged-in user — show Go to Dashboard button */
+              <Button
+                asChild
+                bg="#2F2B77"
+                color="white"
+                h="44px"
+                borderRadius="8px"
+                px="6"
+                fontWeight="700"
+                className="font-body"
+                fontSize="16px"
+                _hover={{ bg: 'brand.primaryHover' }}
+                boxShadow="0px 8px 10px -6px #E2E1FF, 0px 20px 25px -5px #D4D1FF"
+              >
+                <Link href={dashboardHref}>Go to Dashboard</Link>
+              </Button>
+            ) : !hideAuthButtons ? (
               <>
                 {/* Desktop auth buttons — hidden on mobile */}
                 <Box display={{ base: 'none', lg: 'flex' }} alignItems="center">
                   <BusinessHeaderButtons />
                 </Box>
 
-                {/* Mobile — Login + Sign Up */}
+                {/* Mobile — Login only */}
                 <Box display={{ base: 'flex', lg: 'none' }} alignItems="center">
                   <BusinessHeaderButtons />
                 </Box>
