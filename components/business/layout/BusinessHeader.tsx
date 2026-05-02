@@ -52,7 +52,7 @@ const BusinessHeader = async ({
         // Route to the appropriate business destination based on status
         dashboardHref =
           business.status === 'ACTIVE'
-            ? '/business/dashboard'
+            ? '/business/dashboard/edit-profile'
             : business.status === 'PENDING'
             ? '/business/confirm'
             : '/business/suspended';
@@ -106,7 +106,7 @@ const BusinessHeader = async ({
                 _hover={{ bg: 'brand.primaryHover' }}
                 boxShadow="0px 8px 10px -6px #E2E1FF, 0px 20px 25px -5px #D4D1FF"
               >
-                <Link href={dashboardHref}>Go to Dashboard</Link>
+                <Link href={dashboardHref}>My Dashboard</Link>
               </Button>
             ) : !hideAuthButtons ? (
               <>
