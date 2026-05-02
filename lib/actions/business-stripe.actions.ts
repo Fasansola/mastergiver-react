@@ -114,6 +114,7 @@ export async function createCheckoutSessionAction(): Promise<
       // Reuse an existing Stripe customer if one was already created
       ...(business.stripeCustomerId ? { customer: business.stripeCustomerId } : {}),
       line_items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
+      allow_promotion_codes: true,
       success_url: `${appUrl}/business/confirm?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${appUrl}/business/confirm`,
     });
