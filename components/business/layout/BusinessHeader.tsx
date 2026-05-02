@@ -92,19 +92,16 @@ const BusinessHeader = async ({
                 </BusinessMobileMenu>
               </Box>
             ) : dashboardHref ? (
-              /* Logged-in user — show Go to Dashboard button */
+              /* Logged-in user — show My Dashboard button styled like Log In */
               <Button
                 asChild
-                bg="#2F2B77"
-                color="white"
-                h="44px"
-                borderRadius="8px"
-                px="6"
+                variant="ghost"
+                bg="transparent"
+                color="text.primary"
                 fontWeight="700"
                 className="font-body"
-                fontSize="16px"
-                _hover={{ bg: 'brand.primaryHover' }}
-                boxShadow="0px 8px 10px -6px #E2E1FF, 0px 20px 25px -5px #D4D1FF"
+                px="3"
+                _hover={{ bg: 'transparent', opacity: 0.7 }}
               >
                 <Link href={dashboardHref}>My Dashboard</Link>
               </Button>
