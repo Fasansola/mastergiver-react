@@ -70,18 +70,22 @@ export default async function PublicProfilePage({
 
   const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://mastergiver.com';
 
+  // Strip angle brackets from user-supplied strings before embedding in JSON-LD
+  const sanitize = (str: string | null | undefined) =>
+    str?.replace(/[<>]/g, '') ?? undefined;
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    name: `${profile.firstName} ${profile.lastName}`,
+    name: sanitize(`${profile.firstName} ${profile.lastName}`),
     url: `${BASE_URL}/profile/${username}`,
     ...(profile.profilePicture && { image: profile.profilePicture }),
-    ...(profile.aboutMe && { description: profile.aboutMe }),
+    ...(profile.aboutMe && { description: sanitize(profile.aboutMe) }),
     ...(profile.city && profile.state && {
       address: {
         '@type': 'PostalAddress',
-        addressLocality: profile.city,
-        addressRegion: profile.state,
+        addressLocality: sanitize(profile.city),
+        addressRegion: sanitize(profile.state),
       },
     }),
     sameAs: [`${BASE_URL}/profile/${username}`],

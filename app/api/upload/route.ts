@@ -74,9 +74,20 @@ export async function DELETE(request: NextRequest) {
   if (!session?.user.id) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
+
   const { url } = await request.json();
   if (!url) {
     return NextResponse.json({ error: 'No URL provided' }, { status: 400 });
+  }
+
+  // Verify the URL belongs to this user before deleting
+  const profile = await prisma.profile.findUnique({
+    where: { userId: session.user.id },
+    select: { profilePicture: true },
+  });
+
+  if (profile?.profilePicture !== url) {
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
   }
 
   await del(url);

@@ -7,6 +7,24 @@
 
 import { z } from 'zod';
 
+/** Only allow http/https URLs — blocks javascript: and data: protocol injection */
+const safeUrl = z
+  .string()
+  .url('Please enter a valid URL')
+  .refine(
+    (url) => {
+      try {
+        const { protocol } = new URL(url);
+        return protocol === 'http:' || protocol === 'https:';
+      } catch {
+        return false;
+      }
+    },
+    { message: 'URL must start with http:// or https://' }
+  );
+
+const safeUrlOrEmpty = safeUrl.or(z.literal('')).nullable().optional();
+
 // ---------------------------------------------------------------------------
 // Section 1 — About Us
 // ---------------------------------------------------------------------------
@@ -21,7 +39,7 @@ export const aboutUsSchema = z.object({
   zipCode: z.string().max(20).nullable().optional(),
   aboutUs: z.string().max(500, 'About Us must be 500 characters or fewer').nullable().optional(),
   tagline: z.string().max(200).nullable().optional(),
-  website: z.string().url('Please enter a valid URL').or(z.literal('')).nullable().optional(),
+  website: safeUrlOrEmpty,
 });
 
 export type AboutUsInput = z.infer<typeof aboutUsSchema>;
@@ -81,12 +99,7 @@ export type AreasOfImpactInput = z.infer<typeof areasOfImpactSchema>;
 export const communityEventSchema = z.object({
   photo: z.string({ error: 'Photo is required' }).min(1, 'Photo is required'),
   description: z.string().min(1, 'Description is required').max(1000),
-  externalUrl: z
-    .string()
-    .url('Please enter a valid URL')
-    .or(z.literal(''))
-    .nullable()
-    .optional(),
+  externalUrl: safeUrlOrEmpty,
 });
 
 export type CommunityEventInput = z.infer<typeof communityEventSchema>;
@@ -110,12 +123,7 @@ export type EndorsementInput = z.infer<typeof endorsementSchema>;
 export const offerSchema = z.object({
   title: z.string().min(1, 'Title is required').max(200),
   description: z.string().min(1, 'Description is required').max(1000),
-  link: z
-    .string()
-    .url('Please enter a valid URL')
-    .or(z.literal(''))
-    .nullable()
-    .optional(),
+  link: safeUrlOrEmpty,
   offerCode: z.string().max(100).nullable().optional(),
   // Comes from an <input type="date"> so it's a string like "2025-12-31"
   expiresAt: z

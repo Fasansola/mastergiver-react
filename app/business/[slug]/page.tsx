@@ -161,20 +161,37 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
 
   const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://mastergiver.com';
 
+  // Strip angle brackets from user-supplied strings before embedding in JSON-LD
+  const sanitize = (str: string | null | undefined) =>
+    str?.replace(/[<>]/g, '') ?? undefined;
+
+  // Only allow http/https website URLs in JSON-LD — never javascript: or data:
+  const safeWebsite = (() => {
+    if (!business.website) return `${BASE_URL}/business/${slug}`;
+    try {
+      const { protocol } = new URL(business.website);
+      return protocol === 'http:' || protocol === 'https:'
+        ? business.website
+        : `${BASE_URL}/business/${slug}`;
+    } catch {
+      return `${BASE_URL}/business/${slug}`;
+    }
+  })();
+
   // Schema.org JSON-LD — helps search engines and AI understand this business
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: business.companyName,
-    url: business.website ?? `${BASE_URL}/business/${slug}`,
+    name: sanitize(business.companyName),
+    url: safeWebsite,
     ...(business.logo && { logo: business.logo }),
     ...(business.coverPhoto && { image: business.coverPhoto }),
-    ...(business.tagline && { slogan: business.tagline }),
-    ...(business.aboutUs && { description: business.aboutUs }),
+    ...(business.tagline && { slogan: sanitize(business.tagline) }),
+    ...(business.aboutUs && { description: sanitize(business.aboutUs) }),
     ...(business.address && {
       address: {
         '@type': 'PostalAddress',
-        streetAddress: business.address,
+        streetAddress: sanitize(business.address),
       },
     }),
     sameAs: [`${BASE_URL}/business/${slug}`],
