@@ -62,8 +62,9 @@ const GoodNotVisibleSection = () => {
       >
         <Box textAlign="center" w="100%" maxW="">
           <LandingH>
-            Your Community Impact Is Hidden. <br />
-            That&apos;s a Problem.
+            Get Discovered for the Good Your{' '}
+            <br className="sm:hidden md:block" />
+            Business Does
           </LandingH>
         </Box>
 

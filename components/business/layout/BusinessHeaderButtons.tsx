@@ -46,7 +46,7 @@ const BusinessHeaderButtons = ({
         className="font-body"
         _hover={{ bg: 'transparent', opacity: 0.7 }}
       >
-        <Link href="/business/signin">Login</Link>
+        <Link href="/business/signin">Log In</Link>
       </Button>
 
       {/* Sign Up — primary filled, hidden on mobile */}

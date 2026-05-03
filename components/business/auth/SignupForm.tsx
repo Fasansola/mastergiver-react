@@ -65,7 +65,8 @@ const SignupForm = () => {
           lineHeight="1.2em"
           color="text.heading"
         >
-          Create your business profile
+          Create your <br className="sm:block md:hidden" />
+          Business Profile
         </Heading>
 
         <Text fontSize="body" textAlign="center" color="text.primary">

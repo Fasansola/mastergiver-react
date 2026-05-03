@@ -44,9 +44,9 @@ const HomeHeroSection = () => {
                 fontSize={{ base: '36px', md: '52px', lg: '74px' }}
                 lineHeight="120%"
               >
-                Get Discovered for the{' '}
+                Your Community Impact is Hidden.{' '}
                 <Span className="font-display" color="brand.primary">
-                  Good Your Business Does
+                  That’s a Problem.
                 </Span>
               </Heading>
               <Text

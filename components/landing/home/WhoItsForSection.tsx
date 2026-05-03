@@ -4,7 +4,7 @@
  * Split-screen section with background photo on the right and text with
  * a BrandCheck checklist describing the ideal customer profile.
  */
-import { Container, Stack, Text } from '@chakra-ui/react';
+import { Container, Span, Stack, Text } from '@chakra-ui/react';
 import LandingH from '@/components/landing/LandingH';
 import BrandCheck from '@/components/landing/BrandCheck';
 
@@ -41,12 +41,14 @@ const WhoItsForSection = () => {
             maxW={{ base: '100%', lg: '568px' }}
             pr={{ base: '0', lg: '64px' }}
           >
-            <LandingH>
-              Who MasterGiver <br className="sm-mobile-only" />
-              Is Built For
-            </LandingH>
+            <Span textAlign={{ base: 'center', md: 'left ' }}>
+              <LandingH>
+                Who MasterGiver <br className="sm-mobile-only" />
+                Is Built For
+              </LandingH>
+            </Span>
             <Stack gap="8">
-              <Text>
+              <Text textAlign={{ base: 'center', md: 'left ' }}>
                 MasterGiver is designed for businesses that understand
                 reputation is more than marketing, it&apos;s an asset.
               </Text>
