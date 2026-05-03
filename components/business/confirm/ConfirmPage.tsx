@@ -23,7 +23,7 @@ import Image from 'next/image';
 import Badge from '@/public/brand-assets/MastergiverBadge.png';
 
 const POLL_INTERVAL_MS = 3000;
-const MAX_POLL_ATTEMPTS = 5;
+const MAX_POLL_ATTEMPTS = 15; // 15 attempts × 3s = 45s total window
 
 interface ConfirmPageProps {
   sessionId: string | null;
@@ -331,7 +331,8 @@ const ConfirmPage = ({ sessionId }: ConfirmPageProps) => {
     pollAttemptsRef.current = 0;
     setPollingTimedOut(false);
     setIsPolling(true);
-    pollTimerRef.current = setTimeout(pollOnce, POLL_INTERVAL_MS);
+    // Fire the first check immediately, then every POLL_INTERVAL_MS after that
+    pollOnce();
   }, [pollOnce]);
 
   useEffect(() => {
