@@ -63,6 +63,14 @@ export async function POST(req: NextRequest) {
         await handleSubscriptionDeleted(event.data.object as Stripe.Subscription);
         break;
 
+      case 'customer.subscription.updated':
+        await handleSubscriptionUpdated(event.data.object as Stripe.Subscription);
+        break;
+
+      case 'invoice.payment_action_required':
+        await handlePaymentActionRequired(event.data.object as Stripe.Invoice);
+        break;
+
       default:
         // Other event types are ignored — Stripe may send events we don't handle
         break;
@@ -176,6 +184,71 @@ async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
 
   if (!business) {
     throw new Error(`customer.subscription.deleted: no business found for customer ${customerId}`);
+  }
+
+  await prisma.business.update({
+    where: { id: business.id },
+    data: { status: 'SUSPENDED' },
+  });
+}
+
+/**
+ * customer.subscription.updated
+ * Fires when a subscription changes — e.g. Stripe successfully retries a failed
+ * payment and the subscription moves from "past_due" back to "active".
+ * Reactivates a suspended account if the subscription is now active.
+ */
+async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
+  const customerId = extractId(subscription.customer);
+  if (!customerId) throw new Error('customer.subscription.updated: missing customer ID');
+
+  const business = await prisma.business.findFirst({
+    where: { stripeCustomerId: customerId },
+  });
+
+  if (!business) {
+    // Subscription may belong to a customer created before we stored the ID — ignore safely
+    console.warn(`customer.subscription.updated: no business found for customer ${customerId}`);
+    return;
+  }
+
+  if (subscription.status === 'active') {
+    // Subscription recovered — reactivate the account
+    await prisma.business.update({
+      where: { id: business.id },
+      data: {
+        status: 'ACTIVE',
+        subscriptionStatus: 'active',
+        currentPeriodEnd: subscription.items.data[0]?.current_period_end
+          ? new Date(subscription.items.data[0].current_period_end * 1000)
+          : undefined,
+      },
+    });
+  } else if (subscription.status === 'past_due' || subscription.status === 'unpaid') {
+    // Payment retries are failing — suspend the account
+    await prisma.business.update({
+      where: { id: business.id },
+      data: { status: 'SUSPENDED', subscriptionStatus: subscription.status },
+    });
+  }
+}
+
+/**
+ * invoice.payment_action_required
+ * Payment needs additional authentication (e.g. 3D Secure). Suspend the account
+ * until the user completes authentication and the payment goes through.
+ */
+async function handlePaymentActionRequired(invoice: Stripe.Invoice) {
+  const customerId = extractId(invoice.customer);
+  if (!customerId) throw new Error('invoice.payment_action_required: missing customer ID');
+
+  const business = await prisma.business.findFirst({
+    where: { stripeCustomerId: customerId },
+  });
+
+  if (!business) {
+    console.warn(`invoice.payment_action_required: no business found for customer ${customerId}`);
+    return;
   }
 
   await prisma.business.update({
