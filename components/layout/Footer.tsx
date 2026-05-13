@@ -59,6 +59,9 @@ const Footer = () => {
                 <FooterNavItem href="/reputation">
                   Community Impact and Reputation
                 </FooterNavItem>
+                <FooterNavItem href="/good-businesses">
+                  GOOD Businesses Directory
+                </FooterNavItem>
               </Stack>
             </Stack>
 

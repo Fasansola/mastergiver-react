@@ -33,6 +33,8 @@ import EndorsementList from '@/components/business/profile/EndorsementList';
 import OfferCards from '@/components/business/profile/OfferCards';
 import ImpactRecordPublic from '@/components/business/profile/ImpactRecordPublic';
 import { Box, HStack, Stack, Container, Heading, Text } from '@chakra-ui/react';
+import Link from 'next/link';
+import { toCitySlug } from '@/lib/directory';
 import BusinessHeader from '@/components/business/layout/BusinessHeader';
 import Image from 'next/image';
 
@@ -493,6 +495,27 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
                   </Heading>
                   <OfferCards offers={offers} />
                 </Stack>
+              )}
+
+              {/* City backlink — internal linking for SEO */}
+              {business.city && business.state && (
+                <Box w="100%" pt="4" pb="2">
+                  <Link
+                    href={`/good-businesses/${toCitySlug(business.city, business.state)}`}
+                  >
+                    <Text
+                      as="span"
+                      fontSize="14px"
+                      color="#2F2B77"
+                      fontWeight="600"
+                      className="font-body"
+                      _hover={{ textDecoration: 'underline' }}
+                    >
+                      ← Browse more GOOD Businesses in {business.city},{' '}
+                      {business.state}
+                    </Text>
+                  </Link>
+                </Box>
               )}
 
             </Stack>

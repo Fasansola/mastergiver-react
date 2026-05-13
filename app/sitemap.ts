@@ -9,6 +9,7 @@
 
 import type { MetadataRoute } from 'next';
 import { prisma } from '@/lib/prisma';
+import { toCitySlug } from '@/lib/directory';
 
 const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://mastergiver.com';
 
@@ -21,12 +22,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly',
       priority: 1,
     },
+    {
+      url: `${BASE_URL}/good-businesses`,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.9,
+    },
   ];
 
   // Published business profiles
   const businesses = await prisma.business.findMany({
     where: { published: true, status: 'ACTIVE' },
-    select: { slug: true, updatedAt: true },
+    select: { slug: true, city: true, state: true, updatedAt: true },
   });
 
   const businessRoutes: MetadataRoute.Sitemap = businesses.map((b) => ({
@@ -35,6 +42,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: 'monthly',
     priority: 0.8,
   }));
+
+  // GOOD Businesses city pages — one per unique city+state with active profiles
+  const citySet = new Map<string, Date>();
+  for (const b of businesses) {
+    if (!b.city || !b.state) continue;
+    const slug = toCitySlug(b.city, b.state);
+    const existing = citySet.get(slug);
+    if (!existing || b.updatedAt > existing) {
+      citySet.set(slug, b.updatedAt);
+    }
+  }
+  const cityRoutes: MetadataRoute.Sitemap = Array.from(citySet.entries()).map(
+    ([slug, lastModified]) => ({
+      url: `${BASE_URL}/good-businesses/${slug}`,
+      lastModified,
+      changeFrequency: 'weekly' as const,
+      priority: 0.85,
+    })
+  );
 
   // Published individual profiles
   const profiles = await prisma.profile.findMany({
@@ -51,5 +77,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     }));
 
-  return [...staticRoutes, ...businessRoutes, ...profileRoutes];
+  return [...staticRoutes, ...businessRoutes, ...cityRoutes, ...profileRoutes];
 }
