@@ -16,7 +16,7 @@
 import { useState, useRef, useEffect, useId } from 'react';
 import { useRouter } from 'next/navigation';
 import { Box, HStack, Stack, Text } from '@chakra-ui/react';
-import { LuSearch, LuMapPin } from 'react-icons/lu';
+import { LuSearch, LuMapPin, LuArrowRight } from 'react-icons/lu';
 import type { CityGroup } from '@/lib/directory';
 
 interface Props {
@@ -30,7 +30,6 @@ const DirectorySearchClient = ({ cities }: Props) => {
   const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  // Stable IDs for ARIA linkage
   const listboxId = useId();
   const optionId = (slug: string) => `city-opt-${slug}`;
 
@@ -103,7 +102,7 @@ const DirectorySearchClient = ({ cities }: Props) => {
 
   return (
     <Box ref={containerRef} position="relative" w="100%" maxW="540px">
-      {/* Input row */}
+      {/* Input */}
       <HStack
         bg="white"
         borderRadius="14px"
@@ -117,7 +116,6 @@ const DirectorySearchClient = ({ cities }: Props) => {
           boxShadow: '0px 4px 28px rgba(47, 43, 119, 0.22)',
         }}
       >
-        {/* Search icon */}
         <Box color="#9CA3AF" flexShrink="0" display="flex" alignItems="center">
           <LuSearch size={18} />
         </Box>
@@ -150,60 +148,117 @@ const DirectorySearchClient = ({ cities }: Props) => {
         />
       </HStack>
 
-      {/* Dropdown results */}
+      {/* Dropdown */}
       {isOpen && (
         <Stack
           id={listboxId}
           role="listbox"
           aria-label="City suggestions"
           position="absolute"
-          top="calc(100% + 10px)"
+          top="calc(100% + 8px)"
           left="0"
           right="0"
           bg="white"
-          borderRadius="14px"
-          border="1px solid #EEF2FF"
-          boxShadow="0px 12px 40px rgba(47, 43, 119, 0.14)"
+          borderRadius="16px"
+          border="1px solid #E8EAFF"
+          boxShadow="0px 16px 48px rgba(47, 43, 119, 0.16)"
           zIndex="1000"
           gap="0"
           overflow="hidden"
         >
-          {filtered.map((c, i) => (
-            <HStack
-              key={c.slug}
-              id={optionId(c.slug)}
-              role="option"
-              aria-selected={i === focusedIndex}
-              px="20px"
-              py="13px"
-              gap="3"
-              cursor="pointer"
-              bg={i === focusedIndex ? '#F5F3FF' : 'transparent'}
-              _hover={{ bg: '#F5F3FF' }}
-              onClick={() => handleSelect(c.slug)}
-              borderBottom="1px solid #F3F4F6"
-              _last={{ borderBottom: 'none' }}
-              align="center"
-              transition="background 0.1s"
+          {/* Header */}
+          <Box
+            px="16px"
+            py="10px"
+            borderBottom="1px solid #F0F0F8"
+            bg="#FAFBFF"
+          >
+            <Text
+              fontSize="10px"
+              fontWeight="700"
+              color="#9CA3AF"
+              className="font-body"
+              letterSpacing="0.8px"
+              textTransform="uppercase"
             >
-              <Box color="#2F2B77" flexShrink="0" display="flex">
-                <LuMapPin size={14} />
-              </Box>
-              <Box flex="1">
-                <Text
-                  fontSize="15px"
-                  fontWeight="600"
-                  color="#27262D"
-                  className="font-body"
+              {filtered.length} {filtered.length === 1 ? 'city' : 'cities'} found
+            </Text>
+          </Box>
+
+          {/* Results */}
+          {filtered.map((c, i) => {
+            const isFocused = i === focusedIndex;
+            return (
+              <HStack
+                key={c.slug}
+                id={optionId(c.slug)}
+                role="option"
+                aria-selected={isFocused}
+                px="16px"
+                py="12px"
+                gap="3"
+                cursor="pointer"
+                bg={isFocused ? '#F5F3FF' : 'white'}
+                _hover={{ bg: '#F5F3FF' }}
+                onClick={() => handleSelect(c.slug)}
+                borderBottom="1px solid #F5F5FB"
+                _last={{ borderBottom: 'none' }}
+                align="center"
+                transition="background 0.1s"
+              >
+                {/* Icon badge */}
+                <Box
+                  w="34px"
+                  h="34px"
+                  borderRadius="10px"
+                  bg={isFocused ? '#EBE8FF' : '#F4F2FF'}
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  flexShrink="0"
+                  transition="background 0.1s"
                 >
-                  {c.city}, {c.state}
-                </Text>
-                <Text fontSize="12px" color="#9CA3AF" className="font-body">
-                  {c.count} {c.count === 1 ? 'business' : 'businesses'}
-                </Text>
-              </Box>
-            </HStack>
-          ))}
+                  <Box color="#2F2B77" display="flex">
+                    <LuMapPin size={14} />
+                  </Box>
+                </Box>
+
+                {/* Text */}
+                <Stack gap="0" flex="1" textAlign="left">
+                  <Text
+                    fontSize="14px"
+                    fontWeight="600"
+                    color="#1E1B4B"
+                    className="font-body"
+                    lineHeight="140%"
+                  >
+                    {c.city},{' '}
+                    <Box as="span" color="#6B7280" fontWeight="500">
+                      {c.state}
+                    </Box>
+                  </Text>
+                  <Text
+                    fontSize="11px"
+                    color="#9CA3AF"
+                    className="font-body"
+                    lineHeight="140%"
+                  >
+                    {c.count} {c.count === 1 ? 'business' : 'businesses'}
+                  </Text>
+                </Stack>
+
+                {/* Arrow — shows on focus/hover */}
+                <Box
+                  color={isFocused ? '#2F2B77' : '#C4C0F0'}
+                  display="flex"
+                  flexShrink="0"
+                  transition="color 0.1s"
+                >
+                  <LuArrowRight size={14} />
+                </Box>
+              </HStack>
+            );
+          })}
         </Stack>
       )}
     </Box>
