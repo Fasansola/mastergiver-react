@@ -150,14 +150,17 @@ const CityDirectoryPage = async ({ params }: Props) => {
                 flexShrink="0"
               />
               <Text
-                fontSize={{ base: '10px', md: '12px' }}
+                fontSize="11px"
                 fontWeight="700"
                 color="#2F2B77"
                 className="font-body"
-                letterSpacing="0.8px"
+                letterSpacing={{ base: '0.2px', md: '0.7px' }}
                 textTransform="uppercase"
               >
-                GOOD Businesses™ · Powered by MasterGiver
+                GOOD Businesses™
+                <Box as="span" display={{ base: 'none', md: 'inline' }}>
+                  {' · Powered by MasterGiver'}
+                </Box>
               </Text>
             </Box>
 
