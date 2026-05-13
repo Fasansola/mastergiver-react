@@ -75,10 +75,12 @@ const CityGrid = ({ cities }: Props) => {
                   bg="#FAFBFF"
                   border="1px solid #E8EBFF"
                   borderRadius="12px"
-                  px="16px"
+                  px={{ base: '12px', md: '16px' }}
                   py="14px"
                   gap="3"
                   justify="space-between"
+                  align="start"
+                  h="100%"
                   _hover={{
                     bg: '#F0EEFF',
                     borderColor: '#2F2B77',
@@ -88,22 +90,19 @@ const CityGrid = ({ cities }: Props) => {
                   transition="all 0.15s"
                   cursor="pointer"
                 >
-                  <HStack gap="2.5" align="start" minW="0">
+                  <HStack gap="2" align="start" flex="1" minW="0">
                     <Box color="#2F2B77" flexShrink="0" pt="2px" display="flex">
                       <LuMapPin size={13} />
                     </Box>
                     <Stack gap="0" minW="0">
+                      {/* Allow long city names to wrap rather than truncate */}
                       <Text
                         fontWeight="600"
                         fontSize="13px"
                         color="#1E1B4B"
                         className="font-body"
                         lineHeight="140%"
-                        style={{
-                          overflow: 'hidden',
-                          whiteSpace: 'nowrap',
-                          textOverflow: 'ellipsis',
-                        }}
+                        wordBreak="break-word"
                       >
                         {city.city}, {city.state}
                       </Text>
@@ -117,7 +116,7 @@ const CityGrid = ({ cities }: Props) => {
                       </Text>
                     </Stack>
                   </HStack>
-                  <Box color="#C4C0F0" flexShrink="0" display="flex">
+                  <Box color="#C4C0F0" flexShrink="0" display="flex" pt="2px">
                     <LuArrowRight size={14} />
                   </Box>
                 </HStack>

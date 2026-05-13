@@ -104,12 +104,7 @@ const BusinessDirectoryCard = ({ business }: Props) => {
               lineHeight="130%"
               color="#1A1730"
               className="font-body"
-              style={{
-                overflow: 'hidden',
-                display: '-webkit-box',
-                WebkitBoxOrient: 'vertical',
-                WebkitLineClamp: 2,
-              }}
+              lineClamp={2}
             >
               {companyName}
             </Text>
@@ -134,12 +129,7 @@ const BusinessDirectoryCard = ({ business }: Props) => {
               lineHeight="170%"
               color="#4B5563"
               className="font-body"
-              style={{
-                overflow: 'hidden',
-                display: '-webkit-box',
-                WebkitBoxOrient: 'vertical',
-                WebkitLineClamp: 3,
-              }}
+              lineClamp={3}
             >
               {tagline}
             </Text>
@@ -185,7 +175,7 @@ const BusinessDirectoryCard = ({ business }: Props) => {
       {/* Divider + CTA */}
       <Box>
         <Separator borderColor="#F0EEF8" />
-        <Link href={`/business/${slug}`} style={{ display: 'block' }}>
+        <Box as={Link} href={`/business/${slug}`} display="block">
           <HStack
             px="6"
             py="4"
@@ -208,7 +198,7 @@ const BusinessDirectoryCard = ({ business }: Props) => {
               <LuArrowRight size={15} />
             </Box>
           </HStack>
-        </Link>
+        </Box>
       </Box>
     </Stack>
   );
