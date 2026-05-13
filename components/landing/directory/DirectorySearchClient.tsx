@@ -164,7 +164,7 @@ const DirectorySearchClient = ({ cities }: Props) => {
           borderRadius="14px"
           border="1px solid #EEF2FF"
           boxShadow="0px 12px 40px rgba(47, 43, 119, 0.14)"
-          zIndex="50"
+          zIndex="1000"
           gap="0"
           overflow="hidden"
         >

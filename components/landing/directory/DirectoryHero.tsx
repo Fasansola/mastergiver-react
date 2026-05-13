@@ -21,29 +21,29 @@ const DirectoryHero = ({ cities }: Props) => {
       bg="linear-gradient(160deg, #F0F4FF 0%, #EAF0FF 40%, #F5F3FF 100%)"
       py={{ base: '56px', md: '72px', lg: '100px' }}
       position="relative"
-      overflow="hidden"
     >
-      {/* Decorative circles */}
-      <Box
-        position="absolute"
-        top="-120px"
-        right="-120px"
-        w={{ base: '280px', lg: '500px' }}
-        h={{ base: '280px', lg: '500px' }}
-        borderRadius="full"
-        bg="rgba(47,43,119,0.05)"
-        pointerEvents="none"
-      />
-      <Box
-        position="absolute"
-        bottom="-80px"
-        left="-80px"
-        w={{ base: '200px', lg: '320px' }}
-        h={{ base: '200px', lg: '320px' }}
-        borderRadius="full"
-        bg="rgba(47,43,119,0.04)"
-        pointerEvents="none"
-      />
+      {/* Decorative circles — clipped to their own box so overflow:hidden doesn't
+          cut off the absolutely-positioned search dropdown */}
+      <Box position="absolute" inset="0" overflow="hidden" pointerEvents="none">
+        <Box
+          position="absolute"
+          top="-120px"
+          right="-120px"
+          w={{ base: '280px', lg: '500px' }}
+          h={{ base: '280px', lg: '500px' }}
+          borderRadius="full"
+          bg="rgba(47,43,119,0.05)"
+        />
+        <Box
+          position="absolute"
+          bottom="-80px"
+          left="-80px"
+          w={{ base: '200px', lg: '320px' }}
+          h={{ base: '200px', lg: '320px' }}
+          borderRadius="full"
+          bg="rgba(47,43,119,0.04)"
+        />
+      </Box>
 
       <Container position="relative">
         <Stack
