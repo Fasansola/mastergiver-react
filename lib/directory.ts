@@ -55,19 +55,24 @@ export function parseCitySlug(slug: string): { city: string; state: string } {
 
 /** Fetch all active+published businesses, newest first. */
 export async function getAllDirectoryBusinesses(): Promise<DirectoryBusiness[]> {
-  return prisma.business.findMany({
-    where: { status: 'ACTIVE', published: true },
-    select: {
-      slug: true,
-      companyName: true,
-      logo: true,
-      city: true,
-      state: true,
-      tagline: true,
-      causes: { select: { cause: { select: { name: true } } } },
-    },
-    orderBy: { updatedAt: 'desc' },
-  });
+  try {
+    return await prisma.business.findMany({
+      where: { status: 'ACTIVE', published: true },
+      select: {
+        slug: true,
+        companyName: true,
+        logo: true,
+        city: true,
+        state: true,
+        tagline: true,
+        causes: { select: { cause: { select: { name: true } } } },
+      },
+      orderBy: { updatedAt: 'desc' },
+    });
+  } catch (err) {
+    console.error('[directory] getAllDirectoryBusinesses failed:', err);
+    return [];
+  }
 }
 
 /**
@@ -75,32 +80,37 @@ export async function getAllDirectoryBusinesses(): Promise<DirectoryBusiness[]> 
  * Used to populate the city browse grid and search typeahead.
  */
 export async function getCityGroups(): Promise<CityGroup[]> {
-  const businesses = await prisma.business.findMany({
-    where: {
-      status: 'ACTIVE',
-      published: true,
-      city: { not: null },
-      state: { not: null },
-    },
-    select: { city: true, state: true },
-  });
+  try {
+    const businesses = await prisma.business.findMany({
+      where: {
+        status: 'ACTIVE',
+        published: true,
+        city: { not: null },
+        state: { not: null },
+      },
+      select: { city: true, state: true },
+    });
 
-  const map = new Map<string, { city: string; state: string; count: number }>();
+    const map = new Map<string, { city: string; state: string; count: number }>();
 
-  for (const b of businesses) {
-    if (!b.city || !b.state) continue;
-    const key = toCitySlug(b.city, b.state);
-    const existing = map.get(key);
-    if (existing) {
-      existing.count++;
-    } else {
-      map.set(key, { city: b.city, state: b.state, count: 1 });
+    for (const b of businesses) {
+      if (!b.city || !b.state) continue;
+      const key = toCitySlug(b.city, b.state);
+      const existing = map.get(key);
+      if (existing) {
+        existing.count++;
+      } else {
+        map.set(key, { city: b.city, state: b.state, count: 1 });
+      }
     }
-  }
 
-  return Array.from(map.entries())
-    .map(([slug, v]) => ({ ...v, slug }))
-    .sort((a, b) => b.count - a.count);
+    return Array.from(map.entries())
+      .map(([slug, v]) => ({ ...v, slug }))
+      .sort((a, b) => b.count - a.count);
+  } catch (err) {
+    console.error('[directory] getCityGroups failed:', err);
+    return [];
+  }
 }
 
 /**
@@ -112,22 +122,27 @@ export async function getBusinessesByCity(
 ): Promise<DirectoryBusiness[]> {
   const { city, state } = parseCitySlug(citySlug);
 
-  return prisma.business.findMany({
-    where: {
-      status: 'ACTIVE',
-      published: true,
-      city: { equals: city, mode: 'insensitive' },
-      state: { equals: state, mode: 'insensitive' },
-    },
-    select: {
-      slug: true,
-      companyName: true,
-      logo: true,
-      city: true,
-      state: true,
-      tagline: true,
-      causes: { select: { cause: { select: { name: true } } } },
-    },
-    orderBy: { updatedAt: 'desc' },
-  });
+  try {
+    return await prisma.business.findMany({
+      where: {
+        status: 'ACTIVE',
+        published: true,
+        city: { equals: city, mode: 'insensitive' },
+        state: { equals: state, mode: 'insensitive' },
+      },
+      select: {
+        slug: true,
+        companyName: true,
+        logo: true,
+        city: true,
+        state: true,
+        tagline: true,
+        causes: { select: { cause: { select: { name: true } } } },
+      },
+      orderBy: { updatedAt: 'desc' },
+    });
+  } catch (err) {
+    console.error('[directory] getBusinessesByCity failed:', err);
+    return [];
+  }
 }

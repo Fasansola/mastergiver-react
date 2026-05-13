@@ -31,10 +31,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   // Published business profiles
-  const businesses = await prisma.business.findMany({
-    where: { published: true, status: 'ACTIVE' },
-    select: { slug: true, city: true, state: true, updatedAt: true },
-  });
+  let businesses: { slug: string; city: string | null; state: string | null; updatedAt: Date }[] = [];
+  try {
+    businesses = await prisma.business.findMany({
+      where: { published: true, status: 'ACTIVE' },
+      select: { slug: true, city: true, state: true, updatedAt: true },
+    });
+  } catch (err) {
+    console.error('[sitemap] business query failed:', err);
+  }
 
   const businessRoutes: MetadataRoute.Sitemap = businesses.map((b) => ({
     url: `${BASE_URL}/business/${b.slug}`,

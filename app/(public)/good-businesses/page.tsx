@@ -11,7 +11,7 @@
 
 import type { Metadata } from 'next';
 import { Container, Grid, Heading, Stack, Text } from '@chakra-ui/react';
-import { getAllDirectoryBusinesses, getCityGroups } from '@/lib/directory';
+import { getAllDirectoryBusinesses, getCityGroups, type DirectoryBusiness, type CityGroup } from '@/lib/directory';
 import DirectoryHero from '@/components/landing/directory/DirectoryHero';
 import CityGrid from '@/components/landing/directory/CityGrid';
 import BusinessDirectoryCard from '@/components/landing/directory/BusinessDirectoryCard';
@@ -46,7 +46,10 @@ const GoodBusinessesPage = async () => {
   const [businesses, cities] = await Promise.all([
     getAllDirectoryBusinesses(),
     getCityGroups(),
-  ]);
+  ]).catch((err) => {
+    console.error('[good-businesses] page data fetch failed:', err);
+    return [[], []] as [DirectoryBusiness[], CityGroup[]];
+  });
 
   // JSON-LD: ItemList schema so Google understands this is a curated directory
   const jsonLd = {
