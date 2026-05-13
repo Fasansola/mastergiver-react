@@ -68,10 +68,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   );
 
   // Published individual profiles
-  const profiles = await prisma.profile.findMany({
-    where: { status: 'PUBLISHED' },
-    select: { username: true, updatedAt: true },
-  });
+  let profiles: { username: string | null; updatedAt: Date }[] = [];
+  try {
+    profiles = await prisma.profile.findMany({
+      where: { status: 'PUBLISHED' },
+      select: { username: true, updatedAt: true },
+    });
+  } catch (err) {
+    console.error('[sitemap] profile query failed:', err);
+  }
 
   const profileRoutes: MetadataRoute.Sitemap = profiles
     .filter((p) => p.username)

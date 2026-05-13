@@ -5,17 +5,25 @@
  *
  * Catches runtime errors (e.g. DB connection failures) and renders
  * a friendly recovery page instead of a raw 500.
+ * Logs the error client-side for debugging.
  */
 
+import { useEffect } from 'react';
 import { Box, Container, Heading, Stack, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 
 export default function DirectoryError({
+  error,
   reset,
 }: {
-  error: Error;
+  error: Error & { digest?: string };
   reset: () => void;
 }) {
+  // Log to console so the error is visible in Vercel's runtime logs
+  useEffect(() => {
+    console.error('[good-businesses] boundary caught error:', error);
+  }, [error]);
+
   return (
     <Stack
       bg="linear-gradient(160deg, #F0F4FF 0%, #EAF0FF 40%, #F5F3FF 100%)"
@@ -89,6 +97,7 @@ export default function DirectoryError({
               boxShadow="0px 4px 14px rgba(47, 43, 119, 0.25)"
               _hover={{ bg: '#3d3899' }}
               transition="background 0.15s"
+              aria-label="Try loading the directory again"
             >
               Try again
             </Box>

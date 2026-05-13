@@ -82,9 +82,9 @@ const DirectoryCta = () => {
 
           {/* Benefit pills */}
           <HStack gap="3" flexWrap="wrap" justify="center">
-            {BENEFITS.map((b, i) => (
+            {BENEFITS.map((b) => (
               <HStack
-                key={i}
+                key={b.label}
                 gap="2"
                 bg="rgba(255,255,255,0.08)"
                 border="1px solid rgba(255,255,255,0.12)"

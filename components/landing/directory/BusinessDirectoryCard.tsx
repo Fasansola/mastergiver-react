@@ -69,6 +69,7 @@ const BusinessDirectoryCard = ({ business }: Props) => {
                 src={logo}
                 alt={`${name} logo`}
                 fill
+                sizes="64px"
                 style={{ objectFit: 'cover' }}
               />
             </Box>
@@ -146,9 +147,9 @@ const BusinessDirectoryCard = ({ business }: Props) => {
 
           {visibleCauses.length > 0 && (
             <HStack gap="2" flexWrap="wrap">
-              {visibleCauses.map((bc, i) => (
+              {visibleCauses.map((bc) => (
                 <Box
-                  key={i}
+                  key={bc.cause.name}
                   px="9px"
                   py="3px"
                   borderRadius="100px"

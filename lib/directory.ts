@@ -3,6 +3,7 @@
  *
  * Database queries and URL utilities for the GOOD Businesses directory.
  * All queries filter to status: ACTIVE + published: true only.
+ * All query functions return empty arrays on error so pages never crash.
  */
 
 import { prisma } from '@/lib/prisma';
@@ -43,9 +44,14 @@ export function toCitySlug(city: string, state: string): string {
  * Strategy: the last hyphen segment is always the 2-char state abbreviation.
  * e.g. "wilmington-nc" → { city: "Wilmington", state: "NC" }
  * e.g. "new-york-ny"   → { city: "New York",   state: "NY" }
+ * Returns safe defaults if the slug is malformed.
  */
 export function parseCitySlug(slug: string): { city: string; state: string } {
   const lastHyphen = slug.lastIndexOf('-');
+  // Guard: slug must have at least one hyphen separating city from state
+  if (lastHyphen <= 0) {
+    return { city: slug.replace(/-/g, ' '), state: '' };
+  }
   const cityRaw = slug.slice(0, lastHyphen).replace(/-/g, ' ');
   const stateRaw = slug.slice(lastHyphen + 1).toUpperCase();
   // Title-case each word of the city
@@ -70,7 +76,7 @@ export async function getAllDirectoryBusinesses(): Promise<DirectoryBusiness[]> 
       orderBy: { updatedAt: 'desc' },
     });
   } catch (err) {
-    console.error('[directory] getAllDirectoryBusinesses failed:', err);
+    console.error('[directory] getAllDirectoryBusinesses failed:', err instanceof Error ? err.message : String(err));
     return [];
   }
 }
@@ -108,7 +114,7 @@ export async function getCityGroups(): Promise<CityGroup[]> {
       .map(([slug, v]) => ({ ...v, slug }))
       .sort((a, b) => b.count - a.count);
   } catch (err) {
-    console.error('[directory] getCityGroups failed:', err);
+    console.error('[directory] getCityGroups failed:', err instanceof Error ? err.message : String(err));
     return [];
   }
 }
@@ -142,7 +148,7 @@ export async function getBusinessesByCity(
       orderBy: { updatedAt: 'desc' },
     });
   } catch (err) {
-    console.error('[directory] getBusinessesByCity failed:', err);
+    console.error('[directory] getBusinessesByCity failed:', err instanceof Error ? err.message : String(err));
     return [];
   }
 }

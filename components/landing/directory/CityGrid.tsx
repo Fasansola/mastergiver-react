@@ -53,7 +53,7 @@ const CityGrid = ({ cities }: Props) => {
             <Text
               className="font-body"
               color="#6B7280"
-              fontSize="14px"
+              fontSize={{ base: '12px', md: '14px' }}
               flexShrink="0"
             >
               {cities.length} {cities.length === 1 ? 'city' : 'cities'} listed
