@@ -19,7 +19,7 @@ const CityGrid = ({ cities }: Props) => {
   if (cities.length === 0) return null;
 
   return (
-    <Stack bg="white" py={{ base: '64px', lg: '88px' }}>
+    <Stack as="section" bg="white" py={{ base: '56px', md: '72px', lg: '88px' }}>
       <Container>
         <Stack gap="10">
           {/* Section header */}
@@ -43,7 +43,7 @@ const CityGrid = ({ cities }: Props) => {
               <Heading
                 className="font-display"
                 fontWeight="700"
-                fontSize={{ base: '26px', lg: '34px' }}
+                fontSize={{ base: '24px', md: '28px', lg: '34px' }}
                 color="#1E1B4B"
                 lineHeight="120%"
               >

@@ -2,14 +2,11 @@
  * DirectoryHero
  *
  * Hero section for the /good-businesses hub page.
- * Premium lavender gradient with headline, trust stats bar,
- * and the city search typeahead (client component).
- *
- * Derives total business count from the cities array so no extra DB
- * query is needed — the hub page already fetches cities.
+ * Uses a semantic <h1> for the headline for proper SEO hierarchy.
+ * The city search typeahead is a client component island.
  */
 
-import { Box, Container, Stack, Text } from '@chakra-ui/react';
+import { Box, Container, Heading, Stack, Text } from '@chakra-ui/react';
 import type { CityGroup } from '@/lib/directory';
 import DirectorySearchClient from './DirectorySearchClient';
 
@@ -20,18 +17,19 @@ interface Props {
 const DirectoryHero = ({ cities }: Props) => {
   return (
     <Stack
+      as="section"
       bg="linear-gradient(160deg, #F0F4FF 0%, #EAF0FF 40%, #F5F3FF 100%)"
-      py={{ base: '64px', lg: '100px' }}
+      py={{ base: '56px', md: '72px', lg: '100px' }}
       position="relative"
       overflow="hidden"
     >
-      {/* Decorative circles — pure CSS, no images needed */}
+      {/* Decorative circles */}
       <Box
         position="absolute"
         top="-120px"
         right="-120px"
-        w="500px"
-        h="500px"
+        w={{ base: '280px', lg: '500px' }}
+        h={{ base: '280px', lg: '500px' }}
         borderRadius="full"
         bg="rgba(47,43,119,0.05)"
         pointerEvents="none"
@@ -40,16 +38,21 @@ const DirectoryHero = ({ cities }: Props) => {
         position="absolute"
         bottom="-80px"
         left="-80px"
-        w="320px"
-        h="320px"
+        w={{ base: '200px', lg: '320px' }}
+        h={{ base: '200px', lg: '320px' }}
         borderRadius="full"
         bg="rgba(47,43,119,0.04)"
         pointerEvents="none"
       />
 
       <Container position="relative">
-        <Stack align="center" textAlign="center" gap={{ base: '8', lg: '10' }} maxW="760px" mx="auto">
-
+        <Stack
+          align="center"
+          textAlign="center"
+          gap={{ base: '6', md: '8', lg: '10' }}
+          maxW="760px"
+          mx="auto"
+        >
           {/* Eyebrow pill */}
           <Box
             px="16px"
@@ -62,9 +65,15 @@ const DirectoryHero = ({ cities }: Props) => {
             gap="6px"
             boxShadow="0px 2px 8px rgba(47,43,119,0.08)"
           >
-            <Box w="6px" h="6px" borderRadius="full" bg="#2F2B77" flexShrink="0" />
+            <Box
+              w="6px"
+              h="6px"
+              borderRadius="full"
+              bg="#2F2B77"
+              flexShrink="0"
+            />
             <Text
-              fontSize="12px"
+              fontSize={{ base: '10px', md: '12px' }}
               fontWeight="700"
               color="#2F2B77"
               className="font-body"
@@ -75,25 +84,26 @@ const DirectoryHero = ({ cities }: Props) => {
             </Text>
           </Box>
 
-          {/* Headline */}
-          <Text
+          {/* H1 — semantic page title */}
+          <Heading
+            as="h1"
             className="font-display"
             fontWeight="700"
-            fontSize={{ base: '32px', md: '46px', lg: '56px' }}
+            fontSize={{ base: '28px', md: '40px', lg: '56px' }}
             lineHeight="110%"
             color="#1E1B4B"
             letterSpacing="-0.5px"
           >
             Discover Businesses Creating Real Community Impact
-          </Text>
+          </Heading>
 
           {/* Subheadline */}
           <Text
             className="font-body"
-            fontSize={{ base: '16px', lg: '18px' }}
+            fontSize={{ base: '15px', md: '16px', lg: '18px' }}
             lineHeight="175%"
             color="#4B5563"
-            maxW="540px"
+            maxW="520px"
           >
             Browse verified reputation profiles from businesses that turn
             community involvement into visible trust signals.

@@ -53,7 +53,7 @@ const BusinessDirectoryCard = ({ business }: Props) => {
       {/* Card body */}
       <Stack gap="0" flex="1">
         {/* Header area — logo + name + location */}
-        <HStack gap="4" p="6" pb="5" align="start">
+        <HStack gap="4" p={{ base: '4', md: '6' }} pb={{ base: '3', md: '5' }} align="start">
           {/* Logo / initials */}
           {logo ? (
             <Box
@@ -67,7 +67,7 @@ const BusinessDirectoryCard = ({ business }: Props) => {
             >
               <Image
                 src={logo}
-                alt={`${companyName} logo`}
+                alt={`${name} logo`}
                 fill
                 style={{ objectFit: 'cover' }}
               />
@@ -126,7 +126,7 @@ const BusinessDirectoryCard = ({ business }: Props) => {
         </HStack>
 
         {/* Tagline + causes */}
-        <Stack gap="4" px="6" pb="6">
+        <Stack gap="4" px={{ base: '4', md: '6' }} pb={{ base: '4', md: '6' }}>
           {tagline && (
             <Text
               fontSize="13px"

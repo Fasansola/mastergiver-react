@@ -19,7 +19,7 @@ const DirectoryCta = () => {
   return (
     <Stack
       bg="linear-gradient(135deg, #2F2B77 0%, #1E1B4B 100%)"
-      py={{ base: '64px', lg: '88px' }}
+      py={{ base: '56px', md: '72px', lg: '88px' }}
       position="relative"
       overflow="hidden"
     >

@@ -84,6 +84,10 @@ const DirectorySearchClient = ({ cities }: Props) => {
           }}
           onFocus={() => setOpen(true)}
           placeholder="Search by city..."
+          aria-label="Search cities"
+          aria-autocomplete="list"
+          aria-expanded={open && filtered.length > 0}
+          role="combobox"
           style={{
             flex: 1,
             background: 'transparent',

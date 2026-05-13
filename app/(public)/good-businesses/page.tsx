@@ -5,15 +5,12 @@
  * Server-rendered on every request so new businesses and cities
  * appear immediately without a redeploy.
  *
- * Sections:
- *   1. Hero with city search typeahead + trust stats
- *   2. Browse by city grid
- *   3. Recently added businesses (up to 12)
- *   4. CTA for businesses to sign up
+ * SEO: H1 lives in DirectoryHero, H2s here. JSON-LD ItemList
+ * structured data for Google to understand the directory.
  */
 
 import type { Metadata } from 'next';
-import { Box, Container, Grid, Heading, Stack, Text } from '@chakra-ui/react';
+import { Container, Grid, Heading, Stack, Text } from '@chakra-ui/react';
 import { getAllDirectoryBusinesses, getCityGroups } from '@/lib/directory';
 import DirectoryHero from '@/components/landing/directory/DirectoryHero';
 import CityGrid from '@/components/landing/directory/CityGrid';
@@ -22,16 +19,20 @@ import DirectoryCta from '@/components/landing/directory/DirectoryCta';
 
 export const dynamic = 'force-dynamic';
 
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://mastergiver.com';
+
 export const metadata: Metadata = {
   title: 'GOOD Businesses Directory | MasterGiver',
   description:
     'Discover businesses creating visible community impact. Browse GOOD Businesses by city — verified reputation profiles powered by MasterGiver.',
   alternates: { canonical: 'https://mastergiver.com/good-businesses' },
+  robots: { index: true, follow: true },
   openGraph: {
     title: 'GOOD Businesses Directory | MasterGiver',
     description:
       'Discover businesses creating visible community impact. Browse GOOD Businesses by city — verified reputation profiles powered by MasterGiver.',
     url: 'https://mastergiver.com/good-businesses',
+    type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
@@ -47,18 +48,42 @@ const GoodBusinessesPage = async () => {
     getCityGroups(),
   ]);
 
-  const totalBusinesses = businesses.length;
+  // JSON-LD: ItemList schema so Google understands this is a curated directory
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'GOOD Businesses Directory',
+    description:
+      'Businesses creating visible community impact, verified by MasterGiver.',
+    url: `${BASE_URL}/good-businesses`,
+    numberOfItems: businesses.length,
+    itemListElement: businesses.slice(0, 12).map((b, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: `${BASE_URL}/business/${b.slug}`,
+      name: b.companyName ?? 'Business',
+    })),
+  };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <DirectoryHero cities={cities} />
       <CityGrid cities={cities} />
 
       {businesses.length > 0 && (
-        <Stack bg="#F8F9FF" py={{ base: '64px', lg: '88px' }}>
+        <Stack
+          as="section"
+          aria-label="Recently added businesses"
+          bg="#F8F9FF"
+          py={{ base: '56px', md: '72px', lg: '88px' }}
+        >
           <Container>
-            <Stack gap="10">
-              {/* Section header */}
+            <Stack gap={{ base: '8', lg: '10' }}>
               <Stack gap="2">
                 <Text
                   fontSize="12px"
@@ -71,15 +96,21 @@ const GoodBusinessesPage = async () => {
                   Recently Added
                 </Text>
                 <Heading
+                  as="h2"
                   className="font-display"
                   fontWeight="700"
-                  fontSize={{ base: '26px', lg: '34px' }}
+                  fontSize={{ base: '24px', md: '28px', lg: '34px' }}
                   color="#1E1B4B"
                   lineHeight="120%"
                 >
                   GOOD Businesses Making an Impact
                 </Heading>
-                <Text className="font-body" color="#6B7280" fontSize="15px" maxW="480px">
+                <Text
+                  className="font-body"
+                  color="#6B7280"
+                  fontSize={{ base: '14px', lg: '15px' }}
+                  maxW="480px"
+                >
                   Businesses that have documented and published their community
                   impact on MasterGiver.
                 </Text>
@@ -91,24 +122,12 @@ const GoodBusinessesPage = async () => {
                   md: 'repeat(2, 1fr)',
                   lg: 'repeat(3, 1fr)',
                 }}
-                gap="6"
+                gap={{ base: '4', md: '5', lg: '6' }}
               >
                 {businesses.slice(0, 12).map((b) => (
                   <BusinessDirectoryCard key={b.slug} business={b} />
                 ))}
               </Grid>
-
-              {/* Empty state fallback — should never show since we guard above */}
-              {businesses.length === 0 && (
-                <Box
-                  textAlign="center"
-                  py="16"
-                  color="#9CA3AF"
-                  className="font-body"
-                >
-                  No businesses listed yet. Check back soon.
-                </Box>
-              )}
             </Stack>
           </Container>
         </Stack>
