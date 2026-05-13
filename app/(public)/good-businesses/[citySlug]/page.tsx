@@ -165,22 +165,23 @@ const CityDirectoryPage = async ({ params }: Props) => {
             </Box>
 
             {/* H1 — city name */}
-            <HStack gap="3" align="center">
+            <HStack gap={{ base: '2', md: '3' }} align="center">
               <Box
                 color="#2F2B77"
                 display="flex"
                 flexShrink="0"
+                fontSize={{ base: '20px', md: '24px', lg: '28px' }}
               >
-                <LuMapPin size={{ base: 20, lg: 28 } as unknown as number} />
+                <LuMapPin />
               </Box>
               <Heading
                 as="h1"
                 className="font-display"
                 fontWeight="700"
-                fontSize={{ base: '26px', md: '36px', lg: '48px' }}
+                fontSize={{ base: '24px', md: '36px', lg: '48px' }}
                 lineHeight="110%"
                 color="#1E1B4B"
-                letterSpacing="-0.3px"
+                letterSpacing={{ base: '-0.2px', lg: '-0.3px' }}
               >
                 {label}
               </Heading>
@@ -205,7 +206,7 @@ const CityDirectoryPage = async ({ params }: Props) => {
         as="section"
         aria-label={`Businesses in ${label}`}
         bg="#F8F9FF"
-        py={{ base: '44px', md: '56px', lg: '72px' }}
+        py={{ base: '40px', md: '56px', lg: '72px' }}
       >
         <Container>
           <Grid
