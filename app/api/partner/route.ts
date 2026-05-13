@@ -22,7 +22,10 @@ const schema = z.object({
   website: z.string().optional(),
 });
 
-const NOTIFY_RECIPIENTS = ['carlos@mastergiver.com', 'justwpstudio@gmail.com'];
+const NOTIFY_RECIPIENTS =
+  process.env.NODE_ENV === 'production'
+    ? ['carlos@mastergiver.com', 'justwpstudio@gmail.com']
+    : ['justwpstudio@gmail.com'];
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 

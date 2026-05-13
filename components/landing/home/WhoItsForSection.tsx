@@ -4,9 +4,10 @@
  * Split-screen section with background photo on the right and text with
  * a BrandCheck checklist describing the ideal customer profile.
  */
-import { Container, Span, Stack, Text } from '@chakra-ui/react';
+import { Box, Button, Container, Span, Stack, Text } from '@chakra-ui/react';
 import LandingH from '@/components/landing/LandingH';
 import BrandCheck from '@/components/landing/BrandCheck';
+import Link from 'next/link';
 
 const WhoItsForSection = () => {
   return (
@@ -80,6 +81,27 @@ const WhoItsForSection = () => {
                 If you&apos;re already giving back or plan to in the near
                 future, MasterGiver helps make sure it actually counts.
               </Text>
+
+              <Box w={{ base: '100%', lg: 'fit-content' }}>
+                <Link href="/business/tess-the-tooth-fairy">
+                  <Button
+                    bg="#2F2B77"
+                    color="white"
+                    fontWeight="700"
+                    fontSize={{ base: '16px', lg: '20px' }}
+                    lineHeight="160%"
+                    borderRadius="8px"
+                    px={{ base: '12', lg: '8' }}
+                    py="4"
+                    h="auto"
+                    w="100%"
+                    whiteSpace="normal"
+                    boxShadow="0px 8px 10px -6px #E2E1FF, 0px 20px 25px -5px #D4D1FF"
+                  >
+                    View Example Reputation Profile
+                  </Button>
+                </Link>
+              </Box>
             </Stack>
           </Stack>
         </Stack>
