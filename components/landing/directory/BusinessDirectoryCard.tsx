@@ -175,7 +175,7 @@ const BusinessDirectoryCard = ({ business }: Props) => {
       {/* Divider + CTA */}
       <Box>
         <Separator borderColor="#F0EEF8" />
-        <Box as={Link} href={`/business/${slug}`} display="block">
+        <Link href={`/business/${slug}`} style={{ display: 'block' }}>
           <HStack
             px="6"
             py="4"
@@ -198,7 +198,7 @@ const BusinessDirectoryCard = ({ business }: Props) => {
               <LuArrowRight size={15} />
             </Box>
           </HStack>
-        </Box>
+        </Link>
       </Box>
     </Stack>
   );
