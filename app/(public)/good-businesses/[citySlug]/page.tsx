@@ -19,8 +19,7 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
-import Link from 'next/link';
-import { LuArrowLeft, LuMapPin } from 'react-icons/lu';
+import { LuMapPin } from 'react-icons/lu';
 import { getBusinessesByCity, parseCitySlug } from '@/lib/directory';
 import BusinessDirectoryCard from '@/components/landing/directory/BusinessDirectoryCard';
 import DirectoryCta from '@/components/landing/directory/DirectoryCta';
@@ -116,46 +115,6 @@ const CityDirectoryPage = async ({ params }: Props) => {
 
         <Container position="relative">
           <Stack gap={{ base: '5', md: '6' }} maxW="760px">
-            {/* Breadcrumb */}
-            <Link href="/good-businesses" aria-label="Back to GOOD Businesses Directory">
-              <HStack
-                gap="2"
-                display="inline-flex"
-                color="#6B7280"
-                _hover={{ color: '#2F2B77' }}
-                transition="color 0.15s"
-              >
-                <LuArrowLeft size={14} />
-                <Text fontSize="14px" fontWeight="600" className="font-body">
-                  GOOD Businesses Directory
-                </Text>
-              </HStack>
-            </Link>
-
-            {/* Eyebrow */}
-            <Box
-              px="14px"
-              py="6px"
-              borderRadius="100px"
-              bg="white"
-              border="1px solid #DDD8FF"
-              display="inline-flex"
-              alignItems="center"
-              w="fit-content"
-              boxShadow="0px 2px 8px rgba(47,43,119,0.08)"
-            >
-              <Text
-                fontSize="11px"
-                fontWeight="700"
-                color="#2F2B77"
-                className="font-body"
-                letterSpacing={{ base: '0.4px', md: '0.7px' }}
-                textTransform="uppercase"
-              >
-                GOOD Businesses™ • Verified by MasterGiver
-              </Text>
-            </Box>
-
             {/* H1 — city name */}
             <HStack gap={{ base: '2', md: '3' }} align="center">
               <Box
