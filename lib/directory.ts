@@ -22,8 +22,56 @@ export interface CityGroup {
   city: string;
   state: string;
   slug: string;
+  /** Number of active+published businesses. 0 = "Coming Soon" city. */
   count: number;
 }
+
+/**
+ * Static list of cities the platform supports or plans to expand into.
+ * Cities in this list that have no active businesses will appear in search
+ * results as "Coming Soon" to convey ecosystem growth.
+ * Add new cities here as the platform expands.
+ */
+const SUPPORTED_CITIES: { city: string; state: string }[] = [
+  { city: 'Wilmington', state: 'NC' },
+  { city: 'Charlotte', state: 'NC' },
+  { city: 'Raleigh', state: 'NC' },
+  { city: 'Durham', state: 'NC' },
+  { city: 'Greensboro', state: 'NC' },
+  { city: 'Winston-Salem', state: 'NC' },
+  { city: 'Fayetteville', state: 'NC' },
+  { city: 'Charleston', state: 'SC' },
+  { city: 'Columbia', state: 'SC' },
+  { city: 'Greenville', state: 'SC' },
+  { city: 'Myrtle Beach', state: 'SC' },
+  { city: 'Atlanta', state: 'GA' },
+  { city: 'Savannah', state: 'GA' },
+  { city: 'Augusta', state: 'GA' },
+  { city: 'Nashville', state: 'TN' },
+  { city: 'Memphis', state: 'TN' },
+  { city: 'Knoxville', state: 'TN' },
+  { city: 'Richmond', state: 'VA' },
+  { city: 'Virginia Beach', state: 'VA' },
+  { city: 'Jacksonville', state: 'FL' },
+  { city: 'Tampa', state: 'FL' },
+  { city: 'Orlando', state: 'FL' },
+  { city: 'Miami', state: 'FL' },
+  { city: 'Austin', state: 'TX' },
+  { city: 'Dallas', state: 'TX' },
+  { city: 'Houston', state: 'TX' },
+  { city: 'San Antonio', state: 'TX' },
+  { city: 'Denver', state: 'CO' },
+  { city: 'Phoenix', state: 'AZ' },
+  { city: 'Los Angeles', state: 'CA' },
+  { city: 'San Diego', state: 'CA' },
+  { city: 'San Francisco', state: 'CA' },
+  { city: 'Seattle', state: 'WA' },
+  { city: 'Portland', state: 'OR' },
+  { city: 'Chicago', state: 'IL' },
+  { city: 'New York', state: 'NY' },
+  { city: 'Boston', state: 'MA' },
+  { city: 'Philadelphia', state: 'PA' },
+];
 
 /**
  * Convert city + state into a URL-safe slug.
@@ -48,13 +96,11 @@ export function toCitySlug(city: string, state: string): string {
  */
 export function parseCitySlug(slug: string): { city: string; state: string } {
   const lastHyphen = slug.lastIndexOf('-');
-  // Guard: slug must have at least one hyphen separating city from state
   if (lastHyphen <= 0) {
     return { city: slug.replace(/-/g, ' '), state: '' };
   }
   const cityRaw = slug.slice(0, lastHyphen).replace(/-/g, ' ');
   const stateRaw = slug.slice(lastHyphen + 1).toUpperCase();
-  // Title-case each word of the city
   const city = cityRaw.replace(/\b\w/g, (c) => c.toUpperCase());
   return { city, state: stateRaw };
 }
@@ -82,8 +128,11 @@ export async function getAllDirectoryBusinesses(): Promise<DirectoryBusiness[]> 
 }
 
 /**
- * Aggregate all active cities, sorted by business count descending.
- * Used to populate the city browse grid and search typeahead.
+ * Aggregate all active cities merged with the supported cities list.
+ * Cities with active businesses have count > 0.
+ * Cities in SUPPORTED_CITIES but with no active businesses have count = 0
+ * and appear as "Coming Soon" in the search typeahead.
+ * Sorted: active cities (by count desc) first, then Coming Soon alphabetically.
  */
 export async function getCityGroups(): Promise<CityGroup[]> {
   try {
@@ -97,8 +146,9 @@ export async function getCityGroups(): Promise<CityGroup[]> {
       select: { city: true, state: true },
     });
 
-    const map = new Map<string, { city: string; state: string; count: number }>();
+    const map = new Map<string, CityGroup>();
 
+    // Seed with active businesses
     for (const b of businesses) {
       if (!b.city || !b.state) continue;
       const key = toCitySlug(b.city, b.state);
@@ -106,13 +156,26 @@ export async function getCityGroups(): Promise<CityGroup[]> {
       if (existing) {
         existing.count++;
       } else {
-        map.set(key, { city: b.city, state: b.state, count: 1 });
+        map.set(key, { city: b.city, state: b.state, slug: key, count: 1 });
       }
     }
 
-    return Array.from(map.entries())
-      .map(([slug, v]) => ({ ...v, slug }))
-      .sort((a, b) => b.count - a.count);
+    // Add supported cities not yet active as "Coming Soon" (count: 0)
+    for (const { city, state } of SUPPORTED_CITIES) {
+      const key = toCitySlug(city, state);
+      if (!map.has(key)) {
+        map.set(key, { city, state, slug: key, count: 0 });
+      }
+    }
+
+    return Array.from(map.values()).sort((a, b) => {
+      // Active cities first, sorted by count desc
+      if (a.count > 0 && b.count === 0) return -1;
+      if (a.count === 0 && b.count > 0) return 1;
+      if (a.count !== b.count) return b.count - a.count;
+      // Tie-break alphabetically
+      return a.city.localeCompare(b.city);
+    });
   } catch (err) {
     console.error('[directory] getCityGroups failed:', err instanceof Error ? err.message : String(err));
     return [];

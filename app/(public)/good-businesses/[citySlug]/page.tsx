@@ -100,19 +100,19 @@ const CityDirectoryPage = async ({ params }: Props) => {
         bg="linear-gradient(160deg, #F0F4FF 0%, #EAF0FF 40%, #F5F3FF 100%)"
         py={{ base: '44px', md: '56px', lg: '72px' }}
         position="relative"
-        overflow="hidden"
       >
-        {/* Decorative circle */}
-        <Box
-          position="absolute"
-          top="-100px"
-          right="-100px"
-          w={{ base: '240px', lg: '400px' }}
-          h={{ base: '240px', lg: '400px' }}
-          borderRadius="full"
-          bg="rgba(47,43,119,0.05)"
-          pointerEvents="none"
-        />
+        {/* Decorative circle — wrapped so overflow:hidden doesn't clip content */}
+        <Box position="absolute" inset="0" overflow="hidden" pointerEvents="none">
+          <Box
+            position="absolute"
+            top="-100px"
+            right="-100px"
+            w={{ base: '240px', lg: '400px' }}
+            h={{ base: '240px', lg: '400px' }}
+            borderRadius="full"
+            bg="rgba(47,43,119,0.05)"
+          />
+        </Box>
 
         <Container position="relative">
           <Stack gap={{ base: '5', md: '6' }} maxW="760px">
@@ -141,29 +141,18 @@ const CityDirectoryPage = async ({ params }: Props) => {
               border="1px solid #DDD8FF"
               display="inline-flex"
               alignItems="center"
-              gap="6px"
               w="fit-content"
               boxShadow="0px 2px 8px rgba(47,43,119,0.08)"
             >
-              <Box
-                w="6px"
-                h="6px"
-                borderRadius="full"
-                bg="#2F2B77"
-                flexShrink="0"
-              />
               <Text
                 fontSize="11px"
                 fontWeight="700"
                 color="#2F2B77"
                 className="font-body"
-                letterSpacing={{ base: '0.2px', md: '0.7px' }}
+                letterSpacing={{ base: '0.4px', md: '0.7px' }}
                 textTransform="uppercase"
               >
-                GOOD Businesses™
-                <Box as="span" display={{ base: 'none', md: 'inline' }}>
-                  {' · Powered by MasterGiver'}
-                </Box>
+                GOOD Businesses™ • Verified by MasterGiver
               </Text>
             </Box>
 
@@ -196,9 +185,8 @@ const CityDirectoryPage = async ({ params }: Props) => {
               color="#4B5563"
               lineHeight="165%"
             >
-              {businesses.length}{' '}
-              {businesses.length === 1 ? 'business' : 'businesses'} creating
-              visible community impact in {label}.
+              Explore businesses in {city} showcasing community involvement,
+              sponsorships, and local impact.
             </Text>
           </Stack>
         </Container>
@@ -211,12 +199,11 @@ const CityDirectoryPage = async ({ params }: Props) => {
         bg="#F8F9FF"
         py={{ base: '40px', md: '56px', lg: '72px' }}
       >
-        <Container>
+        <Container maxW="1100px">
           <Grid
             templateColumns={{
               base: '1fr',
               md: 'repeat(2, 1fr)',
-              lg: 'repeat(3, 1fr)',
             }}
             gap={{ base: '4', md: '5', lg: '6' }}
           >

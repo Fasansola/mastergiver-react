@@ -88,8 +88,9 @@ const GoodBusinessesPage = async () => {
         }}
       />
 
+      {/* Pass ALL cities (incl. Coming Soon) to search, only active to grid */}
       <DirectoryHero cities={cities} />
-      <CityGrid cities={cities} />
+      <CityGrid cities={cities.filter((c) => c.count > 0)} />
 
       {businesses.length > 0 ? (
         <Stack

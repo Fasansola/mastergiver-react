@@ -4,13 +4,13 @@
  * DirectorySearchClient
  *
  * City search with typeahead for the GOOD Businesses directory hero.
- * Accepts the full list of city groups (passed from server) and filters
- * client-side as the user types. Clicking or pressing Enter on a result
- * navigates to /good-businesses/[citySlug].
+ * Filters client-side as the user types, matching on the START of the
+ * city name so "C" shows Charleston/Charlotte but not Wilmington.
  *
- * Keyboard support: ArrowDown/ArrowUp to move focus, Enter to select,
- * Escape to close. Full ARIA combobox pattern (role="combobox" +
- * role="listbox" + role="option" + aria-activedescendant).
+ * Results show business count for active cities, "Coming Soon" for
+ * supported cities with no active businesses yet.
+ *
+ * Keyboard: ArrowDown/Up to move, Enter to select, Escape to close.
  */
 
 import { useState, useRef, useEffect, useId } from 'react';
@@ -37,11 +37,11 @@ const DirectorySearchClient = ({ cities }: Props) => {
     query.trim().length > 0
       ? cities
           .filter((c) =>
-            `${c.city}, ${c.state}`
-              .toLowerCase()
-              .includes(query.toLowerCase())
+            // Match from the START of the city name — "C" shows Charleston
+            // but not Wilmington. Case-insensitive.
+            c.city.toLowerCase().startsWith(query.trim().toLowerCase())
           )
-          .slice(0, 7)
+          .slice(0, 8)
       : [];
 
   const isOpen = open && filtered.length > 0;
@@ -61,11 +61,13 @@ const DirectorySearchClient = ({ cities }: Props) => {
     return () => document.removeEventListener('mousedown', handler);
   }, []);
 
-  const handleSelect = (slug: string) => {
+  const handleSelect = (city: CityGroup) => {
+    // Coming Soon cities are not navigable
+    if (city.count === 0) return;
     setOpen(false);
     setFocusedIndex(-1);
     setQuery('');
-    router.push(`/good-businesses/${slug}`);
+    router.push(`/good-businesses/${city.slug}`);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,7 +88,7 @@ const DirectorySearchClient = ({ cities }: Props) => {
     } else if (e.key === 'Enter') {
       e.preventDefault();
       if (focusedIndex >= 0 && filtered[focusedIndex]) {
-        handleSelect(filtered[focusedIndex].slug);
+        handleSelect(filtered[focusedIndex]);
       }
     } else if (e.key === 'Escape') {
       setOpen(false);
@@ -166,59 +168,43 @@ const DirectorySearchClient = ({ cities }: Props) => {
           gap="0"
           overflow="hidden"
         >
-          {/* Header */}
-          <Box
-            px="16px"
-            py="10px"
-            borderBottom="1px solid #F0F0F8"
-            bg="#FAFBFF"
-          >
-            <Text
-              fontSize="10px"
-              fontWeight="700"
-              color="#9CA3AF"
-              className="font-body"
-              letterSpacing="0.8px"
-              textTransform="uppercase"
-            >
-              {filtered.length} {filtered.length === 1 ? 'city' : 'cities'} found
-            </Text>
-          </Box>
-
-          {/* Results */}
           {filtered.map((c, i) => {
             const isFocused = i === focusedIndex;
+            const isComingSoon = c.count === 0;
+
             return (
               <HStack
                 key={c.slug}
                 id={optionId(c.slug)}
                 role="option"
                 aria-selected={isFocused}
+                aria-disabled={isComingSoon}
                 px="16px"
                 py="12px"
                 gap="3"
-                cursor="pointer"
-                bg={isFocused ? '#F5F3FF' : 'white'}
-                _hover={{ bg: '#F5F3FF' }}
-                onClick={() => handleSelect(c.slug)}
+                cursor={isComingSoon ? 'default' : 'pointer'}
+                bg={isFocused && !isComingSoon ? '#F5F3FF' : 'white'}
+                _hover={isComingSoon ? {} : { bg: '#F5F3FF' }}
+                onClick={() => handleSelect(c)}
                 borderBottom="1px solid #F5F5FB"
                 _last={{ borderBottom: 'none' }}
                 align="center"
                 transition="background 0.1s"
+                opacity={isComingSoon ? 0.7 : 1}
               >
                 {/* Icon badge */}
                 <Box
                   w="34px"
                   h="34px"
                   borderRadius="10px"
-                  bg={isFocused ? '#EBE8FF' : '#F4F2FF'}
+                  bg={isFocused && !isComingSoon ? '#EBE8FF' : '#F4F2FF'}
                   display="flex"
                   alignItems="center"
                   justifyContent="center"
                   flexShrink="0"
                   transition="background 0.1s"
                 >
-                  <Box color="#2F2B77" display="flex">
+                  <Box color={isComingSoon ? '#A5A0D8' : '#2F2B77'} display="flex">
                     <LuMapPin size={14} />
                   </Box>
                 </Box>
@@ -228,34 +214,39 @@ const DirectorySearchClient = ({ cities }: Props) => {
                   <Text
                     fontSize="14px"
                     fontWeight="600"
-                    color="#1E1B4B"
+                    color={isComingSoon ? '#6B7280' : '#1E1B4B'}
                     className="font-body"
                     lineHeight="140%"
                   >
                     {c.city},{' '}
-                    <Box as="span" color="#6B7280" fontWeight="500">
+                    <Box as="span" fontWeight="500">
                       {c.state}
                     </Box>
                   </Text>
                   <Text
                     fontSize="11px"
-                    color="#9CA3AF"
+                    color={isComingSoon ? '#A5B4FC' : '#9CA3AF'}
                     className="font-body"
                     lineHeight="140%"
+                    fontWeight={isComingSoon ? '600' : '400'}
                   >
-                    {c.count} {c.count === 1 ? 'business' : 'businesses'}
+                    {isComingSoon
+                      ? 'Coming Soon'
+                      : `${c.count} ${c.count === 1 ? 'Featured Business' : 'Featured Businesses'}`}
                   </Text>
                 </Stack>
 
-                {/* Arrow — shows on focus/hover */}
-                <Box
-                  color={isFocused ? '#2F2B77' : '#C4C0F0'}
-                  display="flex"
-                  flexShrink="0"
-                  transition="color 0.1s"
-                >
-                  <LuArrowRight size={14} />
-                </Box>
+                {/* Arrow — only on active cities */}
+                {!isComingSoon && (
+                  <Box
+                    color={isFocused ? '#2F2B77' : '#C4C0F0'}
+                    display="flex"
+                    flexShrink="0"
+                    transition="color 0.1s"
+                  >
+                    <LuArrowRight size={14} />
+                  </Box>
+                )}
               </HStack>
             );
           })}
