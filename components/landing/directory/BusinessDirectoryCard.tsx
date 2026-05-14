@@ -35,7 +35,7 @@ const BusinessDirectoryCard = ({ business }: Props) => {
   const extraCount = causes.length - MAX_CAUSES;
 
   return (
-    <Link href={`/business/${slug}`} style={{ display: 'block', height: '100%' }}>
+    <Link href={`/business/${slug}`} style={{ display: 'block', height: '100%', cursor: 'pointer' }}>
     <Stack
       bg="white"
       borderRadius="20px"
