@@ -39,6 +39,12 @@ body {
   line-height: 1.5em;
 }
 
+/* Tailwind v4 preflight resets cursor to default on all elements including <a>.
+   Restore pointer on links and anything explicitly marked as interactive. */
+a, button, [role="button"], [style*="cursor: pointer"] {
+  cursor: pointer !important;
+}
+
 .inputForm {
   border: 1px solid #D2D2D8 !important;
   padding: 12px 16px;
