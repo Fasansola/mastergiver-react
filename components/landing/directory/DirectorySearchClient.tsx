@@ -126,7 +126,7 @@ const DirectorySearchClient = ({ cities }: Props) => {
           onChange={handleChange}
           onFocus={() => setOpen(true)}
           onKeyDown={handleKeyDown}
-          placeholder="Search by city..."
+          placeholder="Search businesses by city…"
           aria-label="Search cities"
           aria-autocomplete="list"
           aria-expanded={isOpen}

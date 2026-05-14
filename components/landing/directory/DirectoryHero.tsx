@@ -62,28 +62,17 @@ const DirectoryHero = ({ cities }: Props) => {
             border="1px solid #DDD8FF"
             display="inline-flex"
             alignItems="center"
-            gap="6px"
             boxShadow="0px 2px 8px rgba(47,43,119,0.08)"
           >
-            <Box
-              w="6px"
-              h="6px"
-              borderRadius="full"
-              bg="#2F2B77"
-              flexShrink="0"
-            />
             <Text
               fontSize="11px"
               fontWeight="700"
               color="#2F2B77"
               className="font-body"
-              letterSpacing={{ base: '0.2px', md: '0.7px' }}
+              letterSpacing={{ base: '0.4px', md: '0.7px' }}
               textTransform="uppercase"
             >
-              GOOD Businesses™
-              <Box as="span" display={{ base: 'none', md: 'inline' }}>
-                {' · Powered by MasterGiver'}
-              </Box>
+              GOOD Businesses™ • Verified by MasterGiver
             </Text>
           </Box>
 
@@ -97,7 +86,7 @@ const DirectoryHero = ({ cities }: Props) => {
             color="#1E1B4B"
             letterSpacing="-0.5px"
           >
-            Discover Businesses Creating Real Community Impact
+            Discover Businesses Making A Positive Community Impact
           </Heading>
 
           {/* Subheadline */}
@@ -108,8 +97,8 @@ const DirectoryHero = ({ cities }: Props) => {
             color="#4B5563"
             maxW="520px"
           >
-            Browse verified reputation profiles from businesses that turn
-            community involvement into visible trust signals.
+            Browse businesses showcasing verified community involvement,
+            sponsorships, and local impact.
           </Text>
 
           {/* Search */}

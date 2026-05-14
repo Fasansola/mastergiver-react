@@ -50,14 +50,6 @@ const CityGrid = ({ cities }: Props) => {
                 Find GOOD Businesses Near You
               </Heading>
             </Stack>
-            <Text
-              className="font-body"
-              color="#6B7280"
-              fontSize={{ base: '12px', md: '14px' }}
-              flexShrink="0"
-            >
-              {cities.length} {cities.length === 1 ? 'city' : 'cities'} listed
-            </Text>
           </Stack>
 
           {/* City grid */}
