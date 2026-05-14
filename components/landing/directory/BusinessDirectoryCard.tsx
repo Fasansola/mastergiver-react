@@ -35,6 +35,7 @@ const BusinessDirectoryCard = ({ business }: Props) => {
   const extraCount = causes.length - MAX_CAUSES;
 
   return (
+    <Link href={`/business/${slug}`} style={{ display: 'block', height: '100%' }}>
     <Stack
       bg="white"
       borderRadius="20px"
@@ -42,6 +43,7 @@ const BusinessDirectoryCard = ({ business }: Props) => {
       border="1px solid #EBEBF5"
       h="100%"
       justify="space-between"
+      cursor="pointer"
       transition="transform 0.18s, box-shadow 0.18s"
       boxShadow="0px 1px 4px rgba(47, 43, 119, 0.06)"
       _hover={{
@@ -175,32 +177,30 @@ const BusinessDirectoryCard = ({ business }: Props) => {
       {/* Divider + CTA */}
       <Box>
         <Separator borderColor="#F0EEF8" />
-        <Link href={`/business/${slug}`} style={{ display: 'block' }}>
-          <HStack
-            px="6"
-            py="4"
-            justify="space-between"
-            align="center"
-            _hover={{ bg: '#FAFAFE' }}
-            transition="background 0.15s"
-            cursor="pointer"
+        <HStack
+          px="6"
+          py="4"
+          justify="space-between"
+          align="center"
+          _hover={{ bg: '#FAFAFE' }}
+          transition="background 0.15s"
+        >
+          <Text
+            fontSize="13px"
+            fontWeight="700"
+            color="#2F2B77"
+            className="font-body"
+            letterSpacing="0.1px"
           >
-            <Text
-              fontSize="13px"
-              fontWeight="700"
-              color="#2F2B77"
-              className="font-body"
-              letterSpacing="0.1px"
-            >
-              View Reputation Profile
-            </Text>
-            <Box color="#2F2B77" display="flex">
-              <LuArrowRight size={15} />
-            </Box>
-          </HStack>
-        </Link>
+            View Reputation Profile
+          </Text>
+          <Box color="#2F2B77" display="flex">
+            <LuArrowRight size={15} />
+          </Box>
+        </HStack>
       </Box>
     </Stack>
+    </Link>
   );
 };
 
