@@ -10,20 +10,20 @@ import Link from 'next/link';
 import { LuShieldCheck, LuTrendingUp, LuUsers } from 'react-icons/lu';
 
 const BENEFITS = [
-  { icon: <LuShieldCheck size={16} />, label: 'Verified community impact' },
-  { icon: <LuTrendingUp size={16} />, label: 'Search & AI visibility' },
-  { icon: <LuUsers size={16} />, label: 'Trust signals that convert' },
+  { icon: <LuShieldCheck size={18} />, label: 'Verified community impact' },
+  { icon: <LuTrendingUp size={18} />, label: 'Search & AI visibility' },
+  { icon: <LuUsers size={18} />, label: 'Build customer trust' },
 ];
 
 const DirectoryCta = () => {
   return (
     <Stack
       bg="linear-gradient(135deg, #2F2B77 0%, #1E1B4B 100%)"
-      py={{ base: '56px', md: '72px', lg: '88px' }}
+      py={{ base: '64px', md: '80px', lg: '100px' }}
       position="relative"
       overflow="hidden"
     >
-      {/* Decorative ring */}
+      {/* Decorative rings */}
       <Box
         position="absolute"
         top="-160px"
@@ -46,38 +46,54 @@ const DirectoryCta = () => {
       />
 
       <Container position="relative">
-        <Stack align="center" textAlign="center" gap="8" maxW="620px" mx="auto">
+        <Stack align="center" textAlign="center" gap={{ base: '6', lg: '8' }} maxW="700px" mx="auto">
+
+          {/* Label */}
           <Text
             className="font-body"
-            fontSize="12px"
+            fontSize={{ base: '12px', lg: '13px' }}
             fontWeight="700"
             color="#A5B4FC"
             letterSpacing="0.8px"
             textTransform="uppercase"
           >
-            Is Your Business Listed?
+            Own Your Community Reputation
           </Text>
 
+          {/* Headline */}
           <Text
             className="font-display"
             fontWeight="700"
-            fontSize={{ base: '28px', lg: '40px' }}
+            fontSize={{ base: '30px', md: '40px', lg: '48px' }}
             lineHeight="115%"
             color="white"
-            letterSpacing="-0.3px"
+            letterSpacing="-0.5px"
           >
             Turn Your Community Impact Into a Reputation Asset
           </Text>
 
+          {/* Supporting copy */}
           <Text
             className="font-body"
-            fontSize={{ base: '15px', lg: '17px' }}
+            fontSize={{ base: '16px', lg: '18px' }}
             lineHeight="175%"
             color="#C7C4FF"
+            maxW="520px"
+          >
+            Showcase verified community involvement, strengthen your reputation,
+            and help customers discover your business.
+          </Text>
+
+          {/* Ecosystem reinforcement */}
+          <Text
+            className="font-body"
+            fontSize={{ base: '13px', lg: '15px' }}
+            lineHeight="170%"
+            color="#8B87C4"
             maxW="480px"
           >
-            Get your GOOD Business Reputation Profile and start appearing in the
-            directory.
+            Join businesses across growing communities already building their
+            reputation with MasterGiver.
           </Text>
 
           {/* Benefit pills */}
@@ -89,14 +105,14 @@ const DirectoryCta = () => {
                 bg="rgba(255,255,255,0.08)"
                 border="1px solid rgba(255,255,255,0.12)"
                 borderRadius="100px"
-                px="14px"
-                py="7px"
+                px="16px"
+                py="8px"
               >
                 <Box color="#A5B4FC" display="flex">
                   {b.icon}
                 </Box>
                 <Text
-                  fontSize="13px"
+                  fontSize={{ base: '13px', lg: '14px' }}
                   fontWeight="600"
                   color="white"
                   className="font-body"
@@ -107,16 +123,17 @@ const DirectoryCta = () => {
             ))}
           </HStack>
 
+          {/* CTA button */}
           <Link href="/business/signup">
             <Box
               as="button"
               bg="white"
               color="#2F2B77"
               fontWeight="700"
-              fontSize="16px"
+              fontSize={{ base: '16px', lg: '18px' }}
               borderRadius="12px"
-              h="58px"
-              px="10"
+              h={{ base: '58px', lg: '64px' }}
+              px={{ base: '10', lg: '12' }}
               display="flex"
               alignItems="center"
               justifyContent="center"
@@ -131,9 +148,11 @@ const DirectoryCta = () => {
             </Box>
           </Link>
 
-          <Text className="font-body" fontSize="13px" color="#7C7AB8">
+          {/* Pricing line */}
+          <Text className="font-body" fontSize={{ base: '13px', lg: '14px' }} color="#7C7AB8">
             $59/year · No calls · No commitments
           </Text>
+
         </Stack>
       </Container>
     </Stack>
