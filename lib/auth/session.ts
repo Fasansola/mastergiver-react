@@ -52,8 +52,8 @@ export async function requireCompletedOnboarding() {
     redirect('/login');
   }
 
-  // Business users have no individual onboarding — send them to their own panel
-  if (user.business) {
+  // Business-only user (no individual profile) — send them to their panel
+  if (user.business && !user.profile) {
     redirect(STATUS_DESTINATIONS[user.business.status]);
   }
 
@@ -73,8 +73,8 @@ export async function requireIncompleteOnboarding() {
     redirect('/login');
   }
 
-  // Business users have no individual onboarding — send them to their own panel
-  if (user.business) {
+  // Business-only user (no individual profile) — send them to their panel
+  if (user.business && !user.profile) {
     redirect(STATUS_DESTINATIONS[user.business.status]);
   }
 
@@ -94,12 +94,20 @@ export async function redirectIfBusinessSession() {
   const session = await auth();
   if (!session?.user?.id) return;
 
-  const business = await prisma.business.findUnique({
-    where: { ownerId: session.user.id },
-    select: { status: true },
+  const user = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: {
+      profile: { select: { id: true } },
+      business: { select: { status: true } },
+    },
   });
 
-  if (!business) return;
+  if (!user?.business) return;
 
-  redirect(STATUS_DESTINATIONS[business.status]);
+  // Dual-account user — let them choose which panel
+  if (user.profile) {
+    redirect('/select-panel');
+  }
+
+  redirect(STATUS_DESTINATIONS[user.business.status]);
 }
