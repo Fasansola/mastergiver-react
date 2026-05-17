@@ -161,16 +161,20 @@ export async function loginAction(data: LoginInput): Promise<ActionResult<{ redi
       return { success: false, error: 'User not found.' };
     }
 
+    const isAdmin = user.role === 'ADMIN';
     const hasProfile = !!user.profile;
     const hasBusiness = !!user.business;
 
-    // Has both — let them choose which panel to enter
-    if (hasProfile && hasBusiness) {
+    // If the user has more than one panel available, let them choose
+    const panelCount = [isAdmin, hasProfile, hasBusiness].filter(Boolean).length;
+    if (panelCount > 1) {
       return { success: true, redirectTo: '/select-panel' };
     }
 
-    // Business-only user signing in via the individual login page
-    if (hasBusiness && !hasProfile) {
+    // Single panel — route directly
+    if (isAdmin) return { success: true, redirectTo: '/admin/directory' };
+
+    if (hasBusiness) {
       const { status } = user.business!;
       if (status === 'SUSPENDED') return { success: true, redirectTo: '/business/suspended' };
       const redirectTo = status === 'ACTIVE'
