@@ -28,7 +28,16 @@ const Header = async () => {
 
         {/* Desktop nav buttons — hidden on mobile */}
         <Box display={{ base: 'none', lg: 'flex' }} alignItems="center">
-          <HeaderButtons />
+          <HeaderButtons
+            isLoggedIn={!!user}
+            dashboardHref={
+              user?.profile && user?.business
+                ? '/select-panel'
+                : user?.business
+                  ? '/business/dashboard/edit-profile'
+                  : '/dashboard'
+            }
+          />
         </Box>
 
         {/* Mobile hamburger + drawer — hidden on desktop */}
