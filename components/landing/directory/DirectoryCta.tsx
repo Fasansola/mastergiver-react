@@ -148,10 +148,6 @@ const DirectoryCta = () => {
             </Box>
           </Link>
 
-          {/* Pricing line */}
-          <Text className="font-body" fontSize={{ base: '13px', lg: '14px' }} color="#7C7AB8">
-            $59/year · No calls · No commitments
-          </Text>
 
         </Stack>
       </Container>
