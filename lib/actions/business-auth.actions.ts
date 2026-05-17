@@ -65,10 +65,49 @@ export async function businessSignUpAction(
 
     const { businessName, email, password } = validatedFields.data;
 
-    // Prevent duplicate accounts on the same email address
-    const existingUser = await prisma.user.findUnique({ where: { email } });
+    // Check whether an account already exists for this email
+    const existingUser = await prisma.user.findUnique({
+      where: { email },
+      include: { business: true },
+    });
+
     if (existingUser) {
-      return { success: false, error: 'An account with this email already exists.' };
+      // Verify the password matches their existing account
+      const passwordMatch = await bcrypt.compare(password, existingUser.password);
+      if (!passwordMatch) {
+        return {
+          success: false,
+          error: 'An account with this email already exists. Please use your existing password.',
+        };
+      }
+
+      // Already has a business — send them to sign in
+      if (existingUser.business) {
+        return {
+          success: false,
+          error: 'You already have a business account. Sign in instead.',
+        };
+      }
+
+      // Existing individual user extending their account to business
+      const slug = await generateUniqueSlug(businessName);
+      await prisma.business.create({
+        data: {
+          ownerId: existingUser.id,
+          slug,
+          companyName: businessName,
+        },
+      });
+
+      addMailerLiteSubscriber({
+        email,
+        firstName: businessName,
+        lastName: '',
+        groupId: process.env.MAILERLITE_BUSINESS_GROUP_ID,
+      });
+
+      await signIn('credentials', { email, password, redirect: false });
+      return { success: true, redirectTo: '/business/confirm' };
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
@@ -76,7 +115,7 @@ export async function businessSignUpAction(
     // Build a unique URL slug from the business name (e.g. "Acme Corp" → "acme-corp")
     const slug = await generateUniqueSlug(businessName);
 
-    // Create the User and its linked Business record together
+    // Brand-new user — create User + Business together
     await prisma.user.create({
       data: {
         email,
@@ -142,11 +181,17 @@ export async function businessSignInAction(
     // Look up the linked business to determine where to redirect
     const user = await prisma.user.findUnique({
       where: { email },
-      include: { business: true },
+      include: { business: true, profile: true },
     });
 
     if (!user?.business) {
-      // Authenticated successfully but no linked business — edge case
+      // Has an individual profile but no business — guide them to extend their account
+      if (user?.profile) {
+        return {
+          success: false,
+          error: 'This email is linked to an individual account. Sign up as a business to add one.',
+        };
+      }
       return { success: false, error: 'No business account found for this email.' };
     }
 

@@ -151,27 +151,36 @@ export async function loginAction(data: LoginInput): Promise<ActionResult<{ redi
       redirect: false,
     });
 
-    // Check onboarding status to determine redirection
+    // Fetch everything needed to decide where to send this user
     const user = await prisma.user.findUnique({
       where: { email },
-      include: {
-        onboarding: true,
-      },
+      include: { onboarding: true, profile: true, business: true },
     });
 
     if (!user) {
-      return {
-        success: false,
-        error: 'User not found.',
-      };
+      return { success: false, error: 'User not found.' };
     }
 
-    // Determines redirect based on onboarding status
+    const hasProfile = !!user.profile;
+    const hasBusiness = !!user.business;
 
-    const redirectTo = user.onboarding?.isCompleted
-      ? '/dashboard'
-      : '/onboarding';
+    // Has both — let them choose which panel to enter
+    if (hasProfile && hasBusiness) {
+      return { success: true, redirectTo: '/select-panel' };
+    }
 
+    // Business-only user signing in via the individual login page
+    if (hasBusiness && !hasProfile) {
+      const { status } = user.business!;
+      if (status === 'SUSPENDED') return { success: true, redirectTo: '/business/suspended' };
+      const redirectTo = status === 'ACTIVE'
+        ? '/business/dashboard/edit-profile'
+        : '/business/confirm';
+      return { success: true, redirectTo };
+    }
+
+    // Individual user — existing onboarding-aware routing
+    const redirectTo = user.onboarding?.isCompleted ? '/dashboard' : '/onboarding';
     return { success: true, redirectTo };
   } catch (error) {
     if (error instanceof AuthError) {
