@@ -65,7 +65,7 @@ const DirectoryCta = () => {
             className="font-display"
             fontWeight="700"
             fontSize={{ base: '30px', md: '40px', lg: '48px' }}
-            lineHeight="115%"
+            lineHeight="130%"
             color="white"
             letterSpacing="-0.5px"
           >
