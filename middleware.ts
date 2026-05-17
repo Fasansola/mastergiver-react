@@ -20,21 +20,30 @@ import type { NextRequest } from 'next/server';
 
 // NextAuth v5 exposes the session on req.auth when auth() wraps the handler
 export default auth((req: NextRequest & { auth: unknown }) => {
-  const hasSession = !!req.auth;
+  const { pathname } = req.nextUrl;
+  const session = req.auth as { user?: { role?: string } } | null;
+  const hasSession = !!session;
 
+  // Admin routes — must be signed in with ADMIN role
+  if (pathname.startsWith('/admin')) {
+    if (!hasSession || session?.user?.role !== 'ADMIN') {
+      const loginUrl = new URL('/login', req.url);
+      return NextResponse.redirect(loginUrl);
+    }
+    return NextResponse.next();
+  }
+
+  // Business dashboard routes — must be signed in
   if (!hasSession) {
-    // No session — send the user to the business sign-in page
     const signinUrl = new URL('/business/signin', req.url);
     return NextResponse.redirect(signinUrl);
   }
 
-  // Session exists — allow the request through.
-  // The dashboard layout will handle PENDING / SUSPENDED redirects.
+  // Session exists — allow through.
+  // Dashboard layout handles PENDING / SUSPENDED redirects.
   return NextResponse.next();
 });
 
 export const config = {
-  // Only run middleware on business dashboard routes — leaves all Phase 1
-  // routes and the public business auth pages completely untouched.
-  matcher: ['/business/dashboard/:path*'],
+  matcher: ['/business/dashboard/:path*', '/admin/:path*'],
 };

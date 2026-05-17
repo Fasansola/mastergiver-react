@@ -109,7 +109,7 @@ export function parseCitySlug(slug: string): { city: string; state: string } {
 export async function getAllDirectoryBusinesses(): Promise<DirectoryBusiness[]> {
   try {
     return await prisma.business.findMany({
-      where: { status: 'ACTIVE', published: true },
+      where: { status: 'ACTIVE', published: true, featuredInDirectory: true },
       select: {
         slug: true,
         companyName: true,
@@ -140,6 +140,7 @@ export async function getCityGroups(): Promise<CityGroup[]> {
       where: {
         status: 'ACTIVE',
         published: true,
+        featuredInDirectory: true,
         city: { not: null },
         state: { not: null },
       },
