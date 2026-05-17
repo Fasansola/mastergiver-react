@@ -21,7 +21,8 @@ const DashboardLayout = async ({ children }: PropsWithChildren) => {
     },
   });
 
-  // Business-only user — redirect them to their panel
+  // Business-only user (no individual profile) — redirect to their panel.
+  // If they have a profile, always allow through regardless of business status.
   if (!user?.profile && user?.business) {
     const status = user.business.status;
     if (status === 'ACTIVE') redirect('/business/dashboard/edit-profile');
