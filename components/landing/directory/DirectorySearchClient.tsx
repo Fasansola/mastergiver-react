@@ -230,9 +230,7 @@ const DirectorySearchClient = ({ cities }: Props) => {
                     lineHeight="140%"
                     fontWeight={isComingSoon ? '600' : '400'}
                   >
-                    {isComingSoon
-                      ? 'Coming Soon'
-                      : `${c.count} ${c.count === 1 ? 'Featured Business' : 'Featured Businesses'}`}
+                    {isComingSoon ? 'Coming Soon' : null}
                   </Text>
                 </Stack>
 
