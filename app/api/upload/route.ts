@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
     try {
       await del(currentImageURL);
     } catch {
-      console.log('Could not delete old profile picture');
+      console.warn('Could not delete old profile picture');
     }
   }
 

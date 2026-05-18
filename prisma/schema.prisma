@@ -302,8 +302,9 @@ model Business {
   owner     User           @relation(fields: [ownerId], references: [id])
   status    BusinessStatus @default(PENDING)
   published Boolean        @default(false)
-  // Admin-controlled: only businesses with this true appear in the directory
-  featuredInDirectory Boolean @default(false)
+  // Defaults to true on publish — visible in hub and city pages automatically.
+  // Admins can set this to false to hide a business from the entire directory.
+  featuredInDirectory Boolean @default(true)
 
   // --- About Us section ---
   logo        String?

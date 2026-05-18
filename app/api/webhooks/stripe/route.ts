@@ -121,7 +121,12 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
 
 /**
  * invoice.payment_succeeded
- * A subscription payment went through. Update the renewal date.
+ * A subscription payment went through. Update the renewal date and ensure the
+ * account is ACTIVE.
+ *
+ * This also acts as a safety net for suspended accounts whose payment retry
+ * succeeded: if customer.subscription.updated is delayed or missed, the account
+ * is reactivated here instead of staying SUSPENDED after a successful payment.
  *
  * In Stripe API v2026+, the period end is available directly on the invoice
  * as `period_end` (a Unix timestamp). We convert it to a JS Date for Prisma.
@@ -141,9 +146,11 @@ async function handlePaymentSucceeded(invoice: Stripe.Invoice) {
   await prisma.business.update({
     where: { id: business.id },
     data: {
+      // Reactivate if the account was suspended (e.g. payment retry succeeded)
+      status: 'ACTIVE',
+      subscriptionStatus: 'active',
       // invoice.period_end is a Unix timestamp in seconds — multiply by 1000 for JS Date
       currentPeriodEnd: new Date(invoice.period_end * 1000),
-      subscriptionStatus: 'active',
     },
   });
 }

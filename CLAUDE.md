@@ -229,7 +229,7 @@ Annual subscription at $59/year. Flow: create Checkout Session server-side → r
 **Webhook events to handle:**
 
 - `checkout.session.completed` → set `status: ACTIVE`
-- `invoice.payment_succeeded` → update `currentPeriodEnd`
+- `invoice.payment_succeeded` → set `status: ACTIVE` + update `currentPeriodEnd` (safety net for suspended accounts whose retry payment succeeds)
 - `invoice.payment_failed` → set `status: SUSPENDED`
 - `customer.subscription.deleted` → set `status: SUSPENDED`
 
@@ -261,27 +261,25 @@ No other Phase 1 models were touched.
 
 ### Critical
 
-| #   | File                                                          | Issue                                                                         | Status |
-| --- | ------------------------------------------------------------- | ----------------------------------------------------------------------------- | ------ |
-| 1   | `lib/actions/onboarding.actions.ts:224`                       | Missing `await` on `updateProfileData()` — data may not save before redirect  | Open   |
-| 2   | `app/(onboarding)/onboarding/page.tsx:13`                     | Typo: `redirect('/dasboard')` — 404 post-completion                           | Open   |
-| 3   | `lib/auth/auth.actions.ts:161`                                | Missing leading slash: `'onboarding'` instead of `'/onboarding'`              | Open   |
-| 4   | `components/auth/VerificationResult.tsx:64`                   | `redirect()` called in `use client` component — should use `router.push()`    | Open   |
-| 5   | `components/onboarding/profile-preview/NameSection.tsx:44-55` | Input bound to props not draft state — displayed value doesn't reflect typing | Open   |
-| 6   | `app/logout/page.tsx`                                         | `logout()` and `router.push()` called in render body not `useEffect`          | Open   |
+All previously listed critical bugs (#1–6) have been confirmed fixed in the current codebase.
 
-### Non-Critical
+### Non-Critical / Open
 
 | #   | File                                                              | Issue                                                                 | Status |
 | --- | ----------------------------------------------------------------- | --------------------------------------------------------------------- | ------ |
 | 7   | `lib/theme/recipes/input.recipe.ts:6`                             | `borderWidth: '9px'` — typo for `'1px'`                               | Fixed  |
 | 8   | `components/auth/AuthHeading.tsx:15`                              | `fontFamily=""` — overrides theme font                                | Fixed  |
 | 9   | `components/layout/dashboard/ProfileCard.tsx:59`                  | `"null, null"` when city/state unset                                  | Fixed  |
-| 10  | `lib/auth/auth.config.ts:106`                                     | Misleading comment about session strategy                             | Open   |
+| 10  | `lib/auth/auth.config.ts:106`                                     | Misleading comment about session strategy                             | Fixed  |
 | 11  | `components/onboarding/what-i-care-about/OrganizationsSelect.tsx` | Debug `console.log` in production                                     | Fixed  |
 | 12  | `lib/actions/onboarding.actions.ts`                               | `revalidatePath` uses DB id not username                              | Fixed  |
 | 13  | `app/(dashboard)/(settings)/settings/page.tsx`                    | `existingOrgs` filter silently drops manual orgs                      | Open   |
-| 14  | `lib/auth/auth.actions.ts`                                        | Rate limiting resets on cold start — no real protection in production | Open   |
+| 14  | `lib/auth/auth.actions.ts`                                        | Rate limiting resets on cold start — no real protection in production | Fixed (DB-based) |
+| 15  | `app/api/webhooks/stripe/route.ts`                                | `invoice.payment_succeeded` didn't reactivate SUSPENDED accounts      | Fixed  |
+| 16  | `lib/actions/business-account.actions.ts`                         | Email uniqueness race condition — P2002 not caught in transaction      | Fixed  |
+| 17  | `lib/actions/auth.actions.ts`                                     | `signUpAction` P2002 not caught — crash on concurrent signups         | Fixed  |
+| 18  | `lib/actions/business-account.actions.ts`                         | Email change didn't refresh JWT — session showed stale email          | Fixed  |
+| 19  | `lib/validations/business-profile.schema.ts`                      | `endYear < startYear` allowed in impact records — no cross-field check | Fixed  |
 
 ---
 

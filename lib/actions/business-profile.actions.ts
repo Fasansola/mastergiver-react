@@ -541,7 +541,9 @@ export async function publishBusinessAction(): Promise<ActionResult> {
 
   await prisma.business.update({
     where: { id: business.id },
-    data: { published: true },
+    // featuredInDirectory: true ensures the business appears in the hub and city
+    // pages immediately. Admins can hide it later by toggling this off.
+    data: { published: true, featuredInDirectory: true },
   });
 
   return { success: true };

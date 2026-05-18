@@ -56,10 +56,12 @@ export async function generateMetadata({
       tagline: true,
       aboutUs: true,
       logo: true,
+      status: true,
+      published: true,
     },
   });
 
-  if (!business || !business.companyName) {
+  if (!business || !business.companyName || !business.published || business.status !== 'ACTIVE') {
     return { title: 'Business Profile Not Found' };
   }
 
@@ -108,8 +110,9 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
     },
   });
 
-  // Not found or unpublished — return proper 404
-  if (!business || !business.published) {
+  // Not found, unpublished, or subscription not active — return proper 404.
+  // Suspended businesses are hidden even via direct URL until subscription is renewed.
+  if (!business || !business.published || business.status !== 'ACTIVE') {
     notFound();
   }
 

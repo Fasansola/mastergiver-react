@@ -15,7 +15,7 @@
  *   - Return ActionResult — { success: true } | { success: false; error: string }
  */
 
-import { auth } from '@/lib/auth/auth';
+import { auth, unstable_update } from '@/lib/auth/auth';
 import { prisma } from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
 import {
@@ -33,8 +33,12 @@ import type { ActionResult } from '@/lib/types/actions';
 /**
  * Save a new business name and/or email address.
  *
- * Email uniqueness is checked: if the new email is already taken by a
- * different user the action returns an error.
+ * Email uniqueness is enforced at the DB level (unique constraint on User.email).
+ * We do a pre-check for a friendlier error, and catch the P2002 unique constraint
+ * violation in case two requests race past the pre-check simultaneously.
+ *
+ * After an email change the JWT is refreshed so session.user.email reflects the
+ * new value immediately without requiring a logout.
  */
 export async function updateAccountInfoAction(
   data: AccountInfoInput,
@@ -48,18 +52,29 @@ export async function updateAccountInfoAction(
   const { companyName, email } = parsed.data;
   const userId = session.user.id;
 
-  // If the email has changed, make sure it is not already registered to
-  // a different account before committing.
+  // Pre-check for a human-friendly error before hitting the DB constraint.
   const existing = await prisma.user.findUnique({ where: { email } });
   if (existing && existing.id !== userId) {
     return { success: false, error: 'This email is already in use by another account.' };
   }
 
-  // Update both records in a transaction so they succeed or fail together.
-  await prisma.$transaction([
-    prisma.user.update({ where: { id: userId }, data: { email } }),
-    prisma.business.update({ where: { ownerId: userId }, data: { companyName } }),
-  ]);
+  try {
+    // Update both records in a transaction so they succeed or fail together.
+    await prisma.$transaction([
+      prisma.user.update({ where: { id: userId }, data: { email } }),
+      prisma.business.update({ where: { ownerId: userId }, data: { companyName } }),
+    ]);
+  } catch (e: unknown) {
+    // P2002 = unique constraint violation — another request claimed the email
+    const err = e as { code?: string };
+    if (err.code === 'P2002') {
+      return { success: false, error: 'This email is already in use by another account.' };
+    }
+    throw e;
+  }
+
+  // Refresh the JWT so session.user.email reflects the new email immediately.
+  await unstable_update({ user: { email } });
 
   return { success: true };
 }

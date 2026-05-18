@@ -161,6 +161,9 @@ export const impactRecordSchema = z.object({
     .nullable(),
   amount: z.number().positive().optional().nullable(),
   details: z.string().max(500).optional().nullable(),
-});
+}).refine(
+  (data) => !data.endYear || data.endYear >= data.startYear,
+  { message: 'End year must be the same as or after the start year', path: ['endYear'] },
+);
 
 export type ImpactRecordInput = z.infer<typeof impactRecordSchema>;

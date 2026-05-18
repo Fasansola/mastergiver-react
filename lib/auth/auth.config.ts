@@ -103,7 +103,7 @@ export const authConfig = {
   },
 
   session: {
-    strategy: 'jwt', //Using database for sessions storage
+    strategy: 'jwt', // JWT stored in a signed cookie — not database sessions
     maxAge: 30 * 24 * 60 * 60, // 30 Days
   },
 

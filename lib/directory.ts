@@ -185,6 +185,8 @@ export async function getCityGroups(): Promise<CityGroup[]> {
 
 /**
  * Fetch all active+published businesses for a given city-state slug.
+ * Respects featuredInDirectory so an admin hide removes the business from city
+ * pages as well as the main hub.
  * Returns empty array (not 404) if the city has no matching businesses.
  */
 export async function getBusinessesByCity(
@@ -197,6 +199,7 @@ export async function getBusinessesByCity(
       where: {
         status: 'ACTIVE',
         published: true,
+        featuredInDirectory: true,
         city: { equals: city, mode: 'insensitive' },
         state: { equals: state, mode: 'insensitive' },
       },

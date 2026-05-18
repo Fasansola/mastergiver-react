@@ -71,27 +71,41 @@ export async function signUpAction(data: SignUpInput): Promise<ActionResult<{ me
     const hashedPassword = await bcrypt.hash(password, 12);
 
     // Create user and profile in a transaction
-
-    await prisma.user.create({
-      data: {
-        email,
-        password: hashedPassword,
-        profile: {
-          create: {
-            firstName,
-            lastName,
-            username,
+    try {
+      await prisma.user.create({
+        data: {
+          email,
+          password: hashedPassword,
+          profile: {
+            create: {
+              firstName,
+              lastName,
+              username,
+            },
+          },
+          onboarding: {
+            create: {
+              currentStep: 1,
+              completedSteps: [],
+              isCompleted: false,
+            },
           },
         },
-        onboarding: {
-          create: {
-            currentStep: 1,
-            completedSteps: [],
-            isCompleted: false,
-          },
-        },
-      },
-    });
+      });
+    } catch (e: unknown) {
+      // P2002 = unique constraint violation — two concurrent signups raced past the pre-check
+      const err = e as { code?: string; meta?: { target?: string[] } };
+      if (err.code === 'P2002') {
+        const field = err.meta?.target?.includes('username') ? 'username' : 'email';
+        return {
+          success: false,
+          error: field === 'username'
+            ? 'This username is already taken.'
+            : 'An account with this email already exists.',
+        };
+      }
+      throw e;
+    }
 
     // Add to MailerLite individual group — fire-and-forget, never blocks signup
     addMailerLiteSubscriber({
@@ -381,31 +395,29 @@ export async function logoutAction(): Promise<void> {
 
 // RESEND VERIFICATION EMAIL
 
-const resendAttempts = new Map<string, { count: number; resetAt: number }>();
+// Token TTL must match the value in lib/auth/token.ts (createVerificationToken)
+const TOKEN_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
+const RESEND_COOLDOWN_MS = 15 * 60 * 1000; // 15 minutes
 
 export async function resendVerificationEmailAction(email: string): Promise<ActionResult<{ message: string }>> {
   try {
-    // Rate limiting: 3 attempts in 15 minutes
+    // Rate limiting via the database — survives cold starts and scales across
+    // multiple function instances. A VerificationToken expires 24h after creation,
+    // so if the current token expires more than (24h - 15min) from now, it was
+    // issued within the last 15 minutes and we reject the resend.
+    const rateLimitThreshold = new Date(Date.now() + TOKEN_TTL_MS - RESEND_COOLDOWN_MS);
+    const recentToken = await prisma.verificationToken.findFirst({
+      where: {
+        identifier: email,
+        expires: { gt: rateLimitThreshold },
+      },
+    });
 
-    const now = Date.now();
-    const attempt = resendAttempts.get(email);
-
-    if (attempt) {
-      if (now < attempt.resetAt) {
-        if (attempt.count >= 3) {
-          return {
-            success: false,
-            error: 'Too many requests. Please try again later.',
-          };
-        }
-        attempt.count++;
-      } else {
-        // Reset Counter
-        resendAttempts.set(email, { count: 1, resetAt: now + 15 * 60 * 1000 });
-      }
-    } else {
-      // Initial counter
-      resendAttempts.set(email, { count: 1, resetAt: now + 15 * 60 * 1000 });
+    if (recentToken) {
+      return {
+        success: false,
+        error: 'Please wait 15 minutes before requesting another verification email.',
+      };
     }
 
     const user = await prisma.user.findUnique({
@@ -447,7 +459,7 @@ export async function resendVerificationEmailAction(email: string): Promise<Acti
       message: 'verification email sent!',
     };
   } catch (error) {
-    console.log('Resend verification error: ', error);
+    console.error('Resend verification error: ', error);
     return {
       success: false,
       error: 'Failed to resend verification email.',
