@@ -12,7 +12,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { LuMapPin, LuArrowRight, LuBookmark } from 'react-icons/lu';
 import type { DirectoryBusiness } from '@/lib/directory';
-import VerifiedIcon from '@/public/brand-assets/VerifiedBusinessImpact.svg';
 
 interface Props {
   business: DirectoryBusiness;
@@ -189,7 +188,7 @@ const BusinessDirectoryCard = ({ business }: Props) => {
             {/* Verified badge */}
             <HStack gap="3" align="center" flex="1" minW="0">
               <Image
-                src={VerifiedIcon}
+                src="/brand-assets/VerifiedBusinessImpact.svg"
                 alt="Verified Community Impact"
                 width={36}
                 height={36}
