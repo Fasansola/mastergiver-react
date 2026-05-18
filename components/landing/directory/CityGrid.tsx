@@ -98,14 +98,6 @@ const CityGrid = ({ cities }: Props) => {
                       >
                         {city.city}, {city.state}
                       </Text>
-                      <Text
-                        fontSize="11px"
-                        color="#9CA3AF"
-                        className="font-body"
-                      >
-                        {city.count}{' '}
-                        {city.count === 1 ? 'business' : 'businesses'}
-                      </Text>
                     </Stack>
                   </HStack>
                   <Box color="#C4C0F0" flexShrink="0" display="flex" pt="2px">
