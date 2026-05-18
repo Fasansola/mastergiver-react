@@ -67,8 +67,8 @@ const CityGrid = ({ cities }: Props) => {
                   bg="#FAFBFF"
                   border="1px solid #E8EBFF"
                   borderRadius="12px"
-                  px={{ base: '12px', md: '16px' }}
-                  py="14px"
+                  px={{ base: '16px', md: '20px' }}
+                  py="22px"
                   gap="3"
                   justify="space-between"
                   align="start"
