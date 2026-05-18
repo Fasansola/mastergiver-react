@@ -157,11 +157,15 @@ export async function businessSignUpAction(
 /**
  * Sign in a business user.
  *
- * After authenticating, looks up the linked Business record to determine
- * where to send the user:
- *   PENDING   → /business/confirm   (needs to complete payment)
- *   ACTIVE    → /business/dashboard/edit-profile
- *   SUSPENDED → returns `suspended: true` so the form shows an inline message
+ * After authenticating, looks up the linked Business record and the user's role
+ * to determine where to send the user:
+ *   Admin with multiple panels → /select-panel
+ *   PENDING                   → /business/confirm   (needs to complete payment)
+ *   ACTIVE                    → /business/dashboard/edit-profile
+ *   SUSPENDED                 → returns `suspended: true` so the form shows an inline message
+ *
+ * Admin users may sign in here (e.g. they also have a business account). We must
+ * check role first so they are not silently bypassed to the business panel.
  */
 export async function businessSignInAction(
   data: BusinessSignInInput,
@@ -178,11 +182,26 @@ export async function businessSignInAction(
     // Authenticate via NextAuth credentials provider
     await signIn('credentials', { email, password, redirect: false });
 
-    // Look up the linked business to determine where to redirect
+    // Look up the user's role, profile, and business to determine where to redirect
     const user = await prisma.user.findUnique({
       where: { email },
       include: { business: true, profile: true },
     });
+
+    // If the user has admin role, apply the same multi-panel routing used on the
+    // main login page. An admin signing in via /business/signin must not be
+    // silently dropped into the business panel and lose access to /admin/directory.
+    const isAdmin = user?.role === 'ADMIN';
+    const hasBusiness = !!user?.business;
+    const hasProfile = !!user?.profile;
+
+    if (isAdmin) {
+      const panelCount = [isAdmin, hasBusiness, hasProfile].filter(Boolean).length;
+      if (panelCount > 1) {
+        return { success: true, redirectTo: '/select-panel' };
+      }
+      return { success: true, redirectTo: '/admin/directory' };
+    }
 
     if (!user?.business) {
       // Has an individual profile but no business — guide them to extend their account

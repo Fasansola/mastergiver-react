@@ -97,6 +97,7 @@ export async function redirectIfBusinessSession() {
   const user = await prisma.user.findUnique({
     where: { id: session.user.id },
     select: {
+      role: true,
       profile: { select: { id: true } },
       business: { select: { status: true } },
     },
@@ -104,7 +105,18 @@ export async function redirectIfBusinessSession() {
 
   if (!user?.business) return;
 
-  // Dual-account user — let them choose which panel
+  // Admin users with a business account must reach select-panel, not be silently
+  // dropped into the business panel and lose access to /admin/directory.
+  const isAdmin = user.role === 'ADMIN';
+  const hasBusiness = true; // we already checked user.business above
+  const hasProfile = !!user.profile;
+
+  if (isAdmin) {
+    const panelCount = [isAdmin, hasBusiness, hasProfile].filter(Boolean).length;
+    redirect(panelCount > 1 ? '/select-panel' : '/admin/directory');
+  }
+
+  // Dual-account user (individual + business) — let them choose which panel
   if (user.profile) {
     redirect('/select-panel');
   }
