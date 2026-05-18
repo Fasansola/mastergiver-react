@@ -2,15 +2,15 @@
  * BusinessDirectoryCard
  *
  * Card shown in the GOOD Businesses directory hub and city pages.
- * Layout (per design): logo + name/location + bookmark icon in header,
- * tagline, cause chips, then a bottom bar with the verified badge on
- * the left and a "View Reputation Profile →" CTA on the right.
+ * Layout (per design): logo + name/location in header, tagline, cause chips,
+ * then a bottom bar with the verified badge on the left and a
+ * "View Reputation Profile →" CTA on the right.
  */
 
 import { Box, HStack, Separator, Stack, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { LuMapPin, LuArrowRight, LuBookmark } from 'react-icons/lu';
+import { LuMapPin, LuArrowRight } from 'react-icons/lu';
 import type { DirectoryBusiness } from '@/lib/directory';
 
 interface Props {
@@ -54,8 +54,8 @@ const BusinessDirectoryCard = ({ business }: Props) => {
         {/* Card body */}
         <Stack gap="4" p={{ base: '4', md: '5' }} flex="1">
 
-          {/* Header: logo + name/location + bookmark */}
-          <HStack gap="3" align="start" justify="space-between">
+          {/* Header: logo + name/location */}
+          <HStack gap="3" align="start">
             <HStack gap="3" align="start" flex="1" minW="0">
               {/* Logo / initials avatar */}
               {logo ? (
@@ -124,11 +124,6 @@ const BusinessDirectoryCard = ({ business }: Props) => {
                 )}
               </Stack>
             </HStack>
-
-            {/* Bookmark icon */}
-            <Box color="#C4C0F0" flexShrink="0" display="flex" pt="1">
-              <LuBookmark size={18} />
-            </Box>
           </HStack>
 
           {/* Tagline */}
@@ -187,11 +182,13 @@ const BusinessDirectoryCard = ({ business }: Props) => {
           <HStack px="5" py="4" justify="space-between" align="center" gap="3">
             {/* Verified badge */}
             <HStack gap="3" align="center" flex="1" minW="0">
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src="/brand-assets/VerifiedBusinessImpact.svg"
                 alt="Verified Community Impact"
                 width={36}
                 height={36}
+                style={{ flexShrink: 0 }}
               />
               <Stack gap="0" minW="0">
                 <Text
