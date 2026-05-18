@@ -182,14 +182,33 @@ const BusinessDirectoryCard = ({ business }: Props) => {
           <HStack px="5" py="4" justify="space-between" align="center" gap="3">
             {/* Verified badge */}
             <HStack gap="3" align="center" flex="1" minW="0">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/brand-assets/VerifiedBusinessImpact.svg"
-                alt="Verified Community Impact"
-                width={36}
-                height={36}
+              {/* Inlined SVG — avoids public path resolution issues across environments */}
+              <svg
+                width="36"
+                height="36"
+                viewBox="0 0 160 166"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
                 style={{ flexShrink: 0 }}
-              />
+                aria-hidden="true"
+              >
+                <circle cx="80" cy="83" r="74" fill="#F0ECFF" />
+                <path
+                  d="M80 43 C69.5 50.5 57.8 54.5 46 55.5 V78.5 C46 101.5 59.5 119.5 80 128 C100.5 119.5 114 101.5 114 78.5 V55.5 C102.2 54.5 90.5 50.5 80 43Z"
+                  stroke="#5542D6"
+                  strokeWidth="5"
+                  strokeLinejoin="round"
+                  fill="none"
+                />
+                <path
+                  d="M63 82.5L75.5 95L98 70"
+                  stroke="#5542D6"
+                  strokeWidth="6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="none"
+                />
+              </svg>
               <Stack gap="0" minW="0">
                 <Text
                   fontSize="12px"
