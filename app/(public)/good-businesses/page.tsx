@@ -138,7 +138,7 @@ const GoodBusinessesPage = async () => {
                   base: '1fr',
                   md: 'repeat(2, 1fr)',
                 }}
-                gap={{ base: '4', md: '5', lg: '6' }}
+                gap={{ base: '6', md: '12' }}
               >
                 {businesses.slice(0, FEATURED_COUNT).map((b) => (
                   <BusinessDirectoryCard key={b.slug} business={b} />
