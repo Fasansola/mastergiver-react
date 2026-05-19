@@ -137,7 +137,6 @@ const GoodBusinessesPage = async () => {
                 templateColumns={{
                   base: '1fr',
                   md: 'repeat(2, 1fr)',
-                  lg: 'repeat(3, 1fr)',
                 }}
                 gap={{ base: '4', md: '5', lg: '6' }}
               >

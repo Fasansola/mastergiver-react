@@ -17,7 +17,7 @@ interface Props {
   business: DirectoryBusiness;
 }
 
-const MAX_CAUSES = 3;
+const MAX_CAUSES = 4;
 
 const BusinessDirectoryCard = ({ business }: Props) => {
   const { slug, companyName, logo, city, state, tagline, causes } = business;
@@ -35,28 +35,33 @@ const BusinessDirectoryCard = ({ business }: Props) => {
   const extraCount = causes.length - MAX_CAUSES;
 
   return (
-    <Link href={`/business/${slug}`} style={{ display: 'block', height: '100%', cursor: 'pointer' }}>
+    <Link
+      href={`/business/${slug}`}
+      style={{ display: 'block', height: '100%', cursor: 'pointer' }}
+    >
       <Stack
         bg="white"
         borderRadius="20px"
-        border="1px solid #EBEBF5"
+        border="1px solid"
+        borderColor="directory.cardBorder"
         h="100%"
         justify="space-between"
         cursor="pointer"
         transition="transform 0.18s, box-shadow 0.18s"
         boxShadow="0px 1px 4px rgba(47, 43, 119, 0.06)"
+        p={{ base: '4', md: '8' }}
+        gap="6"
         _hover={{
           transform: 'translateY(-3px)',
           boxShadow: '0px 12px 36px rgba(47, 43, 119, 0.12)',
-          borderColor: '#D4D0F5',
+          borderColor: 'directory.cardBorderHover',
         }}
       >
         {/* Card body */}
-        <Stack gap="4" p={{ base: '4', md: '5' }} flex="1">
-
+        <Stack gap="4" flex="1">
           {/* Header: logo + name/location */}
           <HStack gap="3" align="start">
-            <HStack gap="3" align="start" flex="1" minW="0">
+            <HStack gap="3" align="center" flex="1" minW="0">
               {/* Logo / initials avatar */}
               {logo ? (
                 <Box
@@ -66,14 +71,15 @@ const BusinessDirectoryCard = ({ business }: Props) => {
                   overflow="hidden"
                   position="relative"
                   flexShrink="0"
-                  border="1px solid #F0EEF8"
+                  border="1px solid"
+                  borderColor="directory.logoBorder"
                 >
                   <Image
                     src={logo}
                     alt={`${name} logo`}
                     fill
                     sizes="72px"
-                    style={{ objectFit: 'cover' }}
+                    style={{ objectFit: 'contain' }}
                   />
                 </Box>
               ) : (
@@ -106,7 +112,7 @@ const BusinessDirectoryCard = ({ business }: Props) => {
                   fontWeight="700"
                   fontSize={{ base: '16px', md: '18px' }}
                   lineHeight="130%"
-                  color="#1A1730"
+                  color="directory.heading"
                   className="font-display"
                   lineClamp={2}
                 >
@@ -114,10 +120,14 @@ const BusinessDirectoryCard = ({ business }: Props) => {
                 </Text>
                 {location && (
                   <HStack gap="1" align="center">
-                    <Box color="#9CA3AF" display="flex">
+                    <Box color="directory.muted" display="flex">
                       <LuMapPin size={12} />
                     </Box>
-                    <Text fontSize="12px" color="#9CA3AF" className="font-body">
+                    <Text
+                      fontSize="12px"
+                      color="directory.muted"
+                      className="font-body"
+                    >
                       {location}
                     </Text>
                   </HStack>
@@ -131,7 +141,7 @@ const BusinessDirectoryCard = ({ business }: Props) => {
             <Text
               fontSize="13px"
               lineHeight="160%"
-              color="#6B7280"
+              color="directory.body"
               className="font-body"
               lineClamp={2}
             >
@@ -141,20 +151,21 @@ const BusinessDirectoryCard = ({ business }: Props) => {
 
           {/* Cause chips */}
           {visibleCauses.length > 0 && (
-            <HStack gap="2" flexWrap="wrap">
+            <HStack gap="3" flexWrap="wrap">
               {visibleCauses.map((bc) => (
                 <Box
                   key={bc.cause.name}
                   px="10px"
                   py="4px"
                   borderRadius="100px"
-                  bg="#F4F2FF"
-                  border="1px solid #E2DFFF"
+                  bg="directory.chipBg"
+                  border="1px solid"
+                  borderColor="directory.chipBorder"
                 >
                   <Text
                     fontSize="11px"
                     fontWeight="600"
-                    color="#5B52C0"
+                    color="directory.chipText"
                     className="font-body"
                     letterSpacing="0.1px"
                   >
@@ -165,7 +176,7 @@ const BusinessDirectoryCard = ({ business }: Props) => {
               {extraCount > 0 && (
                 <Text
                   fontSize="11px"
-                  color="#9CA3AF"
+                  color="directory.muted"
                   className="font-body"
                   fontWeight="500"
                 >
@@ -176,16 +187,16 @@ const BusinessDirectoryCard = ({ business }: Props) => {
           )}
         </Stack>
 
+        <Separator borderColor="directory.separator" />
         {/* Bottom bar: verified badge + CTA */}
         <Box>
-          <Separator borderColor="#F0EEF8" />
-          <HStack px="5" py="4" justify="space-between" align="center" gap="3">
+          <HStack justify="space-between" align="center" gap="3">
             {/* Verified badge */}
             <HStack gap="3" align="center" flex="1" minW="0">
               {/* Inlined SVG — avoids public path resolution issues across environments */}
               <svg
-                width="36"
-                height="36"
+                width="54"
+                height="54"
                 viewBox="0 0 160 166"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -209,17 +220,24 @@ const BusinessDirectoryCard = ({ business }: Props) => {
                   fill="none"
                 />
               </svg>
-              <Stack gap="0" minW="0">
+
+              <Stack gap="1" minW="0">
                 <Text
                   fontSize="12px"
                   fontWeight="700"
-                  color="#1A1730"
+                  color="directory.heading"
                   className="font-body"
+                  lineHeight="140%"
                   lineClamp={1}
                 >
                   Verified Community Impact
                 </Text>
-                <Text fontSize="11px" color="#9CA3AF" className="font-body">
+                <Text
+                  fontSize="10px"
+                  color="directory.muted"
+                  className="font-body"
+                  lineHeight="130%"
+                >
                   Proud to support our community.
                 </Text>
               </Stack>
@@ -228,15 +246,15 @@ const BusinessDirectoryCard = ({ business }: Props) => {
             {/* View profile CTA */}
             <HStack gap="1" flexShrink="0">
               <Text
-                fontSize="13px"
+                fontSize="12px"
                 fontWeight="700"
-                color="#2F2B77"
+                color="brand.primary"
                 className="font-body"
                 whiteSpace="nowrap"
               >
                 View Reputation Profile
               </Text>
-              <Box color="#2F2B77" display="flex">
+              <Box color="brand.primary" display="flex">
                 <LuArrowRight size={14} />
               </Box>
             </HStack>

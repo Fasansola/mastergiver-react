@@ -15,6 +15,20 @@ const config = defineConfig({
           primaryHover: { value: '#1F1B57' }, // Darker shade for hover
           primaryLight: { value: '#4A45A0' }, // Lighter shade
         },
+        directory: {
+          cardBorder: { value: '#EBEBF5' },
+          cardBorderHover: { value: '#D4D0F5' },
+          heading: { value: '#1A1730' },
+          muted: { value: '#9CA3AF' },
+          body: { value: '#6B7280' },
+          chipBg: { value: '#F4F2FF' },
+          chipBorder: { value: '#E2DFFF' },
+          chipText: { value: '#5B52C0' },
+          separator: { value: '#F0EEF8' },
+          logoBorder: { value: '#F0EEF8' },
+          verifiedCircle: { value: '#F0ECFF' },
+          verifiedStroke: { value: '#5542D6' },
+        },
         background: {
           page: { value: '#f7f8fa' }, // Page background
           card: { value: '#FFFFFF' }, // White cards/boxes
