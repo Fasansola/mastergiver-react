@@ -10,6 +10,7 @@
 
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Stack, Text } from '@chakra-ui/react';
@@ -30,6 +31,7 @@ const partnerSchema = z.object({
 type PartnerFormInput = z.infer<typeof partnerSchema>;
 
 const PartnerForm = () => {
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const [submitted, setSubmitted] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
 
@@ -43,11 +45,18 @@ const PartnerForm = () => {
 
   const onSubmit = async (data: PartnerFormInput) => {
     setServerError(null);
+
+    if (!executeRecaptcha) {
+      setServerError('Security check not ready. Please refresh and try again.');
+      return;
+    }
+    const recaptchaToken = await executeRecaptcha('partner_form');
+
     try {
       const res = await fetch('/api/partner', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, recaptchaToken }),
       });
       if (!res.ok) {
         const json = (await res.json()) as { error?: string };

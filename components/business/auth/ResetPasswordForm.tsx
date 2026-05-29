@@ -19,6 +19,7 @@ import {
   type BusinessResetPasswordRequestInput,
 } from '@/lib/validations/business-auth.schema';
 import { businessRequestPasswordResetAction } from '@/lib/actions/business-auth.actions';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import {
   inputStyle,
   labelStyle,
@@ -29,6 +30,7 @@ import { Heading, Stack, Text, Link } from '@chakra-ui/react';
 import SuccessIcon from '@/public/components-assets/Success Icon.svg';
 
 const ResetPasswordForm = () => {
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [serverError, setServerError] = useState<string | null>(null);
 
@@ -44,7 +46,12 @@ const ResetPasswordForm = () => {
     setServerError(null);
     setSuccessMessage(null);
 
-    const result = await businessRequestPasswordResetAction(data);
+    if (!executeRecaptcha) {
+      setServerError('Security check not ready. Please refresh and try again.');
+      return;
+    }
+    const token = await executeRecaptcha('business_password_reset');
+    const result = await businessRequestPasswordResetAction(data, token);
 
     if (!result.success) {
       setServerError(result.error);

@@ -25,11 +25,17 @@ import VerifyEmail from '@/lib/email/templates/verify-email';
 import ResetPassword from '@/lib/email/templates/reset-password';
 import { addMailerLiteSubscriber } from '@/lib/email/mailerlite';
 import type { ActionResult } from '@/lib/types/actions';
+import { verifyRecaptcha } from '@/lib/recaptcha';
 
 // SIGN UP A NEW USER
 
-export async function signUpAction(data: SignUpInput): Promise<ActionResult<{ message: string }>> {
+export async function signUpAction(data: SignUpInput, recaptchaToken: string): Promise<ActionResult<{ message: string }>> {
   try {
+    const isHuman = await verifyRecaptcha(recaptchaToken);
+    if (!isHuman) {
+      return { success: false, error: 'Bot activity detected. Please try again.' };
+    }
+
     // Validate input
     const validatedFields = signUpSchema.safeParse(data);
 
@@ -146,8 +152,13 @@ export async function signUpAction(data: SignUpInput): Promise<ActionResult<{ me
 
 // LOG IN A USER
 
-export async function loginAction(data: LoginInput): Promise<ActionResult<{ redirectTo: string }>> {
+export async function loginAction(data: LoginInput, recaptchaToken: string): Promise<ActionResult<{ redirectTo: string }>> {
   try {
+    const isHuman = await verifyRecaptcha(recaptchaToken);
+    if (!isHuman) {
+      return { success: false, error: 'Bot activity detected. Please try again.' };
+    }
+
     const validatedFields = loginSchema.safeParse(data);
 
     if (!validatedFields.success) {
@@ -278,8 +289,13 @@ export async function verifyEmailAction(token: string) {
 
 // REQUEST PASSWORD RESET
 
-export async function requestPasswordResetAction(data: ResetPasswordRequestInput): Promise<ActionResult<{ message: string }>> {
+export async function requestPasswordResetAction(data: ResetPasswordRequestInput, recaptchaToken: string): Promise<ActionResult<{ message: string }>> {
   try {
+    const isHuman = await verifyRecaptcha(recaptchaToken);
+    if (!isHuman) {
+      return { success: false, error: 'Bot activity detected. Please try again.' };
+    }
+
     const validatedFields = resetPasswordRequestSchema.safeParse(data);
 
     if (!validatedFields.success) {

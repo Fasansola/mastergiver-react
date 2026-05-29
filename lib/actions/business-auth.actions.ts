@@ -37,6 +37,7 @@ import { sendEmail } from '@/lib/email/client';
 import ResetPassword from '@/lib/email/templates/reset-password';
 import { addMailerLiteSubscriber } from '@/lib/email/mailerlite';
 import type { ActionResult } from '@/lib/types/actions';
+import { verifyRecaptcha } from '@/lib/recaptcha';
 
 // ---------------------------------------------------------------------------
 // SIGN UP
@@ -55,8 +56,14 @@ import type { ActionResult } from '@/lib/types/actions';
  */
 export async function businessSignUpAction(
   data: BusinessSignUpInput,
+  recaptchaToken: string,
 ): Promise<ActionResult<{ redirectTo: string }>> {
   try {
+    const isHuman = await verifyRecaptcha(recaptchaToken);
+    if (!isHuman) {
+      return { success: false, error: 'Bot activity detected. Please try again.' };
+    }
+
     const validatedFields = businessSignUpSchema.safeParse(data);
 
     if (!validatedFields.success) {
@@ -169,8 +176,14 @@ export async function businessSignUpAction(
  */
 export async function businessSignInAction(
   data: BusinessSignInInput,
+  recaptchaToken: string,
 ): Promise<ActionResult<{ redirectTo?: string; suspended?: true }>> {
   try {
+    const isHuman = await verifyRecaptcha(recaptchaToken);
+    if (!isHuman) {
+      return { success: false, error: 'Bot activity detected. Please try again.' };
+    }
+
     const validatedFields = businessSignInSchema.safeParse(data);
 
     if (!validatedFields.success) {
@@ -254,8 +267,14 @@ export async function businessSignInAction(
  */
 export async function businessRequestPasswordResetAction(
   data: BusinessResetPasswordRequestInput,
+  recaptchaToken: string,
 ): Promise<ActionResult<{ message: string }>> {
   try {
+    const isHuman = await verifyRecaptcha(recaptchaToken);
+    if (!isHuman) {
+      return { success: false, error: 'Bot activity detected. Please try again.' };
+    }
+
     const validatedFields = businessResetPasswordRequestSchema.safeParse(data);
 
     if (!validatedFields.success) {

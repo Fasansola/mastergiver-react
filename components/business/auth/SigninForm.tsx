@@ -21,6 +21,7 @@ import {
   type BusinessSignInInput,
 } from '@/lib/validations/business-auth.schema';
 import { businessSignInAction } from '@/lib/actions/business-auth.actions';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import BusinessPasswordInput from '@/components/business/shared/BusinessPasswordInput';
 import {
   inputStyle,
@@ -32,6 +33,7 @@ import { Heading, HStack, Stack, Text, Link } from '@chakra-ui/react';
 
 const SigninForm = () => {
   const router = useRouter();
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const [serverError, setServerError] = useState<string | null>(null);
   // When the business is suspended, we show a special notice instead of a generic error
   const [isSuspended, setIsSuspended] = useState(false);
@@ -48,7 +50,12 @@ const SigninForm = () => {
     setServerError(null);
     setIsSuspended(false);
 
-    const result = await businessSignInAction(data);
+    if (!executeRecaptcha) {
+      setServerError('Security check not ready. Please refresh and try again.');
+      return;
+    }
+    const token = await executeRecaptcha('business_login');
+    const result = await businessSignInAction(data, token);
 
     if (!result.success) {
       setServerError(result.error);

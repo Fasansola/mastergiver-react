@@ -9,9 +9,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Alert, Button, Checkbox, Field, Flex, Input } from '@chakra-ui/react';
 import { PasswordInput } from '@/components/ui/password-input';
 import { signUpAction } from '@/lib/actions/auth.actions';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 const SignUpForm = () => {
   const router = useRouter();
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const [serverError, setServerError] = useState<string | null>(null);
 
   const {
@@ -36,7 +38,12 @@ const SignUpForm = () => {
   const onSubmit = async (data: SignUpInput) => {
     setServerError(null);
 
-    const result = await signUpAction(data);
+    if (!executeRecaptcha) {
+      setServerError('Security check not ready. Please refresh and try again.');
+      return;
+    }
+    const token = await executeRecaptcha('signup');
+    const result = await signUpAction(data, token);
 
     if (!result.success) {
       setServerError(result.error ?? 'Something went wrong');

@@ -10,8 +10,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 const RequestResetForm = () => {
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const [serverMessage, setServerMessage] = useState<{
     type: 'success' | 'error';
     text: string;
@@ -31,7 +33,12 @@ const RequestResetForm = () => {
   const onSubmit = async (data: ResetPasswordRequestInput) => {
     setServerMessage(null);
 
-    const result = await requestPasswordResetAction(data);
+    if (!executeRecaptcha) {
+      setServerMessage({ type: 'error', text: 'Security check not ready. Please refresh and try again.' });
+      return;
+    }
+    const token = await executeRecaptcha('password_reset');
+    const result = await requestPasswordResetAction(data, token);
 
     if (!result.success) {
       setServerMessage({

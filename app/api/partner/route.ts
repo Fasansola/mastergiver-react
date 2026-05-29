@@ -12,6 +12,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { Resend } from 'resend';
+import { verifyRecaptcha } from '@/lib/recaptcha';
 
 export const dynamic = 'force-dynamic';
 
@@ -20,6 +21,7 @@ const schema = z.object({
   organizationName: z.string().min(1),
   email: z.string().email(),
   website: z.string().optional(),
+  recaptchaToken: z.string().min(1),
 });
 
 const NOTIFY_RECIPIENTS =
@@ -74,7 +76,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid form data.' }, { status: 400 });
   }
 
-  const { contactName, organizationName, email, website } = parsed.data;
+  const { contactName, organizationName, email, website, recaptchaToken } = parsed.data;
+
+  const isHuman = await verifyRecaptcha(recaptchaToken);
+  if (!isHuman) {
+    return NextResponse.json({ error: 'Bot activity detected. Please try again.' }, { status: 400 });
+  }
 
   const from =
     process.env.NODE_ENV === 'production'

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import { Libre_Bodoni } from 'next/font/google';
 import { Provider } from '@/components/ui/provider';
+import RecaptchaProvider from '@/components/RecaptchaProvider';
 import './globals.css';
 
 const poppins = Poppins({
@@ -76,7 +77,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         </noscript>
         {/* End Google Tag Manager (noscript) */}
-        <Provider>{children}</Provider>
+        <Provider>
+          <RecaptchaProvider>{children}</RecaptchaProvider>
+        </Provider>
       </body>
     </html>
   );

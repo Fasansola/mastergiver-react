@@ -18,6 +18,7 @@ import {
   type BusinessSignUpInput,
 } from '@/lib/validations/business-auth.schema';
 import { businessSignUpAction } from '@/lib/actions/business-auth.actions';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import BusinessPasswordInput from '@/components/business/shared/BusinessPasswordInput';
 import {
   inputStyle,
@@ -29,6 +30,7 @@ import { Heading, Link, Stack, Text } from '@chakra-ui/react';
 
 const SignupForm = () => {
   const router = useRouter();
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const [serverError, setServerError] = useState<string | null>(null);
 
   const {
@@ -41,7 +43,13 @@ const SignupForm = () => {
 
   const onSubmit = async (data: BusinessSignUpInput) => {
     setServerError(null);
-    const result = await businessSignUpAction(data);
+
+    if (!executeRecaptcha) {
+      setServerError('Security check not ready. Please refresh and try again.');
+      return;
+    }
+    const token = await executeRecaptcha('business_signup');
+    const result = await businessSignUpAction(data, token);
 
     if (!result.success) {
       setServerError(result.error);
