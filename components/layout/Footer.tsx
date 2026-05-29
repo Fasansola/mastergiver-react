@@ -144,16 +144,16 @@ const Footer = () => {
             &copy; 2026 MasterGiver. All rights reserved.
           </Text>
           <HStack gap="6">
-            <Link target="_blank" href="/">
+            <Link target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/company/themastergiver/">
               <Image src={LinkedInIcon} alt="MasterGiver Linkedin" />
             </Link>
-            <Link target="_blank" href="/">
+            <Link target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/themastergiver">
               <Image src={InstagramIcon} alt="MasterGiver Instagram" />
             </Link>
-            <Link target="_blank" href="/">
+            <Link target="_blank" rel="noopener noreferrer" href="https://x.com/TheMasterGiver">
               <Image src={TwitterIcon} alt="MasterGiver Twitter or X" />
             </Link>
-            <Link target="_blank" href="/">
+            <Link target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/themastergiver">
               <Image src={FacebookIcon} alt="MasterGiver Facebook" />
             </Link>
           </HStack>
