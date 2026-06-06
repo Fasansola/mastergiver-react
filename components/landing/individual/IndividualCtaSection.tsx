@@ -11,7 +11,7 @@ import Link from 'next/link';
 
 const IndividualCtaSection = () => {
   return (
-    <Stack bgColor="white">
+    <Stack bgColor="background.white">
       <Container py={{ base: '60px', lg: '100px' }}>
         <Stack align="center" gap={{ base: '5', lg: '6' }} textAlign="center">
           <Text

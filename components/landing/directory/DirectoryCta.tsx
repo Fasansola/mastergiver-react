@@ -127,7 +127,7 @@ const DirectoryCta = () => {
           <Link href="/business/signup">
             <Box
               as="button"
-              bg="white"
+              bg="background.white"
               color="#2F2B77"
               fontWeight="700"
               fontSize={{ base: '16px', lg: '18px' }}

@@ -96,7 +96,7 @@ const CityDirectoryPage = async ({ params }: Props) => {
       {/* Page header */}
       <Stack
         as="section"
-        bg="linear-gradient(160deg, #F0F4FF 0%, #EAF0FF 40%, #F5F3FF 100%)"
+        bg="var(--gradient-hero-directory)"
         py={{ base: '44px', md: '56px', lg: '72px' }}
         position="relative"
       >
@@ -155,7 +155,7 @@ const CityDirectoryPage = async ({ params }: Props) => {
       <Stack
         as="section"
         aria-label={`Businesses in ${label}`}
-        bg="#F8F9FF"
+        bg="background.subtle"
         py={{ base: '40px', md: '56px', lg: '72px' }}
       >
         <Container maxW="1100px">

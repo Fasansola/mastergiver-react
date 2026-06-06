@@ -18,7 +18,7 @@ const CommunityImpactBox = ({ image, title, description }: Props) => {
     >
       <Stack gap="10" align="center">
         <Stack
-          bgColor="white"
+          bgColor="background.white"
           borderRadius="8px"
           maxW="100px"
           maxH="100px"

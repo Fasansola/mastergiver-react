@@ -66,7 +66,7 @@ const PartnerCtaSection = () => {
             p={{ base: '8', lg: '12' }}
             borderRadius="16px"
             color="text.heading"
-            bgColor="white"
+            bgColor="background.white"
           >
             <Stack gap="10">
               <Heading

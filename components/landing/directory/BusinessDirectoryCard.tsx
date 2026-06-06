@@ -40,7 +40,7 @@ const BusinessDirectoryCard = ({ business }: Props) => {
       style={{ display: 'block', height: '100%', cursor: 'pointer' }}
     >
       <Stack
-        bg="white"
+        bg="background.white"
         borderRadius={{ base: '16px', md: '20px' }}
         border="1px solid"
         borderColor="directory.cardBorder"

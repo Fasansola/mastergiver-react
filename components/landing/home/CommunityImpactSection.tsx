@@ -82,7 +82,7 @@ const CommunityImpactSection = () => {
         <Box w={{ base: '100%', lg: 'fit-content' }}>
           <Link href="/reputation">
             <Button
-              bg="#2F2B77"
+              bg="brand.primary"
               color="white"
               fontWeight="700"
               fontSize={{ base: '16px', lg: '20px' }}

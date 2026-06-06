@@ -40,7 +40,7 @@ const benefits = [
 
 const BenefitWorthSection = () => {
   return (
-    <Stack bgColor="#F7F8FA" borderY="1px solid #E9EAED">
+    <Stack bgColor="background.section" borderY="1px solid #E9EAED">
       <Container
         py={{ base: '60px', lg: '100px' }}
         alignItems="center"
@@ -68,7 +68,7 @@ const BenefitWorthSection = () => {
             <Stack
               p={{ base: '6', lg: '10' }}
               gap="6"
-              bg="white"
+              bg="background.white"
               boxShadow="0px 1px 2px 0px #4646490F, 0px 5px 3px 0px #4646490A"
               borderRadius="12px"
               border="0.5px solid #DCDFE3"

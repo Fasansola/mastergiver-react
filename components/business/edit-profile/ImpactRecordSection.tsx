@@ -316,7 +316,7 @@ const ImpactRecordSection = ({
                 {entries.map((record) => (
                   <Box
                     key={record.id}
-                    bg="white"
+                    bg="background.white"
                     border="0.5px solid"
                     borderColor="border.accentBorder"
                     borderLeft="4px solid"

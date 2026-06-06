@@ -11,7 +11,7 @@ import LandingH from '@/components/landing/LandingH';
 const ReputationRulesSection = () => {
   return (
     <Stack
-      bg="#F8F8F8"
+      bg="background.section"
       h={{ base: 'auto', lg: '840px' }}
       maxH={{ base: 'none', lg: '840px' }}
       justify="center"
@@ -54,7 +54,7 @@ const ReputationRulesSection = () => {
                 p={{ base: '5', lg: '8' }}
                 borderLeft="4px solid"
                 borderColor="#BDBDFA"
-                bg="#FFFFFF"
+                bg="background.white"
               >
                 <Text
                   className="font-display"
@@ -70,7 +70,7 @@ const ReputationRulesSection = () => {
               <Box w={{ base: '100%', lg: 'fit-content' }}>
                 <Link href="/reputation">
                   <Button
-                    bg="#2F2B77"
+                    bg="brand.primary"
                     color="white"
                     fontWeight="700"
                     fontSize={{ base: '16px', lg: '20px' }}

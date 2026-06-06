@@ -41,7 +41,7 @@ export default function GlobalError({ error, reset }: ErrorProps) {
           later.
         </Text>
         <Button
-          bg="#2F2B77"
+          bg="brand.primary"
           color="white"
           borderRadius="8px"
           px="8"

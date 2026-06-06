@@ -42,7 +42,7 @@ const AboutPage = () => {
     <Stack gap="0" className="font-body">
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <Stack bg="linear-gradient(107.69deg, #F3F6FF 0%, #F1F5FF 100%)">
+      <Stack bg="var(--gradient-hero)">
         <Container
           pt={{ base: '40px', lg: '72px' }}
           pb={{ base: '60px', lg: '100px' }}
@@ -104,7 +104,7 @@ const AboutPage = () => {
       </Stack>
 
       {/* ── SECTION 2 ────────────────────────────────────────────────────── */}
-      <Stack bg="white">
+      <Stack bg="background.white">
         <Container
           py={{ base: '60px', lg: '100px' }}
           maxW="860px"
@@ -160,7 +160,7 @@ const AboutPage = () => {
       </Stack>
 
       {/* ── SECTION 3 ────────────────────────────────────────────────────── */}
-      <Stack bg="#F7F8FA">
+      <Stack bg="background.section">
         <Container
           py={{ base: '60px', lg: '100px' }}
           maxW="860px"
@@ -218,7 +218,7 @@ const AboutPage = () => {
       </Stack>
 
       {/* ── SECTION 4 ────────────────────────────────────────────────────── */}
-      <Stack bg="white">
+      <Stack bg="background.white">
         <Container
           py={{ base: '60px', lg: '100px' }}
           maxW="860px"
@@ -269,7 +269,7 @@ const AboutPage = () => {
       </Stack>
 
       {/* ── SECTION 5 ────────────────────────────────────────────────────── */}
-      <Stack bg="#F7F8FA">
+      <Stack bg="background.section">
         <Container
           py={{ base: '60px', lg: '100px' }}
           maxW="860px"
@@ -312,7 +312,7 @@ const AboutPage = () => {
       </Stack>
 
       {/* ── SECTION 6 ────────────────────────────────────────────────────── */}
-      <Stack bg="white">
+      <Stack bg="background.white">
         <Container
           py={{ base: '60px', lg: '100px' }}
           maxW="860px"
@@ -399,7 +399,7 @@ const AboutPage = () => {
             <Box w={{ base: '100%', lg: 'fit-content' }} pt="2">
               <Link href="/business/signup">
                 <Button
-                  bg="white"
+                  bg="background.white"
                   color="brand.primary"
                   fontWeight="700"
                   fontSize={{ base: '16px', lg: '20px' }}

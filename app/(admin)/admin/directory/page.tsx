@@ -57,7 +57,7 @@ const AdminDirectoryPage = async () => {
             {/* Stats */}
             <HStack gap="4">
               <Box
-                bg="white"
+                bg="background.white"
                 border="1px solid #E8EBFF"
                 borderRadius="10px"
                 px="16px"
@@ -72,7 +72,7 @@ const AdminDirectoryPage = async () => {
                 </Text>
               </Box>
               <Box
-                bg="white"
+                bg="background.white"
                 border="1px solid #E8EBFF"
                 borderRadius="10px"
                 px="16px"
@@ -110,7 +110,7 @@ const AdminDirectoryPage = async () => {
             {businesses.map((b) => (
               <Box
                 key={b.id}
-                bg="white"
+                bg="background.white"
                 border="1px solid"
                 borderColor={b.featuredInDirectory ? '#DDD8FF' : '#F3F4F6'}
                 borderRadius="14px"

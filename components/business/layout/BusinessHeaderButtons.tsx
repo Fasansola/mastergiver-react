@@ -53,7 +53,7 @@ const BusinessHeaderButtons = ({
       <Button
         asChild
         display={{ base: 'none', lg: 'flex' }}
-        bg="#2F2B77"
+        bg="brand.primary"
         color="white"
         h="56px"
         borderRadius="8px"

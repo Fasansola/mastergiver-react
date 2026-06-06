@@ -49,7 +49,7 @@ const BusinessSidebar = ({ isDrawer = false }: BusinessSidebarProps) => {
         mt="8"
         p="5"
         gap="3"
-        bgColor="white"
+        bgColor="background.white"
         borderRadius="16px"
         border="1px solid"
         borderColor="border.default"

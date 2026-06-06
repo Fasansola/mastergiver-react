@@ -9,7 +9,7 @@ const WhatYouGetBox = ({ image, title, description }: Props) => {
     <Stack
       p={{ base: '5', lg: '8' }}
       gap="4"
-      bg="white"
+      bg="background.white"
       boxShadow="0px 1px 2px 0px #4646490F, 0px 5px 3px 0px #4646490A"
       borderRadius="12px"
       align="center"

@@ -40,6 +40,9 @@ export async function verifyRecaptcha(token: string): Promise<boolean> {
       return false;
     }
 
+    // TODO: remove this log after confirming reCAPTCHA is working in production
+    console.log(`[reCAPTCHA] action="${data.action}" score=${data.score} (threshold=${SCORE_THRESHOLD}) → ${data.score >= SCORE_THRESHOLD ? 'PASS ✓' : 'BLOCKED ✗'}`);
+
     return data.score >= SCORE_THRESHOLD;
   } catch (err) {
     console.error('[reCAPTCHA] Network error during verification:', err);

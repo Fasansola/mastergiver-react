@@ -22,7 +22,7 @@ import GreenCheck from '@/components/landing/GreenCheck';
 
 const HomeHeroSection = () => {
   return (
-    <Stack bg="linear-gradient(107.69deg, #F3F6FF 0%, #F1F5FF 100%)">
+    <Stack bg="var(--gradient-hero)">
       <Container
         pt={{ base: '40px', lg: '64px' }}
         pb={{ base: '60px', lg: '100px' }}
@@ -65,7 +65,7 @@ const HomeHeroSection = () => {
               <Box w={{ base: '100%', lg: 'fit-content' }}>
                 <Link href="/business/signup">
                   <Button
-                    bg="#2F2B77"
+                    bg="brand.primary"
                     color="white"
                     fontWeight="700"
                     fontSize={{ base: '16px', lg: '20px' }}

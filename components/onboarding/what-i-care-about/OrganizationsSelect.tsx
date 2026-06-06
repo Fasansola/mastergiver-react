@@ -79,7 +79,7 @@ const OrganizationsSelect = () => {
                         borderTop="1px solid"
                         borderColor="#D2D2D8"
                         p="4"
-                        _hover={{ backgroundColor: '#ECEBF8' }}
+                        _hover={{ backgroundColor: 'brand.accent' }}
                       >
                         {item.logo ? (
                           <Box backgroundColor="white" borderRadius="sm" p="2">

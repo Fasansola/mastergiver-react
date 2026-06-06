@@ -21,9 +21,9 @@ export default async function AdminLayout({ children }: PropsWithChildren) {
   }
 
   return (
-    <Stack gap="0" minH="100vh" bg="#F8F9FF">
+    <Stack gap="0" minH="100vh" bg="background.subtle">
       {/* Top nav */}
-      <Box bg="white" borderBottom="1px solid #E8EBFF" py="4">
+      <Box bg="background.white" borderBottom="1px solid #E8EBFF" py="4">
         <Container maxW="1200px">
           <Flex align="center" justify="space-between">
             <HStack gap="6">

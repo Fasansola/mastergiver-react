@@ -125,7 +125,7 @@ const EntryItem = ({ record }: { record: ImpactEntry }) => {
                 px="2"
                 py="0.5"
                 borderRadius="4px"
-                bg="white"
+                bg="background.white"
                 border="1px solid #E0DFFF"
               >
                 <Text
@@ -143,7 +143,7 @@ const EntryItem = ({ record }: { record: ImpactEntry }) => {
                 px="2"
                 py="0.5"
                 borderRadius="4px"
-                bg="white"
+                bg="background.white"
                 border="1px solid #C6F6D5"
               >
                 <Text
@@ -238,7 +238,7 @@ const ImpactRecordPublic = ({ records }: ImpactRecordPublicProps) => {
               py="3"
               borderRadius="8px"
               border="2px solid #2F2B77"
-              bg="white"
+              bg="background.white"
               color="#2F2B77"
               fontWeight="700"
               fontSize="15px"
@@ -270,7 +270,7 @@ const ImpactRecordPublic = ({ records }: ImpactRecordPublicProps) => {
           }}
         >
           <Box
-            bg="white"
+            bg="background.white"
             borderRadius="16px"
             w="100%"
             maxW="640px"
@@ -278,7 +278,7 @@ const ImpactRecordPublic = ({ records }: ImpactRecordPublicProps) => {
             boxShadow="0px 20px 60px rgba(0,0,0,0.2)"
           >
             {/* Modal header bar */}
-            <Box bg="#2F2B77" px="6" py="4">
+            <Box bg="brand.primary" px="6" py="4">
               <HStack justify="space-between" align="center">
                 <Heading
                   as="h2"

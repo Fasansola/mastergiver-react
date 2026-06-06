@@ -13,7 +13,7 @@ type FAQSectionProps = {
 
 const FAQSection = ({ faqs }: FAQSectionProps) => {
   return (
-    <Stack bgColor="white" borderY="1px solid #E9EAED">
+    <Stack bgColor="background.white" borderY="1px solid #E9EAED">
       <Container
         py={{ base: '60px', lg: '100px' }}
         alignItems="center"

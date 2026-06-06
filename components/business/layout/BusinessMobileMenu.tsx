@@ -46,7 +46,7 @@ const BusinessMobileMenu = ({ children }: PropsWithChildren) => {
           <Drawer.Backdrop />
           <Drawer.Positioner>
             {/* White background to match the business sidebar design */}
-            <Drawer.Content w="400px" maxW="100vw" bg="#FFFFFF" overflowY="auto">
+            <Drawer.Content w="400px" maxW="100vw" bg="background.white" overflowY="auto">
               {children}
             </Drawer.Content>
           </Drawer.Positioner>

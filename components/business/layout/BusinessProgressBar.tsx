@@ -27,7 +27,7 @@ const BusinessProgressBar = ({ percent }: BusinessProgressBarProps) => {
       borderRadius="12px"
       px="5"
       py="4"
-      bgColor="white"
+      bgColor="background.white"
     >
       {/* Label row */}
       <div

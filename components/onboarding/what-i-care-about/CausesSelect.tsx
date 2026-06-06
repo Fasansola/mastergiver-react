@@ -85,7 +85,7 @@ const CausesSelect = ({ causes }: CausesSelectProps) => {
             {collection.items.map((item) => (
               <Combobox.Item key={item.value} item={item}>
                 <HStack
-                  _hover={{ backgroundColor: '#ECEBF8' }}
+                  _hover={{ backgroundColor: 'brand.accent' }}
                   p="2"
                   cursor="pointer"
                   gap="3"

@@ -12,7 +12,7 @@ import type { PropsWithChildren } from 'react';
 const BusinessAuthCard = ({ children }: PropsWithChildren) => {
   return (
     <Stack
-      bgColor="#FFFFFF"
+      bgColor="background.white"
       maxW="660px"
       p={{ base: '6', md: '12' }}
       borderRadius="16px"

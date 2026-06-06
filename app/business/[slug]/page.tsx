@@ -261,7 +261,7 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
               >
                 {/* Verified Community Impact */}
                 <HStack
-                  bgColor="white"
+                  bgColor="background.white"
                   p={{ base: '4', md: '6' }}
                   w="100%"
                   maxW="580px"
@@ -302,7 +302,7 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
                 {hasImpact && (
                   <Stack
                     w="100%"
-                    bgColor="white"
+                    bgColor="background.white"
                     p={{ base: '5', md: '7', lg: '10' }}
                     align="center"
                     border="solid 0.5px #DCDFE3"
@@ -341,7 +341,7 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
                 {hasImpactRecord && (
                   <Stack
                     w="100%"
-                    bgColor="white"
+                    bgColor="background.white"
                     p={{ base: '5', md: '7', lg: '10' }}
                     align="center"
                     border="solid 0.5px #DCDFE3"
@@ -378,7 +378,7 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
               {hasPartners && (
                 <Stack
                   w="100%"
-                  bgColor="white"
+                  bgColor="background.white"
                   p={{ base: '5', md: '7', lg: '10' }}
                   align="center"
                   border="solid 0.5px #DCDFE3"
@@ -403,7 +403,7 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
               {hasCauses && (
                 <Stack
                   w="100%"
-                  bgColor="white"
+                  bgColor="background.white"
                   p={{ base: '5', md: '7', lg: '10' }}
                   align="center"
                   border="solid 0.5px #DCDFE3"
@@ -428,7 +428,7 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
               {hasEvents && (
                 <Stack
                   w="100%"
-                  bgColor="white"
+                  bgColor="background.white"
                   p={{ base: '5', md: '7', lg: '10' }}
                   align="center"
                   border="solid 0.5px #DCDFE3"
@@ -453,7 +453,7 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
               {hasEndorsements && (
                 <Stack
                   w="100%"
-                  bgColor="white"
+                  bgColor="background.white"
                   p={{ base: '5', md: '7', lg: '10' }}
                   align="center"
                   border="solid 0.5px #DCDFE3"
@@ -478,7 +478,7 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
               {hasOffers && (
                 <Stack
                   w="100%"
-                  bgColor="white"
+                  bgColor="background.white"
                   p={{ base: '5', md: '7', lg: '10' }}
                   align="center"
                   border="solid 0.5px #DCDFE3"

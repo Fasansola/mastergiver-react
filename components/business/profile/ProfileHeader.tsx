@@ -52,7 +52,7 @@ const ProfileHeader = ({
     <Stack
       w={{ base: 'full', lg: '440px' }}
       minW={{ base: 'auto', lg: '440px' }}
-      bgColor="white"
+      bgColor="background.white"
       py={{ base: '6', lg: '10' }}
       px={{ base: '5', lg: '8' }}
       gap="8"

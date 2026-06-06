@@ -106,7 +106,7 @@ const DirectorySearchClient = ({ cities }: Props) => {
     <Box ref={containerRef} position="relative" w="100%" maxW="540px">
       {/* Input */}
       <HStack
-        bg="white"
+        bg="background.white"
         borderRadius="14px"
         border="1.5px solid #E0E7FF"
         px="5"
@@ -160,7 +160,7 @@ const DirectorySearchClient = ({ cities }: Props) => {
           top="calc(100% + 8px)"
           left="0"
           right="0"
-          bg="white"
+          bg="background.white"
           borderRadius="16px"
           border="1px solid #E8EAFF"
           boxShadow="0px 16px 48px rgba(47, 43, 119, 0.16)"

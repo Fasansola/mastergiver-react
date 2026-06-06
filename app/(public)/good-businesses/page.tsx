@@ -96,7 +96,7 @@ const GoodBusinessesPage = async () => {
         <Stack
           as="section"
           aria-label="Recently added businesses"
-          bg="#F8F9FF"
+          bg="background.subtle"
           py={{ base: '56px', md: '72px', lg: '88px' }}
         >
           <Container>
@@ -151,7 +151,7 @@ const GoodBusinessesPage = async () => {
         /* Empty state — shown when no businesses are published yet */
         <Stack
           as="section"
-          bg="#F8F9FF"
+          bg="background.subtle"
           py={{ base: '56px', md: '72px', lg: '88px' }}
           align="center"
           textAlign="center"
@@ -175,7 +175,7 @@ const GoodBusinessesPage = async () => {
               <Link href="/business/signup">
                 <Box
                   as="button"
-                  bg="#2F2B77"
+                  bg="brand.primary"
                   color="white"
                   fontWeight="700"
                   fontSize="15px"

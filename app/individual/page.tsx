@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 
 export default function IndividualPage() {
   return (
-    <Stack gap="0" bgColor="white" overflowX="hidden" className="font-poppins">
+    <Stack gap="0" bgColor="background.white" overflowX="hidden" className="font-poppins">
       <Header />
       <IndividualHeroSection />
       <IndividualFeaturedSection />

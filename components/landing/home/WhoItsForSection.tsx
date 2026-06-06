@@ -12,7 +12,7 @@ import Link from 'next/link';
 const WhoItsForSection = () => {
   return (
     <Stack
-      bg="#FFF"
+      bg="background.white"
       h={{ base: 'auto', lg: '840px' }}
       maxH={{ base: 'none', lg: '840px' }}
       justify="center"
@@ -85,7 +85,7 @@ const WhoItsForSection = () => {
               <Box w={{ base: '100%', lg: 'fit-content' }}>
                 <Link href="/business/tess-the-tooth-fairy">
                   <Button
-                    bg="#2F2B77"
+                    bg="brand.primary"
                     color="white"
                     fontWeight="700"
                     fontSize={{ base: '16px', lg: '20px' }}

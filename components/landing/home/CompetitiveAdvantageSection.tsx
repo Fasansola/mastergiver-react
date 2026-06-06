@@ -47,7 +47,7 @@ const CompetitiveAdvantageSection = () => {
         <Stack
           p={{ base: '6', md: '10', lg: '60px' }}
           boxShadow="0px 25px 50px -12px #00000040"
-          bgColor="white"
+          bgColor="background.white"
           align="center"
           border="0.5px solid #E9EAED"
           borderRadius="16px"
@@ -128,7 +128,7 @@ const CompetitiveAdvantageSection = () => {
 
           <Link href="/business/signup" className="w-full">
             <Button
-              bg="#2F2B77"
+              bg="brand.primary"
               color="white"
               fontWeight="700"
               fontSize={{ base: '16px', lg: '20px' }}

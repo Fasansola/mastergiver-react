@@ -27,7 +27,7 @@ const steps = [
 
 const ThreeStepsSection = () => {
   return (
-    <Stack bgColor="#F7F8FA" borderY="1px solid #E9EAED">
+    <Stack bgColor="background.section" borderY="1px solid #E9EAED">
       <Container
         py={{ base: '60px', lg: '100px' }}
         alignItems="center"
@@ -58,7 +58,7 @@ const ThreeStepsSection = () => {
                 align="center"
                 gap="10"
                 p="8"
-                bgColor="white"
+                bgColor="background.white"
                 borderRadius="16px"
               >
                 <Stack
@@ -97,7 +97,7 @@ const ThreeStepsSection = () => {
             border="1px solid"
             borderLeft="4px solid"
             borderColor="#5851BF"
-            bg="#FFFFFF"
+            bg="background.white"
             maxW="1032px"
           >
             <Text

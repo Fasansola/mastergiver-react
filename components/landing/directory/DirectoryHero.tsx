@@ -18,7 +18,7 @@ const DirectoryHero = ({ cities }: Props) => {
   return (
     <Stack
       as="section"
-      bg="linear-gradient(160deg, #F0F4FF 0%, #EAF0FF 40%, #F5F3FF 100%)"
+      bg="var(--gradient-hero-directory)"
       py={{ base: '56px', md: '72px', lg: '100px' }}
       position="relative"
     >
@@ -58,7 +58,7 @@ const DirectoryHero = ({ cities }: Props) => {
             px="14px"
             py="6px"
             borderRadius="100px"
-            bg="white"
+            bg="background.white"
             border="1px solid #DDD8FF"
             display="inline-flex"
             alignItems="center"

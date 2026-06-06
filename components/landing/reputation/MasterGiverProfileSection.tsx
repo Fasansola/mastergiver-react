@@ -13,7 +13,7 @@ import LandingH from '@/components/landing/LandingH';
 
 const MasterGiverProfileSection = () => {
   return (
-    <Stack bg="white">
+    <Stack bg="background.white">
       <Container py={{ base: '60px', lg: '100px' }}>
         <Stack
           direction={{ base: 'column', lg: 'row' }}
@@ -48,7 +48,7 @@ const MasterGiverProfileSection = () => {
               <Box w={{ base: '100%', lg: 'fit-content' }}>
                 <Link href="/business/tess-the-tooth-fairy">
                   <Button
-                    bg="#2F2B77"
+                    bg="brand.primary"
                     color="white"
                     fontWeight="700"
                     fontSize={{ base: '16px', lg: '20px' }}

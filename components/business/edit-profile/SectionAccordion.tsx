@@ -41,7 +41,7 @@ const SectionAccordion = ({
 
   return (
     <Stack
-      bgColor="white"
+      bgColor="background.white"
       borderRadius="8px"
       border="1px solid #E5E7EB"
       gap="0"

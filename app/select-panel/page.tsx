@@ -58,9 +58,9 @@ const SelectPanelPage = async () => {
         : '/business/confirm';
 
   return (
-    <Box minH="100vh" bg="#F8F9FF" display="flex" flexDirection="column">
+    <Box minH="100vh" bg="background.subtle" display="flex" flexDirection="column">
       {/* Top bar */}
-      <Box bg="white" borderBottom="1px solid #E8EBFF" py="4" px="6">
+      <Box bg="background.white" borderBottom="1px solid #E8EBFF" py="4" px="6">
         <Image src={siteLogo} alt="MasterGiver" width={130} height={44} />
       </Box>
 
@@ -94,7 +94,7 @@ const SelectPanelPage = async () => {
               {hasProfile && (
                 <Link href="/dashboard" style={{ display: 'block', textDecoration: 'none' }}>
                   <Box
-                    bg="white"
+                    bg="background.white"
                     border="1px solid #E8EBFF"
                     borderRadius="16px"
                     p="6"
@@ -140,7 +140,7 @@ const SelectPanelPage = async () => {
               {hasBusiness && (
                 <Link href={businessHref} style={{ display: 'block', textDecoration: 'none' }}>
                   <Box
-                    bg="white"
+                    bg="background.white"
                     border="1px solid #E8EBFF"
                     borderRadius="16px"
                     p="6"
@@ -186,7 +186,7 @@ const SelectPanelPage = async () => {
               {isAdmin && (
                 <Link href="/admin/directory" style={{ display: 'block', textDecoration: 'none' }}>
                   <Box
-                    bg="white"
+                    bg="background.white"
                     border="1px solid #E8EBFF"
                     borderRadius="16px"
                     p="6"

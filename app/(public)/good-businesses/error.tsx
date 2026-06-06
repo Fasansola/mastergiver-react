@@ -26,7 +26,7 @@ export default function DirectoryError({
 
   return (
     <Stack
-      bg="linear-gradient(160deg, #F0F4FF 0%, #EAF0FF 40%, #F5F3FF 100%)"
+      bg="var(--gradient-hero-directory)"
       minH="60vh"
       align="center"
       justify="center"
@@ -38,13 +38,13 @@ export default function DirectoryError({
             px="14px"
             py="6px"
             borderRadius="100px"
-            bg="white"
+            bg="background.white"
             border="1px solid #DDD8FF"
             display="inline-flex"
             alignItems="center"
             gap="6px"
           >
-            <Box w="6px" h="6px" borderRadius="full" bg="#2F2B77" />
+            <Box w="6px" h="6px" borderRadius="full" bg="brand.primary" />
             <Text
               fontSize="11px"
               fontWeight="700"
@@ -82,7 +82,7 @@ export default function DirectoryError({
             <Box
               as="button"
               onClick={reset}
-              bg="#2F2B77"
+              bg="brand.primary"
               color="white"
               fontWeight="700"
               fontSize="15px"
@@ -105,7 +105,7 @@ export default function DirectoryError({
             <Link href="/">
               <Box
                 as="button"
-                bg="white"
+                bg="background.white"
                 color="#2F2B77"
                 fontWeight="600"
                 fontSize="15px"

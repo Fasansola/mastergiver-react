@@ -63,7 +63,7 @@ const DirectoryToggle = ({ businessId, initialFeatured, companyName }: Props) =>
           w="18px"
           h="18px"
           borderRadius="full"
-          bg="white"
+          bg="background.white"
           boxShadow="0px 1px 3px rgba(0,0,0,0.2)"
           transition="left 0.2s"
         />

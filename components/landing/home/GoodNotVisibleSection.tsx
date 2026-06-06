@@ -71,7 +71,7 @@ const GoodNotVisibleSection = () => {
         <Stack
           direction={{ base: 'column', lg: 'row' }}
           p={{ base: '6', lg: '10' }}
-          bg="#F8F8F8"
+          bg="background.section"
           border="0.5px solid #E9EAED"
           w="100%"
           gap="12"

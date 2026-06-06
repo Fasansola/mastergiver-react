@@ -96,7 +96,7 @@ const features = [
 
 const IndividualFeaturedSection = () => {
   return (
-    <Stack bgColor="#F7F8FA">
+    <Stack bgColor="background.section">
       <Container py={{ base: '48px', lg: '80px' }}>
         <Heading
           fontWeight="700"

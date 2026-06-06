@@ -44,7 +44,7 @@ const ReputationCtaSection = () => {
           <Stack align="center" gap="4" w="100%">
             <Link href="/business/signup">
               <Button
-                bgColor="white"
+                bgColor="background.white"
                 w="100%"
                 color="brand.primary"
                 fontSize={{ base: '16px', lg: '20px' }}

@@ -43,7 +43,7 @@ const HomeCtaSection = () => {
           <Stack align="center" gap="4">
             <Link href="/business/signup">
               <Button
-                bgColor="white"
+                bgColor="background.white"
                 w="fit-content"
                 color="brand.primary"
                 fontSize="20px"

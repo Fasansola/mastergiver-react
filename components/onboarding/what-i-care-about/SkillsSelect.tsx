@@ -74,7 +74,7 @@ const SkillsSelect = ({ skills }: SkillsSelectProps) => {
             {collection.items.map((item) => (
               <Combobox.Item key={item.value} item={item}>
                 <Box
-                  _hover={{ backgroundColor: '#ECEBF8' }}
+                  _hover={{ backgroundColor: 'brand.accent' }}
                   p="4"
                   cursor="pointer"
                   h="52px"

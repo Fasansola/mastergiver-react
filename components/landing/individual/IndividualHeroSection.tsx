@@ -12,7 +12,7 @@ import heroImage from '@/public/individual/hero-image.png';
 
 const IndividualHeroSection = () => {
   return (
-    <Stack bgColor="white">
+    <Stack bgColor="background.white">
       <Container py={{ base: '48px', lg: '80px' }}>
         <Stack
           direction={{ base: 'column', lg: 'row' }}

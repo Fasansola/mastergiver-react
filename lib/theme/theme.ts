@@ -30,12 +30,14 @@ const config = defineConfig({
           verifiedStroke: { value: '#5542D6' },
         },
         background: {
-          page: { value: '#f7f8fa' }, // Page background
-          card: { value: '#FFFFFF' }, // White cards/boxes
-          white: { value: '#FFFFFF' }, // White cards/boxes
-          lightBlue: { value: '#C7DCFD' }, // White cards/boxes
-          input: { value: '#FFFFFF' }, // Input backgrounds
-          hover: { value: '#5851BF' }, // Link text
+          page: { value: '#f7f8fa' },    // Full-page background (auth, dashboard, onboarding)
+          section: { value: '#F7F8FA' }, // Alternating light section bg on landing pages
+          subtle: { value: '#F8F9FF' },  // Admin / select-panel page bg (slight purple tint)
+          card: { value: '#FFFFFF' },    // White cards/boxes
+          white: { value: '#FFFFFF' },   // Explicit white (same value, clearer intent)
+          lightBlue: { value: '#C7DCFD' },
+          input: { value: '#FFFFFF' },   // Input backgrounds
+          hover: { value: '#5851BF' },   // Link text
         },
         text: {
           heading: { value: '#27262D' },

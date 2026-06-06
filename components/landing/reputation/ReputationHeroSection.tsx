@@ -18,7 +18,7 @@ import VerifiedImpact from '@/public/reputation/VerifiedImpact.png';
 
 const ReputationHeroSection = () => {
   return (
-    <Stack bg="linear-gradient(107.69deg, #F3F6FF 0%, #F1F5FF 100%)">
+    <Stack bg="var(--gradient-hero)">
       <Container
         pt={{ base: '40px', lg: '64px' }}
         pb={{ base: '60px', lg: '100px' }}
@@ -67,7 +67,7 @@ const ReputationHeroSection = () => {
                 border="1px solid"
                 borderLeft="4px solid"
                 borderColor="#BDBDFA"
-                bg="#FFFFFF"
+                bg="background.white"
               >
                 <Text
                   className="font-body"
@@ -85,7 +85,7 @@ const ReputationHeroSection = () => {
               <Box w={{ base: '100%', lg: 'fit-content' }}>
                 <Link href="/business/signup">
                   <Button
-                    bg="#2F2B77"
+                    bg="brand.primary"
                     color="white"
                     fontWeight="700"
                     fontSize={{ base: '16px', lg: '20px' }}

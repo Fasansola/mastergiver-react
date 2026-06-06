@@ -102,7 +102,7 @@ const SECTIONS = [
 
 const TermsPage = () => {
   return (
-    <Box bgColor="white">
+    <Box bgColor="background.white">
       {/* Page header */}
       <Box
         bgGradient="linear(107.69deg, #F3F6FF 0%, #F1F5FF 100%)"

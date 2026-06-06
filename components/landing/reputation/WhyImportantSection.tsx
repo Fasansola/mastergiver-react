@@ -28,7 +28,7 @@ const shifts = [
 
 const WhyImportantSection = () => {
   return (
-    <Stack bg="white">
+    <Stack bg="background.white">
       <Container py={{ base: '60px', lg: '100px' }}>
         <Stack
           direction={{ base: 'column', lg: 'row' }}

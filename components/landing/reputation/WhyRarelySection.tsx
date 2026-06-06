@@ -27,7 +27,7 @@ const problems = [
 
 const WhyRarelySection = () => {
   return (
-    <Stack bgColor="#F7F8FA" borderY="1px solid #E9EAED">
+    <Stack bgColor="background.section" borderY="1px solid #E9EAED">
       <Container
         py={{ base: '60px', lg: '100px' }}
         alignItems="center"
@@ -74,7 +74,7 @@ const WhyRarelySection = () => {
             >
               <Stack gap="10" align="center">
                 <Stack
-                  bgColor="#ECEBF8"
+                  bgColor="brand.accent"
                   borderRadius="16px"
                   maxW="100px"
                   maxH="100px"

@@ -62,7 +62,7 @@ const LogoutConfirmDialog = ({
                 </Button>
                 <Button
                   color="white"
-                  bg="#2F2B77"
+                  bg="brand.primary"
                   _hover={{ bg: '#1e1a5e' }}
                   _active={{ bg: '#17145a' }}
                   onClick={onConfirm}

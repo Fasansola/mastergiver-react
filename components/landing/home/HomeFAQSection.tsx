@@ -48,7 +48,7 @@ const FAQS = [
 
 const HomeFAQSection = () => {
   return (
-    <Stack bgColor="#F7F8FA" borderY="1px solid #E9EAED">
+    <Stack bgColor="background.section" borderY="1px solid #E9EAED">
       <Container
         py={{ base: '60px', lg: '100px' }}
         alignItems="center"

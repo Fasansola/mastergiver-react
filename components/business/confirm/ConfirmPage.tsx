@@ -47,7 +47,7 @@ const CheckItem = ({ label }: { label: string }) => (
       w="22px"
       h="22px"
       borderRadius="full"
-      bgColor="#ECEBF8"
+      bgColor="brand.accent"
       flexShrink={0}
       display="flex"
       alignItems="center"

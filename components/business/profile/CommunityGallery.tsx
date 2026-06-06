@@ -28,7 +28,7 @@ const CommunityGallery = ({ events }: CommunityGalleryProps) => {
       {events.map((e) => (
         <Stack
           key={e.id}
-          bgColor="white"
+          bgColor="background.white"
           border="1px solid #DCDFE3"
           borderRadius="12px"
           boxShadow="0px 1px 2px 0px #4646490F, 0px 5px 3px 0px #4646490A"
