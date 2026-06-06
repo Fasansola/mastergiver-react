@@ -15,10 +15,11 @@ import {
 import Link from 'next/link';
 import NextImage from 'next/image';
 import VerifiedImpact from '@/public/reputation/VerifiedImpact.png';
+import { HERO_GRADIENT } from '@/lib/theme/gradients';
 
 const ReputationHeroSection = () => {
   return (
-    <Stack bg="var(--gradient-hero)">
+    <Stack bg={HERO_GRADIENT}>
       <Container
         pt={{ base: '40px', lg: '64px' }}
         pb={{ base: '60px', lg: '100px' }}

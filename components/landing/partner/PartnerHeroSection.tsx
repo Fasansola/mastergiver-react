@@ -7,10 +7,11 @@
 import { Box, Button, Container, Heading, Stack, Text } from '@chakra-ui/react';
 import NextImage from 'next/image';
 import Hero from '@/public/partner/Hero.png';
+import { HERO_GRADIENT } from '@/lib/theme/gradients';
 
 const PartnerHeroSection = () => {
   return (
-    <Stack bg="var(--gradient-hero)">
+    <Stack bg={HERO_GRADIENT}>
       <Container
         pt={{ base: '40px', lg: '64px' }}
         pb={{ base: '60px', lg: '100px' }}

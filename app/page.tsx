@@ -32,11 +32,12 @@ import ReturnOnReputationSection from '@/components/landing/home/ReturnOnReputat
 import CompetitiveAdvantageSection from '@/components/landing/home/CompetitiveAdvantageSection';
 import HomeFAQSection from '@/components/landing/home/HomeFAQSection';
 import HomeCtaSection from '@/components/landing/home/HomeCtaSection';
+import { HERO_GRADIENT } from '@/lib/theme/gradients';
 
 export default function Home() {
   return (
     <Stack gap="0" bgColor="background.white" overflowX="hidden" className="font-body">
-      <BusinessHeader bgColor="var(--gradient-hero)" />
+      <BusinessHeader bgColor={HERO_GRADIENT} />
       <HomeHeroSection />
       <GoodNotVisibleSection />
       <Stack display="none">

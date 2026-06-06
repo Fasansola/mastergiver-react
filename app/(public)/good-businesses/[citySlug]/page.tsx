@@ -23,6 +23,7 @@ import { LuMapPin } from 'react-icons/lu';
 import { getBusinessesByCity, parseCitySlug } from '@/lib/directory';
 import BusinessDirectoryCard from '@/components/landing/directory/BusinessDirectoryCard';
 import DirectoryCta from '@/components/landing/directory/DirectoryCta';
+import { DIRECTORY_HERO_GRADIENT } from '@/lib/theme/gradients';
 
 export const dynamic = 'force-dynamic';
 
@@ -96,7 +97,7 @@ const CityDirectoryPage = async ({ params }: Props) => {
       {/* Page header */}
       <Stack
         as="section"
-        bg="var(--gradient-hero-directory)"
+        bg={DIRECTORY_HERO_GRADIENT}
         py={{ base: '44px', md: '56px', lg: '72px' }}
         position="relative"
       >

@@ -11,6 +11,7 @@
 import { useEffect } from 'react';
 import { Box, Container, Heading, Stack, Text } from '@chakra-ui/react';
 import Link from 'next/link';
+import { DIRECTORY_HERO_GRADIENT } from '@/lib/theme/gradients';
 
 export default function DirectoryError({
   error,
@@ -26,7 +27,7 @@ export default function DirectoryError({
 
   return (
     <Stack
-      bg="var(--gradient-hero-directory)"
+      bg={DIRECTORY_HERO_GRADIENT}
       minH="60vh"
       align="center"
       justify="center"

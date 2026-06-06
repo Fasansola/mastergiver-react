@@ -9,6 +9,7 @@
 import { Box, Container, Heading, Stack, Text } from '@chakra-ui/react';
 import type { CityGroup } from '@/lib/directory';
 import DirectorySearchClient from './DirectorySearchClient';
+import { DIRECTORY_HERO_GRADIENT } from '@/lib/theme/gradients';
 
 interface Props {
   cities: CityGroup[];
@@ -18,7 +19,7 @@ const DirectoryHero = ({ cities }: Props) => {
   return (
     <Stack
       as="section"
-      bg="var(--gradient-hero-directory)"
+      bg={DIRECTORY_HERO_GRADIENT}
       py={{ base: '56px', md: '72px', lg: '100px' }}
       position="relative"
     >

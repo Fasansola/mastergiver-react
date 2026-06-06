@@ -9,6 +9,7 @@
 import type { Metadata } from 'next';
 import { Box, Button, Container, Heading, Stack, Text } from '@chakra-ui/react';
 import Link from 'next/link';
+import { HERO_GRADIENT } from '@/lib/theme/gradients';
 
 export const metadata: Metadata = {
   title: 'Community Impact & Business Reputation | About MasterGiver',
@@ -42,7 +43,7 @@ const AboutPage = () => {
     <Stack gap="0" className="font-body">
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <Stack bg="var(--gradient-hero)">
+      <Stack bg={HERO_GRADIENT}>
         <Container
           pt={{ base: '40px', lg: '72px' }}
           pb={{ base: '60px', lg: '100px' }}
