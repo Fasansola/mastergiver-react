@@ -278,12 +278,19 @@ const BeyondReviews = () => {
               <>
                 <StatsCards key={index} stat={stat} />
                 {index !== statsData.length - 1 ? (
-                  <Separator
-                    orientation="vertical"
-                    border="1px solid"
-                    borderColor="border.accentBorder"
-                    display={{ base: 'none', lg: 'block' }}
-                  />
+                  <>
+                    {/* Horizontal divider between cards on mobile */}
+                    <Separator
+                      borderColor="border.accentBorder"
+                      display={{ base: 'block', lg: 'none' }}
+                    />
+                    {/* Vertical divider between cards on desktop */}
+                    <Separator
+                      orientation="vertical"
+                      borderColor="border.accentBorder"
+                      display={{ base: 'none', lg: 'block' }}
+                    />
+                  </>
                 ) : null}
               </>
             ))}
