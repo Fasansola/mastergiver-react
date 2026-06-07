@@ -21,6 +21,7 @@ import {
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 import { HERO_GRADIENT } from '@/lib/theme/gradients';
+import EyebrowPill from '@/components/landing/EyebrowPill';
 
 import badge from '@/public/beyond-reviews/Frame (4).svg';
 import flag from '@/public/beyond-reviews/Flag.svg';
@@ -153,27 +154,10 @@ const BeyondReviews = () => {
           <Stack align="center" gap="10">
             <Stack align="center" gap="10">
               {/* Eyebrow pill */}
-              <HStack
-                gap="2"
-                align="center"
-                width="fit-content"
-                py="10px"
-                px="4"
-                border="1px solid"
-                borderColor="brand.lightPrimary"
-                borderRadius="12px"
-                bgColor="background.lightPurple"
-              >
-                <Image alt="" src={badge} width={24} height={24} />
-                <Text
-                  color="brand.primary"
-                  fontSize="subheading"
-                  fontWeight="bold"
-                  lineHeight="170%"
-                >
-                  INTRODUCING VERIFIED COMMUNITY IMPACT
-                </Text>
-              </HStack>
+              <EyebrowPill
+                icon={badge}
+                label="INTRODUCING VERIFIED COMMUNITY IMPACT"
+              />
 
               {/* Headlines */}
               <Stack align="center" gap="4" textAlign="center">
@@ -428,29 +412,10 @@ const BeyondReviews = () => {
           <Stack align="center" gap="10" maxW="740px">
             <Stack align="center" gap="10">
               {/* Eyebrow pill */}
-              <HStack
-                gap="2"
-                alignItems="center"
-                justifyContent="center"
-                width="fit-content"
-                py="10px"
-                px="4"
-                border="1px solid"
-                borderColor="brand.lightPrimary"
-                borderRadius="12px"
-                bgColor="background.lightPurple"
-              >
-                <Image alt="" src={flag} width={24} height={24} />
-                <Text
-                  color="brand.primary"
-                  fontSize="subheading"
-                  fontWeight="500"
-                  lineHeight="170%"
-                  className="font-body"
-                >
-                  EVERYTHING INCLUDED
-                </Text>
-              </HStack>
+              <EyebrowPill
+                icon={flag}
+                label="EVERYTHING INCLUDED"
+              />
 
               <Stack align="center" gap="10" textAlign="center">
                 <Stack gap="4">
@@ -531,26 +496,11 @@ const BeyondReviews = () => {
           <Stack align="center" gap="16">
             <Stack align="center" gap="10">
               {/* Eyebrow pill */}
-              <HStack
-                gap="2"
-                align="center"
-                width="fit-content"
-                py="10px"
-                px="4"
-                border="0.5px solid"
-                borderColor="background.white"
-                borderRadius="12px"
-              >
-                <Image alt="" src={footerIcon} width={24} height={24} />
-                <Text
-                  color="text.white"
-                  fontSize={{ base: 'small', md: 'subheading' }}
-                  fontWeight="bold"
-                  lineHeight="170%"
-                >
-                  YOUR COMPETITORS ARE STILL JUST COLLECTING REVIEWS
-                </Text>
-              </HStack>
+              <EyebrowPill
+                icon={footerIcon}
+                label="YOUR COMPETITORS ARE STILL JUST COLLECTING REVIEWS"
+                variant="dark"
+              />
 
               <Stack align="center" gap="10" textAlign="center">
                 <Stack gap="4">
