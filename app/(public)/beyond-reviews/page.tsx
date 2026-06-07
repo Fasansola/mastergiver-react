@@ -213,9 +213,13 @@ const BeyondReviews = () => {
               </Stack>
             </Stack>
 
-            {/* CTAs */}
-            <HStack gap="4" flexWrap="wrap" justify="center">
-              <Link href="/business/signup">
+            {/* CTAs — stack vertically (full-width) on mobile, side-by-side on md+ */}
+            <Stack
+              direction={{ base: 'column', md: 'row' }}
+              gap="4"
+              w={{ base: '100%', md: 'auto' }}
+            >
+              <Link href="/business/signup" style={{ width: '100%' }}>
                 <Button
                   fontWeight="700"
                   fontSize="subheading"
@@ -224,11 +228,12 @@ const BeyondReviews = () => {
                   borderRadius="8px"
                   bgColor="brand.primary"
                   color="text.white"
+                  w="100%"
                 >
                   Build My Reputation Profile
                 </Button>
               </Link>
-              <Link href="/good-businesses">
+              <Link href="/good-businesses" style={{ width: '100%' }}>
                 <Button
                   fontWeight="700"
                   fontSize="subheading"
@@ -239,11 +244,12 @@ const BeyondReviews = () => {
                   borderRadius="8px"
                   bgColor="background.white"
                   color="brand.primary"
+                  w="100%"
                 >
                   See Example Profile
                 </Button>
               </Link>
-            </HStack>
+            </Stack>
           </Stack>
         </Container>
       </Stack>
@@ -572,7 +578,10 @@ const BeyondReviews = () => {
               </Stack>
             </Stack>
 
-            <Link href="/business/signup">
+            <Link
+              href="/business/signup"
+              style={{ width: '100%', maxWidth: '400px' }}
+            >
               <Button
                 fontWeight="700"
                 fontSize="subheading"
@@ -581,6 +590,7 @@ const BeyondReviews = () => {
                 borderRadius="8px"
                 bgColor="brand.lightPrimary"
                 color="text.white"
+                w="100%"
               >
                 Get Started
               </Button>
