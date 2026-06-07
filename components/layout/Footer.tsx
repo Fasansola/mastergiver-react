@@ -82,6 +82,7 @@ const Footer = () => {
               </Heading>
               <Stack gap="4">
                 <FooterNavItem href="/about">About MasterGiver</FooterNavItem>
+                <FooterNavItem href="/beyond-reviews">Beyond Reviews</FooterNavItem>
                 <FooterNavItem href="/partner">Partner</FooterNavItem>
               </Stack>
             </Stack>
