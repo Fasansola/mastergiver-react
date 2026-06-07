@@ -578,7 +578,7 @@ const StatsCards = ({ stat }: { stat: StatsInterface }) => {
         />
         <Heading
           className="font-display"
-          fontSize={{ base: '48px', lg: '80px' }}
+          fontSize="80px"
           lineHeight="100%"
           color="brand.primary"
         >
