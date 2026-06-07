@@ -455,7 +455,7 @@ const BeyondReviews = () => {
                   flexDir={{ base: 'column', md: 'row' }}
                   key={i}
                   gap="10"
-                  bg={{ base: 'white', md: 'background.subtle' }}
+                  bg={{ base: 'background.white', md: 'background.subtle' }}
                   boxShadow="0px 1px 2px 0px #4646490F, 0px 5px 3px 0px #4646490A"
                   border="0.5px solid"
                   borderColor="border.default"

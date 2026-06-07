@@ -59,7 +59,7 @@ const EyebrowPill = ({ icon, label, variant = 'light' }: EyebrowPillProps) => {
       <Text
         className="font-body"
         color={styles.textColor}
-        fontSize={{ base: 'small', md: 'subheading' }}
+        fontSize={{ base: '12px', md: 'subheading' }}
         fontWeight="bold"
         lineHeight="170%"
       >
