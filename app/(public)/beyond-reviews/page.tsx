@@ -77,7 +77,8 @@ const statsData: StatsInterface[] = [
     icon: Search,
     value: 62,
     unit: '%',
-    heading: 'Of businesses are invisible to AI search — even with strong reviews.',
+    heading:
+      'Of businesses are invisible to AI search — even with strong reviews.',
     description:
       'Most businesses lack the signals AI systems rely on to surface results.',
   },
@@ -179,7 +180,7 @@ const BeyondReviews = () => {
                 <Stack gap="4">
                   <Heading
                     className="font-display"
-                    fontSize={{ base: '36px', md: '56px', lg: '80px' }}
+                    fontSize={{ base: '48px', md: '56px', lg: '80px' }}
                     fontWeight="700"
                     lineHeight="120%"
                     color="brand.lightPrimary"
@@ -189,7 +190,7 @@ const BeyondReviews = () => {
                   <Heading
                     className="font-display"
                     color="brand.primary"
-                    fontSize={{ base: '36px', md: '56px', lg: '80px' }}
+                    fontSize={{ base: '48px', md: '56px', lg: '80px' }}
                     fontWeight="700"
                     lineHeight="120%"
                   >
@@ -487,8 +488,9 @@ const BeyondReviews = () => {
             {/* Feature cards */}
             <Grid templateColumns="1fr" gap="4" w="100%">
               {repsCardData.map(({ image, title, description }, i) => (
-                <HStack
+                <Stack
                   p={{ base: '5', lg: '8' }}
+                  flexDir={{ base: 'column', md: 'row' }}
                   key={i}
                   gap="10"
                   bg="background.subtle"
@@ -516,7 +518,7 @@ const BeyondReviews = () => {
                       {description}
                     </Text>
                   </Stack>
-                </HStack>
+                </Stack>
               ))}
             </Grid>
           </Stack>
@@ -631,10 +633,7 @@ const StatsCards = ({ stat }: { stat: StatsInterface }) => {
           color="brand.primary"
         >
           {stat.value}
-          <Span
-            fontSize={{ base: '24px', lg: '40px' }}
-            className="font-display"
-          >
+          <Span fontSize="40px" className="font-display">
             {stat.unit}
           </Span>
         </Heading>
