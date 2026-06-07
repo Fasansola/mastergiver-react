@@ -164,7 +164,7 @@ const BeyondReviews = () => {
                 <Stack gap="4">
                   <Heading
                     className="font-display"
-                    fontSize={{ base: '48px', md: '56px', lg: '80px' }}
+                    fontSize={{ base: '38px', md: '56px', lg: '80px' }}
                     fontWeight="700"
                     lineHeight="120%"
                     color="brand.lightPrimary"
@@ -174,7 +174,7 @@ const BeyondReviews = () => {
                   <Heading
                     className="font-display"
                     color="brand.primary"
-                    fontSize={{ base: '48px', md: '56px', lg: '80px' }}
+                    fontSize={{ base: '38px', md: '56px', lg: '80px' }}
                     fontWeight="700"
                     lineHeight="120%"
                   >
@@ -412,13 +412,10 @@ const BeyondReviews = () => {
           <Stack align="center" gap="10" maxW="740px">
             <Stack align="center" gap="10">
               {/* Eyebrow pill */}
-              <EyebrowPill
-                icon={flag}
-                label="EVERYTHING INCLUDED"
-              />
+              <EyebrowPill icon={flag} label="EVERYTHING INCLUDED" />
 
               <Stack align="center" gap="10" textAlign="center">
-                <Stack gap="4">
+                <Stack gap="2">
                   <Heading
                     className="font-display"
                     color="brand.primary"
@@ -454,11 +451,11 @@ const BeyondReviews = () => {
             <Grid templateColumns="1fr" gap="4" w="100%">
               {repsCardData.map(({ image, title, description }, i) => (
                 <Stack
-                  p={{ base: '5', lg: '8' }}
+                  p="8"
                   flexDir={{ base: 'column', md: 'row' }}
                   key={i}
                   gap="10"
-                  bg="background.subtle"
+                  bg={{ base: 'white', md: 'background.subtle' }}
                   boxShadow="0px 1px 2px 0px #4646490F, 0px 5px 3px 0px #4646490A"
                   border="0.5px solid"
                   borderColor="border.default"
@@ -466,7 +463,7 @@ const BeyondReviews = () => {
                   textAlign="start"
                 >
                   <Image alt={title} src={image} width={72} height={72} />
-                  <Stack gap="4">
+                  <Stack gap={{ base: '6', md: '4' }}>
                     <Heading
                       className="font-display"
                       fontSize="28px"
@@ -474,6 +471,13 @@ const BeyondReviews = () => {
                     >
                       {title}
                     </Heading>
+
+                    <Separator
+                      display={{ base: 'block', md: 'none' }}
+                      width="60px"
+                      border="2px solid"
+                      borderColor="#B38600"
+                    />
                     <Text
                       color="text.primary"
                       className="font-body"
@@ -534,6 +538,7 @@ const BeyondReviews = () => {
                 >
                   You&apos;ve already done the hard part — serving your
                   community, giving back, showing up. Now let the world see it.
+                  <br />
                   Add Verified Community Impact and build the reputation layer
                   your competitors can&apos;t copy overnight.
                 </Text>
@@ -606,6 +611,7 @@ const StatsCards = ({ stat }: { stat: StatsInterface }) => {
           color="text.primary"
           fontSize="body"
           lineHeight="180%"
+          maxW="330px"
         >
           {stat.description}
         </Text>
