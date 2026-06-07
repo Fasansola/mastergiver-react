@@ -164,6 +164,7 @@ const BeyondReviews = () => {
                 <Stack gap="4">
                   <Heading
                     className="font-display"
+                    letterSpacing="wide"
                     fontSize={{ base: '38px', md: '56px', lg: '80px' }}
                     fontWeight="700"
                     lineHeight="120%"
@@ -173,6 +174,7 @@ const BeyondReviews = () => {
                   </Heading>
                   <Heading
                     className="font-display"
+                    letterSpacing="wide"
                     color="brand.primary"
                     fontSize={{ base: '38px', md: '56px', lg: '80px' }}
                     fontWeight="700"
@@ -218,7 +220,7 @@ const BeyondReviews = () => {
                   Build My Reputation Profile
                 </Button>
               </Link>
-              <Link href="/good-businesses" style={{ width: '100%' }}>
+              <Link href="https://www.mastergiver.com/business/tess-the-tooth-fairy" style={{ width: '100%' }}>
                 <Button
                   fontWeight="700"
                   fontSize="subheading"
@@ -302,6 +304,7 @@ const BeyondReviews = () => {
             <Stack>
               <Heading
                 className="font-display"
+                letterSpacing="wide"
                 fontSize={{ base: '28px', md: '36px', lg: '48px' }}
                 fontWeight="700"
                 lineHeight="120%"
@@ -311,6 +314,7 @@ const BeyondReviews = () => {
               </Heading>
               <Heading
                 className="font-display"
+                letterSpacing="wide"
                 fontSize={{ base: '28px', md: '36px', lg: '48px' }}
                 fontWeight="700"
                 lineHeight="120%"
@@ -349,6 +353,7 @@ const BeyondReviews = () => {
                   <Image alt={title} src={image} width={80} height={80} />
                   <Heading
                     className="font-display"
+                    letterSpacing="wide"
                     fontSize="28px"
                     color="brand.primary"
                   >
@@ -418,6 +423,7 @@ const BeyondReviews = () => {
                 <Stack gap="2">
                   <Heading
                     className="font-display"
+                    letterSpacing="wide"
                     color="brand.primary"
                     fontSize={{ base: '32px', lg: '48px' }}
                     fontWeight="700"
@@ -427,6 +433,7 @@ const BeyondReviews = () => {
                   </Heading>
                   <Heading
                     className="font-display"
+                    letterSpacing="wide"
                     fontSize={{ base: '32px', lg: '48px' }}
                     fontWeight="700"
                     lineHeight="120%"
@@ -466,6 +473,7 @@ const BeyondReviews = () => {
                   <Stack gap={{ base: '6', md: '4' }}>
                     <Heading
                       className="font-display"
+                      letterSpacing="wide"
                       fontSize="28px"
                       color="brand.primary"
                     >
@@ -510,6 +518,7 @@ const BeyondReviews = () => {
                 <Stack gap="4">
                   <Heading
                     className="font-display"
+                    letterSpacing="wide"
                     fontSize={{ base: '28px', md: '36px', lg: '48px' }}
                     fontWeight="700"
                     lineHeight="120%"
@@ -521,6 +530,7 @@ const BeyondReviews = () => {
                       intentional one-off colour for this section */}
                   <Heading
                     className="font-display"
+                    letterSpacing="wide"
                     color="#AECCFF"
                     fontSize={{ base: '28px', md: '36px', lg: '48px' }}
                     fontWeight="700"
@@ -583,6 +593,7 @@ const StatsCards = ({ stat }: { stat: StatsInterface }) => {
         />
         <Heading
           className="font-display"
+          letterSpacing="wide"
           fontSize="80px"
           lineHeight="100%"
           color="brand.primary"
@@ -599,6 +610,7 @@ const StatsCards = ({ stat }: { stat: StatsInterface }) => {
       <Stack gap="4">
         <Heading
           className="font-display"
+          letterSpacing="wide"
           lineHeight="120%"
           fontSize="bigheading"
           color="text.heading"
