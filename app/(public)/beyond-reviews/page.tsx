@@ -150,7 +150,7 @@ const BeyondReviews = () => {
     <>
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <Stack style={{ background: HERO_GRADIENT }}>
-        <Container py="100px" px={{ base: '4', md: '6' }}>
+        <Container py="80px" px={{ base: '4', md: '6' }}>
           <Stack align="center" gap="10">
             <Stack align="center" gap="10">
               {/* Eyebrow pill */}
@@ -291,7 +291,7 @@ const BeyondReviews = () => {
         borderColor="border.accentBorder"
       >
         <Container
-          py={{ base: '100px', lg: '120px' }}
+          py={{ base: '80px', lg: '120px' }}
           px={{ base: '4', md: '6' }}
           alignItems="center"
           display="flex"
@@ -395,7 +395,7 @@ const BeyondReviews = () => {
       {/* ── WHAT YOU GET ─────────────────────────────────────────────────── */}
       <Stack bgColor="background.white">
         <Container
-          py="100px"
+          py="80px"
           px={{ base: '4', md: '6' }}
           flexDir={{ base: 'column', md: 'row' }}
           display="flex"
@@ -496,7 +496,7 @@ const BeyondReviews = () => {
 
       {/* ── BOTTOM CTA ───────────────────────────────────────────────────── */}
       <Stack bgColor="brand.primary">
-        <Container py="100px" px={{ base: '4', md: '6' }}>
+        <Container py="80px" px={{ base: '4', md: '6' }}>
           <Stack align="center" gap="16">
             <Stack align="center" gap="10">
               {/* Eyebrow pill */}
