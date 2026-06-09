@@ -18,10 +18,10 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://mastergiver.com/blog' },
 };
 
-export const revalidate = 60; // ISR — revalidate every 60 seconds
+export const dynamic = 'force-dynamic';
 
 const BlogListingPage = async () => {
-  const [posts, categories] = await Promise.all([
+  const [posts, allCategories] = await Promise.all([
     prisma.blogPost.findMany({
       where: { status: 'PUBLISHED' },
       orderBy: { publishedAt: 'desc' },
@@ -30,11 +30,14 @@ const BlogListingPage = async () => {
         categories: { include: { category: { select: { name: true, slug: true } } } },
       },
     }),
-    prisma.blogCategory.findMany({
-      orderBy: { name: 'asc' },
-      include: { _count: { select: { posts: { where: { post: { status: 'PUBLISHED' } } } } } },
-    }),
+    prisma.blogCategory.findMany({ orderBy: { name: 'asc' } }),
   ]);
+
+  // Filter to only categories that have at least one published post
+  const publishedCategorySlugs = new Set(
+    posts.flatMap((p) => p.categories.map((c) => c.category.slug))
+  );
+  const categories = allCategories.filter((c) => publishedCategorySlugs.has(c.slug));
 
   const [featured, ...rest] = posts;
 
@@ -84,9 +87,7 @@ const BlogListingPage = async () => {
                   </Text>
                 </Box>
               </Link>
-              {categories
-                .filter((c) => c._count.posts > 0)
-                .map((cat) => (
+              {categories.map((cat) => (
                   <Link key={cat.id} href={`/blog/category/${cat.slug}`}>
                     <Box
                       px="4"

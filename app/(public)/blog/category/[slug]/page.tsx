@@ -24,12 +24,12 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
   };
 }
 
-export const revalidate = 60;
+export const dynamic = 'force-dynamic';
 
 const CategoryPage = async ({ params }: CategoryPageProps) => {
   const { slug } = await params;
 
-  const [category, allCategories] = await Promise.all([
+  const [category, rawCategories] = await Promise.all([
     prisma.blogCategory.findUnique({
       where: { slug },
       include: {
@@ -47,15 +47,18 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
         },
       },
     }),
-    prisma.blogCategory.findMany({
-      orderBy: { name: 'asc' },
-      include: { _count: { select: { posts: { where: { post: { status: 'PUBLISHED' } } } } } },
-    }),
+    prisma.blogCategory.findMany({ orderBy: { name: 'asc' } }),
   ]);
 
   if (!category) notFound();
 
   const posts = category.posts.map((p) => p.post);
+
+  // Only show categories that have at least one published post (always include current)
+  const publishedSlugs = new Set(posts.flatMap((p) => p.categories.map((c) => c.category.slug)));
+  const filteredCategories = rawCategories.filter(
+    (c) => c.slug === slug || publishedSlugs.has(c.slug)
+  );
 
   return (
     <Stack gap="0">
@@ -94,8 +97,7 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
                 <Text fontSize="13px" fontWeight="500" color="text.primary" className="font-body">All</Text>
               </Box>
             </Link>
-            {allCategories
-              .filter((c) => c._count.posts > 0)
+            {filteredCategories
               .map((cat) => (
                 <Link key={cat.id} href={`/blog/category/${cat.slug}`}>
                   <Box
