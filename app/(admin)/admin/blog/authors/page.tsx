@@ -136,7 +136,8 @@ const AdminAuthorsPage = () => {
               <Text fontSize="13px" fontWeight="500" color="text.primary" className="font-body">
                 Profile photo
               </Text>
-              <label>
+              {/* Box as="label" keeps native label semantics while using Chakra styling */}
+              <Box as="label" display="inline-block">
                 <Box
                   as="span"
                   display="inline-block"
@@ -153,13 +154,14 @@ const AdminAuthorsPage = () => {
                 >
                   {avatarUploading ? 'Uploading…' : 'Choose photo'}
                 </Box>
+                {/* Hidden file input — stays as native <input>; browser file picker requires it */}
                 <input
                   type="file"
                   accept="image/*"
                   style={{ display: 'none' }}
                   onChange={(e) => { const f = e.target.files?.[0]; if (f) handleAvatarUpload(f); }}
                 />
-              </label>
+              </Box>
             </Stack>
           </HStack>
 

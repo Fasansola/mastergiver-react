@@ -22,6 +22,8 @@ import {
   Grid,
   HStack,
   Input,
+  NativeSelectField,
+  NativeSelectRoot,
   Stack,
   Text,
   Textarea,
@@ -351,27 +353,25 @@ const BlogPostForm = ({ post, authors, categories }: BlogPostFormProps) => {
 
             {/* Author */}
             <SidebarSection label="Author">
-              <select
-                value={authorId}
-                onChange={(e) => setAuthorId(e.target.value)}
-                style={{
-                  width: '100%',
-                  padding: '8px 10px',
-                  border: '1px solid #DCDFE3',
-                  borderRadius: '6px',
-                  fontSize: '14px',
-                  color: '#212325',
-                  background: 'white',
-                  outline: 'none',
-                }}
-              >
-                {authors.length === 0 && (
-                  <option value="">No authors yet — add one first</option>
-                )}
-                {authors.map((a) => (
-                  <option key={a.id} value={a.id}>{a.name}</option>
-                ))}
-              </select>
+              <NativeSelectRoot size="sm">
+                <NativeSelectField
+                  value={authorId}
+                  onChange={(e) => setAuthorId(e.target.value)}
+                  border="1px solid"
+                  borderColor="border.default"
+                  borderRadius="6px"
+                  fontSize="14px"
+                  color="text.primary"
+                  bg="background.white"
+                >
+                  {authors.length === 0 && (
+                    <option value="">No authors yet — add one first</option>
+                  )}
+                  {authors.map((a) => (
+                    <option key={a.id} value={a.id}>{a.name}</option>
+                  ))}
+                </NativeSelectField>
+              </NativeSelectRoot>
             </SidebarSection>
 
             <Box h="1px" bg="border.default" />
@@ -381,7 +381,9 @@ const BlogPostForm = ({ post, authors, categories }: BlogPostFormProps) => {
               {categories.length === 0 ? (
                 <Text fontSize="13px" color="text.secondary">
                   No categories yet —{' '}
-                  <Link href="/admin/blog/categories" style={{ color: '#5851BF' }}>add one</Link>
+                  <Link href="/admin/blog/categories">
+                    <Text as="span" color="brand.primary" textDecoration="underline" _hover={{ opacity: 0.8 }}>add one</Text>
+                  </Link>
                 </Text>
               ) : (
                 <Stack gap="2">
