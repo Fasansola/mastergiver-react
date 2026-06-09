@@ -93,6 +93,103 @@ select:-webkit-autofill {
   background: #3d3899;
 }
 
+/* ─── BlockNote editor wrapper ──────────────────────────────────────────────
+   Scopes BlockNote UI styles to the admin post editor only.                  */
+
+.blocknote-wrapper .bn-container {
+  font-family: var(--font-poppins), sans-serif;
+}
+
+.blocknote-wrapper .bn-editor {
+  padding: 24px;
+  min-height: 460px;
+}
+
+/* ─── Blog post prose styles ────────────────────────────────────────────────
+   Applied to the .blog-content container that renders BlockNote HTML output.
+   Scoped so these styles never bleed into other parts of the site.           */
+
+.blog-content h1,
+.blog-content h2,
+.blog-content h3,
+.blog-content h4 {
+  font-family: var(--font-libre-bodoni), Georgia, serif;
+  font-weight: 700;
+  line-height: 125%;
+  color: #27262D;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+}
+
+.blog-content h1 { font-size: 2em; }
+.blog-content h2 { font-size: 1.5em; }
+.blog-content h3 { font-size: 1.25em; }
+
+.blog-content p {
+  margin-bottom: 1.4em;
+}
+
+.blog-content a {
+  color: #5851BF;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.blog-content a:hover {
+  color: #2F2B77;
+}
+
+.blog-content ul,
+.blog-content ol {
+  padding-left: 1.5em;
+  margin-bottom: 1.4em;
+}
+
+.blog-content li {
+  margin-bottom: 0.4em;
+}
+
+.blog-content blockquote {
+  border-left: 4px solid #BDBDFA;
+  padding: 12px 20px;
+  margin: 1.5em 0;
+  background: #F8F9FF;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: #575C62;
+}
+
+.blog-content pre,
+.blog-content code {
+  font-family: 'Fira Code', 'Courier New', monospace;
+  background: #F3F4F6;
+  border-radius: 4px;
+}
+
+.blog-content pre {
+  padding: 16px 20px;
+  overflow-x: auto;
+  margin-bottom: 1.4em;
+  font-size: 14px;
+}
+
+.blog-content code {
+  padding: 2px 6px;
+  font-size: 0.9em;
+}
+
+.blog-content img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin: 1em 0;
+}
+
+.blog-content hr {
+  border: none;
+  border-top: 1px solid #DCDFE3;
+  margin: 2em 0;
+}
+
 /* Visibility utilities — mobile-only (< 768px) */
 .sm-mobile-only {
   display: block;

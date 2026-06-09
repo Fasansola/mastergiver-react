@@ -44,6 +44,11 @@ export default async function AdminLayout({ children }: PropsWithChildren) {
             </HStack>
 
             <HStack gap="6">
+              <Link href="/admin/blog">
+                <Text fontSize="14px" fontWeight="600" color="#2F2B77" className="font-body">
+                  Blog
+                </Text>
+              </Link>
               <Link href="/admin/directory">
                 <Text fontSize="14px" fontWeight="600" color="#2F2B77" className="font-body">
                   Directory

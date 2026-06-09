@@ -87,5 +87,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     }));
 
-  return [...staticRoutes, ...businessRoutes, ...cityRoutes, ...profileRoutes];
+  // Published blog posts
+  let blogPosts: { slug: string; updatedAt: Date }[] = [];
+  try {
+    blogPosts = await prisma.blogPost.findMany({
+      where: { status: 'PUBLISHED' },
+      select: { slug: true, updatedAt: true },
+    });
+  } catch (err) {
+    console.error('[sitemap] blog post query failed:', err);
+  }
+
+  const blogRoutes: MetadataRoute.Sitemap = [
+    { url: `${BASE_URL}/blog`, lastModified: new Date(), changeFrequency: 'daily', priority: 0.9 },
+    ...blogPosts.map((p) => ({
+      url: `${BASE_URL}/blog/${p.slug}`,
+      lastModified: p.updatedAt,
+      changeFrequency: 'monthly' as const,
+      priority: 0.75,
+    })),
+  ];
+
+  return [...staticRoutes, ...blogRoutes, ...businessRoutes, ...cityRoutes, ...profileRoutes];
 }

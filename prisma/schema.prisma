@@ -465,3 +465,102 @@ model BusinessImpactRecord {
 
   @@map("business_impact_records")
 }
+
+// ============================================
+// BLOG
+// ============================================
+
+enum PostStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model BlogPost {
+  id          String     @id @default(cuid())
+  title       String
+  slug        String     @unique
+  excerpt     String?    @db.Text
+  // HTML output from BlockNote editor
+  content     String     @db.Text
+  coverImage  String?    // Vercel Blob URL
+  status      PostStatus @default(DRAFT)
+  publishedAt DateTime?
+  // Auto-calculated from word count on save (minutes)
+  readingTime Int?
+  // SEO overrides — if blank, title/excerpt are used as fallbacks
+  metaTitle       String?
+  metaDescription String?
+
+  authorId String
+  author   BlogAuthor @relation(fields: [authorId], references: [id])
+
+  categories BlogPostCategory[]
+  tags       BlogPostTag[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("blog_posts")
+}
+
+model BlogAuthor {
+  id     String  @id @default(cuid())
+  name   String
+  slug   String  @unique
+  bio    String? @db.Text
+  avatar String? // Vercel Blob URL
+
+  posts BlogPost[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("blog_authors")
+}
+
+model BlogCategory {
+  id   String @id @default(cuid())
+  name String @unique
+  slug String @unique
+
+  posts BlogPostCategory[]
+
+  createdAt DateTime @default(now())
+
+  @@map("blog_categories")
+}
+
+// Join table — a post can belong to many categories
+model BlogPostCategory {
+  postId     String
+  categoryId String
+
+  post     BlogPost     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  category BlogCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([postId, categoryId])
+  @@map("blog_post_categories")
+}
+
+model BlogTag {
+  id   String @id @default(cuid())
+  name String @unique
+  slug String @unique
+
+  posts BlogPostTag[]
+
+  @@map("blog_tags")
+}
+
+// Join table — a post can have many tags
+model BlogPostTag {
+  postId String
+  tagId  String
+
+  post BlogPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  tag  BlogTag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([postId, tagId])
+  @@map("blog_post_tags")
+}
