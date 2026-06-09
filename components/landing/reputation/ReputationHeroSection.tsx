@@ -105,7 +105,7 @@ const ReputationHeroSection = () => {
               </Box>
             </Stack>
           </Stack>
-          <Stack w={{ base: '100%', lg: '50%' }} align="end">
+          <Stack w={{ base: '100%', lg: '50%' }} align="end" display={{ base: 'none', lg: 'flex' }}>
             <NextImage
               src={VerifiedImpact}
               alt="Verified Impact"
