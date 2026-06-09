@@ -92,7 +92,7 @@ const BlogPostPage = async ({ params }: PostPageProps) => {
       {post.coverImage && (
         <Box
           position="relative"
-          h={{ base: '260px', md: '420px', lg: '500px' }}
+          h={{ base: '180px', md: '260px', lg: '320px' }}
           overflow="hidden"
           bg="background.subtle"
         >
