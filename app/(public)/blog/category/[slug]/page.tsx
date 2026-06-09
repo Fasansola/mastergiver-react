@@ -64,7 +64,7 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
   return (
     <Stack gap="0">
       {/* ── Hero header ─────────────────────────────────────────────────────── */}
-      <Box bg={HERO_GRADIENT} py={{ base: '64px', lg: '96px' }} px={{ base: '4', md: '6' }}>
+      <Box bg={HERO_GRADIENT} py={{ base: '64px', lg: '96px' }}>
         <Container>
           <Stack gap="6" maxW="700px">
             {/* Eyebrow */}
@@ -108,7 +108,6 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
         borderBottom="1px solid"
         borderColor="border.default"
         bg="background.white"
-        px={{ base: '4', md: '6' }}
         position="sticky"
         top="0"
         zIndex="10"
@@ -164,7 +163,7 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
       </Box>
 
       {/* ── Posts grid ──────────────────────────────────────────────────────── */}
-      <Box bg="background.section" px={{ base: '4', md: '6' }} py={{ base: '60px', lg: '80px' }}>
+      <Box bg="background.section" py={{ base: '60px', lg: '80px' }}>
         <Container>
           {posts.length === 0 ? (
             <Box textAlign="center" py="24">

@@ -123,7 +123,6 @@ const BlogPostPage = async ({ params }: PostPageProps) => {
         bg="background.white"
         pt={post.coverImage ? { base: '0', md: '0' } : { base: '48px', lg: '64px' }}
         pb="0"
-        px={{ base: '4', md: '6' }}
       >
         <Container maxW="780px">
           {/* Back to blog + breadcrumb */}
@@ -257,7 +256,7 @@ const BlogPostPage = async ({ params }: PostPageProps) => {
       </Box>
 
       {/* ── Post content ──────────────────────────────────────────────────── */}
-      <Box bg="background.white" px={{ base: '4', md: '6' }}>
+      <Box bg="background.white">
         <Container maxW="780px">
           <Box
             className="blog-content"
@@ -271,7 +270,7 @@ const BlogPostPage = async ({ params }: PostPageProps) => {
       </Box>
 
       {/* ── Tags + share section ──────────────────────────────────────────── */}
-      <Box bg="background.white" px={{ base: '4', md: '6' }} pb={{ base: '10', lg: '12' }}>
+      <Box bg="background.white" pb={{ base: '10', lg: '12' }}>
         <Container maxW="780px">
           <Box pt="6" borderTop="1px solid" borderColor="border.default">
             {post.tags.length > 0 && (
@@ -310,7 +309,7 @@ const BlogPostPage = async ({ params }: PostPageProps) => {
       </Box>
 
       {/* ── Author card ───────────────────────────────────────────────────── */}
-      <Box bg="background.section" px={{ base: '4', md: '6' }} py={{ base: '10', lg: '12' }}>
+      <Box bg="background.section" py={{ base: '10', lg: '12' }}>
         <Container maxW="780px">
           <Box
             bg="background.white"
@@ -392,7 +391,6 @@ const BlogPostPage = async ({ params }: PostPageProps) => {
         bg="background.white"
         borderTop="1px solid"
         borderColor="border.default"
-        px={{ base: '4', md: '6' }}
         py="6"
       >
         <Container maxW="780px">
@@ -432,7 +430,6 @@ const BlogPostPage = async ({ params }: PostPageProps) => {
         <Box
           bg="background.section"
           py={{ base: '60px', lg: '80px' }}
-          px={{ base: '4', md: '6' }}
           borderTop="1px solid"
           borderColor="border.default"
         >
