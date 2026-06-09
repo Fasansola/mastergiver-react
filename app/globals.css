@@ -122,11 +122,27 @@ select:-webkit-autofill {
 }
 
 .blog-content h1 { font-size: 2em; }
-.blog-content h2 { font-size: 1.5em; }
-.blog-content h3 { font-size: 1.25em; }
+.blog-content h2 { font-size: 1.5em; border-bottom: 1px solid #EBEBEB; padding-bottom: 0.3em; }
+.blog-content h3 { font-size: 1.2em; }
+.blog-content h4 { font-size: 1.05em; letter-spacing: 0.01em; }
+
+/* First paragraph after the post header gets slightly larger treatment */
+.blog-content > p:first-child {
+  font-size: 1.08em;
+  color: #444;
+}
 
 .blog-content p {
-  margin-bottom: 1.4em;
+  margin-bottom: 1.5em;
+}
+
+.blog-content strong {
+  font-weight: 700;
+  color: #27262D;
+}
+
+.blog-content em {
+  font-style: italic;
 }
 
 .blog-content a {

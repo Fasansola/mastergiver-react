@@ -2,7 +2,7 @@
  * /blog — Public blog listing page.
  *
  * Shows all published posts in a responsive grid.
- * First post gets a full-width featured treatment.
+ * First post gets a full-width featured horizontal treatment.
  */
 
 import type { Metadata } from 'next';
@@ -43,91 +43,157 @@ const BlogListingPage = async () => {
 
   return (
     <Stack gap="0">
-      {/* Hero header */}
-      <Box bg={HERO_GRADIENT} py={{ base: '60px', lg: '80px' }} px={{ base: '4', md: '6' }}>
+      {/* ── Hero header ─────────────────────────────────────────────────────── */}
+      <Box bg={HERO_GRADIENT} py={{ base: '64px', lg: '96px' }} px={{ base: '4', md: '6' }}>
         <Container>
-          <Stack gap="4" maxW="640px">
+          <Stack gap="6" maxW="700px">
+            {/* Eyebrow */}
+            <HStack gap="2" display="inline-flex">
+              <Box w="20px" h="2px" bg="brand.primary" borderRadius="full" />
+              <Text
+                className="font-body"
+                fontSize="12px"
+                fontWeight="700"
+                color="brand.primary"
+                textTransform="uppercase"
+                letterSpacing="0.12em"
+              >
+                MasterGiver Blog
+              </Text>
+            </HStack>
+
             <Heading
               className="font-display"
               fontWeight="700"
-              fontSize={{ base: '38px', md: '52px', lg: '64px' }}
+              fontSize={{ base: '36px', md: '52px', lg: '60px' }}
               lineHeight="115%"
-              color="brand.primary"
-              wordSpacing="0.1em"
+              color="text.heading"
+              wordSpacing="0.05em"
             >
-              The MasterGiver Blog
+              Insights on Impact &amp;{' '}
+              <Box as="span" color="brand.primary">
+                Reputation
+              </Box>
             </Heading>
+
             <Text
               className="font-body"
-              fontSize={{ base: '16px', lg: '18px' }}
-              lineHeight="170%"
+              fontSize={{ base: '15px', lg: '17px' }}
+              lineHeight="175%"
               color="text.secondary"
+              maxW="540px"
             >
-              Insights on community impact, business reputation, and what it means to give back.
+              How businesses build lasting trust through community involvement, authentic giving,
+              and verified social impact.
             </Text>
           </Stack>
         </Container>
       </Box>
 
-      <Container py={{ base: '60px', lg: '80px' }} px={{ base: '4', md: '6' }}>
-        <Stack gap="12">
-          {/* Category filter tabs */}
-          {categories.length > 0 && (
-            <HStack gap="3" flexWrap="wrap">
-              <Link href="/blog">
+      {/* ── Category filter bar ──────────────────────────────────────────────── */}
+      {categories.length > 0 && (
+        <Box
+          borderBottom="1px solid"
+          borderColor="border.default"
+          bg="background.white"
+          px={{ base: '4', md: '6' }}
+          position="sticky"
+          top="0"
+          zIndex="10"
+        >
+          <Container>
+            <HStack gap="0" overflowX="auto" py="1" css={{ scrollbarWidth: 'none' }}>
+              {/* "All" tab */}
+              <Link href="/blog" style={{ flexShrink: 0 }}>
                 <Box
-                  px="4"
-                  py="2"
-                  borderRadius="999px"
-                  bg="brand.primary"
+                  px="5"
+                  py="4"
+                  borderBottom="2px solid"
+                  borderColor="brand.primary"
                   cursor="pointer"
                 >
-                  <Text fontSize="13px" fontWeight="600" color="white" className="font-body">
-                    All
+                  <Text
+                    fontSize="13px"
+                    fontWeight="700"
+                    color="brand.primary"
+                    className="font-body"
+                    whiteSpace="nowrap"
+                  >
+                    All Posts
                   </Text>
                 </Box>
               </Link>
-              {categories.map((cat) => (
-                  <Link key={cat.id} href={`/blog/category/${cat.slug}`}>
-                    <Box
-                      px="4"
-                      py="2"
-                      borderRadius="999px"
-                      border="1px solid"
-                      borderColor="border.default"
-                      bg="background.white"
-                      cursor="pointer"
-                      _hover={{ borderColor: 'brand.primary' }}
-                    >
-                      <Text fontSize="13px" fontWeight="500" color="text.primary" className="font-body">
-                        {cat.name}
-                      </Text>
-                    </Box>
-                  </Link>
-                ))}
-            </HStack>
-          )}
 
+              {categories.map((cat) => (
+                <Link key={cat.id} href={`/blog/category/${cat.slug}`} style={{ flexShrink: 0 }}>
+                  <Box
+                    px="5"
+                    py="4"
+                    borderBottom="2px solid"
+                    borderColor="transparent"
+                    cursor="pointer"
+                    _hover={{ borderColor: 'border.subtle', color: 'text.primary' }}
+                  >
+                    <Text
+                      fontSize="13px"
+                      fontWeight="500"
+                      color="text.secondary"
+                      className="font-body"
+                      whiteSpace="nowrap"
+                    >
+                      {cat.name}
+                    </Text>
+                  </Box>
+                </Link>
+              ))}
+            </HStack>
+          </Container>
+        </Box>
+      )}
+
+      {/* ── Posts ───────────────────────────────────────────────────────────── */}
+      <Box bg="background.section" px={{ base: '4', md: '6' }} py={{ base: '60px', lg: '80px' }}>
+        <Container>
           {posts.length === 0 ? (
-            <Box textAlign="center" py="20">
-              <Text fontSize="16px" color="text.secondary" className="font-body">
-                No posts published yet — check back soon.
+            <Box textAlign="center" py="24">
+              <Text fontSize="40px" mb="4">✍️</Text>
+              <Text fontSize="18px" fontWeight="600" color="text.heading" className="font-display" mb="2">
+                No posts yet
+              </Text>
+              <Text fontSize="15px" color="text.secondary" className="font-body">
+                Check back soon — content is on the way.
               </Text>
             </Box>
           ) : (
-            <Stack gap="8">
-              {/* Featured first post */}
-              {featured && (
-                <Box>
-                  <PostCard post={featured} featured />
-                </Box>
+            <Stack gap="10">
+              {/* Featured first post — horizontal card */}
+              {featured && <PostCard post={featured} featured />}
+
+              {/* Divider + "More articles" label */}
+              {rest.length > 0 && (
+                <HStack gap="4" pt="2">
+                  <Box flex="1" h="1px" bg="border.default" />
+                  <Text
+                    fontSize="11px"
+                    fontWeight="700"
+                    color="text.secondary"
+                    textTransform="uppercase"
+                    letterSpacing="0.1em"
+                    className="font-body"
+                    flexShrink={0}
+                  >
+                    More articles
+                  </Text>
+                  <Box flex="1" h="1px" bg="border.default" />
+                </HStack>
               )}
 
-              {/* Remaining posts grid */}
+              {/* Remaining posts in 3-col grid */}
               {rest.length > 0 && (
                 <Grid
                   templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }}
                   gap="6"
+                  alignItems="start"
                 >
                   {rest.map((post) => (
                     <PostCard key={post.id} post={post} />
@@ -136,8 +202,8 @@ const BlogListingPage = async () => {
               )}
             </Stack>
           )}
-        </Stack>
-      </Container>
+        </Container>
+      </Box>
     </Stack>
   );
 };
