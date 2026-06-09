@@ -13,6 +13,14 @@ function generateSlug(name: string): string {
 }
 
 async function main() {
+  // Safety guard — refuse to run against production database
+  const dbUrl = process.env.DATABASE_URL ?? '';
+  if (dbUrl.includes('supabase') || dbUrl.includes('pooler') || dbUrl.includes('neon')) {
+    console.error('❌ Seed refused: DATABASE_URL looks like a production database.');
+    console.error('   Run the seed only against your local dev database.');
+    process.exit(1);
+  }
+
   console.log('🌱 Starting seed...');
 
   // ── Business causes ────────────────────────────────────────────────────────
