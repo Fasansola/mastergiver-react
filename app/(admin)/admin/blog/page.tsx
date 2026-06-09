@@ -17,6 +17,7 @@ import { prisma } from '@/lib/prisma';
 import PostStatusBadge from '@/components/admin/blog/PostStatusBadge';
 import { formatPostDate } from '@/lib/blog/utils';
 import { LuPenLine, LuPlus } from 'react-icons/lu';
+import DuplicatePostButton from '@/components/admin/blog/DuplicatePostButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -170,8 +171,9 @@ const AdminBlogPage = async () => {
                       </HStack>
                     </Stack>
 
-                    <HStack gap="3">
+                    <HStack gap="3" flexWrap="wrap">
                       <PostStatusBadge status={post.status} />
+                      <DuplicatePostButton postId={post.id} />
                       <Link href={`/admin/blog/${post.id}/edit`}>
                         <HStack
                           gap="1"

@@ -30,17 +30,21 @@ export default async function AdminLayout({ children }: PropsWithChildren) {
               <Link href="/">
                 <Image src={siteLogo} alt="MasterGiver" width={120} height={50} />
               </Link>
-              <Box
-                px="10px"
-                py="3px"
-                bg="#F0EEFF"
-                borderRadius="6px"
-                border="1px solid #DDD8FF"
-              >
-                <Text fontSize="11px" fontWeight="700" color="#2F2B77" letterSpacing="0.5px" textTransform="uppercase">
-                  Admin
-                </Text>
-              </Box>
+              <Link href="/admin">
+                <Box
+                  px="10px"
+                  py="3px"
+                  bg="#F0EEFF"
+                  borderRadius="6px"
+                  border="1px solid #DDD8FF"
+                  _hover={{ bg: '#E0DCFF' }}
+                  transition="background 0.15s"
+                >
+                  <Text fontSize="11px" fontWeight="700" color="#2F2B77" letterSpacing="0.5px" textTransform="uppercase">
+                    Admin
+                  </Text>
+                </Box>
+              </Link>
             </HStack>
 
             <HStack gap="6">
