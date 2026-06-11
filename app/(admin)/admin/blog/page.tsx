@@ -18,6 +18,7 @@ import PostStatusBadge from '@/components/admin/blog/PostStatusBadge';
 import { formatPostDate } from '@/lib/blog/utils';
 import { LuPenLine, LuPlus } from 'react-icons/lu';
 import DuplicatePostButton from '@/components/admin/blog/DuplicatePostButton';
+import DeletePostButton from '@/components/admin/blog/DeletePostButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -174,6 +175,7 @@ const AdminBlogPage = async () => {
                     <HStack gap="3" flexWrap="wrap">
                       <PostStatusBadge status={post.status} />
                       <DuplicatePostButton postId={post.id} />
+                      <DeletePostButton postId={post.id} />
                       <Link href={`/admin/blog/${post.id}/edit`}>
                         <HStack
                           gap="1"

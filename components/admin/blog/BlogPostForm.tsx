@@ -36,6 +36,7 @@ import { LuArrowLeft, LuCheck, LuLoader } from 'react-icons/lu';
 import Link from 'next/link';
 import CoverImageUpload from './CoverImageUpload';
 import PostStatusBadge from './PostStatusBadge';
+import DeletePostButton from './DeletePostButton';
 import { slugify } from '@/lib/blog/utils';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -215,12 +216,16 @@ const BlogPostForm = ({ post, authors, categories }: BlogPostFormProps) => {
         px={{ base: '4', lg: '8' }}
       >
         <HStack justify="space-between" maxW="1400px" mx="auto">
-          <Link href="/admin/blog">
-            <HStack gap="1" color="text.secondary" _hover={{ color: 'brand.primary' }} transition="color 0.15s">
-              <LuArrowLeft size={16} />
-              <Text fontSize="14px" fontWeight="500" className="font-body">All posts</Text>
-            </HStack>
-          </Link>
+          <HStack gap="4">
+            <Link href="/admin/blog">
+              <HStack gap="1" color="text.secondary" _hover={{ color: 'brand.primary' }} transition="color 0.15s">
+                <LuArrowLeft size={16} />
+                <Text fontSize="14px" fontWeight="500" className="font-body">All posts</Text>
+              </HStack>
+            </Link>
+            {/* Delete — only shown when editing an existing post */}
+            {post?.id && <DeletePostButton postId={post.id} />}
+          </HStack>
 
           <HStack gap="3">
             {savedAt && !saving && (
