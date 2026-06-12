@@ -55,7 +55,7 @@ const CommunityGallery = ({ events }: CommunityGalleryProps) => {
               fontSize="14px"
               className="font-body"
               color="text.primary"
-              fontWeight="700"
+              fontWeight="400"
             >
               {e.description}
             </Text>
