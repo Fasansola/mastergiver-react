@@ -58,7 +58,7 @@ const MultiEntryCard = ({
       {/* Text content */}
       <Stack gap="6">
         <Heading
-          // fontWeight="700"
+          fontWeight="400"
           className="font-body"
           // textTransform="uppercase"
           fontSize="20"
