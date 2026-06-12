@@ -46,7 +46,7 @@ const MasterGiverProfileSection = () => {
                 ))}
               </Stack>
               <Box w={{ base: '100%', lg: 'fit-content' }}>
-                <Link href="/business/tess-the-tooth-fairy">
+                <Link href="/business/clearview-family-eyecare">
                   <Button
                     bg="brand.primary"
                     color="white"
