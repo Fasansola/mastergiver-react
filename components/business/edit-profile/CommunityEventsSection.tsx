@@ -148,7 +148,8 @@ const CommunityEventsSection = ({
         <MultiEntryCard
           key={e.id}
           image={e.photo}
-          title={e.description.slice(0, 60)}
+          title={e.description}
+          // title={e.description.slice(0, 60)}
           description={e.externalUrl ?? 'No link provided'}
           onEdit={() => {
             setEditingId(e.id);
@@ -177,7 +178,9 @@ const CommunityEventsSection = ({
           <label style={labelStyle}>Photo *</label>
           <ImageUploadInput
             value={photoValue ?? null}
-            onChange={(url: string | null) => setValue('photo', url ?? '', { shouldValidate: true })}
+            onChange={(url: string | null) =>
+              setValue('photo', url ?? '', { shouldValidate: true })
+            }
             label="photo"
           />
           {errors.photo && (
@@ -230,7 +233,12 @@ const CommunityEventsSection = ({
           )}
         </Stack>
 
-        <HStack align="center" justify={{ base: '', md: 'end' }} gap="6" flexWrap="wrap">
+        <HStack
+          align="center"
+          justify={{ base: '', md: 'end' }}
+          gap="6"
+          flexWrap="wrap"
+        >
           <button
             type="button"
             onClick={handleAddAnother}
