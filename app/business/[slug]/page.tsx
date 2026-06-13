@@ -53,8 +53,6 @@ export async function generateMetadata({
     where: { slug },
     select: {
       companyName: true,
-      tagline: true,
-      aboutUs: true,
       logo: true,
       status: true,
       published: true,
@@ -65,27 +63,31 @@ export async function generateMetadata({
     return { title: 'Business Profile Not Found' };
   }
 
-  const title = business.companyName;
-  const description =
-    business.tagline ??
-    business.aboutUs?.slice(0, 155) ??
-    `See how ${business.companyName} gives back to the community on MasterGiver.`;
+  const name = business.companyName;
+
+  // Task 1 — full title format signals the page type to search engines and AI
+  const fullTitle = `${name} | Verified Community Impact Profile | MasterGiver`;
+
+  // Task 2 — structured description replaces tagline; consistent across all profiles
+  const description = `View ${name}'s verified community impact profile, including nonprofit partnerships, sponsorships, causes supported, community involvement, and reputation signals on MasterGiver.`;
 
   const canonicalUrl = `https://mastergiver.com/business/${slug}`;
 
   return {
-    title,
+    // `absolute` bypasses the root layout template ('%s | MasterGiver') so the
+    // full string is used as-is rather than being wrapped a second time.
+    title: { absolute: fullTitle },
     description,
     alternates: { canonical: canonicalUrl },
     openGraph: {
-      title: `${title} | MasterGiver`,
+      title: fullTitle,
       description,
       url: canonicalUrl,
       images: business.logo ? [{ url: business.logo }] : [],
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${title} | MasterGiver`,
+      title: fullTitle,
       description,
       images: business.logo ? [business.logo] : [],
     },
@@ -165,6 +167,7 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
   const hasOffers = offers.length > 0;
 
   const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://mastergiver.com';
+  const profileUrl = `${BASE_URL}/business/${slug}`;
 
   // Strip angle brackets from user-supplied strings before embedding in JSON-LD
   const sanitize = (str: string | null | undefined) =>
@@ -172,18 +175,36 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
 
   // Only allow http/https website URLs in JSON-LD — never javascript: or data:
   const safeWebsite = (() => {
-    if (!business.website) return `${BASE_URL}/business/${slug}`;
+    if (!business.website) return profileUrl;
     try {
       const { protocol } = new URL(business.website);
       return protocol === 'http:' || protocol === 'https:'
         ? business.website
-        : `${BASE_URL}/business/${slug}`;
+        : profileUrl;
     } catch {
-      return `${BASE_URL}/business/${slug}`;
+      return profileUrl;
     }
   })();
 
-  // Schema.org JSON-LD — helps search engines and AI understand this business
+  // Task 5 — SameAs: always include the MasterGiver profile URL.
+  // If the business has a separate website, `url` points there and the profile
+  // page becomes the sameAs entry, tying both to the same entity.
+  const sameAsUrls: string[] = [profileUrl];
+
+  // Build a shared PostalAddress object (used by both schema types below)
+  const hasAddress = !!(business.address || business.city || business.state);
+  const postalAddress = hasAddress
+    ? {
+        '@type': 'PostalAddress',
+        ...(business.address && { streetAddress: sanitize(business.address) }),
+        ...(business.city && { addressLocality: sanitize(business.city) }),
+        ...(business.state && { addressRegion: sanitize(business.state) }),
+        ...(business.zipCode && { postalCode: sanitize(business.zipCode) }),
+        addressCountry: 'US',
+      }
+    : undefined;
+
+  // Task 4 — Organization schema
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -193,24 +214,55 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
     ...(business.coverPhoto && { image: business.coverPhoto }),
     ...(business.tagline && { slogan: sanitize(business.tagline) }),
     ...(business.aboutUs && { description: sanitize(business.aboutUs) }),
-    ...(business.address && {
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: sanitize(business.address),
-      },
-    }),
-    sameAs: [`${BASE_URL}/business/${slug}`],
+    ...(postalAddress && { address: postalAddress }),
+    sameAs: sameAsUrls,
     ...(causes.length > 0 && {
       knowsAbout: causes.map((c) => c.name),
     }),
   };
 
+  // Task 6 — LocalBusiness schema (only when location data exists)
+  const hasLocation = !!(business.city || business.state);
+  const localBusinessLd = hasLocation
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'LocalBusiness',
+        name: sanitize(business.companyName),
+        url: safeWebsite,
+        ...(business.logo && { logo: business.logo }),
+        address: postalAddress,
+      }
+    : null;
+
+  // Footer directory link — only shown when ≥10 other published businesses
+  // share the same city/state (so the directory page feels useful, not empty)
+  const sameCityCount =
+    business.city && business.state
+      ? await prisma.business.count({
+          where: {
+            city: business.city,
+            state: business.state,
+            published: true,
+            status: 'ACTIVE',
+            id: { not: business.id },
+          },
+        })
+      : 0;
+
   return (
     <Stack as="main" bgColor="#FFFCF7" gap="0">
+      {/* Task 4 — Organization schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      {/* Task 6 — LocalBusiness schema (rendered only when location data exists) */}
+      {localBusinessLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessLd) }}
+        />
+      )}
       <BusinessHeader hideAuthButtons />
       {/* White profile card centred on the page */}
       <Stack gap="0">
@@ -500,8 +552,9 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
                 </Stack>
               )}
 
-              {/* City backlink — internal linking for SEO */}
-              {business.city && business.state && (
+              {/* City backlink — only shown when ≥10 other published businesses
+                  exist in the same city so the destination page feels useful */}
+              {sameCityCount >= 10 && business.city && business.state && (
                 <Box w="100%" pt="4" pb="2">
                   <Link
                     href={`/good-businesses/${toCitySlug(business.city, business.state)}`}
@@ -514,8 +567,8 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
                       className="font-body"
                       _hover={{ textDecoration: 'underline' }}
                     >
-                      ← Browse more GOOD Businesses in {business.city},{' '}
-                      {business.state}
+                      ← Explore more businesses making a positive impact in{' '}
+                      {business.city}, {business.state}
                     </Text>
                   </Link>
                 </Box>
