@@ -10,13 +10,13 @@ import {
   Container,
   Heading,
   HStack,
-  Image,
   Separator,
   Span,
   Stack,
   Text,
 } from '@chakra-ui/react';
 import Link from 'next/link';
+import NextImage from 'next/image';
 import Hero from '@/public/landing/BusinessHero.png';
 import GreenCheck from '@/components/landing/GreenCheck';
 import { HERO_GRADIENT } from '@/lib/theme/gradients';
@@ -96,13 +96,21 @@ const HomeHeroSection = () => {
             </Stack>
           </Stack>
           <Stack w={{ base: '100%', lg: '50%' }} justify="center">
-            <Image
-              src={Hero.src}
-              align="center"
-              justifyContent="center"
+            {/*
+             * next/image instead of Chakra <Image> so Next.js can:
+             *   - serve WebP/AVIF (cuts ~70% of the 3.4MB PNG)
+             *   - inject a <link rel="preload"> via the priority prop
+             *   - generate the correct srcset for every viewport
+             * priority tells the browser this is the LCP element — no lazy
+             * loading, fetch starts as early as possible.
+             */}
+            <NextImage
+              src={Hero}
               alt="Hero image"
-              w={{ base: '100%', '2xl': '120%' }}
-              maxW={{ base: '100%', '2xl': '120%' }}
+              priority
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              style={{ width: '100%', height: 'auto', display: 'block' }}
+              quality={85}
             />
           </Stack>
         </Stack>

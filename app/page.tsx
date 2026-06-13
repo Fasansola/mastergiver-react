@@ -24,7 +24,6 @@ export const metadata: Metadata = {
 import Footer from '@/components/layout/Footer';
 import HomeHeroSection from '@/components/landing/home/HomeHeroSection';
 import GoodNotVisibleSection from '@/components/landing/home/GoodNotVisibleSection';
-import ReputationRulesSection from '@/components/landing/home/ReputationRulesSection';
 import CommunityImpactSection from '@/components/landing/home/CommunityImpactSection';
 import WhatYouGetSection from '@/components/landing/home/WhatYouGetSection';
 import WhoItsForSection from '@/components/landing/home/WhoItsForSection';
@@ -40,9 +39,6 @@ export default function Home() {
       <BusinessHeader bgColor={HERO_GRADIENT} />
       <HomeHeroSection />
       <GoodNotVisibleSection />
-      <Stack display="none">
-        <ReputationRulesSection />
-      </Stack>
       <CommunityImpactSection />
       <WhatYouGetSection />
       <WhoItsForSection />

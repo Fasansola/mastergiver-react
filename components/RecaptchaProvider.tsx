@@ -16,8 +16,17 @@ export default function RecaptchaProvider({
   children: React.ReactNode;
 }) {
   return (
+    /*
+     * scriptProps.async + defer: the reCAPTCHA v3 loader is still injected
+     * globally (so useGoogleReCaptcha() works on any page) but the script
+     * no longer blocks the main thread during initial parse. The badge and
+     * token generation will be available before any form submission occurs.
+     * appendTo: 'body' keeps it out of <head> where it would otherwise
+     * compete with render-critical resources.
+     */
     <GoogleReCaptchaProvider
       reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? ''}
+      scriptProps={{ async: true, defer: true, appendTo: 'body' }}
     >
       {children}
     </GoogleReCaptchaProvider>
