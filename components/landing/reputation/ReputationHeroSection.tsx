@@ -5,10 +5,10 @@
  * an explanatory pull-quote, CTA button, and a verified impact image.
  */
 import {
-  Box,
   Button,
   Container,
   Heading,
+  HStack,
   Stack,
   Text,
 } from '@chakra-ui/react';
@@ -38,7 +38,7 @@ const ReputationHeroSection = () => {
                 lineHeight="120%"
                 color="brand.primary"
               >
-                The Missing Layer in Local Business Marketing
+                One of Your Most Valuable Reputation Assets Is Being Overlooked
               </Heading>
               <Stack gap="6">
                 <Text
@@ -47,10 +47,9 @@ const ReputationHeroSection = () => {
                   lineHeight="170%"
                   color="text.primary"
                 >
-                  Most local businesses have invested in at least some of the
-                  core building blocks of their online presence — search
-                  visibility, customer reviews, maybe some advertising or press
-                  coverage.
+                  Most local businesses spend thousands of dollars building
+                  visibility through Google Ads, Facebook Ads, customer reviews,
+                  SEO, and their website.
                 </Text>
                 <Text
                   className="font-body"
@@ -58,51 +57,70 @@ const ReputationHeroSection = () => {
                   lineHeight="170%"
                   color="text.primary"
                 >
-                  But there&apos;s one reputation layer that almost no business
-                  has organized: how they show up for the community they serve.
+                  Yet one of the strongest trust signals available to customers
+                  often remains invisible online: documented community
+                  involvement.
                 </Text>
-              </Stack>
-              <Stack
-                padding="6"
-                borderRadius="0 16px 16px 0"
-                border="1px solid"
-                borderLeft="4px solid"
-                borderColor="#BDBDFA"
-                bg="background.white"
-              >
                 <Text
                   className="font-body"
-                  fontSize={{ base: '16px', lg: '20px' }}
+                  fontSize={{ base: '18px', lg: '21px' }}
                   lineHeight="170%"
-                  textAlign="start"
+                  color="text.primary"
                 >
-                  This page explains where community reputation fits, why it
-                  matters now, and what it looks like when it&apos;s structured.
+                  MasterGiver helps transform sponsorships, nonprofit
+                  partnerships, donations, and volunteer efforts into a
+                  structured reputation asset that strengthens trust, supports
+                  differentiation, and helps your business stand out.
                 </Text>
               </Stack>
             </Stack>
 
             <Stack gap="8">
-              <Box w={{ base: '100%', lg: 'fit-content' }}>
-                <Link href="/business/signup">
+              <Stack
+                direction={{ base: 'column', md: 'row' }}
+                align={{ md: 'stretch' }}
+                gap="3"
+                w={{ base: '100%', md: 'auto' }}
+              >
+                <Link href="/business/signup" style={{ display: 'flex' }}>
                   <Button
                     bg="brand.primary"
                     color="white"
                     fontWeight="700"
-                    fontSize={{ base: '16px', lg: '20px' }}
+                    fontSize={{ base: '14px', lg: '18px' }}
                     lineHeight="160%"
                     borderRadius="8px"
-                    px={{ base: '12', lg: '8' }}
+                    px={{ base: '6', lg: '8' }}
                     py="4"
-                    h="auto"
-                    w="100%"
+                    h="100%"
+                    w={{ base: '100%', md: 'auto' }}
                     whiteSpace="normal"
                     boxShadow="0px 8px 10px -6px #E2E1FF, 0px 20px 25px -5px #D4D1FF"
                   >
-                    See How This Works
+                    Get Your Reputation Profile
                   </Button>
                 </Link>
-              </Box>
+                <Link href="/business/clearview-family-eyecare" style={{ display: 'flex' }}>
+                  <Button
+                    bg="transparent"
+                    color="brand.primary"
+                    fontWeight="600"
+                    fontSize={{ base: '14px', lg: '18px' }}
+                    lineHeight="160%"
+                    borderRadius="8px"
+                    border="1px solid"
+                    borderColor="brand.primary"
+                    px={{ base: '6', lg: '8' }}
+                    py="4"
+                    h="100%"
+                    w={{ base: '100%', md: 'auto' }}
+                    whiteSpace="normal"
+                    _hover={{ bg: '#F5F4FF' }}
+                  >
+                    View Example Profile
+                  </Button>
+                </Link>
+              </Stack>
             </Stack>
           </Stack>
           <Stack w={{ base: '100%', lg: '50%' }} align="end" display={{ base: 'none', lg: 'flex' }}>

@@ -45,9 +45,9 @@ const HomeHeroSection = () => {
                 fontSize={{ base: '36px', md: '52px', lg: '74px' }}
                 lineHeight="120%"
               >
-                Your Community Impact is Hidden.{' '}
+                Your Community Impact is a Powerful Reputation Asset.{' '}
                 <Span className="font-display" color="brand.primary">
-                  That’s a Problem.
+                  Most Businesses Never Make it Visible.
                 </Span>
               </Heading>
               <Text
@@ -63,27 +63,51 @@ const HomeHeroSection = () => {
               </Text>
             </Stack>
             <Stack gap="8">
-              <Box w={{ base: '100%', lg: 'fit-content' }}>
-                <Link href="/business/signup">
+              <Stack
+                direction={{ base: 'column', md: 'row' }}
+                align={{ md: 'stretch' }}
+                gap="3"
+                w={{ base: '100%', md: 'auto' }}
+              >
+                <Link href="/business/signup" style={{ display: 'flex' }}>
                   <Button
                     bg="brand.primary"
                     color="white"
                     fontWeight="700"
-                    fontSize={{ base: '16px', lg: '20px' }}
+                    fontSize={{ base: '14px', lg: '18px' }}
                     lineHeight="160%"
                     borderRadius="8px"
-                    px={{ base: '12', lg: '8' }}
+                    px={{ base: '6', lg: '8' }}
                     py="4"
-                    h="auto"
-                    w="100%"
+                    h="100%"
+                    w={{ base: '100%', md: 'auto' }}
                     whiteSpace="normal"
                     boxShadow="0px 8px 10px -6px #E2E1FF, 0px 20px 25px -5px #D4D1FF"
                   >
-                    Get Your MasterGiver <br className="sm-mobile-only" />
-                    Reputation Profile™
+                    Get Your Reputation Profile
                   </Button>
                 </Link>
-              </Box>
+                <Link href="/business/clearview-family-eyecare" style={{ display: 'flex' }}>
+                  <Button
+                    bg="transparent"
+                    color="brand.primary"
+                    fontWeight="600"
+                    fontSize={{ base: '14px', lg: '18px' }}
+                    lineHeight="160%"
+                    borderRadius="8px"
+                    border="1px solid"
+                    borderColor="brand.primary"
+                    px={{ base: '6', lg: '8' }}
+                    py="4"
+                    h="100%"
+                    w={{ base: '100%', md: 'auto' }}
+                    whiteSpace="normal"
+                    _hover={{ bg: '#F5F4FF' }}
+                  >
+                    View Example Profile
+                  </Button>
+                </Link>
+              </Stack>
               <HStack gap="3" flexWrap="wrap">
                 <GreenCheck item="Setup in minutes" />
                 <Separator

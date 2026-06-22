@@ -4,15 +4,7 @@
  * Explains the visibility gap between offline good deeds and online presence.
  * Pull-quote callout + grid of WhatWeDoBox cards (web, AI, customers, search).
  */
-import {
-  Box,
-  Container,
-  Grid,
-  Heading,
-  HStack,
-  Stack,
-  Text,
-} from '@chakra-ui/react';
+import { Box, Container, Grid, HStack, Stack, Text } from '@chakra-ui/react';
 import Web from '@/public/landing/Web.svg';
 import Customer from '@/public/landing/Customer.svg';
 import Search from '@/public/landing/SearchIcon.svg';
@@ -24,27 +16,27 @@ import BrandCheck from '@/components/landing/BrandCheck';
 const whatWeDo = [
   {
     image: Web.src,
-    title: 'The Web',
+    title: 'Build Trust',
     description:
-      'Your real-world good is digital silence. Community impact deserves digital visibility.',
+      'Customers increasingly look beyond ratings and reviews. Community involvement provides another layer of credibility that helps reinforce trust in your business.',
   },
   {
     image: Assistant.src,
-    title: 'AI Assistants',
+    title: 'Stand Out From Competitors',
     description:
-      "Can't factor your impact into recommendations. Your values remain invisible to algorithms.",
+      'Most businesses look similar online. A documented record of community involvement highlights the values and actions that make your organization different.',
   },
   {
     image: Customer.src,
-    title: 'Customers',
+    title: 'Strengthen Your Reputation',
     description:
-      "Don't see the values that make you different. Your community commitment stays hidden.",
+      'Your sponsorships, donations, volunteer efforts, and nonprofit partnerships are already contributing to your reputation. MasterGiver helps make those contributions visible.',
   },
   {
     image: Search.src,
-    title: 'Search Engines',
+    title: 'Increase Discoverability',
     description:
-      'Missing your community data in rankings. Good deeds go unseen in search results.',
+      'Structured community impact data creates additional trust signals that can support visibility across search, AI systems, and other digital discovery channels.',
   },
 ];
 
@@ -60,11 +52,9 @@ const GoodNotVisibleSection = () => {
         gap="10"
         w="100%"
       >
-        <Box textAlign="center" w="100%" maxW="">
+        <Box textAlign="center" w="100%" maxW="960px">
           <LandingH>
-            Get Discovered for the Good Your{' '}
-            <br className="sm:hidden md:block" />
-            Business Does
+            Turn Your Community Impact Into a Reputation Advantage
           </LandingH>
         </Box>
 
@@ -82,35 +72,24 @@ const GoodNotVisibleSection = () => {
             <HStack gap="4" flexWrap="wrap">
               {[
                 'You sponsor local teams.',
-                'You donate to causes.',
-                'You support your community.',
+                'You support nonprofits.',
+                'You invest in the communities where your customers live and work.',
               ].map((item, i) => (
                 <BrandCheck key={i} item={item} />
               ))}
             </HStack>
 
-            <Heading
-              className="font-body"
-              fontWeight="400"
-              // fontSize={{ base: '22px', md: '24px', lg: '28px' }}
-              fontSize="16px"
-              lineHeight="120%"
-              color="text.primary"
-            >
-              But online? It&apos;s like none of it ever happened.
-            </Heading>
-
             <Stack gap="2">
               <Text>
-                Your website doesn&apos;t surface it in a meaningful way. Search
-                engines don&apos;t understand it. AI tools don&apos;t recognize
-                it when deciding which businesses to recommend.
+                But while most businesses spend years building reviews,
+                websites, and advertising campaigns, very few have a structured
+                way to showcase the community involvement that helps build trust
+                and differentiate them from competitors.
               </Text>
               <Text>
-                So the very things that make your business different — your
-                giving, your values, your community involvement, are missing
-                from the systems now shaping visibility, rankings, and
-                recommendations.
+                MasterGiver helps transform those efforts into a visible
+                reputation asset that supports trust, discoverability, and
+                customer choice.
               </Text>
             </Stack>
           </Stack>
@@ -140,7 +119,7 @@ const GoodNotVisibleSection = () => {
         <Grid
           gap="8"
           templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)' }}
-          maxW="966px"
+          // maxW="1066px"
         >
           {whatWeDo.map((item, i) => (
             <WhatWeDoBox
