@@ -38,7 +38,7 @@ const ReputationHeroSection = () => {
                 lineHeight="120%"
                 color="brand.primary"
               >
-                One of Your Most Valuable Reputation Assets Is Being Overlooked
+                The Missing Layer in Local Business Marketing
               </Heading>
               <Stack gap="6">
                 <Text

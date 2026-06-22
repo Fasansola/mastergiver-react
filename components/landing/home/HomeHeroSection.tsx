@@ -45,9 +45,9 @@ const HomeHeroSection = () => {
                 fontSize={{ base: '36px', md: '52px', lg: '74px' }}
                 lineHeight="120%"
               >
-                Your Community Impact is a Powerful Reputation Asset.{' '}
+                Your Community Impact is Hidden.{' '}
                 <Span className="font-display" color="brand.primary">
-                  Most Businesses Never Make it Visible.
+                  That&apos;s a Problem.
                 </Span>
               </Heading>
               <Text
