@@ -112,7 +112,7 @@ const ReturnOnReputationSection = () => {
               fontWeight="700"
               // fontSize={{ base: '26px', md: '36px', lg: '46px' }}
               fontSize={{ base: '36px', lg: '46px' }}
-              lineHeight="120%"
+              lineHeight="135%"
               color="brand.primary"
             >
               How a profile actually influences customer decisions

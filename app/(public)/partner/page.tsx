@@ -71,8 +71,8 @@ const PartnerPage = () => {
     <>
       <PartnerHeroSection />
       <TurnGivingSection />
-      <BenefitWorthSection />
-      <OrgsSection />
+      {/* <BenefitWorthSection /> */}
+      {/* <OrgsSection /> */}
       <ThreeStepsSection />
       <FAQSection faqs={PARTNER_FAQS} />
       <PartnerCtaSection />

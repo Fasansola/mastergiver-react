@@ -41,7 +41,7 @@ export default function Home() {
       <GoodNotVisibleSection />
       <CommunityImpactSection />
       <WhatYouGetSection />
-      <WhoItsForSection />
+      {/* <WhoItsForSection /> */}
       <ReturnOnReputationSection />
       <CompetitiveAdvantageSection />
       <HomeFAQSection />

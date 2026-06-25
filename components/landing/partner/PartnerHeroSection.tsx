@@ -4,7 +4,8 @@
  * Gradient background with headline about adding value to members,
  * a CTA anchor link to the form, and the partner hero image.
  */
-import { Box, Button, Container, Heading, Stack, Text } from '@chakra-ui/react';
+import { Button, Container, Heading, Stack, Text } from '@chakra-ui/react';
+import Link from 'next/link';
 import NextImage from 'next/image';
 import Hero from '@/public/partner/Hero.png';
 import { HERO_GRADIENT } from '@/lib/theme/gradients';
@@ -30,11 +31,11 @@ const PartnerHeroSection = () => {
               <Heading
                 className="font-display"
                 fontWeight="700"
-                fontSize={{ base: '38px', md: '52px', lg: '74px' }}
-                lineHeight="120%"
+                fontSize={{ base: '36px', md: '46px', lg: '56px' }}
+                lineHeight="135%"
                 color="brand.primary"
               >
-                Add Instant Value for Members and Sponsors
+                Help Sponsors Get More Recognition for Their Community Impact
               </Heading>
               <Text
                 className="font-body"
@@ -42,32 +43,58 @@ const PartnerHeroSection = () => {
                 lineHeight="170%"
                 color="text.primary"
               >
-                Give your entire network a powerful way to track and showcase
-                their community impact — at no cost to you.
+                Give your corporate sponsors a powerful way to document, verify,
+                and showcase the community support they already provide—at no
+                cost to your organization.
               </Text>
             </Stack>
 
             <Stack gap="8">
-              <Box w={{ base: '100%', lg: 'fit-content' }}>
-                <a href="partner/#cta">
+              <Stack
+                direction={{ base: 'column', md: 'row' }}
+                align={{ md: 'stretch' }}
+                gap="3"
+                w={{ base: '100%', md: 'auto' }}
+              >
+                <a href="partner/#cta" style={{ display: 'flex' }}>
                   <Button
                     bg="brand.primary"
                     color="white"
                     fontWeight="700"
-                    fontSize={{ base: '16px', lg: '20px' }}
+                    fontSize={{ base: '14px', lg: '18px' }}
                     lineHeight="160%"
                     borderRadius="8px"
-                    px={{ base: '12', lg: '8' }}
+                    px={{ base: '6', lg: '8' }}
                     py="4"
-                    h="auto"
-                    w="100%"
+                    h="100%"
+                    w={{ base: '100%', md: 'auto' }}
                     whiteSpace="normal"
                     boxShadow="0px 8px 10px -6px #E2E1FF, 0px 20px 25px -5px #D4D1FF"
                   >
                     BECOME A PARTNER
                   </Button>
                 </a>
-              </Box>
+                <Link href="/business/clearview-family-eyecare" style={{ display: 'flex' }}>
+                  <Button
+                    bg="transparent"
+                    color="brand.primary"
+                    fontWeight="600"
+                    fontSize={{ base: '14px', lg: '18px' }}
+                    lineHeight="160%"
+                    borderRadius="8px"
+                    border="1px solid"
+                    borderColor="brand.primary"
+                    px={{ base: '6', lg: '8' }}
+                    py="4"
+                    h="100%"
+                    w={{ base: '100%', md: 'auto' }}
+                    whiteSpace="normal"
+                    _hover={{ bg: '#F5F4FF' }}
+                  >
+                    View Example Profile
+                  </Button>
+                </Link>
+              </Stack>
             </Stack>
           </Stack>
 

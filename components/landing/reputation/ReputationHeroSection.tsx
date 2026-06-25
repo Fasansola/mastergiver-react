@@ -34,45 +34,25 @@ const ReputationHeroSection = () => {
               <Heading
                 className="font-display"
                 fontWeight="700"
-                fontSize={{ base: '38px', md: '52px', lg: '74px' }}
-                lineHeight="120%"
+                fontSize={{ base: '36px', md: '46px', lg: '56px' }}
+                lineHeight="135%"
                 color="brand.primary"
               >
-                The Missing Layer in Local Business Marketing
+                You Already Invest in Your Community. Your Reputation Should
+                Benefit From It.
               </Heading>
-              <Stack gap="6">
-                <Text
-                  className="font-body"
-                  fontSize={{ base: '18px', lg: '21px' }}
-                  lineHeight="170%"
-                  color="text.primary"
-                >
-                  Most local businesses spend thousands of dollars building
-                  visibility through Google Ads, Facebook Ads, customer reviews,
-                  SEO, and their website.
-                </Text>
-                <Text
-                  className="font-body"
-                  fontSize={{ base: '18px', lg: '21px' }}
-                  lineHeight="170%"
-                  color="text.primary"
-                >
-                  Yet one of the strongest trust signals available to customers
-                  often remains invisible online: documented community
-                  involvement.
-                </Text>
-                <Text
-                  className="font-body"
-                  fontSize={{ base: '18px', lg: '21px' }}
-                  lineHeight="170%"
-                  color="text.primary"
-                >
-                  MasterGiver helps transform sponsorships, nonprofit
-                  partnerships, donations, and volunteer efforts into a
-                  structured reputation asset that strengthens trust, supports
-                  differentiation, and helps your business stand out.
-                </Text>
-              </Stack>
+              <Text
+                className="font-body"
+                fontSize={{ base: '18px', lg: '21px' }}
+                lineHeight="170%"
+                color="text.primary"
+              >
+                MasterGiver helps transform your business&apos;s sponsorships,
+                nonprofit partnerships, donations, and volunteer efforts into a
+                structured reputation asset that helps build trust,
+                differentiate your business, and give customers more reasons to
+                choose you.
+              </Text>
             </Stack>
 
             <Stack gap="8">

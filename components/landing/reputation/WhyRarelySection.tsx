@@ -41,7 +41,7 @@ const WhyRarelySection = () => {
               className="font-display"
               fontWeight="700"
               fontSize={{ base: '28px', md: '44px', lg: '56px' }}
-              lineHeight="120%"
+              lineHeight="135%"
               color="brand.primary"
             >
               Why Community Impact Rarely Becomes a Reputation Signal

@@ -42,12 +42,12 @@ const HomeHeroSection = () => {
               <Heading
                 className="font-display"
                 fontWeight="700"
-                fontSize={{ base: '36px', md: '52px', lg: '74px' }}
-                lineHeight="120%"
+                fontSize={{ base: '36px', md: '46px', lg: '56px' }}
+                lineHeight="135%"
               >
-                Your Community Impact is Hidden.{' '}
+                Your Community Impact is a Powerful Reputation Asset.{' '}
                 <Span className="font-display" color="brand.primary">
-                  That&apos;s a Problem.
+                  Most Businesses Never Make it Visible.
                 </Span>
               </Heading>
               <Text

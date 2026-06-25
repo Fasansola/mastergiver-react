@@ -15,21 +15,21 @@ import LandingH from '@/components/landing/LandingH';
 const communityImpact = [
   {
     image: DocumentIcon.src,
-    title: 'Document',
+    title: 'Build Your Foundation',
     description:
-      'Share your giving and impact details in minutes. We capture everything from sponsorships to donations.',
+      'Document the community involvement you already have—or start with your very first initiative. Every business begins somewhere.',
   },
   {
     image: VerifiedIcon.src,
-    title: 'Verify & Structure',
+    title: 'Grow Your Impact',
     description:
-      'We turn actions into AI-readable, trusted signals with structured data and verification.',
+      'As your business supports more nonprofits, sponsorships, volunteer efforts, and community initiatives, your profile grows with you.',
   },
   {
     image: BoosterIcon.src,
-    title: 'Boost Visibility',
+    title: 'Strengthen Your Reputation',
     description:
-      'Search engines and AI now recognize your true value and recommend you to customers.',
+      'Turn years of community involvement into a lasting reputation asset that helps customers better understand who you are and what your business stands for.',
   },
 ];
 
@@ -45,18 +45,12 @@ const CommunityImpactSection = () => {
       >
         <Stack textAlign="center" align="center" gap="6">
           <Stack w="100%" maxW="872px">
-            <LandingH>MasterGiver Makes Your Community Impact Visible</LandingH>
+            <LandingH>Every Community Reputation Starts Somewhere.</LandingH>
           </Stack>
           <Text color="text.primary" maxW="880px" fontSize="body">
-            MasterGiver exists to make sure the good your business does is
-            recognized, understood, and rewarded.{' '}
-            <br className="sm-mobile-only" />
-            <br className="sm-mobile-only" />
-            We translate your real-world actions — charitable giving,
-            sponsorships, and community involvement — into verified reputation
-            signals AI and search engines can read and trust. So your business
-            doesn&apos;t just do good, but turns trust and visibility into
-            growth.
+            Whether you&apos;ve supported your community for years or
+            you&apos;re just getting started, MasterGiver helps you build a
+            reputation asset that grows with your business.
           </Text>
         </Stack>
 

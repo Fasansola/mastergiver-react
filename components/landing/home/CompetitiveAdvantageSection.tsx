@@ -61,7 +61,7 @@ const CompetitiveAdvantageSection = () => {
               className="font-display"
               fontWeight="700"
               fontSize={{ base: '24px', md: '32px', lg: '40px' }}
-              lineHeight="120%"
+              lineHeight="135%"
               color="text.primary"
               textAlign="center"
             >
@@ -161,7 +161,7 @@ const CompetitiveAdvantageSection = () => {
           <Heading
             className="font-display"
             fontSize={{ base: '22px', md: '28px', lg: '32px' }}
-            lineHeight="120%"
+            lineHeight="135%"
           >
             What You&apos;re Already Spending vs. What You Get
           </Heading>

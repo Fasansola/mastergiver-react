@@ -71,9 +71,9 @@ const GoodNotVisibleSection = () => {
           <Stack gap="6" w={{ base: '100%', lg: '760px' }}>
             <HStack gap="4" flexWrap="wrap">
               {[
-                'You sponsor local teams.',
-                'You support nonprofits.',
+                'You support local organizations and causes.',
                 'You invest in the communities where your customers live and work.',
+                'You believe business success should create community impact.',
               ].map((item, i) => (
                 <BrandCheck key={i} item={item} />
               ))}
