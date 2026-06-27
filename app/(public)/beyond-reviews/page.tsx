@@ -595,7 +595,7 @@ const StatsCards = ({ stat }: { stat: StatsInterface }) => {
           className="font-display"
           wordSpacing="0.1em"
           fontSize="80px"
-          lineHeight="140%"
+          lineHeight="100%"
           color="brand.primary"
         >
           {stat.value}
