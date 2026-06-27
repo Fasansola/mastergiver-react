@@ -161,7 +161,7 @@ const BeyondReviews = () => {
 
               {/* Headlines */}
               <Stack align="center" gap="4" textAlign="center">
-                <Stack gap="4">
+                <Stack gap="0">
                   <Heading
                     className="font-display"
                     wordSpacing="0.1em"
