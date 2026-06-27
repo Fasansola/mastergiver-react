@@ -64,7 +64,7 @@ export default function DirectoryError({
             fontWeight="700"
             fontSize={{ base: '26px', lg: '34px' }}
             color="#1E1B4B"
-            lineHeight="120%"
+            lineHeight="140%"
           >
             Something went wrong
           </Heading>

@@ -131,7 +131,7 @@ const CityDirectoryPage = async ({ params }: Props) => {
                 className="font-display"
                 fontWeight="700"
                 fontSize={{ base: '24px', md: '36px', lg: '48px' }}
-                lineHeight="110%"
+                lineHeight="140%"
                 color="#1E1B4B"
                 letterSpacing={{ base: '-0.2px', lg: '-0.3px' }}
               >

@@ -58,7 +58,7 @@ const WhoItsForSection = () => {
                 <Text
                   className="font-body"
                   // fontSize={{ base: '22px', md: '24px', lg: '28px' }}
-                  lineHeight="130%"
+                  lineHeight="140%"
                   // fontWeight="700"
                 >
                   It&apos;s a strong fit if your business:

@@ -167,7 +167,7 @@ const BeyondReviews = () => {
                     wordSpacing="0.1em"
                     fontSize={{ base: '38px', md: '56px', lg: '80px' }}
                     fontWeight="700"
-                    lineHeight="120%"
+                    lineHeight="140%"
                     color="brand.lightPrimary"
                   >
                     Your Reviews Are Great.
@@ -178,7 +178,7 @@ const BeyondReviews = () => {
                     color="brand.primary"
                     fontSize={{ base: '38px', md: '56px', lg: '80px' }}
                     fontWeight="700"
-                    lineHeight="120%"
+                    lineHeight="140%"
                   >
                     So Is Everyone Else&apos;s.
                   </Heading>
@@ -307,7 +307,7 @@ const BeyondReviews = () => {
                 wordSpacing="0.1em"
                 fontSize={{ base: '28px', md: '36px', lg: '48px' }}
                 fontWeight="700"
-                lineHeight="120%"
+                lineHeight="140%"
                 color="brand.primary"
               >
                 You&apos;ve Done Everything Right.
@@ -317,7 +317,7 @@ const BeyondReviews = () => {
                 wordSpacing="0.1em"
                 fontSize={{ base: '28px', md: '36px', lg: '48px' }}
                 fontWeight="700"
-                lineHeight="120%"
+                lineHeight="140%"
                 color="brand.lightPrimary"
               >
                 And You&apos;re Still Getting Overlooked.
@@ -427,7 +427,7 @@ const BeyondReviews = () => {
                     color="brand.primary"
                     fontSize={{ base: '32px', lg: '48px' }}
                     fontWeight="700"
-                    lineHeight="120%"
+                    lineHeight="140%"
                   >
                     One Profile.
                   </Heading>
@@ -436,7 +436,7 @@ const BeyondReviews = () => {
                     wordSpacing="0.1em"
                     fontSize={{ base: '32px', lg: '48px' }}
                     fontWeight="700"
-                    lineHeight="120%"
+                    lineHeight="140%"
                     color="brand.lightPrimary"
                   >
                     Complete Reputation.
@@ -521,7 +521,7 @@ const BeyondReviews = () => {
                     wordSpacing="0.1em"
                     fontSize={{ base: '28px', md: '36px', lg: '48px' }}
                     fontWeight="700"
-                    lineHeight="120%"
+                    lineHeight="140%"
                     color="text.white"
                   >
                     The Businesses That Win Tomorrow
@@ -534,7 +534,7 @@ const BeyondReviews = () => {
                     color="#AECCFF"
                     fontSize={{ base: '28px', md: '36px', lg: '48px' }}
                     fontWeight="700"
-                    lineHeight="120%"
+                    lineHeight="140%"
                   >
                     Are Building Their Edge Today.
                   </Heading>
@@ -595,7 +595,7 @@ const StatsCards = ({ stat }: { stat: StatsInterface }) => {
           className="font-display"
           wordSpacing="0.1em"
           fontSize="80px"
-          lineHeight="100%"
+          lineHeight="140%"
           color="brand.primary"
         >
           {stat.value}
@@ -611,7 +611,7 @@ const StatsCards = ({ stat }: { stat: StatsInterface }) => {
         <Heading
           className="font-display"
           wordSpacing="0.1em"
-          lineHeight="120%"
+          lineHeight="140%"
           fontSize="bigheading"
           color="text.heading"
           fontWeight="700"

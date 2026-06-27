@@ -43,11 +43,11 @@ const HomeHeroSection = () => {
                 className="font-display"
                 fontWeight="700"
                 fontSize={{ base: '36px', md: '46px', lg: '56px' }}
-                lineHeight="135%"
+                lineHeight="150%"
               >
-                Your Community Impact is a Powerful Reputation Asset.{' '}
+                Your Community Impact is an Asset.{' '}
                 <Span className="font-display" color="brand.primary">
-                  Most Businesses Never Make it Visible.
+                  It&apos;s Just Invisible.
                 </Span>
               </Heading>
               <Text
@@ -119,7 +119,7 @@ const HomeHeroSection = () => {
               </HStack>
             </Stack>
           </Stack>
-          <Stack w={{ base: '100%', lg: '50%' }} justify="center">
+          <Stack w={{ base: '100%', lg: '50%' }} justify="center" gap="0">
             {/*
              * next/image instead of Chakra <Image> so Next.js can:
              *   - serve WebP/AVIF (cuts ~70% of the 3.4MB PNG)
@@ -136,6 +136,17 @@ const HomeHeroSection = () => {
               style={{ width: '100%', height: 'auto', display: 'block' }}
               quality={85}
             />
+            <Text
+              className="font-display"
+              fontSize="16px"
+              lineHeight="150%"
+              color="text.primary"
+              textAlign="center"
+            >
+              Adding the Verified Impact badge shows proof of your community
+              involvement, right alongside the trust signals customers already
+              look for.
+            </Text>
           </Stack>
         </Stack>
       </Container>

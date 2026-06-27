@@ -32,7 +32,7 @@ const PartnerHeroSection = () => {
                 className="font-display"
                 fontWeight="700"
                 fontSize={{ base: '36px', md: '46px', lg: '56px' }}
-                lineHeight="135%"
+                lineHeight="150%"
                 color="brand.primary"
               >
                 Help Sponsors Get More Recognition for Their Community Impact

@@ -118,7 +118,7 @@ const GoodBusinessesPage = async () => {
                   fontWeight="700"
                   fontSize={{ base: '24px', md: '28px', lg: '34px' }}
                   color="#1E1B4B"
-                  lineHeight="120%"
+                  lineHeight="140%"
                 >
                   GOOD Businesses Making an Impact
                 </Heading>
@@ -164,7 +164,7 @@ const GoodBusinessesPage = async () => {
                 fontWeight="700"
                 fontSize={{ base: '22px', md: '26px' }}
                 color="#1E1B4B"
-                lineHeight="130%"
+                lineHeight="140%"
               >
                 Be the First GOOD Business Listed
               </Heading>

@@ -180,7 +180,7 @@ const BlogPostPage = async ({ params }: PostPageProps) => {
             className="font-display"
             fontWeight="700"
             fontSize={{ base: '28px', md: '40px', lg: '48px' }}
-            lineHeight="118%"
+            lineHeight="140%"
             color="text.heading"
             wordSpacing="0.03em"
             mb="6"

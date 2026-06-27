@@ -86,7 +86,7 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
               className="font-display"
               fontWeight="700"
               fontSize={{ base: '36px', md: '52px', lg: '60px' }}
-              lineHeight="115%"
+              lineHeight="140%"
               color="text.heading"
             >
               {category.name}

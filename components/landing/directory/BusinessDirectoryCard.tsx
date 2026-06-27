@@ -96,7 +96,7 @@ const BusinessDirectoryCard = ({ business }: Props) => {
                   color="white"
                   fontWeight="700"
                   fontSize={{ base: '18px', md: '22px' }}
-                  lineHeight="1"
+                  lineHeight="140%"
                   className="font-body"
                   letterSpacing="-0.5px"
                 >
@@ -110,7 +110,7 @@ const BusinessDirectoryCard = ({ business }: Props) => {
               <Text
                 fontWeight="700"
                 fontSize={{ base: '15px', md: '18px' }}
-                lineHeight="130%"
+                lineHeight="140%"
                 color="directory.heading"
                 className="font-display"
                 lineClamp={2}
@@ -235,7 +235,7 @@ const BusinessDirectoryCard = ({ business }: Props) => {
                 fontSize="10px"
                 color="directory.muted"
                 className="font-body"
-                lineHeight="130%"
+                lineHeight="140%"
               >
                 Proud to support our community.
               </Text>

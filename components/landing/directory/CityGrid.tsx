@@ -45,7 +45,7 @@ const CityGrid = ({ cities }: Props) => {
                 fontWeight="700"
                 fontSize={{ base: '24px', md: '28px', lg: '34px' }}
                 color="#1E1B4B"
-                lineHeight="120%"
+                lineHeight="140%"
               >
                 Find GOOD Businesses Near You
               </Heading>

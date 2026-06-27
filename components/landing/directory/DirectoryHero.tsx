@@ -83,7 +83,7 @@ const DirectoryHero = ({ cities }: Props) => {
             className="font-display"
             fontWeight="700"
             fontSize={{ base: '28px', md: '40px', lg: '56px' }}
-            lineHeight="125%"
+            lineHeight="140%"
             color="#1E1B4B"
             letterSpacing="-0.5px"
           >

@@ -61,7 +61,7 @@ const CompetitiveAdvantageSection = () => {
               className="font-display"
               fontWeight="700"
               fontSize={{ base: '24px', md: '32px', lg: '40px' }}
-              lineHeight="135%"
+              lineHeight="150%"
               color="text.primary"
               textAlign="center"
             >
@@ -75,14 +75,14 @@ const CompetitiveAdvantageSection = () => {
                 className="font-display"
                 fontWeight="700"
                 fontSize={{ base: '40px', lg: '48px' }}
-                lineHeight="100%"
+                lineHeight="140%"
                 color="text.primary"
               >
                 $59
                 <Span
                   className="font-display"
                   fontSize="20px"
-                  lineHeight="100%"
+                  lineHeight="140%"
                   color="text.primary"
                 >
                   {' '}
@@ -103,7 +103,7 @@ const CompetitiveAdvantageSection = () => {
                 className="font-display"
                 fontWeight="600"
                 fontSize={{ base: '16px', lg: '18px' }}
-                lineHeight="130%"
+                lineHeight="140%"
                 textAlign="start"
                 color="brand.primary"
               >
@@ -161,7 +161,7 @@ const CompetitiveAdvantageSection = () => {
           <Heading
             className="font-display"
             fontSize={{ base: '22px', md: '28px', lg: '32px' }}
-            lineHeight="135%"
+            lineHeight="150%"
           >
             What You&apos;re Already Spending vs. What You Get
           </Heading>

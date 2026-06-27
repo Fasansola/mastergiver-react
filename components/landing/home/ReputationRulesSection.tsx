@@ -59,7 +59,7 @@ const ReputationRulesSection = () => {
                 <Text
                   className="font-display"
                   fontSize={{ base: '20px', md: '24px', lg: '28px' }}
-                  lineHeight="130%"
+                  lineHeight="140%"
                   fontWeight="700"
                 >
                   If algorithms can&apos;t recognize your reputation, it

@@ -206,7 +206,7 @@ const PrivacyPage = () => {
               fontFamily="'Libre Bodoni', Georgia, serif"
               fontWeight="700"
               fontSize={{ base: '28px', lg: '32px' }}
-              lineHeight="120%"
+              lineHeight="140%"
               color="#27262D"
             >
               Privacy Policy

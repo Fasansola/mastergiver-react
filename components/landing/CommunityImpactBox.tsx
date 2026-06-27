@@ -31,7 +31,7 @@ const CommunityImpactBox = ({ image, title, description }: Props) => {
         >
           <NextImage alt={title} src={image} width="60" height="60" />
         </Stack>
-        <Heading className="font-display" fontSize="28px" color="brand.primary">
+        <Heading className="font-display" fontSize="28px" lineHeight="140%" color="brand.primary">
           {title}
         </Heading>
       </Stack>

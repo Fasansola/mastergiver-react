@@ -16,7 +16,7 @@ const FaqBox = ({ title, description, theme }: FaqBoxProps) => {
       borderColor="border.default"
       borderRadius="12px"
     >
-      <Heading className="font-display" fontSize="heading" lineHeight="120%">
+      <Heading className="font-display" fontSize="heading" lineHeight="140%">
         {title}
       </Heading>
       <Text className="font-body" fontWeight="400" lineHeight="180%">

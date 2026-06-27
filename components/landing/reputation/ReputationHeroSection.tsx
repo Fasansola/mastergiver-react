@@ -35,11 +35,10 @@ const ReputationHeroSection = () => {
                 className="font-display"
                 fontWeight="700"
                 fontSize={{ base: '36px', md: '46px', lg: '56px' }}
-                lineHeight="135%"
+                lineHeight="150%"
                 color="brand.primary"
               >
-                You Already Invest in Your Community. Your Reputation Should
-                Benefit From It.
+                Your Reputation Is More Than Reviews.
               </Heading>
               <Text
                 className="font-body"
@@ -47,11 +46,11 @@ const ReputationHeroSection = () => {
                 lineHeight="170%"
                 color="text.primary"
               >
-                MasterGiver helps transform your business&apos;s sponsorships,
-                nonprofit partnerships, donations, and volunteer efforts into a
-                structured reputation asset that helps build trust,
-                differentiate your business, and give customers more reasons to
-                choose you.
+                Today&apos;s customers evaluate businesses using more than star
+                ratings alone. Whether you&apos;re just starting to build
+                community involvement or have years of it to show, here&apos;s
+                why it&apos;s becoming one of the most valuable, and overlooked,
+                reputation assets.
               </Text>
             </Stack>
 

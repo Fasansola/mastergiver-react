@@ -27,7 +27,7 @@ const HomeCtaSection = () => {
               className="font-display"
               fontWeight="700"
               fontSize={{ base: '34px', md: '46px', lg: '60px' }}
-              lineHeight="135%"
+              lineHeight="150%"
             >
               Make Sure Your Reputation Works <br className="sm-mobile-only" />
               for You

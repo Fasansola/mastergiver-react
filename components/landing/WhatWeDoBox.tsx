@@ -33,6 +33,7 @@ const WhatWeDoBox = ({ image, title, description }: Props) => {
         <Heading
           className="font-display"
           fontSize={{ base: '20px', lg: '28px' }}
+          lineHeight="140%"
           color="brand.primary"
         >
           {title}

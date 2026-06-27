@@ -64,7 +64,7 @@ const AboutPage = () => {
               className="font-display"
               fontWeight="700"
               fontSize={{ base: '36px', md: '52px', lg: '64px' }}
-              lineHeight="120%"
+              lineHeight="140%"
               color="brand.primary"
             >
               The Good You Do Is Invisible. And It&apos;s Costing You.
@@ -115,7 +115,7 @@ const AboutPage = () => {
               className="font-display"
               fontWeight="700"
               fontSize={{ base: '28px', md: '38px', lg: '48px' }}
-              lineHeight="120%"
+              lineHeight="140%"
               color="text.heading"
             >
               You&apos;re Showing Up in Your Community,
@@ -171,7 +171,7 @@ const AboutPage = () => {
               className="font-display"
               fontWeight="700"
               fontSize={{ base: '28px', md: '38px', lg: '48px' }}
-              lineHeight="120%"
+              lineHeight="140%"
               color="text.heading"
             >
               Reputation Should Be Built on
@@ -229,7 +229,7 @@ const AboutPage = () => {
               className="font-display"
               fontWeight="700"
               fontSize={{ base: '28px', md: '38px', lg: '48px' }}
-              lineHeight="120%"
+              lineHeight="140%"
               color="text.heading"
             >
               MasterGiver Exists to Make
@@ -280,7 +280,7 @@ const AboutPage = () => {
               className="font-display"
               fontWeight="700"
               fontSize={{ base: '28px', md: '38px', lg: '48px' }}
-              lineHeight="120%"
+              lineHeight="140%"
               color="text.heading"
             >
               A More Complete Picture of a Business
@@ -323,7 +323,7 @@ const AboutPage = () => {
               className="font-display"
               fontWeight="700"
               fontSize={{ base: '28px', md: '38px', lg: '48px' }}
-              lineHeight="120%"
+              lineHeight="140%"
               color="text.heading"
             >
               The Beginning of a New Standard
@@ -369,7 +369,7 @@ const AboutPage = () => {
               className="font-display"
               fontWeight="700"
               fontSize={{ base: '28px', md: '38px', lg: '48px' }}
-              lineHeight="120%"
+              lineHeight="140%"
               color="white"
             >
               Start With What You&apos;re Already Doing
