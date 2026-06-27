@@ -45,7 +45,8 @@ const HomeHeroSection = () => {
                 fontSize={{ base: '36px', md: '46px', lg: '56px' }}
                 lineHeight="150%"
               >
-                Your Community Impact is an Asset.{' '}
+                Your Community Impact is an Asset.
+                <br />
                 <Span className="font-display" color="brand.primary">
                   It&apos;s Just Invisible.
                 </Span>
