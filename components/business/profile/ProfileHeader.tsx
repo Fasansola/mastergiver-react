@@ -59,7 +59,10 @@ const ProfileHeader = ({
       border="0.5px solid #DCDFE3"
       borderRadius="20px"
       boxShadow="0px 1px 2px 0px #4646490F, 0px 1px 3px 0px #4646490A"
-      mt={{ base: '0', lg: hasCoverPhoto ? '-32' : '10' }}
+      mt={{
+        base: hasCoverPhoto ? '-72px' : '32px',
+        lg: hasCoverPhoto ? '-32' : '10',
+      }}
       pos={{ base: 'static', lg: 'sticky' }}
       top="140px"
     >
@@ -108,7 +111,12 @@ const ProfileHeader = ({
             </Text>
           )}
           {locationLine && (
-            <Text className="font-body" color="text.secondary" fontSize="small" textAlign="center">
+            <Text
+              className="font-body"
+              color="text.secondary"
+              fontSize="small"
+              textAlign="center"
+            >
               {locationLine}
             </Text>
           )}

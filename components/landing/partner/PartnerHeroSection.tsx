@@ -25,7 +25,7 @@ const PartnerHeroSection = () => {
           <Stack w={{ base: '100%', lg: '50%' }} gap="10">
             <Stack
               gap="10"
-              maxW={{ base: '100%', lg: '640px' }}
+              maxW={{ base: '100%', lg: '740px' }}
               textAlign={{ base: 'center', md: 'left' }}
             >
               <Heading
@@ -35,12 +35,12 @@ const PartnerHeroSection = () => {
                 lineHeight="140%"
                 color="brand.primary"
               >
-                Help Sponsors Get More Recognition for Their{' '}
-                <Box as="span" whiteSpace="nowrap">Community Impact</Box>
+                Help Sponsors Get More Recognition for Their Community Impact
               </Heading>
               <Text
                 className="font-body"
                 fontSize={{ base: '18px', lg: '21px' }}
+                maxW={{ base: '100%', lg: '540px' }}
                 lineHeight="170%"
                 color="text.primary"
               >
@@ -75,7 +75,10 @@ const PartnerHeroSection = () => {
                     BECOME A PARTNER
                   </Button>
                 </a>
-                <Link href="/business/clearview-family-eyecare" style={{ display: 'flex' }}>
+                <Link
+                  href="/business/clearview-family-eyecare"
+                  style={{ display: 'flex' }}
+                >
                   <Button
                     bg="transparent"
                     color="brand.primary"
@@ -99,7 +102,11 @@ const PartnerHeroSection = () => {
             </Stack>
           </Stack>
 
-          <Stack w={{ base: '100%', lg: '50%' }} align="end" display={{ base: 'none', lg: 'flex' }}>
+          <Stack
+            w={{ base: '100%', lg: '50%' }}
+            align="end"
+            display={{ base: 'none', lg: 'flex' }}
+          >
             <NextImage
               src={Hero}
               alt="Partner hero"
