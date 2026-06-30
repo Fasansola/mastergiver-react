@@ -90,7 +90,7 @@ const CommunityImpactSection = () => {
               boxShadow="0px 8px 10px -6px #E2E1FF, 0px 20px 25px -5px #D4D1FF"
             >
               See how the MasterGiver <br className="sm-mobile-only" />
-              Reputation Profile™ works
+              Community Impact Profile™ works
             </Button>
           </Link>
         </Box>

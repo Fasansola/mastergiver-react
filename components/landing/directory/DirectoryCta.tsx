@@ -144,7 +144,7 @@ const DirectoryCta = () => {
               _hover={{ bg: '#F0EEFF' }}
               transition="background 0.15s"
             >
-              Get Your Reputation Profile →
+              Get Your Community Impact Profile →
             </Box>
           </Link>
 

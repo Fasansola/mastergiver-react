@@ -36,7 +36,7 @@ const ReputationCtaSection = () => {
               Ready to structure your community reputation?
             </Heading>
             <Text>
-              Create your MasterGiver Reputation Profile™ and give your
+              Create your MasterGiver Community Impact Profile™ and give your
               community involvement the visibility it deserves.
             </Text>
           </Stack>
@@ -57,7 +57,7 @@ const ReputationCtaSection = () => {
                 whiteSpace="normal"
                 minH="64px"
               >
-                Create Your MasterGiver Reputation Profile™
+                Create Your MasterGiver Community Impact Profile™
               </Button>
             </Link>
           </Stack>

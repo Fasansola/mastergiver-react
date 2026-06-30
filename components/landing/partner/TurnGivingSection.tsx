@@ -40,7 +40,7 @@ const TurnGivingSection = () => {
               </Text>
               <Text>
                 MasterGiver helps businesses bring those efforts together into
-                a dedicated Reputation Profile™ that showcases their community
+                a dedicated Community Impact Profile™ that showcases their community
                 involvement and highlights what makes them different.
               </Text>
             </Stack>

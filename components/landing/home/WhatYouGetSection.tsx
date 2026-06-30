@@ -17,7 +17,7 @@ import LandingH from '@/components/landing/LandingH';
 const whatYouGet = [
   {
     image: RepProfileIcon.src,
-    title: 'Verified Reputation Profile',
+    title: 'Verified Community Impact Profile',
     description:
       'A public, professionally structured profile documenting your charitable giving, sponsorships, and community involvement — built to be credible, searchable, and easy to understand.',
   },

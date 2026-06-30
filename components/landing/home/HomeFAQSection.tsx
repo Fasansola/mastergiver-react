@@ -12,7 +12,7 @@ const FAQS = [
   {
     title: 'How long does it take to set up my profile?',
     description:
-      'Most businesses complete their MasterGiver Reputation Profile in about 15 minutes. You can update or expand it anytime.',
+      'Most businesses complete their MasterGiver Community Impact Profile in about 15 minutes. You can update or expand it anytime.',
   },
   {
     title: 'Do I need to be a large business or nonprofit?',
@@ -42,7 +42,7 @@ const FAQS = [
   {
     title: "What if I don't have any community impact to showcase?",
     description:
-      "That's ok.  Create your Reputation Profile anyway and begin building out your profile as much as you can.  Just getting started with a minimal profile is better than nothing at all.",
+      "That's ok.  Create your Community Impact Profile anyway and begin building out your profile as much as you can.  Just getting started with a minimal profile is better than nothing at all.",
   },
 ];
 

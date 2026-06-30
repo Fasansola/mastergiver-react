@@ -65,7 +65,7 @@ const CompetitiveAdvantageSection = () => {
               color="text.primary"
               textAlign="center"
             >
-              Get Your MasterGiver Reputation Profile
+              Get Your MasterGiver Community Impact Profile
             </Heading>
 
             <Separator borderColor="border.default" w="100%" />
@@ -141,7 +141,7 @@ const CompetitiveAdvantageSection = () => {
               whiteSpace="normal"
               boxShadow="0px 8px 10px -6px #E2E1FF, 0px 20px 25px -5px #D4D1FF"
             >
-              Get Your Reputation Profile
+              Get Your Community Impact Profile
             </Button>
           </Link>
         </Stack>

@@ -1,5 +1,5 @@
 /**
- * MasterGiverProfileSection — "The MasterGiver Reputation Profile™"
+ * MasterGiverProfileSection — "The MasterGiver Community Impact Profile™"
  *
  * Text and BrandCheck feature list on the left with a signup CTA button.
  * Hero product image on the right.
@@ -22,7 +22,7 @@ const MasterGiverProfileSection = () => {
         >
           <Stack w={{ base: '100%', lg: '50%' }} gap="40px">
             <Stack gap="6" maxW={{ base: '100%', lg: '640px' }} textAlign={{ base: 'center', lg: 'start' }}>
-              <LandingH>The MasterGiver Reputation Profile™</LandingH>
+              <LandingH>The MasterGiver Community Impact Profile™</LandingH>
               <Stack
                 className="font-body"
                 lineHeight="170%"
@@ -61,7 +61,7 @@ const MasterGiverProfileSection = () => {
                     whiteSpace="normal"
                     boxShadow="0px 8px 10px -6px #E2E1FF, 0px 20px 25px -5px #D4D1FF"
                   >
-                    View Example Reputation Profile
+                    View Example Community Impact Profile
                   </Button>
                 </Link>
               </Box>

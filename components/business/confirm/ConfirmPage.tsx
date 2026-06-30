@@ -30,7 +30,7 @@ interface ConfirmPageProps {
 }
 
 const FEATURES = [
-  'Public Reputation Profile',
+  'Public Community Impact Profile',
   'Verified Impact Badge',
   'Discoverable by AI & search engines',
   'Shareable with customers & partners',

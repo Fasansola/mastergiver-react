@@ -217,7 +217,7 @@ const BeyondReviews = () => {
                   color="text.white"
                   w="100%"
                 >
-                  Build My Reputation Profile
+                  Build My Community Impact Profile
                 </Button>
               </Link>
               <Link href="/business/clearview-family-eyecare" style={{ width: '100%' }}>

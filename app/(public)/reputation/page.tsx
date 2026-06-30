@@ -45,7 +45,7 @@ const FAQS = [
   {
     title: 'How is this different from customer reviews?',
     description:
-      "Reviews show how customers experience your business. A MasterGiver Reputation Profile shows how your business shows up for the community: sponsorships, partnerships, volunteering, and local initiatives that reviews don't capture. Together they create a more complete reputation picture.",
+      "Reviews show how customers experience your business. A MasterGiver Community Impact Profile shows how your business shows up for the community: sponsorships, partnerships, volunteering, and local initiatives that reviews don't capture. Together they create a more complete reputation picture.",
   },
   {
     title:
@@ -62,7 +62,7 @@ const FAQS = [
   {
     title: 'What do businesses receive when they create a profile?',
     description:
-      'A public Reputation Profile™ , a Verified Impact Badge for use on your website and marketing materials, and a structured record of community involvement that can be shared with customers and partners and grows with your business over time.',
+      'A public Community Impact Profile™ , a Verified Impact Badge for use on your website and marketing materials, and a structured record of community involvement that can be shared with customers and partners and grows with your business over time.',
   },
 ];
 

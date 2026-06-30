@@ -4,7 +4,7 @@
  * Card shown in the GOOD Businesses directory hub and city pages.
  * Layout (per design): logo + name/location in header, tagline, cause chips,
  * then a bottom bar with the verified badge on the left and a
- * "View Reputation Profile →" CTA on the right.
+ * "View Community Impact Profile →" CTA on the right.
  */
 
 import { Box, HStack, Separator, Stack, Text } from '@chakra-ui/react';
@@ -251,7 +251,7 @@ const BusinessDirectoryCard = ({ business }: Props) => {
               className="font-body"
               whiteSpace="nowrap"
             >
-              View Reputation Profile
+              View Community Impact Profile
             </Text>
             <Box color="brand.primary" display="flex">
               <LuArrowRight size={14} />

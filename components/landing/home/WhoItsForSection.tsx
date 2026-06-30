@@ -98,7 +98,7 @@ const WhoItsForSection = () => {
                     whiteSpace="normal"
                     boxShadow="0px 8px 10px -6px #E2E1FF, 0px 20px 25px -5px #D4D1FF"
                   >
-                    View Example Reputation Profile
+                    View Example Community Impact Profile
                   </Button>
                 </Link>
               </Box>

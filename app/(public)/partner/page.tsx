@@ -62,7 +62,7 @@ const PARTNER_FAQS = [
   {
     title: 'What do businesses receive?',
     description:
-      'Businesses who sign up receive a MasterGiver Reputation Profile, a structured way to document their community impact, a Verified Impact Badge, and increased visibility across search and AI tools.',
+      'Businesses who sign up receive a MasterGiver Community Impact Profile, a structured way to document their community impact, a Verified Impact Badge, and increased visibility across search and AI tools.',
   },
 ];
 

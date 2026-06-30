@@ -367,7 +367,7 @@ async function main() {
 <p>Second, consumer trust in traditional advertising and even in reviews has declined. People are looking for signals that are harder to fake. Genuine, documented community involvement is one of those signals.</p>
 <h2>The good news</h2>
 <p>You do not need to do more. You almost certainly already have involvement worth documenting. The opportunity is to organise what you already do into a structured, public record that customers, search engines, and AI tools can actually find and understand.</p>
-<p>That is exactly what a MasterGiver Reputation Profile is for.</p>`,
+<p>That is exactly what a MasterGiver Community Impact Profile is for.</p>`,
     },
     {
       title: 'Why AI Recommends Businesses That Give Back',
@@ -390,7 +390,7 @@ async function main() {
 <p>A business with a public record of sponsoring youth sports, partnering with a local food bank, and volunteering at community events has a meaningfully richer data footprint than a business with only customer reviews — even if both have a 4.8-star average.</p>
 <h2>Structured data is the key</h2>
 <p>The critical word is <em>structured</em>. Scattered mentions in old Facebook posts do not count. What AI models can actually process and weight is information that is organised, consistent, and accessible in a format they can read.</p>
-<p>A MasterGiver Reputation Profile creates exactly that: a structured, public record of community involvement that is readable by AI systems, searchable on the web, and shareable with customers and partners.</p>
+<p>A MasterGiver Community Impact Profile creates exactly that: a structured, public record of community involvement that is readable by AI systems, searchable on the web, and shareable with customers and partners.</p>
 <h2>This is not about gaming algorithms</h2>
 <p>It is worth being clear: this is not about tricking AI systems. It is about ensuring that the genuine community involvement your business already has is actually visible and legible to the tools people increasingly use to discover businesses.</p>
 <p>If you sponsor a local little league team and no structured record of that exists anywhere, it simply does not factor into how you are perceived by AI. The involvement is real. The opportunity is to make it count.</p>`,
@@ -453,11 +453,11 @@ async function main() {
       title: 'What a Verified Community Impact Profile Actually Looks Like',
       slug: 'what-verified-community-impact-profile-looks-like',
       excerpt:
-        'A MasterGiver Reputation Profile is not a generic business listing. Here is exactly what it contains, what each section is for, and how customers and AI tools interact with it.',
+        'A MasterGiver Community Impact Profile is not a generic business listing. Here is exactly what it contains, what each section is for, and how customers and AI tools interact with it.',
       categoryName: 'Community Impact',
       tags: ['profile', 'mastergiver', 'reputation', 'features'],
       content: `<h2>A profile built around proof, not claims</h2>
-<p>Anyone can write "We care about our community" on their website. A MasterGiver Reputation Profile is built around the opposite approach: documented evidence of specific, verifiable community involvement, presented in a structured format that both humans and AI systems can read and trust.</p>
+<p>Anyone can write "We care about our community" on their website. A MasterGiver Community Impact Profile is built around the opposite approach: documented evidence of specific, verifiable community involvement, presented in a structured format that both humans and AI systems can read and trust.</p>
 <p>Here is what the profile actually contains.</p>
 <h2>The Impact Record</h2>
 <p>The core of the profile. Each entry in the Impact Record captures one piece of community involvement: a sponsorship, a donation, a volunteer initiative, a nonprofit partnership. Entries include the organisation involved, the type of contribution, the timeframe, and — where relevant — amounts or hours.</p>

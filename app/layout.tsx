@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_APP_URL ?? 'https://mastergiver.com'
   ),
   title: {
-    default: 'MasterGiver — Verified Business Reputation Profiles',
+    default: 'MasterGiver — Verified Business Community Impact Profiles',
     template: '%s | MasterGiver',
   },
   description:
@@ -31,13 +31,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     siteName: 'MasterGiver',
-    title: 'MasterGiver — Verified Business Reputation Profiles',
+    title: 'MasterGiver — Verified Business Community Impact Profiles',
     description:
       'Turn your community impact into verified reputation signals that AI and search engines trust.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'MasterGiver — Verified Business Reputation Profiles',
+    title: 'MasterGiver — Verified Business Community Impact Profiles',
     description:
       'Turn your community impact into verified reputation signals that AI and search engines trust.',
   },

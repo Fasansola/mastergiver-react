@@ -186,7 +186,7 @@ const EditProfileClient = ({
             lineHeight="120%"
             color="text.primary"
           >
-            Reputation Profile Builder
+            Community Impact Profile Builder
           </Heading>
           <Text color="text.secondary">
             Click the + icon to add content to each section of your MasterGiver
