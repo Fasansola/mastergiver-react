@@ -4,7 +4,7 @@
  * Gradient background with headline about adding value to members,
  * a CTA anchor link to the form, and the partner hero image.
  */
-import { Button, Container, Heading, Stack, Text } from '@chakra-ui/react';
+import { Box, Button, Container, Heading, Stack, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 import NextImage from 'next/image';
 import Hero from '@/public/partner/Hero.png';
@@ -32,10 +32,11 @@ const PartnerHeroSection = () => {
                 className="font-display"
                 fontWeight="700"
                 fontSize={{ base: '36px', md: '46px', lg: '56px' }}
-                lineHeight="150%"
+                lineHeight="140%"
                 color="brand.primary"
               >
-                Help Sponsors Get More Recognition for Their Community Impact
+                Help Sponsors Get More Recognition for Their{' '}
+                <Box as="span" whiteSpace="nowrap">Community Impact</Box>
               </Heading>
               <Text
                 className="font-body"
@@ -98,7 +99,7 @@ const PartnerHeroSection = () => {
             </Stack>
           </Stack>
 
-          <Stack w={{ base: '100%', lg: '50%' }} align="end">
+          <Stack w={{ base: '100%', lg: '50%' }} align="end" display={{ base: 'none', lg: 'flex' }}>
             <NextImage
               src={Hero}
               alt="Partner hero"

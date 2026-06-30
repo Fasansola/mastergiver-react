@@ -120,7 +120,10 @@ const GoodBusinessesPage = async () => {
                   color="#1E1B4B"
                   lineHeight="140%"
                 >
-                  GOOD Businesses Making an Impact
+                  GOOD Businesses{' '}
+                  <Box as="span" display={{ base: 'block', md: 'inline' }}>
+                    Making an Impact
+                  </Box>
                 </Heading>
                 <Text
                   className="font-body"

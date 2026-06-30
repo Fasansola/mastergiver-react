@@ -30,12 +30,12 @@ const ReputationHeroSection = () => {
           align="center"
         >
           <Stack w={{ base: '100%', lg: '50%' }} gap="10">
-            <Stack gap="10" maxW={{ base: '100%', lg: '640px' }}>
+            <Stack gap="10" maxW={{ base: '100%', lg: '640px' }} textAlign={{ base: 'center', lg: 'left' }}>
               <Heading
                 className="font-display"
                 fontWeight="700"
                 fontSize={{ base: '36px', md: '46px', lg: '56px' }}
-                lineHeight="150%"
+                lineHeight="140%"
                 color="brand.primary"
               >
                 Your Reputation Is More Than Reviews.

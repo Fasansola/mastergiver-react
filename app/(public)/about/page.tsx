@@ -63,11 +63,14 @@ const AboutPage = () => {
             <Heading
               className="font-display"
               fontWeight="700"
-              fontSize={{ base: '36px', md: '52px', lg: '64px' }}
+              fontSize={{ base: '28px', md: '52px', lg: '64px' }}
               lineHeight="140%"
               color="brand.primary"
+              textAlign={{ base: 'center', lg: 'left' }}
             >
-              The Good You Do Is Invisible. And It&apos;s Costing You.
+              The Good You Do Is Invisible.
+              <br />
+              And It&apos;s Costing You.
             </Heading>
 
             <Stack gap="5">
@@ -117,6 +120,7 @@ const AboutPage = () => {
               fontSize={{ base: '28px', md: '38px', lg: '48px' }}
               lineHeight="140%"
               color="text.heading"
+              textAlign={{ base: 'center', lg: 'left' }}
             >
               You&apos;re Showing Up in Your Community,
               <br />
@@ -173,6 +177,7 @@ const AboutPage = () => {
               fontSize={{ base: '28px', md: '38px', lg: '48px' }}
               lineHeight="140%"
               color="text.heading"
+              textAlign={{ base: 'center', lg: 'left' }}
             >
               Reputation Should Be Built on
               <br />
@@ -231,6 +236,7 @@ const AboutPage = () => {
               fontSize={{ base: '28px', md: '38px', lg: '48px' }}
               lineHeight="140%"
               color="text.heading"
+              textAlign={{ base: 'center', lg: 'left' }}
             >
               MasterGiver Exists to Make
               <br />
@@ -282,6 +288,7 @@ const AboutPage = () => {
               fontSize={{ base: '28px', md: '38px', lg: '48px' }}
               lineHeight="140%"
               color="text.heading"
+              textAlign={{ base: 'center', lg: 'left' }}
             >
               A More Complete Picture of a Business
             </Heading>
@@ -325,6 +332,7 @@ const AboutPage = () => {
               fontSize={{ base: '28px', md: '38px', lg: '48px' }}
               lineHeight="140%"
               color="text.heading"
+              textAlign={{ base: 'center', lg: 'left' }}
             >
               The Beginning of a New Standard
             </Heading>
@@ -371,6 +379,7 @@ const AboutPage = () => {
               fontSize={{ base: '28px', md: '38px', lg: '48px' }}
               lineHeight="140%"
               color="white"
+              textAlign={{ base: 'center', lg: 'left' }}
             >
               Start With What You&apos;re Already Doing
             </Heading>
@@ -407,12 +416,18 @@ const AboutPage = () => {
                   lineHeight="160%"
                   borderRadius="8px"
                   px="10"
-                  h="64px"
+                  minH="64px"
+                  h="auto"
                   w={{ base: '100%', lg: 'auto' }}
+                  whiteSpace="normal"
+                  textAlign="center"
                   boxShadow="0px 8px 10px -6px rgba(0,0,0,0.2), 0px 20px 25px -5px rgba(0,0,0,0.15)"
                   _hover={{ bg: '#ECEBF8' }}
                 >
-                  Create Your MasterGiver Reputation Profile →
+                  Create Your{' '}
+                  <Box as="span" display={{ base: 'block', md: 'inline' }}>
+                    MasterGiver Profile →
+                  </Box>
                 </Button>
               </Link>
             </Box>

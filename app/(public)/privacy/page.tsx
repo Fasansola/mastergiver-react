@@ -221,7 +221,7 @@ const PrivacyPage = () => {
             <Text
               fontFamily="'SF Pro Display', 'SF Pro Text', system-ui, sans-serif"
               fontSize="16px"
-              lineHeight="150%"
+              lineHeight="140%"
               color="#000000"
               pt="2"
             >
@@ -234,7 +234,7 @@ const PrivacyPage = () => {
             <Text
               fontFamily="'SF Pro Display', 'SF Pro Text', system-ui, sans-serif"
               fontSize="16px"
-              lineHeight="150%"
+              lineHeight="140%"
               color="#000000"
             >
               By accessing or using MasterGiver, you agree to the collection and
@@ -254,7 +254,7 @@ const PrivacyPage = () => {
                 fontFamily="'Libre Bodoni', Georgia, serif"
                 fontWeight="700"
                 fontSize={{ base: '18px', lg: '20px' }}
-                lineHeight="150%"
+                lineHeight="140%"
                 color="#2F2B77"
               >
                 {section.title}
@@ -265,7 +265,7 @@ const PrivacyPage = () => {
                 <Text
                   fontFamily="'SF Pro Display', 'SF Pro Text', system-ui, sans-serif"
                   fontSize="16px"
-                  lineHeight="150%"
+                  lineHeight="140%"
                   color="#000000"
                 >
                   {section.intro}
@@ -281,7 +281,7 @@ const PrivacyPage = () => {
                         fontFamily="'SF Pro Display', 'SF Pro Text', system-ui, sans-serif"
                         fontWeight="700"
                         fontSize="16px"
-                        lineHeight="150%"
+                        lineHeight="140%"
                         color="#27262D"
                       >
                         {sub.title}
@@ -292,7 +292,7 @@ const PrivacyPage = () => {
                             key={item.label}
                             fontFamily="'SF Pro Display', 'SF Pro Text', system-ui, sans-serif"
                             fontSize="16px"
-                            lineHeight="150%"
+                            lineHeight="140%"
                             color="#000000"
                           >
                             <Box as="span" fontWeight="700" color="#27262D" mr="1">
@@ -314,7 +314,7 @@ const PrivacyPage = () => {
                   pl="6"
                   fontFamily="'SF Pro Display', 'SF Pro Text', system-ui, sans-serif"
                   fontSize="16px"
-                  lineHeight="150%"
+                  lineHeight="140%"
                   color="#000000"
                 >
                   {section.bullets.map((item, i) => (
@@ -328,7 +328,7 @@ const PrivacyPage = () => {
                 <Text
                   fontFamily="'SF Pro Display', 'SF Pro Text', system-ui, sans-serif"
                   fontSize="16px"
-                  lineHeight="150%"
+                  lineHeight="140%"
                   color="#000000"
                 >
                   {section.body}
@@ -342,7 +342,7 @@ const PrivacyPage = () => {
             <Text
               fontFamily="'SF Pro Display', 'SF Pro Text', system-ui, sans-serif"
               fontSize="16px"
-              lineHeight="150%"
+              lineHeight="140%"
               color="#000000"
             >
               By using MasterGiver, you acknowledge that you have read and

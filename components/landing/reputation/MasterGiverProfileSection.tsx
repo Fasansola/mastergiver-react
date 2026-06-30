@@ -21,7 +21,7 @@ const MasterGiverProfileSection = () => {
           align="center"
         >
           <Stack w={{ base: '100%', lg: '50%' }} gap="40px">
-            <Stack gap="6" maxW={{ base: '100%', lg: '640px' }}>
+            <Stack gap="6" maxW={{ base: '100%', lg: '640px' }} textAlign={{ base: 'center', lg: 'start' }}>
               <LandingH>The MasterGiver Reputation Profile™</LandingH>
               <Stack
                 className="font-body"

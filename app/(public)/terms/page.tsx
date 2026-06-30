@@ -131,7 +131,7 @@ const TermsPage = () => {
             <Text
               fontFamily="'SF Pro Display', 'SF Pro Text', system-ui, sans-serif"
               fontSize="16px"
-              lineHeight="150%"
+              lineHeight="140%"
               color="#000000"
               pt="2"
             >
@@ -154,7 +154,7 @@ const TermsPage = () => {
                 fontFamily="'Libre Bodoni', Georgia, serif"
                 fontWeight="700"
                 fontSize={{ base: '18px', lg: '20px' }}
-                lineHeight="150%"
+                lineHeight="140%"
                 color="#2F2B77"
               >
                 {section.title}
@@ -165,7 +165,7 @@ const TermsPage = () => {
                 <Text
                   fontFamily="'SF Pro Display', 'SF Pro Text', system-ui, sans-serif"
                   fontSize="16px"
-                  lineHeight="150%"
+                  lineHeight="140%"
                   color="#000000"
                 >
                   {section.body}
@@ -179,7 +179,7 @@ const TermsPage = () => {
                     <Text
                       fontFamily="'SF Pro Display', 'SF Pro Text', system-ui, sans-serif"
                       fontSize="16px"
-                      lineHeight="150%"
+                      lineHeight="140%"
                       color="#000000"
                     >
                       {section.intro}
@@ -190,7 +190,7 @@ const TermsPage = () => {
                     pl="6"
                     fontFamily="'SF Pro Display', 'SF Pro Text', system-ui, sans-serif"
                     fontSize="16px"
-                    lineHeight="150%"
+                    lineHeight="140%"
                     color="#000000"
                   >
                     {section.bullets.map((item) => (
@@ -210,7 +210,7 @@ const TermsPage = () => {
                       key={sub.label}
                       fontFamily="'SF Pro Display', 'SF Pro Text', system-ui, sans-serif"
                       fontSize="16px"
-                      lineHeight="150%"
+                      lineHeight="140%"
                       color="#000000"
                     >
                       <Box as="span" fontWeight="700" color="#27262D" mr="1">
@@ -232,7 +232,7 @@ const TermsPage = () => {
                 fontFamily="'Libre Bodoni', Georgia, serif"
                 fontWeight="700"
                 fontSize={{ base: '18px', lg: '20px' }}
-                lineHeight="150%"
+                lineHeight="140%"
                 color="#2F2B77"
               >
                 Acceptance of Terms
@@ -240,7 +240,7 @@ const TermsPage = () => {
               <Text
                 fontFamily="'SF Pro Display', 'SF Pro Text', system-ui, sans-serif"
                 fontSize="16px"
-                lineHeight="150%"
+                lineHeight="140%"
                 color="#000000"
               >
                 By creating an account or using MasterGiver, you acknowledge

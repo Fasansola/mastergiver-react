@@ -33,21 +33,24 @@ const HomeHeroSection = () => {
           gap={{ base: '10', lg: '6' }}
           align="center"
         >
-          <Stack w={{ base: '100%', lg: '50%' }} gap="10">
+          <Stack w={{ base: '100%', lg: '52%' }} gap="10">
             <Stack
               gap="6"
-              maxW={{ base: '100%', lg: '640px' }}
+              maxW={{ base: '100%', lg: '740px' }}
               textAlign={{ base: 'center', md: 'left' }}
             >
               <Heading
                 className="font-display"
                 fontWeight="700"
                 fontSize={{ base: '36px', md: '46px', lg: '56px' }}
-                lineHeight="150%"
+                lineHeight="140%"
               >
-                Your Community Impact is an Asset.
-                <br />
-                <Span className="font-display" color="brand.primary">
+                Your Community Impact is an Asset. {/* <br /> */}
+                <Span
+                  className="font-display"
+                  color="brand.primary"
+                  wordSpacing="12px"
+                >
                   It&apos;s Just Invisible.
                 </Span>
               </Heading>
@@ -57,10 +60,9 @@ const HomeHeroSection = () => {
                 lineHeight="170%"
                 color="text.primary"
               >
-                MasterGiver turns your business&apos;s charitable giving and
-                community involvement into verified reputation signals so AI
-                recommends you, search engines rank you higher, and customers
-                choose you.
+                MasterGiver turns your business&apos;s community involvement
+                into a verified reputation profile and badge so AI recommends
+                you, search engines rank you higher, and customers choose you.
               </Text>
             </Stack>
             <Stack gap="8">
@@ -88,7 +90,10 @@ const HomeHeroSection = () => {
                     Get Your Reputation Profile
                   </Button>
                 </Link>
-                <Link href="/business/clearview-family-eyecare" style={{ display: 'flex' }}>
+                <Link
+                  href="/business/clearview-family-eyecare"
+                  style={{ display: 'flex' }}
+                >
                   <Button
                     bg="transparent"
                     color="brand.primary"
@@ -140,7 +145,7 @@ const HomeHeroSection = () => {
             <Text
               className="font-display"
               fontSize="16px"
-              lineHeight="150%"
+              lineHeight="140%"
               color="text.primary"
               textAlign="center"
             >

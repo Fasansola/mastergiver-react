@@ -42,7 +42,7 @@ const WhatWeDoBox = ({ image, title, description }: Props) => {
           color="text.primary"
           className="font-body"
           lineHeight="160%"
-          fontSize="18px"
+          fontSize="16px"
         >
           {description}
         </Text>

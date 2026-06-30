@@ -86,8 +86,13 @@ const DirectoryHero = ({ cities }: Props) => {
             lineHeight="140%"
             color="#1E1B4B"
             letterSpacing="-0.5px"
+            wordSpacing="0.1em"
           >
-            Discover Businesses Making A Positive Community Impact
+            Discover Businesses
+            <br />
+            Making a Positive
+            <br />
+            Community Impact
           </Heading>
 
           {/* Subheadline */}

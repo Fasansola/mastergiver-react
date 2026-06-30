@@ -31,7 +31,7 @@ const ReputationCtaSection = () => {
               className="font-display"
               fontWeight="700"
               fontSize={{ base: '40px', md: '48px', lg: '60px' }}
-              lineHeight="150%"
+              lineHeight="140%"
             >
               Ready to structure your community reputation?
             </Heading>

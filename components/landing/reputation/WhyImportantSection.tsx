@@ -46,7 +46,7 @@ const WhyImportantSection = () => {
           </Stack>
 
           <Stack w={{ base: '100%', lg: '50%' }} gap="10">
-            <Stack gap="10">
+            <Stack gap="10" textAlign={{ base: 'center', lg: 'start' }}>
               <LandingH>
                 Why the Community Impact Layer is Becoming More Important
               </LandingH>

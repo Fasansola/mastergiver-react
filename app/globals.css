@@ -34,6 +34,7 @@
 .font-body .font-display,
 .font-display {
   font-family: var(--font-libre-bodoni), Georgia, serif !important;
+  word-spacing: 0.15em;
 }
 
 body {
@@ -45,7 +46,10 @@ body {
 
 /* Tailwind v4 preflight resets cursor to default on all elements including <a>.
    Restore pointer on links and anything explicitly marked as interactive. */
-a, button, [role="button"], [style*="cursor: pointer"] {
+a,
+button,
+[role="button"],
+[style*="cursor: pointer"] {
   cursor: pointer !important;
 }
 
@@ -121,13 +125,27 @@ select:-webkit-autofill {
   margin-bottom: 0.5em;
 }
 
-.blog-content h1 { font-size: 2em; }
-.blog-content h2 { font-size: 1.5em; border-bottom: 1px solid #EBEBEB; padding-bottom: 0.3em; }
-.blog-content h3 { font-size: 1.2em; }
-.blog-content h4 { font-size: 1.05em; letter-spacing: 0.01em; }
+.blog-content h1 {
+  font-size: 2em;
+}
+
+.blog-content h2 {
+  font-size: 1.5em;
+  border-bottom: 1px solid #EBEBEB;
+  padding-bottom: 0.3em;
+}
+
+.blog-content h3 {
+  font-size: 1.2em;
+}
+
+.blog-content h4 {
+  font-size: 1.05em;
+  letter-spacing: 0.01em;
+}
 
 /* First paragraph after the post header gets slightly larger treatment */
-.blog-content > p:first-child {
+.blog-content>p:first-child {
   font-size: 1.08em;
   color: #444;
 }

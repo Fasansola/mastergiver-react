@@ -5,8 +5,6 @@
  * checklist on the right.
  */
 import { Container, Stack, Text } from '@chakra-ui/react';
-import NextImage from 'next/image';
-import DeviceDesktop from '@/public/landing/BusinessHero.png';
 import BrandCheck from '@/components/landing/BrandCheck';
 import LandingH from '@/components/landing/LandingH';
 
@@ -14,52 +12,49 @@ const TurnGivingSection = () => {
   return (
     <Stack bg="background.white">
       <Container py={{ base: '60px', lg: '100px' }}>
-        <Stack
-          direction={{ base: 'column', lg: 'row' }}
-          gap={{ base: '10', lg: '20' }}
-          align="center"
-        >
-          <Stack w={{ base: '100%', lg: '55%' }} justify="center">
-            <NextImage
-              src={DeviceDesktop}
-              alt="MasterGiver dashboard"
-              style={{ width: '100%', height: 'auto' }}
-            />
-          </Stack>
+        <Stack gap={{ base: '10', lg: '16' }}>
+          {/* Heading — full width above both columns */}
+          <LandingH>Most Businesses Give Back. Few Get Credit For It.</LandingH>
 
+          {/* Two-column row: description left, checklist right */}
           <Stack
-            w={{ base: '100%', lg: '45%' }}
-            gap={{ base: '10', lg: '60px' }}
+            direction={{ base: 'column', lg: 'row' }}
+            gap={{ base: '10', lg: '20' }}
+            align={{ lg: 'start' }}
           >
-            <Stack gap="6" maxW={{ base: '100%', lg: '640px' }}>
-              <LandingH>We turn giving into a visible business asset.</LandingH>
-              <Stack
-                className="font-body"
-                lineHeight="170%"
-                color="text.primary"
-                gap="6"
-                fontSize={{ base: '18px', lg: '21px' }}
-              >
-                <Text>
-                  Most businesses give back to their communities but that
-                  generosity never shows up where customers can see it.
-                  MasterGiver gives businesses a Reputation Profile™ as a
-                  dedicated place to showcase the good they do and strengthen
-                  how they appear online.
-                </Text>
-              </Stack>
+            <Stack
+              w={{ base: '100%', lg: '55%' }}
+              className="font-body"
+              lineHeight="170%"
+              color="text.primary"
+              gap="6"
+              fontSize={{ base: '18px', lg: '21px' }}
+            >
+              <Text>
+                Businesses support nonprofits, sponsor community programs,
+                donate resources, and invest countless hours giving back. Yet
+                much of that impact remains scattered across websites, social
+                media posts, event pages, and thank-you mentions that are
+                difficult for customers, prospects, and search engines to
+                discover.
+              </Text>
+              <Text>
+                MasterGiver helps businesses bring those efforts together into
+                a dedicated Reputation Profile™ that showcases their community
+                involvement and highlights what makes them different.
+              </Text>
             </Stack>
-            <Stack gap="14">
-              <Stack gap="4">
-                {[
-                  'Highlight community involvement and sponsorships',
-                  'Build credibility and trust with local customers',
-                  'Improve online reputation',
-                  'Demonstrate a genuine commitment to community impact',
-                ].map((item, i) => (
-                  <BrandCheck item={item} key={i} />
-                ))}
-              </Stack>
+
+            <Stack w={{ base: '100%', lg: '45%' }} gap="4">
+              {[
+                'Highlight sponsorships and community involvement',
+                'Create a lasting reputation asset',
+                'Build trust with customers',
+                'Differentiate from competitors',
+                'Strengthen online visibility',
+              ].map((item, i) => (
+                <BrandCheck item={item} key={i} />
+              ))}
             </Stack>
           </Stack>
         </Stack>

@@ -68,7 +68,7 @@ const GoodNotVisibleSection = () => {
           justify="space-between"
           borderRadius="16px"
         >
-          <Stack gap="6" w={{ base: '100%', lg: '760px' }}>
+          <Stack gap="6" w={{ base: '100%', lg: '700px' }}>
             <HStack gap="4" flexWrap="wrap">
               {[
                 'You support local organizations and causes.',
@@ -79,24 +79,22 @@ const GoodNotVisibleSection = () => {
               ))}
             </HStack>
 
-            <Stack gap="2">
-              <Text fontSize="18px">
-                But while most businesses spend years building reviews,
-                websites, and advertising campaigns, very few have a structured
-                way to showcase the community involvement that helps build trust
-                and differentiate them from competitors.
-              </Text>
-              <Text fontSize="18px">
-                MasterGiver helps transform those efforts into a visible
-                reputation asset that supports trust, discoverability, and
-                customer choice.
-              </Text>
-            </Stack>
+            <Text fontSize="18px" lineHeight="170%">
+              But while most businesses spend years building reviews, websites,
+              and advertising campaigns, very few have a structured way to
+              showcase the community involvement that helps build trust and
+              differentiate them from competitors.
+              <br />
+              MasterGiver helps transform those efforts into a visible
+              reputation asset that supports trust, discoverability, and
+              customer choice.
+            </Text>
+            {/* <Stack gap="2"></Stack> */}
           </Stack>
 
           <Stack
             p={{ base: '5', lg: '8' }}
-            w={{ base: '100%', lg: '350px' }}
+            w={{ base: '100%', lg: '400px' }}
             borderLeft="4px solid"
             borderColor="brand.primary"
             borderRadius="12px"

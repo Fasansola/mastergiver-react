@@ -165,10 +165,10 @@ const BeyondReviews = () => {
                   <Heading
                     className="font-display"
                     wordSpacing="0.1em"
-                    fontSize={{ base: '38px', md: '56px', lg: '80px' }}
+                    fontSize={{ base: '32px', md: '56px', lg: '80px' }}
                     fontWeight="700"
                     lineHeight="140%"
-                    color="brand.lightPrimary"
+                    color="brand.primary"
                   >
                     Your Reviews Are Great.
                   </Heading>
@@ -176,7 +176,7 @@ const BeyondReviews = () => {
                     className="font-display"
                     wordSpacing="0.1em"
                     color="brand.primary"
-                    fontSize={{ base: '38px', md: '56px', lg: '80px' }}
+                    fontSize={{ base: '32px', md: '56px', lg: '80px' }}
                     fontWeight="700"
                     lineHeight="140%"
                   >
@@ -318,7 +318,7 @@ const BeyondReviews = () => {
                 fontSize={{ base: '28px', md: '36px', lg: '48px' }}
                 fontWeight="700"
                 lineHeight="140%"
-                color="brand.lightPrimary"
+                color="brand.primary"
               >
                 And You&apos;re Still Getting Overlooked.
               </Heading>
@@ -437,7 +437,7 @@ const BeyondReviews = () => {
                     fontSize={{ base: '32px', lg: '48px' }}
                     fontWeight="700"
                     lineHeight="140%"
-                    color="brand.lightPrimary"
+                    color="brand.primary"
                   >
                     Complete Reputation.
                   </Heading>

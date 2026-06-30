@@ -73,7 +73,7 @@ const PartnerCtaSection = () => {
                 className="font-display"
                 fontWeight="700"
                 fontSize={{ base: '26px', lg: '32px' }}
-                lineHeight="150%"
+                lineHeight="140%"
               >
                 Create Partner Account
               </Heading>
