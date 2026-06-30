@@ -27,7 +27,12 @@ const PartnerCards = ({ partners }: PartnerCardsProps) => {
       {partners.map((p, i) => (
         <>
           {i !== 0 && <Separator />}
-          <Stack direction={{ base: 'column', md: 'row' }} gap="6" key={p.id}>
+          <Stack
+            direction={{ base: 'column', md: 'row' }}
+            gap="6"
+            key={p.id}
+            align={{ base: 'center', md: 'start' }}
+          >
             {/* Partner image */}
             {p.image && (
               <Image
@@ -44,7 +49,7 @@ const PartnerCards = ({ partners }: PartnerCardsProps) => {
               />
             )}
 
-            <Stack gap="4" flexShrink="1">
+            <Stack gap="4" flexShrink="1" textAlign={{ base: 'center', md: 'left' }}>
               <Text className="font-body" fontWeight="800" color="text.primary">
                 {p.name}
               </Text>

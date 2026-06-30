@@ -311,7 +311,7 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
                 align="center"
                 w="100%"
               >
-                {/* Verified Community Impact */}
+                {/* Verified Community Impact — hidden on mobile (doesn't adapt well) */}
                 <HStack
                   bgColor="background.white"
                   p={{ base: '4', md: '6' }}
@@ -322,6 +322,7 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
                   gap="4"
                   borderRadius="20px"
                   boxShadow="0px 1px 2px 0px #4646490F, 0px 1px 3px 0px #4646490A"
+                  display={{ base: 'none', md: 'flex' }}
                 >
                   <Image
                     src={Certified}
@@ -379,7 +380,10 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
                         color="text.secondary"
                         textAlign="center"
                       >
-                        Updated regularly to reflect ongoing community impact.
+                        Updated regularly to reflect{' '}
+                        <Box as="span" display={{ base: 'block', md: 'inline' }}>
+                          ongoing community impact.
+                        </Box>
                       </Text>
                     </Stack>
                     <ImpactStats
@@ -418,8 +422,7 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
                         color="text.secondary"
                         textAlign="center"
                       >
-                        A continuously updated record of this business&apos;s
-                        community impact.
+                        A continuously updated record of our community impact.
                       </Text>
                     </Stack>
                     <ImpactRecordPublic records={impactRecords} />
@@ -445,8 +448,12 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
                     color="text.businessH"
                     textAlign="center"
                     lineHeight="120%"
+                    wordSpacing="0.05em"
                   >
-                    Community Partners and Programs
+                    Community Partners{' '}
+                    <Box as="span" display={{ base: 'block', md: 'inline' }}>
+                      and Programs
+                    </Box>
                   </Heading>
                   <PartnerCards partners={business.partners} />
                 </Stack>
