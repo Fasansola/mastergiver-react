@@ -35,7 +35,7 @@ const PartnerHeroSection = () => {
                 lineHeight="140%"
                 color="brand.primary"
               >
-                Help Sponsors Get More Recognition for Their Community Impact
+                Help Sponsors Get More Recognition For Their Community Impact
               </Heading>
               <Text
                 className="font-body"

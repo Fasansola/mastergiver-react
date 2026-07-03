@@ -79,17 +79,19 @@ const GoodNotVisibleSection = () => {
               ))}
             </HStack>
 
-            <Text fontSize="18px" lineHeight="170%">
-              But while most businesses spend years building reviews, websites,
-              and advertising campaigns, very few have a structured way to
-              showcase the community involvement that helps build trust and
-              differentiate them from competitors.
-              <br />
-              MasterGiver helps transform those efforts into a visible
-              reputation asset that supports trust, discoverability, and
-              customer choice.
-            </Text>
-            {/* <Stack gap="2"></Stack> */}
+            <Stack gap="2">
+              <Text fontSize="18px" lineHeight="170%">
+                But while most businesses spend years building reviews,
+                websites, and advertising campaigns, very few have a structured
+                way to showcase the community involvement that helps build trust
+                and differentiate them from competitors.
+              </Text>
+              <Text fontSize="18px" lineHeight="170%">
+                MasterGiver helps transform those efforts into a visible
+                reputation asset that supports trust, discoverability, and
+                customer choice.
+              </Text>
+            </Stack>
           </Stack>
 
           <Stack

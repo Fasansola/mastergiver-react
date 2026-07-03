@@ -33,10 +33,10 @@ const HomeHeroSection = () => {
           gap={{ base: '10', lg: '6' }}
           align="center"
         >
-          <Stack w={{ base: '100%', lg: '52%' }} gap="10">
+          <Stack w={{ base: '100%', lg: '50%' }} gap="10">
             <Stack
               gap="6"
-              maxW={{ base: '100%', lg: '740px' }}
+              maxW={{ base: '100%', lg: '560px' }}
               textAlign={{ base: 'center', md: 'left' }}
             >
               <Heading
@@ -45,7 +45,8 @@ const HomeHeroSection = () => {
                 fontSize={{ base: '36px', md: '46px', lg: '56px' }}
                 lineHeight="140%"
               >
-                Your Community Impact is an Asset. {/* <br /> */}
+                Your Community Impact is an Asset.
+                <br />
                 <Span
                   className="font-display"
                   color="brand.primary"
@@ -61,8 +62,9 @@ const HomeHeroSection = () => {
                 color="text.primary"
               >
                 MasterGiver turns your business&apos;s community involvement
-                into a verified reputation profile and badge so AI recommends
-                you, search engines rank you higher, and customers choose you.
+                into a verified community impact profile and badge so AI
+                recommends you, search engines rank you higher, and customers
+                choose you.
               </Text>
             </Stack>
             <Stack gap="8">

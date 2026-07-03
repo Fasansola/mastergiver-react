@@ -4,7 +4,7 @@
  * Product screenshot on the left, feature description and BrandCheck
  * checklist on the right.
  */
-import { Container, Stack, Text } from '@chakra-ui/react';
+import { Box, Container, Stack, Text } from '@chakra-ui/react';
 import BrandCheck from '@/components/landing/BrandCheck';
 import LandingH from '@/components/landing/LandingH';
 
@@ -12,9 +12,14 @@ const TurnGivingSection = () => {
   return (
     <Stack bg="background.white">
       <Container py={{ base: '60px', lg: '100px' }}>
-        <Stack gap={{ base: '10', lg: '16' }}>
+        <Stack gap={{ base: '10', lg: '16' }} alignItems="center">
           {/* Heading — full width above both columns */}
-          <LandingH>Most Businesses Give Back. Few Get Credit For It.</LandingH>
+
+          <Box textAlign="center" w="100%" maxW="740px">
+            <LandingH>
+              Most Businesses Give Back. Few Get Credit For It.
+            </LandingH>
+          </Box>
 
           {/* Two-column row: description left, checklist right */}
           <Stack
@@ -28,7 +33,7 @@ const TurnGivingSection = () => {
               lineHeight="170%"
               color="text.primary"
               gap="6"
-              fontSize={{ base: '18px', lg: '21px' }}
+              fontSize={{ base: '18px' }}
             >
               <Text>
                 Businesses support nonprofits, sponsor community programs,
@@ -39,9 +44,9 @@ const TurnGivingSection = () => {
                 discover.
               </Text>
               <Text>
-                MasterGiver helps businesses bring those efforts together into
-                a dedicated Community Impact Profile™ that showcases their community
-                involvement and highlights what makes them different.
+                MasterGiver helps businesses bring those efforts together into a
+                dedicated Community Impact Profile™ that showcases their
+                community involvement and highlights what makes them different.
               </Text>
             </Stack>
 
