@@ -59,7 +59,12 @@ export async function generateMetadata({
     },
   });
 
-  if (!business || !business.companyName || !business.published || business.status !== 'ACTIVE') {
+  if (
+    !business ||
+    !business.companyName ||
+    !business.published ||
+    business.status !== 'ACTIVE'
+  ) {
     return { title: 'Business Profile Not Found' };
   }
 
@@ -71,7 +76,7 @@ export async function generateMetadata({
   // Task 2 — structured description replaces tagline; consistent across all profiles
   const description = `View ${name}'s verified community impact profile, including nonprofit partnerships, sponsorships, causes supported, community involvement, and reputation signals on MasterGiver.`;
 
-  const canonicalUrl = `https://mastergiver.com/business/${slug}`;
+  const canonicalUrl = `https://www.mastergiver.com/business/${slug}`;
 
   return {
     // `absolute` bypasses the root layout template ('%s | MasterGiver') so the
@@ -166,7 +171,7 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
   const hasEndorsements = business.endorsements.length > 0;
   const hasOffers = offers.length > 0;
 
-  const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://mastergiver.com';
+  const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://www.mastergiver.com';
   const profileUrl = `${BASE_URL}/business/${slug}`;
 
   // Strip angle brackets from user-supplied strings before embedding in JSON-LD
@@ -381,7 +386,10 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
                         textAlign="center"
                       >
                         Updated regularly to reflect{' '}
-                        <Box as="span" display={{ base: 'block', md: 'inline' }}>
+                        <Box
+                          as="span"
+                          display={{ base: 'block', md: 'inline' }}
+                        >
                           ongoing community impact.
                         </Box>
                       </Text>
@@ -450,10 +458,7 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
                     lineHeight="120%"
                     wordSpacing="0.05em"
                   >
-                    Community Partners{' '}
-                    <Box as="span" display={{ base: 'block', md: 'inline' }}>
-                      and Programs
-                    </Box>
+                    Community Partners and Programs
                   </Heading>
                   <PartnerCards partners={business.partners} />
                 </Stack>
@@ -580,7 +585,6 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
                   </Link>
                 </Box>
               )}
-
             </Stack>
           </Stack>
         </Container>

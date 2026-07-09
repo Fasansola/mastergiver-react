@@ -25,7 +25,7 @@ import DirectoryCta from '@/components/landing/directory/DirectoryCta';
 
 export const dynamic = 'force-dynamic';
 
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://mastergiver.com';
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://www.mastergiver.com';
 
 // Max businesses shown in the "Recently Added" section
 const FEATURED_COUNT = 12;
@@ -34,13 +34,13 @@ export const metadata: Metadata = {
   title: 'GOOD Businesses Directory | MasterGiver',
   description:
     'Discover businesses creating visible community impact. Browse GOOD Businesses by city — verified reputation profiles powered by MasterGiver.',
-  alternates: { canonical: 'https://mastergiver.com/good-businesses' },
+  alternates: { canonical: 'https://www.mastergiver.com/good-businesses' },
   robots: { index: true, follow: true },
   openGraph: {
     title: 'GOOD Businesses Directory | MasterGiver',
     description:
       'Discover businesses creating visible community impact. Browse GOOD Businesses by city — verified reputation profiles powered by MasterGiver.',
-    url: 'https://mastergiver.com/good-businesses',
+    url: 'https://www.mastergiver.com/good-businesses',
     type: 'website',
   },
   twitter: {

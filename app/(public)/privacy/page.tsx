@@ -12,11 +12,11 @@ export const metadata: Metadata = {
   title: 'Privacy Policy | MasterGiver',
   description:
     'Learn how MasterGiver collects, uses, and protects your personal information.',
-  alternates: { canonical: 'https://mastergiver.com/privacy' },
+  alternates: { canonical: 'https://www.mastergiver.com/privacy' },
   openGraph: {
     title: 'Privacy Policy | MasterGiver',
     description: 'Learn how MasterGiver collects, uses, and protects your personal information.',
-    url: 'https://mastergiver.com/privacy',
+    url: 'https://www.mastergiver.com/privacy',
   },
   twitter: {
     card: 'summary',

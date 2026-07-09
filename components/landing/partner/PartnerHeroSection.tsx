@@ -4,7 +4,7 @@
  * Gradient background with headline about adding value to members,
  * a CTA anchor link to the form, and the partner hero image.
  */
-import { Box, Button, Container, Heading, Stack, Text } from '@chakra-ui/react';
+import { Button, Container, Heading, Stack, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 import NextImage from 'next/image';
 import Hero from '@/public/partner/Hero.png';

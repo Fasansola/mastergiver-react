@@ -12,11 +12,11 @@ export const metadata: Metadata = {
   title: 'Terms of Use | MasterGiver',
   description:
     'Read the MasterGiver Terms of Use to understand your rights and responsibilities when using our platform.',
-  alternates: { canonical: 'https://mastergiver.com/terms' },
+  alternates: { canonical: 'https://www.mastergiver.com/terms' },
   openGraph: {
     title: 'Terms of Use | MasterGiver',
     description: 'Read the MasterGiver Terms of Use to understand your rights and responsibilities when using our platform.',
-    url: 'https://mastergiver.com/terms',
+    url: 'https://www.mastergiver.com/terms',
   },
   twitter: {
     card: 'summary',

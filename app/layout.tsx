@@ -20,7 +20,7 @@ const libreBodoni = Libre_Bodoni({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_APP_URL ?? 'https://mastergiver.com'
+    process.env.NEXT_PUBLIC_APP_URL ?? 'https://www.mastergiver.com'
   ),
   title: {
     default: 'MasterGiver — Verified Business Community Impact Profiles',
@@ -54,6 +54,28 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@graph': [
+                {
+                  '@type': 'WebSite',
+                  name: 'MasterGiver',
+                  url: 'https://www.mastergiver.com/',
+                },
+                {
+                  '@type': 'Organization',
+                  name: 'MasterGiver',
+                  url: 'https://www.mastergiver.com/',
+                },
+              ],
+            }),
+          }}
+        />
+      </head>
       <body className={`${poppins.variable} ${libreBodoni.variable} font-body`}>
         {/* GTM noscript fallback — must stay at top of <body> */}
         <noscript>

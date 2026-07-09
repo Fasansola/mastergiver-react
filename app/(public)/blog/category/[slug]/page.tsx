@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
   if (!category) return {};
   return {
     title: `${category.name} | MasterGiver Blog`,
-    alternates: { canonical: `https://mastergiver.com/blog/category/${slug}` },
+    alternates: { canonical: `https://www.mastergiver.com/blog/category/${slug}` },
   };
 }
 

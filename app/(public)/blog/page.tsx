@@ -15,7 +15,7 @@ import { HERO_GRADIENT } from '@/lib/theme/gradients';
 export const metadata: Metadata = {
   title: 'Blog | MasterGiver',
   description: 'Insights on community impact, business reputation, and giving back.',
-  alternates: { canonical: 'https://mastergiver.com/blog' },
+  alternates: { canonical: 'https://www.mastergiver.com/blog' },
 };
 
 export const dynamic = 'force-dynamic';

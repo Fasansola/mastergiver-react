@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
   return {
     title: `${title} | MasterGiver Blog`,
     description,
-    alternates: { canonical: `https://mastergiver.com/blog/${slug}` },
+    alternates: { canonical: `https://www.mastergiver.com/blog/${slug}` },
     openGraph: { title, description, images: post.coverImage ? [post.coverImage] : [] },
     twitter: { card: 'summary_large_image', title, description },
   };

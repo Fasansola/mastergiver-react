@@ -16,12 +16,12 @@ export const metadata: Metadata = {
   title: 'Show Off Your Good Side | MasterGiver',
   description:
     'Build your MasterGiver profile to track your charitable efforts, share your impact, and let the world see your commitment to doing good.',
-  alternates: { canonical: 'https://mastergiver.com/individual' },
+  alternates: { canonical: 'https://www.mastergiver.com/individual' },
   openGraph: {
     title: 'Show Off Your Good Side | MasterGiver',
     description:
       'Build your MasterGiver profile to track your charitable efforts, share your impact, and let the world see your commitment to doing good.',
-    url: 'https://mastergiver.com/individual',
+    url: 'https://www.mastergiver.com/individual',
   },
   twitter: {
     card: 'summary_large_image',

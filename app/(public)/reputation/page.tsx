@@ -13,12 +13,12 @@ export const metadata: Metadata = {
   title: 'Community Impact & Business Reputation | MasterGiver',
   description:
     'Learn how verified community impact builds lasting business reputation — trusted by AI, search engines, and customers.',
-  alternates: { canonical: 'https://mastergiver.com/reputation' },
+  alternates: { canonical: 'https://www.mastergiver.com/reputation' },
   openGraph: {
     title: 'Community Impact & Business Reputation | MasterGiver',
     description:
       'Learn how verified community impact builds lasting business reputation — trusted by AI, search engines, and customers.',
-    url: 'https://mastergiver.com/reputation',
+    url: 'https://www.mastergiver.com/reputation',
   },
   twitter: {
     card: 'summary_large_image',

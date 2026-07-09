@@ -27,7 +27,7 @@ import { DIRECTORY_HERO_GRADIENT } from '@/lib/theme/gradients';
 
 export const dynamic = 'force-dynamic';
 
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://mastergiver.com';
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://www.mastergiver.com';
 
 interface Props {
   params: Promise<{ citySlug: string }>;
@@ -42,13 +42,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `GOOD Businesses in ${label} | MasterGiver`,
     description: `Discover businesses in ${label} creating visible community impact. Verified reputation profiles powered by MasterGiver.`,
     alternates: {
-      canonical: `https://mastergiver.com/good-businesses/${citySlug}`,
+      canonical: `https://www.mastergiver.com/good-businesses/${citySlug}`,
     },
     robots: { index: true, follow: true },
     openGraph: {
       title: `GOOD Businesses in ${label} | MasterGiver`,
       description: `Discover businesses in ${label} creating visible community impact. Verified reputation profiles powered by MasterGiver.`,
-      url: `https://mastergiver.com/good-businesses/${citySlug}`,
+      url: `https://www.mastergiver.com/good-businesses/${citySlug}`,
       type: 'website',
     },
     twitter: {

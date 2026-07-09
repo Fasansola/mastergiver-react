@@ -29,7 +29,7 @@ export async function generateMetadata({
   const description = profile.aboutMe
     ? profile.aboutMe.slice(0, 155)
     : `View ${fullName}'s philanthropic profile on MasterGiver.`;
-  const canonicalUrl = `https://mastergiver.com/profile/${username}`;
+  const canonicalUrl = `https://www.mastergiver.com/profile/${username}`;
 
   return {
     title,
@@ -68,7 +68,7 @@ export default async function PublicProfilePage({
   // Show 404 if profile doesn't exist or isn't published
   if (!profile) notFound();
 
-  const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://mastergiver.com';
+  const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://www.mastergiver.com';
 
   // Strip angle brackets from user-supplied strings before embedding in JSON-LD
   const sanitize = (str: string | null | undefined) =>

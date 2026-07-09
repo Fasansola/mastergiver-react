@@ -13,12 +13,12 @@ export const metadata: Metadata = {
   title: 'Become a Community Partner | MasterGiver',
   description:
     'Partner with MasterGiver to connect nonprofits, chambers, and associations with businesses committed to verified community impact.',
-  alternates: { canonical: 'https://mastergiver.com/partner' },
+  alternates: { canonical: 'https://www.mastergiver.com/partner' },
   openGraph: {
     title: 'Become a Community Partner | MasterGiver',
     description:
       'Partner with MasterGiver to connect nonprofits, chambers, and associations with businesses committed to verified community impact.',
-    url: 'https://mastergiver.com/partner',
+    url: 'https://www.mastergiver.com/partner',
   },
   twitter: {
     card: 'summary_large_image',
@@ -28,8 +28,8 @@ export const metadata: Metadata = {
   },
 };
 import TurnGivingSection from '@/components/landing/partner/TurnGivingSection';
-import BenefitWorthSection from '@/components/landing/partner/BenefitWorthSection';
-import OrgsSection from '@/components/landing/partner/OrgsSection';
+// import BenefitWorthSection from '@/components/landing/partner/BenefitWorthSection';
+// import OrgsSection from '@/components/landing/partner/OrgsSection';
 import ThreeStepsSection from '@/components/landing/partner/ThreeStepsSection';
 import FAQSection from '../shared/FAQSection';
 import PartnerCtaSection from '@/components/landing/partner/PartnerCtaSection';
