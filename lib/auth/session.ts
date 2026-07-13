@@ -3,12 +3,23 @@ import { auth } from './auth';
 import { prisma } from '../prisma';
 import { redirect } from 'next/navigation';
 import type { BusinessStatus } from '@prisma/client';
+import { getPaymentRequired } from '../flags';
 
 const STATUS_DESTINATIONS: Record<BusinessStatus, string> = {
   ACTIVE: '/business/dashboard/edit-profile',
   PENDING: '/business/confirm',
   SUSPENDED: '/business/suspended',
 };
+
+// Returns the correct redirect destination for a business, taking the
+// paymentRequired flag into account so PENDING maps to dashboard when free.
+async function resolveBusinessDestination(status: BusinessStatus): Promise<string> {
+  if (status === 'PENDING') {
+    const paymentRequired = await getPaymentRequired();
+    return paymentRequired ? '/business/confirm' : STATUS_DESTINATIONS.ACTIVE;
+  }
+  return STATUS_DESTINATIONS[status];
+}
 
 // Get current authenticated user (server side only)
 // Cached per request to have multiple DB calls
@@ -54,7 +65,7 @@ export async function requireCompletedOnboarding() {
 
   // Business-only user (no individual profile) — send them to their panel
   if (user.business && !user.profile) {
-    redirect(STATUS_DESTINATIONS[user.business.status]);
+    redirect(await resolveBusinessDestination(user.business.status));
   }
 
   if (!user.onboarding?.isCompleted) {
@@ -75,7 +86,7 @@ export async function requireIncompleteOnboarding() {
 
   // Business-only user (no individual profile) — send them to their panel
   if (user.business && !user.profile) {
-    redirect(STATUS_DESTINATIONS[user.business.status]);
+    redirect(await resolveBusinessDestination(user.business.status));
   }
 
   if (user.onboarding?.isCompleted) {

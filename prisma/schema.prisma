@@ -290,9 +290,24 @@ model PasswordResetToken {
 // ============================================
 
 enum BusinessStatus {
-  PENDING // Registered but has not paid yet
-  ACTIVE // Payment confirmed, full access
+  PENDING   // Registered but has not paid yet (used when paymentRequired = true)
+  ACTIVE    // Full access (free or paid)
   SUSPENDED // Payment failed or subscription cancelled
+}
+
+enum Plan {
+  FREE // No payment required — default for all new accounts
+  PRO  // Paid subscription via Stripe
+}
+
+// Singleton row that controls site-wide feature flags.
+// Only one row exists (id = "singleton"). Admins update it via the admin panel.
+model SiteSettings {
+  id              String   @id @default("singleton")
+  paymentRequired Boolean  @default(false)
+  updatedAt       DateTime @updatedAt
+
+  @@map("site_settings")
 }
 
 model Business {
@@ -301,6 +316,7 @@ model Business {
   ownerId   String         @unique
   owner     User           @relation(fields: [ownerId], references: [id])
   status    BusinessStatus @default(PENDING)
+  plan      Plan           @default(FREE)
   published Boolean        @default(false)
   // Defaults to true on publish — visible in hub and city pages automatically.
   // Admins can set this to false to hide a business from the entire directory.

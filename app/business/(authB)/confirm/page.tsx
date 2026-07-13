@@ -11,14 +11,20 @@
  */
 
 import { type SearchParams } from 'next/dist/server/request/search-params';
+import { redirect } from 'next/navigation';
 import { Stack } from '@chakra-ui/react';
 import ConfirmPage from '@/components/business/confirm/ConfirmPage';
+import { getPaymentRequired } from '@/lib/flags';
 
 interface ConfirmPageProps {
   searchParams: Promise<SearchParams>;
 }
 
 const BusinessConfirmPage = async ({ searchParams }: ConfirmPageProps) => {
+  // When payment is not required, skip this page entirely
+  const paymentRequired = await getPaymentRequired();
+  if (!paymentRequired) redirect('/business/dashboard/edit-profile');
+
   const params = await searchParams;
 
   // Stripe appends ?session_id=cs_... to the success_url after payment

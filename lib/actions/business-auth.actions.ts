@@ -38,6 +38,7 @@ import ResetPassword from '@/lib/email/templates/reset-password';
 import { addMailerLiteSubscriber } from '@/lib/email/mailerlite';
 import type { ActionResult } from '@/lib/types/actions';
 import { verifyRecaptcha } from '@/lib/recaptcha';
+import { getPaymentRequired } from '@/lib/flags';
 
 // ---------------------------------------------------------------------------
 // SIGN UP
@@ -72,6 +73,8 @@ export async function businessSignUpAction(
 
     const { businessName, email, password } = validatedFields.data;
 
+    const paymentRequired = await getPaymentRequired();
+
     // Check whether an account already exists for this email
     const existingUser = await prisma.user.findUnique({
       where: { email },
@@ -103,6 +106,7 @@ export async function businessSignUpAction(
           ownerId: existingUser.id,
           slug,
           companyName: businessName,
+          ...(!paymentRequired && { status: 'ACTIVE', plan: 'FREE' }),
         },
       });
 
@@ -114,7 +118,10 @@ export async function businessSignUpAction(
       });
 
       await signIn('credentials', { email, password, redirect: false });
-      return { success: true, redirectTo: '/business/confirm' };
+      return {
+        success: true,
+        redirectTo: paymentRequired ? '/business/confirm' : '/business/dashboard/edit-profile',
+      };
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
@@ -133,7 +140,7 @@ export async function businessSignUpAction(
           create: {
             slug,
             companyName: businessName,
-            // status defaults to PENDING (defined in the Prisma schema)
+            ...(!paymentRequired && { status: 'ACTIVE', plan: 'FREE' }),
           },
         },
       },
@@ -147,10 +154,13 @@ export async function businessSignUpAction(
       groupId: process.env.MAILERLITE_BUSINESS_GROUP_ID,
     });
 
-    // Sign the user in immediately so they arrive at /business/confirm with an active session
+    // Sign the user in immediately so they arrive at the correct destination
     await signIn('credentials', { email, password, redirect: false });
 
-    return { success: true, redirectTo: '/business/confirm' };
+    return {
+      success: true,
+      redirectTo: paymentRequired ? '/business/confirm' : '/business/dashboard/edit-profile',
+    };
   } catch (error) {
     console.error('Business sign up error:', error);
     return { success: false, error: 'Something went wrong. Please try again.' };
@@ -234,10 +244,12 @@ export async function businessSignInAction(
       return { success: true, suspended: true };
     }
 
+    const paymentRequired = await getPaymentRequired();
+
     const redirectTo =
-      status === 'ACTIVE'
+      status === 'ACTIVE' || (status === 'PENDING' && !paymentRequired)
         ? '/business/dashboard/edit-profile'
-        : '/business/confirm'; // PENDING — still needs to pay
+        : '/business/confirm'; // PENDING with payment required
 
     return { success: true, redirectTo };
   } catch (error) {

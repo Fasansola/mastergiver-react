@@ -14,6 +14,7 @@
 import { redirect } from 'next/navigation';
 import { auth } from '@/lib/auth/auth';
 import { prisma } from '@/lib/prisma';
+import { getPaymentRequired } from '@/lib/flags';
 import { calculateProgress } from '@/lib/business/progress';
 import BusinessSidebar from '@/components/business/layout/BusinessSidebar';
 import BusinessQueryProvider from '@/components/business/layout/BusinessQueryProvider';
@@ -55,7 +56,17 @@ const BusinessDashboardLayout = async ({ children }: PropsWithChildren) => {
 
   // Status-based access control
   if (business.status === 'PENDING') {
-    redirect('/business/confirm');
+    const paymentRequired = await getPaymentRequired();
+    if (paymentRequired) {
+      redirect('/business/confirm');
+    } else {
+      // Free-access mode — auto-upgrade any stale PENDING account that slipped through
+      await prisma.business.update({
+        where: { id: business.id },
+        data: { status: 'ACTIVE', plan: 'FREE' },
+      });
+      // Fall through — render the dashboard normally
+    }
   }
 
   if (business.status === 'SUSPENDED') {

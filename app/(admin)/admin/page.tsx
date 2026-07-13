@@ -14,6 +14,7 @@ import {
   LuBuilding2,
   LuPenLine,
   LuPlus,
+  LuSettings,
   LuTag,
   LuUser,
 } from 'react-icons/lu';
@@ -226,6 +227,19 @@ const AdminPage = async () => {
             ]}
             actions={[
               { label: 'Manage Directory', href: '/admin/directory' },
+            ]}
+          />
+
+          {/* Site Settings */}
+          <SectionCard
+            icon={<LuSettings size={20} />}
+            title="Site Settings"
+            description="Toggle payment requirement and feature flags"
+            href="/admin/settings"
+            accentColor="#8B5CF6"
+            stats={[]}
+            actions={[
+              { label: 'Manage Settings', href: '/admin/settings' },
             ]}
           />
         </Grid>
