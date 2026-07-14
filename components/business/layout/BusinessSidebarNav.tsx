@@ -51,6 +51,10 @@ const NAV_ITEMS: NavItem[] = [
   },
 ];
 
+interface BusinessSidebarNavProps {
+  showBilling?: boolean;
+}
+
 // Shared style helpers so the logout button exactly matches an inactive link
 const inactiveItemStyle: React.CSSProperties = {
   display: 'flex',
@@ -73,11 +77,13 @@ const inactiveLabelStyle: React.CSSProperties = {
   color: '#000000',
 };
 
-const BusinessSidebarNav = () => {
+const BusinessSidebarNav = ({ showBilling = true }: BusinessSidebarNavProps) => {
   const pathname = usePathname();
   const router = useRouter();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
+
+  const navItems = showBilling ? NAV_ITEMS : NAV_ITEMS.filter((item) => item.href !== '/business/dashboard/billing');
 
   const handleLogoutConfirm = async () => {
     setIsLoggingOut(true);
@@ -89,7 +95,7 @@ const BusinessSidebarNav = () => {
     <>
       <Stack as="nav" gap="6" flex="1">
         {/* Regular nav links */}
-        {NAV_ITEMS.map((item) => {
+        {navItems.map((item) => {
           const isActive = pathname === item.href;
 
           return (

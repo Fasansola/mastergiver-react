@@ -16,12 +16,16 @@
 import { redirect } from 'next/navigation';
 import { auth } from '@/lib/auth/auth';
 import { prisma } from '@/lib/prisma';
+import { getPaymentRequired } from '@/lib/flags';
 import CurrentPlanCard from '@/components/business/billing/CurrentPlanCard';
 import ManageBillingCard from '@/components/business/billing/ManageBillingCard';
 import PaymentHistoryCard from '@/components/business/billing/PaymentHistoryCard';
 import { Container, Heading, Stack, Text } from '@chakra-ui/react';
 
 const BillingPage = async () => {
+  const paymentRequired = await getPaymentRequired();
+  if (!paymentRequired) redirect('/business/dashboard/edit-profile');
+
   const session = await auth();
   if (!session?.user?.id) redirect('/business/signin');
 

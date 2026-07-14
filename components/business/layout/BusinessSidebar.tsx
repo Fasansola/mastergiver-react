@@ -14,12 +14,14 @@ import BusinessSidebarNav from './BusinessSidebarNav';
 import { Heading, Stack, Text, HStack, Link } from '@chakra-ui/react';
 import Image from 'next/image';
 import MailIcon from '@/public/components-assets/mail.svg';
+import { getPaymentRequired } from '@/lib/flags';
 
 interface BusinessSidebarProps {
   isDrawer?: boolean;
 }
 
-const BusinessSidebar = ({ isDrawer = false }: BusinessSidebarProps) => {
+const BusinessSidebar = async ({ isDrawer = false }: BusinessSidebarProps) => {
+  const paymentRequired = await getPaymentRequired();
   return (
     <Stack
       as="aside"
@@ -42,7 +44,7 @@ const BusinessSidebar = ({ isDrawer = false }: BusinessSidebarProps) => {
       >
         Settings
       </Heading>
-      <BusinessSidebarNav />
+      <BusinessSidebarNav showBilling={paymentRequired} />
 
       {/* Contact Us box — pushed away from nav with top margin */}
       <Stack
