@@ -51,7 +51,7 @@ const influenceBox = [
 const ReturnOnReputationSection = () => {
   return (
     <>
-      <Stack bgColor="background.section" borderY="1px solid #E9EAED">
+      <Stack className="premium-only" bgColor="background.section" borderY="1px solid #E9EAED">
         <Container
           py={{ base: '60px', lg: '100px' }}
           alignItems="center"
