@@ -36,10 +36,7 @@ const CompetitiveAdvantageSection = () => {
             </LandingH>
           </Stack>
           <Text color="text.primary" maxW="800px">
-            You already invest in: Marketing, Ads, SEO, Brand awareness.
-            MasterGiver doesn&apos;t replace those. It strengthens all of them
-            by making your reputation visible to AI, search engines, and
-            customers.
+            Document the sponsorships, nonprofit partnerships, volunteer efforts, and community initiatives that deserve to become part of your business&apos;s online reputation.
           </Text>
         </Stack>
 
