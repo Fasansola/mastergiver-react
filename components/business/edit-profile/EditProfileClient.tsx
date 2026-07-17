@@ -186,12 +186,20 @@ const EditProfileClient = ({
             lineHeight="120%"
             color="text.primary"
           >
-            Community Impact Profile Builder
+            Build Your Verified Community Impact Profile
           </Heading>
-          <Text color="text.secondary">
-            Click the + icon to add content to each section of your MasterGiver
-            Profile.
-          </Text>
+          <Stack gap="3">
+            <Text color="text.secondary">
+              <Text as="span" fontWeight="700" color="text.primary">Welcome!</Text>
+              <br />
+              Every sponsorship, volunteer initiative, nonprofit partnership, and community investment tells part of your business&apos;s story.
+              <br />
+              Let&apos;s document the impact you&apos;ve already made so it becomes part of your online reputation.
+            </Text>
+            <Text color="text.secondary">
+              Click the + icon to add content to each section of your MasterGiver Profile.
+            </Text>
+          </Stack>
         </Stack>
 
         <BusinessProgressBar

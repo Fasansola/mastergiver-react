@@ -47,7 +47,7 @@ const BusinessProgressBar = ({ percent }: BusinessProgressBarProps) => {
             color: '#575C62',
           }}
         >
-          Profile complete
+          Your Profile Progress
         </span>
         <span
           style={{
