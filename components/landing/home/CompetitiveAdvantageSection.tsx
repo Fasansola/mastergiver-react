@@ -67,7 +67,7 @@ const CompetitiveAdvantageSection = () => {
 
             <Separator borderColor="border.default" w="100%" />
 
-            <Stack textAlign="center">
+            <Stack className="premium-only" textAlign="center">
               <Heading
                 className="font-display"
                 fontWeight="700"
@@ -89,6 +89,7 @@ const CompetitiveAdvantageSection = () => {
             </Stack>
 
             <Stack
+              className="premium-only"
               padding={{ base: '6', lg: '8' }}
               borderRadius="8px"
               border="1px solid"
