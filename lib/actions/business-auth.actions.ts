@@ -106,7 +106,8 @@ export async function businessSignUpAction(
           ownerId: existingUser.id,
           slug,
           companyName: businessName,
-          ...(!paymentRequired && { status: 'ACTIVE', plan: 'FREE' }),
+          // Only set PENDING when payment is explicitly required; schema default is ACTIVE
+          ...(paymentRequired && { status: 'PENDING' }),
         },
       });
 
@@ -140,7 +141,8 @@ export async function businessSignUpAction(
           create: {
             slug,
             companyName: businessName,
-            ...(!paymentRequired && { status: 'ACTIVE', plan: 'FREE' }),
+            // Only set PENDING when payment is explicitly required; schema default is ACTIVE
+            ...(paymentRequired && { status: 'PENDING' }),
           },
         },
       },

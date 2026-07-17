@@ -315,7 +315,7 @@ model Business {
   slug      String         @unique
   ownerId   String         @unique
   owner     User           @relation(fields: [ownerId], references: [id])
-  status    BusinessStatus @default(PENDING)
+  status    BusinessStatus @default(ACTIVE)
   plan      Plan           @default(FREE)
   published Boolean        @default(false)
   // Defaults to true on publish — visible in hub and city pages automatically.
