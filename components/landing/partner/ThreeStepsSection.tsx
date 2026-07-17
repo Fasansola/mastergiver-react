@@ -11,17 +11,17 @@ const steps = [
   {
     title: 'Complete the Short Form',
     description:
-      "Tell us your organization name, contact, and type. That's all we need to get you started.",
+      "Tell us about your organization and who we should contact. We'll use this information to personalize the resources we provide.",
   },
   {
-    title: 'Get Your Partner Toolkit',
+    title: 'Receive Sponsor Resources',
     description:
-      "We'll send your custom $20 partner discount code and a ready-to-send email template.",
+      "We'll send you everything you need to introduce MasterGiver to your sponsors, including a ready-to-share email and educational resources.",
   },
   {
-    title: 'Share With Your Network.',
+    title: 'Share with your Sponsors',
     description:
-      'Forward the email to your members, sponsors, or supporters. Copy, paste, and done.',
+      'Simply forward the email, include it in your newsletter, or share the resources with current and prospective sponsors.',
   },
 ];
 

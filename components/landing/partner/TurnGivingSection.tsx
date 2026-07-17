@@ -36,17 +36,16 @@ const TurnGivingSection = () => {
               fontSize={{ base: '18px' }}
             >
               <Text>
-                Businesses support nonprofits, sponsor community programs,
-                donate resources, and invest countless hours giving back. Yet
-                much of that impact remains scattered across websites, social
-                media posts, event pages, and thank-you mentions that are
-                difficult for customers, prospects, and search engines to
-                discover.
+                Every year, businesses invest in organizations like yours through
+                sponsorships, donations, volunteer efforts, and community
+                partnerships. While that support creates real value for your
+                mission, much of it disappears once the event ends or the
+                campaign is over.
               </Text>
               <Text>
-                MasterGiver helps businesses bring those efforts together into a
-                dedicated Community Impact Profile™ that showcases their
-                community involvement and highlights what makes them different.
+                MasterGiver helps businesses preserve those contributions through
+                a Verified Community Impact Profile, allowing their community
+                involvement to become a lasting part of their online reputation.
               </Text>
             </Stack>
 

@@ -35,7 +35,7 @@ const PartnerHeroSection = () => {
                 lineHeight="140%"
                 color="brand.primary"
               >
-                Help Sponsors Get More Recognition For Their Community Impact
+                Help Sponsors Turn Community Impact Into Lasting Recognition
               </Heading>
               <Text
                 className="font-body"
@@ -44,9 +44,9 @@ const PartnerHeroSection = () => {
                 lineHeight="170%"
                 color="text.primary"
               >
-                Give your corporate sponsors a powerful way to document, verify,
-                and showcase the community support they already provide—at no
-                cost to your organization.
+                Give your sponsors a powerful way to document, verify, and
+                showcase the community support they already provide so it
+                becomes part of their long-term online reputation.
               </Text>
             </Stack>
 
@@ -72,7 +72,7 @@ const PartnerHeroSection = () => {
                     whiteSpace="normal"
                     boxShadow="0px 8px 10px -6px #E2E1FF, 0px 20px 25px -5px #D4D1FF"
                   >
-                    BECOME A PARTNER
+                    Share with My Sponsors
                   </Button>
                 </a>
                 <Link
