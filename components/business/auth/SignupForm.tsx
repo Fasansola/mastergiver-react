@@ -73,12 +73,11 @@ const SignupForm = () => {
           lineHeight="1.2em"
           color="text.heading"
         >
-          Create your <br className="sm:block md:hidden" />
-          Business Profile
+          Create Your Verified Community Impact Profile
         </Heading>
 
         <Text fontSize="body" textAlign="center" color="text.primary">
-          Start building your company&apos;s digital reputation today.
+          Build a trusted record of your business&apos;s community involvement that customers, AI, and search engines can discover.
         </Text>
       </Stack>
 
@@ -234,7 +233,7 @@ const SignupForm = () => {
             disabled={isSubmitting}
             style={primaryButtonStyle(isSubmitting)}
           >
-            {isSubmitting ? 'Creating account…' : 'Create Account'}
+            {isSubmitting ? 'Creating account…' : 'Create My Profile'}
           </button>
         </Stack>
       </form>
