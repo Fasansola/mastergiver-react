@@ -151,9 +151,7 @@ const HomeHeroSection = () => {
               color="text.primary"
               textAlign="center"
             >
-              Adding the Verified Impact badge shows proof of your community
-              involvement, right alongside the trust signals customers already
-              look for.
+              Every Verified Community Impact Profile includes a website badge you can proudly display alongside your existing trust signals.
             </Text>
           </Stack>
         </Stack>
