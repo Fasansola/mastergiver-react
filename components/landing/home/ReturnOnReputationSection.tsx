@@ -51,7 +51,11 @@ const influenceBox = [
 const ReturnOnReputationSection = () => {
   return (
     <>
-      <Stack className="premium-only" bgColor="background.section" borderY="1px solid #E9EAED">
+      <Stack
+        className="premium-only"
+        bgColor="background.section"
+        borderY="1px solid #E9EAED"
+      >
         <Container
           py={{ base: '60px', lg: '100px' }}
           alignItems="center"
@@ -112,10 +116,12 @@ const ReturnOnReputationSection = () => {
               fontWeight="700"
               // fontSize={{ base: '26px', md: '36px', lg: '46px' }}
               fontSize={{ base: '36px', lg: '46px' }}
+              maxW="1000px"
               lineHeight="140%"
               color="brand.primary"
             >
-              How a Verified Community Impact Profile actually influences customer decisions
+              How a Verified Community Impact Profile actually influences
+              customer decisions
             </Heading>
 
             <Grid

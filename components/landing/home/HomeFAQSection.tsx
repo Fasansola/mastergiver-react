@@ -34,11 +34,11 @@ const FAQS = [
     description:
       'Absolutely. Your reputation evolves and your profile evolves with it.',
   },
-  {
-    title: 'Am I locked into a contract?',
-    description:
-      " No long-term contracts. Your profile is billed annually, and you're always in control.",
-  },
+  // {
+  //   title: 'Am I locked into a contract?',
+  //   description:
+  //     " No long-term contracts. Your profile is billed annually, and you're always in control.",
+  // },
   {
     title: "What if I don't have any community impact to showcase?",
     description:
@@ -64,11 +64,7 @@ const HomeFAQSection = () => {
 
         <Grid templateColumns="repeat(1, 1fr)" gap="6" w="100%" maxW="1112px">
           {FAQS.map((item, i) => (
-            <FaqBox
-              key={i}
-              title={item.title}
-              description={item.description}
-            />
+            <FaqBox key={i} title={item.title} description={item.description} />
           ))}
         </Grid>
       </Container>
