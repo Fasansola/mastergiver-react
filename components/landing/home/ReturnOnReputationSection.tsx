@@ -115,7 +115,7 @@ const ReturnOnReputationSection = () => {
               lineHeight="140%"
               color="brand.primary"
             >
-              How a profile actually influences customer decisions
+              How a Verified Community Impact Profile actually influences customer decisions
             </Heading>
 
             <Grid
