@@ -99,6 +99,23 @@ const SignupForm = () => {
       )}
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <Stack gap="6">
+          {/* YOUR NAME */}
+          <Stack gap="3">
+            <label style={labelStyle} htmlFor="name">
+              Your Name
+            </label>
+            <input
+              id="name"
+              {...register('name')}
+              style={inputStyle}
+              placeholder="Enter your full name..."
+              disabled={isSubmitting}
+            />
+            {errors.name && (
+              <p style={errorTextStyle}>{errors.name.message}</p>
+            )}
+          </Stack>
+
           {/* BUSINESS NAME */}
           <Stack gap="3">
             <label style={labelStyle} htmlFor="businessName">

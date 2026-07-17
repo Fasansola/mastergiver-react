@@ -71,7 +71,7 @@ export async function businessSignUpAction(
       return { success: false, error: 'Invalid input. Please check your entries.' };
     }
 
-    const { businessName, email, password } = validatedFields.data;
+    const { name, businessName, email, password } = validatedFields.data;
 
     const paymentRequired = await getPaymentRequired();
 
@@ -133,6 +133,7 @@ export async function businessSignUpAction(
     // Brand-new user — create User + Business together
     await prisma.user.create({
       data: {
+        name,
         email,
         password: hashedPassword,
         // Auto-verify email — business users are verified via Stripe payment, not email link

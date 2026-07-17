@@ -18,6 +18,10 @@ const passwordSchema = z
 // --- SIGN UP ---
 export const businessSignUpSchema = z
   .object({
+    name: z
+      .string()
+      .min(2, 'Name must be at least 2 characters')
+      .max(100, 'Name cannot exceed 100 characters'),
     businessName: z
       .string()
       .min(2, 'Business name must be at least 2 characters')
