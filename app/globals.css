@@ -224,6 +224,26 @@ select:-webkit-autofill {
   margin: 2em 0;
 }
 
+/* ─── Payment-gated elements ─────────────────────────────────────────────────
+   Add className="premium-only" to any UI block that should only show when
+   the payment gate is active (e.g. "upgrade to unlock" banners, pricing
+   prompts, billing CTAs).
+
+   - Hidden by default → free-access mode, no visual noise for users.
+   - Revealed automatically when an admin turns payment back on in
+     /admin/settings, which stamps data-payment="required" on <html>.
+
+   Use `display: revert` so each element falls back to its natural display
+   type (block, inline-block, flex, etc.) rather than being forced to block. */
+
+.premium-only {
+  display: none !important;
+}
+
+html[data-payment="required"] .premium-only {
+  display: revert !important;
+}
+
 /* Visibility utilities — mobile-only (< 768px) */
 .sm-mobile-only {
   display: block;

@@ -4,6 +4,7 @@ import { Libre_Bodoni } from 'next/font/google';
 import Script from 'next/script';
 import { Provider } from '@/components/ui/provider';
 import RecaptchaProvider from '@/components/RecaptchaProvider';
+import { getPaymentRequired } from '@/lib/flags';
 import './globals.css';
 
 const poppins = Poppins({
@@ -47,13 +48,19 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const paymentRequired = await getPaymentRequired();
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      {...(paymentRequired ? { 'data-payment': 'required' } : {})}
+    >
       <head>
         <script
           type="application/ld+json"
