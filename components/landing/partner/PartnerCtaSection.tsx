@@ -32,9 +32,9 @@ const PartnerCtaSection = () => {
         >
           <Stack w={{ base: '100%', lg: '45%' }} gap="10" color="white!">
             <Text className="font-body" lineHeight="180%">
-              BECOME A COMMUNITY PARTNER
+              Share MasterGiver with your Sponsors
             </Text>
-            <LandingH color="white">Get Your Partner Toolkit</LandingH>
+            <LandingH color="white">Everything You Need to Introduce MasterGiver to Your Sponsors</LandingH>
             <Stack
               className="font-body"
               lineHeight="170%"
@@ -42,16 +42,19 @@ const PartnerCtaSection = () => {
               fontSize={{ base: '18px', lg: '21px' }}
             >
               <Text>
-                Complete the short form to receive your partner toolkit and
-                start sharing with your network.
+                Complete the short form and we&apos;ll send you ready-to-share
+                emails, social media graphics, and educational resources you can
+                use to introduce MasterGiver to your current and prospective
+                sponsors.
               </Text>
             </Stack>
             <Stack gap="14">
               <Stack gap="4">
                 {[
-                  'Your custom $20 partner discount code',
-                  'A copy-and-paste email template ready to send to your members, sponsors, or supporters',
-                  'No calls. No follow-up required. No commitments.',
+                  'Ready-to-share sponsor email',
+                  'Newsletter and social media content',
+                  'Educational resources about Verified Community Impact',
+                  'No contracts. No ongoing management. Share whenever it makes sense.',
                 ].map((item, i) => (
                   <LightCheck item={item} key={i} />
                 ))}
@@ -75,15 +78,17 @@ const PartnerCtaSection = () => {
                 fontSize={{ base: '26px', lg: '32px' }}
                 lineHeight="140%"
               >
-                Create Partner Account
+                Receive Sponsor Resources
               </Heading>
 
               <PartnerForm />
 
               <Stack gap="2">
                 <Text>
-                  No cost. No obligation. <br />
-                  Just a simple way to offer value to your network.
+                  No cost. No commitment.
+                  <br />
+                  Simply another way to provide lasting value to the businesses
+                  that support your organization.
                 </Text>
               </Stack>
             </Stack>

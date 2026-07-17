@@ -177,7 +177,7 @@ const PartnerForm = () => {
           disabled={isSubmitting}
           style={primaryButtonStyle(isSubmitting)}
         >
-          {isSubmitting ? 'Sending…' : 'Get My Partner Toolkit'}
+          {isSubmitting ? 'Sending…' : 'Get My Sponsor Resources'}
         </button>
       </Stack>
     </form>
