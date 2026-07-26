@@ -73,7 +73,6 @@ const GoodNotVisibleSection = () => {
               {[
                 'You support local organizations and causes.',
                 'You invest in the communities where your customers live and work.',
-                'You believe business success should create community impact.',
               ].map((item, i) => (
                 <BrandCheck key={i} item={item} />
               ))}
@@ -110,8 +109,8 @@ const GoodNotVisibleSection = () => {
               color="brand.primary"
               fontWeight="700"
             >
-              &quot;If algorithms can&apos;t see it, they can&apos;t reward
-              it.&quot;
+              &quot;If your community impact isn&apos;t visible, it can&apos;t
+              strengthen your reputation.&quot;
             </Text>
           </Stack>
         </Stack>

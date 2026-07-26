@@ -167,7 +167,7 @@ const EditProfileClient = ({
     { title: 'About Us' },
     { title: 'Impact Summary' },
     { title: 'Impact Record' },
-    { title: 'Our Community Partners & Programs' },
+    { title: 'Organizations We Support' },
     { title: 'Areas of Impact' },
     { title: 'In the Community' },
     { title: 'Community Endorsements' },
@@ -186,15 +186,16 @@ const EditProfileClient = ({
             lineHeight="120%"
             color="text.primary"
           >
-            Build Your Verified Community Impact Profile
+            Let&apos;s Build Your Public Community Reputation.
           </Heading>
           <Stack gap="3">
             <Text color="text.secondary">
-              <Text as="span" fontWeight="700" color="text.primary">Welcome!</Text>
+              Your business has already made a difference in your community.
               <br />
-              Every sponsorship, volunteer initiative, nonprofit partnership, and community investment tells part of your business&apos;s story.
-              <br />
-              Let&apos;s document the impact you&apos;ve already made so it becomes part of your online reputation.
+              Now let&apos;s organize those contributions into a permanent Verified Community Impact™ Profile that customers, partners, nonprofits, and AI can discover.
+            </Text>
+            <Text color="text.secondary">
+              Most businesses finish in about 10 minutes.
             </Text>
             <Text color="text.secondary">
               Click the + icon to add content to each section of your MasterGiver Profile.

@@ -458,7 +458,7 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
                     lineHeight="120%"
                     wordSpacing="0.05em"
                   >
-                    Community Partners and Programs
+                    Organizations We Support
                   </Heading>
                   <PartnerCards partners={business.partners} />
                 </Stack>

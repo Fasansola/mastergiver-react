@@ -44,10 +44,10 @@ export default function Home() {
       <BusinessHeader bgColor={HERO_GRADIENT} />
       <HomeHeroSection />
       <GoodNotVisibleSection />
-      <CommunityImpactSection />
+      {/* <CommunityImpactSection /> */}
       <WhatYouGetSection />
       {/* <WhoItsForSection /> */}
-      <ReturnOnReputationSection />
+      {/* <ReturnOnReputationSection /> */}
       <CompetitiveAdvantageSection />
       <HomeFAQSection />
       <HomeCtaSection />

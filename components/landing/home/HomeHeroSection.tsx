@@ -61,10 +61,9 @@ const HomeHeroSection = () => {
                 lineHeight="170%"
                 color="text.primary"
               >
-                MasterGiver turns your business&apos;s community involvement
-                into a verified community impact profile and badge so AI
-                recommends you, search engines rank you higher, and customers
-                choose you.
+                MasterGiver organizes and verifies your community involvement
+                into a permanent profile that strengthens your business
+                reputation.
               </Text>
             </Stack>
             <Stack gap="8">
@@ -123,10 +122,17 @@ const HomeHeroSection = () => {
                   height="4"
                   display={{ base: 'none', md: 'block' }}
                 />
+                <GreenCheck item="Free to Create" />
+                <Separator
+                  orientation="vertical"
+                  height="4"
+                  display={{ base: 'none', md: 'block' }}
+                />
                 <GreenCheck item="No technical work required" />
               </HStack>
             </Stack>
           </Stack>
+
           <Stack w={{ base: '100%', lg: '50%' }} justify="center" gap="0">
             {/*
              * next/image instead of Chakra <Image> so Next.js can:
@@ -151,7 +157,8 @@ const HomeHeroSection = () => {
               color="text.primary"
               textAlign="center"
             >
-              Every Verified Community Impact Profile includes a website badge you can proudly display alongside your existing trust signals.
+              Make your community impact as visible as the reputation
+              you&apos;ve worked so hard to build.
             </Text>
           </Stack>
         </Stack>
