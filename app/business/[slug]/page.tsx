@@ -357,7 +357,8 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
                   </Stack>
                 </HStack>
 
-                {hasImpact && (
+                {/* Impact Summary hidden — AI will auto-populate this later */}
+                {/* {hasImpact && (
                   <Stack
                     w="100%"
                     bgColor="background.white"
@@ -400,7 +401,7 @@ const BusinessProfilePage = async ({ params }: PageProps) => {
                       activePartners={business.activePartners}
                     />
                   </Stack>
-                )}
+                )} */}
 
                 {hasImpactRecord && (
                   <Stack

@@ -83,7 +83,7 @@ const BusinessProgressBar = ({ percent }: BusinessProgressBarProps) => {
       </div>
       <Text fontSize="sm" color="text.secondary">
         {clamped < 100
-          ? 'Having a complete verified account will increase the chances of getting visibilty.'
+          ? 'Complete your profile to publish your Verified Community Impact Profile and begin showcasing your community involvement.'
           : 'Your profile is complete! You can update it anytime to keep it fresh.'}
       </Text>
     </Stack>

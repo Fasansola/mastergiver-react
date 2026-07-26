@@ -165,7 +165,7 @@ const EditProfileClient = ({
 
   const sections = [
     { title: 'About Us' },
-    { title: 'Impact Summary' },
+    // { title: 'Impact Summary' }, // hidden — AI will auto-populate this later
     { title: 'Impact Record' },
     { title: 'Organizations We Support' },
     { title: 'Areas of Impact' },
@@ -205,7 +205,7 @@ const EditProfileClient = ({
 
         <BusinessProgressBar
           percent={Math.round(
-            (sectionCompletion.filter(Boolean).length / 8) * 100
+            (sectionCompletion.filter((v, i) => i !== 1 && v).length / 7) * 100
           )}
         />
 
@@ -222,9 +222,10 @@ const EditProfileClient = ({
             <AboutUsSection onSave={close} defaultValues={aboutUsDefaults} />
           </SectionAccordion>
 
-          <SectionAccordion
+          {/* Impact Summary hidden — AI will auto-populate this later */}
+          {/* <SectionAccordion
             number={2}
-            title={sections[1].title}
+            title="Impact Summary"
             isComplete={sectionCompletion[1]}
             isOpen={openSection === 2}
             onOpen={() => open(2)}
@@ -234,14 +235,14 @@ const EditProfileClient = ({
               onSave={close}
               defaultValues={impactDefaults}
             />
-          </SectionAccordion>
+          </SectionAccordion> */}
 
           <SectionAccordion
-            number={3}
-            title={sections[2].title}
+            number={2}
+            title={sections[1].title}
             isComplete={sectionCompletion[7]}
-            isOpen={openSection === 3}
-            onOpen={() => open(3)}
+            isOpen={openSection === 2}
+            onOpen={() => open(2)}
             onClose={close}
           >
             <ImpactRecordSection
@@ -251,11 +252,11 @@ const EditProfileClient = ({
           </SectionAccordion>
 
           <SectionAccordion
-            number={4}
-            title={sections[3].title}
+            number={3}
+            title={sections[2].title}
             isComplete={sectionCompletion[2]}
-            isOpen={openSection === 4}
-            onOpen={() => open(4)}
+            isOpen={openSection === 3}
+            onOpen={() => open(3)}
             onClose={close}
           >
             <PartnersSection
@@ -265,11 +266,11 @@ const EditProfileClient = ({
           </SectionAccordion>
 
           <SectionAccordion
-            number={5}
-            title={sections[4].title}
+            number={4}
+            title={sections[3].title}
             isComplete={sectionCompletion[3]}
-            isOpen={openSection === 5}
-            onOpen={() => open(5)}
+            isOpen={openSection === 4}
+            onOpen={() => open(4)}
             onClose={close}
           >
             <AreasOfImpactSection
@@ -280,11 +281,11 @@ const EditProfileClient = ({
           </SectionAccordion>
 
           <SectionAccordion
-            number={6}
-            title={sections[5].title}
+            number={5}
+            title={sections[4].title}
             isComplete={sectionCompletion[4]}
-            isOpen={openSection === 6}
-            onOpen={() => open(6)}
+            isOpen={openSection === 5}
+            onOpen={() => open(5)}
             onClose={close}
           >
             <CommunityEventsSection
@@ -294,11 +295,11 @@ const EditProfileClient = ({
           </SectionAccordion>
 
           <SectionAccordion
-            number={7}
-            title={sections[6].title}
+            number={6}
+            title={sections[5].title}
             isComplete={sectionCompletion[5]}
-            isOpen={openSection === 7}
-            onOpen={() => open(7)}
+            isOpen={openSection === 6}
+            onOpen={() => open(6)}
             onClose={close}
           >
             <EndorsementsSection
@@ -308,11 +309,11 @@ const EditProfileClient = ({
           </SectionAccordion>
 
           <SectionAccordion
-            number={8}
-            title={sections[7].title}
+            number={7}
+            title={sections[6].title}
             isComplete={sectionCompletion[6]}
-            isOpen={openSection === 8}
-            onOpen={() => open(8)}
+            isOpen={openSection === 7}
+            onOpen={() => open(7)}
             onClose={close}
           >
             <OffersSection onSave={close} initialOffers={business.offers} />
@@ -335,12 +336,10 @@ const EditProfileClient = ({
               style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}
             >
               {(() => {
-                const canPublish = sectionCompletion[0] && sectionCompletion[1];
+                const canPublish = sectionCompletion[0];
                 const nudge = !sectionCompletion[0]
                   ? 'Complete Section 1 (About Us) to publish your profile.'
-                  : !sectionCompletion[1]
-                    ? 'Complete Section 2 (Impact Summary) to publish your profile.'
-                    : null;
+                  : null;
                 return (
                   <>
                     <button
