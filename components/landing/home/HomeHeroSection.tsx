@@ -17,7 +17,7 @@ import {
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import NextImage from 'next/image';
-import Hero from '@/public/landing/BusinessHero.png';
+import Hero from '@/public/landing/HeroEditorial.png';
 import GreenCheck from '@/components/landing/GreenCheck';
 import { HERO_GRADIENT } from '@/lib/theme/gradients';
 
@@ -33,7 +33,7 @@ const HomeHeroSection = () => {
           gap={{ base: '10', lg: '6' }}
           align="center"
         >
-          <Stack w={{ base: '100%', lg: '50%' }} gap="10">
+          <Stack w={{ base: '100%', lg: '45%' }} gap="10">
             <Stack
               gap="6"
               maxW={{ base: '100%', lg: '560px' }}
@@ -133,32 +133,32 @@ const HomeHeroSection = () => {
             </Stack>
           </Stack>
 
-          <Stack w={{ base: '100%', lg: '50%' }} justify="center" gap="0">
-            {/*
-             * next/image instead of Chakra <Image> so Next.js can:
-             *   - serve WebP/AVIF (cuts ~70% of the 3.4MB PNG)
-             *   - inject a <link rel="preload"> via the priority prop
-             *   - generate the correct srcset for every viewport
-             * priority tells the browser this is the LCP element — no lazy
-             * loading, fetch starts as early as possible.
-             */}
+          <Stack w={{ base: '100%', lg: '55%' }} justify="center" gap="4">
             <NextImage
               src={Hero}
-              alt="Hero image"
+              alt="Sponsorship plaques, volunteer shirts, community photos, certificates, and thank-you letters — the story of a business's community impact"
               priority
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              style={{ width: '100%', height: 'auto', display: 'block' }}
-              quality={85}
+              sizes="(max-width: 1024px) 100vw, 55vw"
+              style={{
+                width: '100%',
+                height: 'auto',
+                display: 'block',
+                borderRadius: '20px',
+                boxShadow: '0 20px 60px rgba(0,0,0,0.10)',
+                filter: 'brightness(0.95) contrast(1.05)',
+              }}
+              quality={90}
             />
             <Text
-              className="font-display"
-              fontSize="16px"
-              lineHeight="140%"
-              color="text.primary"
+              className="font-body"
+              fontSize="15px"
+              fontWeight="450"
+              lineHeight="1.5"
+              color="#555555"
               textAlign="center"
             >
-              Make your community impact as visible as the reputation
-              you&apos;ve worked so hard to build.
+              MasterGiver organizes years of community involvement into one
+              permanent reputation asset for your business.
             </Text>
           </Stack>
         </Stack>
