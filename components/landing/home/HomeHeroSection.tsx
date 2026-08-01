@@ -33,7 +33,7 @@ const HomeHeroSection = () => {
           gap={{ base: '10', lg: '6' }}
           align="center"
         >
-          <Stack w={{ base: '100%', lg: '45%' }} gap="10">
+          <Stack w={{ base: '100%', lg: '50%' }} gap="10">
             <Stack
               gap="6"
               maxW={{ base: '100%', lg: '560px' }}
@@ -133,7 +133,12 @@ const HomeHeroSection = () => {
             </Stack>
           </Stack>
 
-          <Stack w={{ base: '100%', lg: '55%' }} justify="center" gap="4">
+          <Stack
+            w={{ base: '100%', lg: '50%' }}
+            justify="center"
+            alignItems="center"
+            gap="4"
+          >
             <NextImage
               src={Hero}
               alt="Sponsorship plaques, volunteer shirts, community photos, certificates, and thank-you letters — the story of a business's community impact"
@@ -156,6 +161,7 @@ const HomeHeroSection = () => {
               lineHeight="1.5"
               color="#555555"
               textAlign="center"
+              maxW="500px"
             >
               MasterGiver organizes years of community involvement into one
               permanent reputation asset for your business.

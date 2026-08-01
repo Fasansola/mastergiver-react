@@ -25,9 +25,9 @@ export const metadata: Metadata = {
 import Footer from '@/components/layout/Footer';
 import HomeHeroSection from '@/components/landing/home/HomeHeroSection';
 import GoodNotVisibleSection from '@/components/landing/home/GoodNotVisibleSection';
-import CommunityImpactSection from '@/components/landing/home/CommunityImpactSection';
+// import CommunityImpactSection from '@/components/landing/home/CommunityImpactSection';
+// import ReturnOnReputationSection from '@/components/landing/home/ReturnOnReputationSection';
 import WhatYouGetSection from '@/components/landing/home/WhatYouGetSection';
-import ReturnOnReputationSection from '@/components/landing/home/ReturnOnReputationSection';
 import CompetitiveAdvantageSection from '@/components/landing/home/CompetitiveAdvantageSection';
 import HomeFAQSection from '@/components/landing/home/HomeFAQSection';
 import HomeCtaSection from '@/components/landing/home/HomeCtaSection';
